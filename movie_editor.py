@@ -1,0 +1,1235 @@
+﻿import os
+import re
+import io
+import sys
+import time
+import atexit
+import msvcrt
+import shutil
+import threading
+import subprocess
+import unicodedata
+import tkinter as tk
+from tkinter import filedialog
+from collections import deque
+
+if sys.platform == 'win32':
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
+
+ANSI_ESCAPE = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
+CURSOR_HOME = '\033[H'
+
+ACTIVE_CHILD_PROCESSES = set()
+ACTIVE_CHILD_LOCK = threading.Lock()
+
+
+UI_COLORS = {
+    'reset': '\033[0m',
+    'accent': '\033[96m',
+    'title': '\033[33m',
+    'muted': '\033[90m',
+    'selected_row': '\033[48;5;24m',
+}
+UI_ICONS = {
+    'focus': '›',
+}
+MENU_LABEL_WIDTH = 28
+
+
+def register_child_process(process):
+    with ACTIVE_CHILD_LOCK:
+        ACTIVE_CHILD_PROCESSES.add(process)
+
+
+def unregister_child_process(process):
+    with ACTIVE_CHILD_LOCK:
+        ACTIVE_CHILD_PROCESSES.discard(process)
+
+
+def terminate_active_children():
+    with ACTIVE_CHILD_LOCK:
+        processes = list(ACTIVE_CHILD_PROCESSES)
+    for process in processes:
+        try:
+            if process.poll() is None:
+                process.terminate()
+        except Exception:
+            pass
+    time.sleep(0.2)
+    for process in processes:
+        try:
+            if process.poll() is None:
+                process.kill()
+        except Exception:
+            pass
+
+
+atexit.register(terminate_active_children)
+
+if os.name == 'nt':
+    try:
+        import ctypes
+        _CTRL_HANDLER = ctypes.WINFUNCTYPE(ctypes.c_bool, ctypes.c_uint)
+
+        def _console_ctrl_handler(_):
+            terminate_active_children()
+            return False
+
+        _console_ctrl_handler_ref = _CTRL_HANDLER(_console_ctrl_handler)
+        ctypes.windll.kernel32.SetConsoleCtrlHandler(_console_ctrl_handler_ref, True)
+    except Exception:
+        pass
+
+
+def hide_cursor():
+    print('\033[?25l', end='', flush=True)
+
+
+def show_cursor():
+    print('\033[?25h', end='', flush=True)
+
+
+def get_display_width(text):
+    width = 0
+    for ch in text:
+        width += 2 if unicodedata.east_asian_width(ch) in ('W', 'F') else 1
+    return width
+
+
+TITLE_MARKER = '__TITLE__ '
+MENU_SEPARATOR = '─' * 52
+
+
+def menu_section(title):
+    clean = str(title).replace('\n', ' ').strip()
+    return f"{TITLE_MARKER}{clean}"
+
+
+def gray_hint(text):
+    return f"{UI_COLORS['muted']}{text}{UI_COLORS['reset']}"
+
+
+def with_ffmpeg_hint(label, ffmpeg_hint=None, enabled=True):
+    if enabled and ffmpeg_hint:
+        hint_text = str(ffmpeg_hint).strip()
+        if hint_text.startswith('(') and hint_text.endswith(')'):
+            hint_text = hint_text[1:-1].strip()
+        return f'{label} {gray_hint(hint_text)}'
+    return label
+
+
+def pad_display(text, width):
+    return text + (' ' * max(0, width - get_display_width(text)))
+
+
+def menu_item(label, value=None, icon=None, hint=None, indent=0):
+    icon_text = UI_ICONS.get(icon, '') if icon else ''
+    lead = ' ' * (indent * 2)
+    body = f'{lead}{label}' if not icon_text else f'{lead}{icon_text} {label}'
+    if value is not None:
+        body = f"{pad_display(body, MENU_LABEL_WIDTH)} : {value}"
+    if hint:
+        body = f'{body} {gray_hint(hint)}'
+    return body
+
+
+def shorten_items(items, max_items=3):
+    if len(items) <= max_items:
+        return items
+    return items[:max_items] + ['...']
+
+
+def trim_to_display_width(text, max_width):
+    if max_width <= 0:
+        return ''
+    if get_display_width(text) <= max_width:
+        return text
+    suffix = '...'
+    suffix_w = get_display_width(suffix)
+    if max_width <= suffix_w:
+        return suffix[:max_width]
+    out = ''
+    width = 0
+    for ch in text:
+        ch_w = 2 if unicodedata.east_asian_width(ch) in ('W', 'F') else 1
+        if width + ch_w > max_width - suffix_w:
+            break
+        out += ch
+        width += ch_w
+    return out + suffix
+
+
+def build_top_border(inner_width, title_text=None):
+    if not title_text:
+        return f"  ╭{'─' * inner_width}╮"
+    clean_title = str(title_text).replace('\n', ' ').strip()
+    if not clean_title:
+        return f"  ╭{'─' * inner_width}╮"
+    title_plain = f' {clean_title} '
+    max_title_width = max(1, inner_width - 2)
+    title_plain = trim_to_display_width(title_plain, max_title_width)
+    title_w = get_display_width(title_plain)
+    remain = max(0, inner_width - title_w)
+    left = min(2, remain)
+    right = remain - left
+    return (
+        f"  ╭{'─' * left}{UI_COLORS['title']}\033[1m{title_plain}{UI_COLORS['reset']}"
+        f"{'─' * right}╮"
+    )
+
+
+def render_menu_box(lines, selected_index=None):
+    parsed_lines = []
+    max_w = 0
+    border_title = None
+    for line in lines:
+        plain = ANSI_ESCAPE.sub('', line)
+        display_plain = plain[len(TITLE_MARKER):] if plain.startswith(TITLE_MARKER) else plain
+        if plain.startswith(TITLE_MARKER) and border_title is None:
+            border_title = display_plain.strip()
+        else:
+            max_w = max(max_w, get_display_width(display_plain))
+        parsed_lines.append((line, plain, display_plain))
+
+    inner_width = max_w + 4
+    if border_title:
+        inner_width = max(inner_width, get_display_width(f' {border_title} ') + 6)
+    out = [build_top_border(inner_width, border_title)]
+    if border_title:
+        out.append(f"  │{' ' * inner_width}│")
+
+    for i, (original, plain, display_plain) in enumerate(parsed_lines):
+        stripped = display_plain.strip()
+        display_w = get_display_width(display_plain)
+        base_padding = ' ' * max(0, inner_width - 3 - display_w - 1)
+        is_selected = selected_index is not None and i == selected_index
+        is_separator = len(stripped) > 0 and len(set(stripped)) == 1 and stripped[0] in ('─', '-', '=')
+        is_empty = stripped == ''
+        is_header = plain.startswith(TITLE_MARKER)
+
+        if is_separator:
+            sep = '─' * (inner_width - 2)
+            out.append(f"  │ {UI_COLORS['muted']}{sep}{UI_COLORS['reset']} │")
+        elif is_empty:
+            out.append(f"  │{' ' * inner_width}│")
+        elif is_header:
+            continue
+        elif is_selected:
+            selected_plain = f" {UI_ICONS['focus']} {display_plain}"
+            selected_w = get_display_width(selected_plain)
+            selected_padding = ' ' * max(0, inner_width - selected_w)
+            out.append(f"  │{UI_COLORS['selected_row']}{selected_plain}{selected_padding}{UI_COLORS['reset']}│")
+        else:
+            out.append(f'  │   {original}{base_padding} │')
+
+    out.append(f"  ╰{'─' * inner_width}╯")
+    print('\033[J' + '\n'.join(out), flush=True)
+
+
+def render_preview_box(lines):
+    parsed_lines = []
+    max_w = 0
+    for line in lines:
+        plain = ANSI_ESCAPE.sub('', line)
+        max_w = max(max_w, get_display_width(plain))
+        parsed_lines.append((line, plain))
+
+    inner_width = max_w + 1
+    out = [f"  ╭{'─' * inner_width}╮"]
+    for original, plain in parsed_lines:
+        padding = ' ' * (inner_width - get_display_width(plain))
+        out.append(f'  │{original}{padding}│')
+    out.append(f"  ╰{'─' * inner_width}╯")
+    print('\033[J' + '\n'.join(out), flush=True)
+
+
+def get_selectable_indices(lines):
+    selectable = []
+    for i, line in enumerate(lines):
+        plain = ANSI_ESCAPE.sub('', line)
+        stripped = plain.strip()
+        is_empty = stripped == ''
+        is_separator = len(stripped) > 0 and len(set(stripped)) == 1 and stripped[0] in ('─', '-', '=')
+        is_header = plain.startswith(TITLE_MARKER)
+        if not is_empty and not is_separator and not is_header:
+            selectable.append(i)
+    return selectable
+
+
+def get_next_selectable(lines, current_index, direction):
+    selectable = get_selectable_indices(lines)
+    if not selectable:
+        return current_index
+    if current_index not in selectable:
+        return selectable[0] if direction > 0 else selectable[-1]
+    current_pos = selectable.index(current_index)
+    return selectable[(current_pos + direction) % len(selectable)]
+
+
+def normalize_selected_index(lines, selected_index):
+    selectable = get_selectable_indices(lines)
+    if not selectable:
+        return None
+    if selected_index in selectable:
+        return selected_index
+    return selectable[0]
+
+
+def render_screen_menu(screen_title, context_lines, menu_lines, selected_index=None, footer_hint=None):
+    composed = [menu_section(screen_title)]
+    for line in context_lines:
+        composed.append(line)
+    if context_lines:
+        composed.append(MENU_SEPARATOR)
+    menu_offset = len(composed)
+    composed.extend(menu_lines)
+    if footer_hint:
+        composed.append(MENU_SEPARATOR)
+        composed.append(footer_hint)
+
+    normalized = normalize_selected_index(menu_lines, selected_index)
+    adjusted_selected = (normalized + menu_offset) if normalized is not None else None
+    render_menu_box(composed, selected_index=adjusted_selected)
+
+
+def format_hms(seconds):
+    h = int(seconds // 3600)
+    m = int((seconds % 3600) // 60)
+    s = int(seconds % 60)
+    return f'{h:02d}:{m:02d}:{s:02d}'
+
+
+def parse_time_to_seconds(time_text):
+    if time_text is None:
+        return 0
+    value = str(time_text).strip()
+    if value in ('', '0'):
+        return 0
+    if value.isdigit():
+        return int(value)
+    parts = value.split(':')
+    if len(parts) == 3 and all(p.isdigit() for p in parts):
+        h, m, s = map(int, parts)
+        return h * 3600 + m * 60 + s
+    if len(parts) == 2 and all(p.isdigit() for p in parts):
+        m, s = map(int, parts)
+        return m * 60 + s
+    return None
+
+
+def adjust_time_setting(time_text, delta_seconds):
+    seconds = parse_time_to_seconds(time_text)
+    if seconds is None:
+        seconds = 0
+    new_seconds = max(0, seconds + delta_seconds)
+    return format_hms(new_seconds) if new_seconds > 0 else None
+
+
+def cycle_option(current, options, step):
+    if not options:
+        return current
+    try:
+        idx = options.index(current)
+    except ValueError:
+        idx = 0
+    return options[(idx + step) % len(options)]
+
+
+def format_on_off(enabled):
+    return '开启' if enabled else '关闭'
+
+
+def build_resolution_options(src_width, src_height):
+    options = [None]
+    if not src_width or not src_height:
+        return options
+    seen = set()
+    for scale in (0.75, 0.5, 0.25):
+        w = int(src_width * scale)
+        h = int(src_height * scale)
+        w -= w % 2
+        h -= h % 2
+        if w < 2 or h < 2:
+            continue
+        text = f'{w}x{h}'
+        if text in seen:
+            continue
+        seen.add(text)
+        options.append(text)
+    return options
+
+
+def read_navigation_key():
+    while True:
+        try:
+            key = msvcrt.getch()
+            if key in (b'\xe0', b'\x00'):
+                ext = msvcrt.getch()
+                if ext == b'H':
+                    return 'UP'
+                if ext == b'P':
+                    return 'DOWN'
+                if ext == b'K':
+                    return 'LEFT'
+                if ext == b'M':
+                    return 'RIGHT'
+            elif key in (b'\r', b'\n'):
+                return 'ENTER'
+            elif key == b'\x08':
+                return 'BACKSPACE'
+            elif key == b'\x03':
+                raise KeyboardInterrupt
+        except KeyboardInterrupt:
+            raise
+        except Exception:
+            pass
+
+
+def clear_keyboard_buffer():
+    try:
+        while msvcrt.kbhit():
+            msvcrt.getch()
+    except Exception:
+        pass
+
+
+def choose_files(title, filetypes):
+    root = tk.Tk()
+    root.withdraw()
+    files = filedialog.askopenfilenames(title=title, filetypes=filetypes)
+    root.destroy()
+    return list(files)
+
+
+def choose_file(title, filetypes):
+    root = tk.Tk()
+    root.withdraw()
+    file_path = filedialog.askopenfilename(title=title, filetypes=filetypes)
+    root.destroy()
+    return file_path
+
+
+def get_video_resolution(file_path):
+    try:
+        cmd = ['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height', '-of', 'csv=p=0', file_path]
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        out = result.stdout.strip()
+        if not out:
+            return 0, 0
+        w, h = map(int, out.split(','))
+        return w, h
+    except Exception:
+        return 0, 0
+
+
+def get_video_duration(file_path):
+    try:
+        cmd = ['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'default=noprint_wrappers=1:nokey=1', file_path]
+        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+        return float(result.stdout.strip())
+    except Exception:
+        return 0
+
+
+def _probe_streams_json(file_path, selector, entries):
+    try:
+        import json
+        cmd = ['ffprobe', '-v', 'error', '-select_streams', selector, '-show_entries', entries, '-of', 'json', file_path]
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        data = json.loads(result.stdout or '{}')
+        return data.get('streams', [])
+    except Exception:
+        return []
+
+
+def get_audio_streams(file_path):
+    streams = []
+    for s in _probe_streams_json(file_path, 'a', 'stream=index,codec_name,channels:stream_tags=language'):
+        streams.append({'index': s.get('index'), 'codec': s.get('codec_name', 'unknown'), 'channels': s.get('channels', 2), 'language': s.get('tags', {}).get('language', 'und')})
+    return streams
+
+
+def get_subtitle_streams(file_path):
+    streams = []
+    for s in _probe_streams_json(file_path, 's', 'stream=index,codec_name:stream_tags=language'):
+        streams.append({'index': s.get('index'), 'codec': s.get('codec_name', 'unknown'), 'language': s.get('tags', {}).get('language', 'und')})
+    return streams
+
+
+def format_preview_lines(command, input_file=None, output_file=None):
+    def replace_path(token):
+        text = str(token)
+        if input_file and text == input_file:
+            return 'input'
+        if output_file and text == output_file:
+            return 'output'
+        return text
+
+    lines = [f'  {command[0]}']
+    i = 1
+    while i < len(command):
+        token = replace_path(command[i])
+        if token.startswith('-'):
+            line = f'    {token}'
+            if i + 1 < len(command) and not str(command[i + 1]).startswith('-'):
+                arg = replace_path(command[i + 1])
+                if any(c.isspace() for c in arg):
+                    arg = f'"{arg}"'
+                line += f' {arg}'
+                i += 1
+            lines.append(line)
+        else:
+            lines.append(f'    {token}')
+        i += 1
+    return lines
+
+
+def run_ffmpeg_with_progress(command, total_duration):
+    output_file = command[-1]
+    # Prepare command for execution
+    exec_command = command[:-1] + ['-progress', 'pipe:1', output_file]
+    
+    # Extract input/output for pretty display
+    input_file = None
+    try:
+        if '-i' in command:
+            idx = command.index('-i')
+            if idx + 1 < len(command):
+                input_file = command[idx+1]
+    except Exception:
+        pass
+
+    # Format command lines vertically
+    cmd_lines_raw = format_preview_lines(command, input_file, output_file)
+
+    creationflags = subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0
+    process = subprocess.Popen(exec_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, encoding='utf-8', errors='replace', creationflags=creationflags)
+    register_child_process(process)
+    
+    stderr_tail = deque(maxlen=10)
+
+    def collect_err():
+        try:
+            for line in process.stderr:
+                clean = line.strip()
+                if clean:
+                    stderr_tail.append(clean)
+        except Exception:
+            pass
+
+    t_err = threading.Thread(target=collect_err, daemon=True)
+    t_err.start()
+
+    state = {
+        'current_ms': 0,
+        'speed': 0.0,
+        'done': False,
+        'started': False,
+        'lock': threading.Lock()
+    }
+
+    def reader():
+        alpha = 0.1
+        try:
+            for line in process.stdout:
+                if 'out_time_ms=' in line:
+                    try:
+                        ms = int(line.split('=', 1)[1].strip())
+                        if ms > 0:
+                            with state['lock']:
+                                state['current_ms'] = ms
+                                state['started'] = True
+                    except Exception:
+                        pass
+                if 'speed=' in line:
+                    try:
+                        sp_str = line.split('speed=', 1)[1].split('x', 1)[0].strip()
+                        if sp_str != 'N/A':
+                            cur = float(sp_str)
+                            with state['lock']:
+                                state['speed'] = alpha * cur + (1 - alpha) * (state['speed'] if state['speed'] > 0 else cur)
+                                if cur > 0.01:
+                                    state['started'] = True
+                    except Exception:
+                        pass
+                if 'progress=end' in line:
+                    break
+        except Exception:
+            pass
+        finally:
+            state['done'] = True
+
+    t_read = threading.Thread(target=reader, daemon=True)
+    t_read.start()
+
+    def get_shimmer_text(text, offset):
+        C_DIM = '\033[90m'
+        C_MID = '\033[37m'
+        C_BRIGHT = '\033[97m\033[1m'
+        C_RESET = '\033[0m'
+        
+        out = []
+        text_len = len(text)
+        wave_width = 12
+        total_range = text_len + wave_width * 2
+        center = (offset * total_range) - wave_width
+        
+        for i, char in enumerate(text):
+            dist = abs(i - center)
+            if dist < 2:
+                color = C_BRIGHT
+            elif dist < 5:
+                color = C_MID
+            else:
+                color = C_DIM
+            out.append(f'{color}{char}')
+        out.append(C_RESET)
+        return ''.join(out)
+
+    hide_cursor()
+    last_plain_text = '正在初始化进程...'
+    
+    # State for UI rendering
+    last_term_size = (0, 0)
+    
+    # Layout constants
+    # Row 1: Top Border
+    # Row 2: Padding (Empty)
+    # Row 3: Progress Line (Target)
+    # Row 4: Padding (Empty)
+    # Row 5+: Command Lines
+    PROGRESS_ROW_IDX = 3 # 1-based ANSI line number
+
+    def draw_full_interface(progress_text, title, is_finished):
+        term_w, term_h = shutil.get_terminal_size((120, 30))
+        width = max(70, min(120, term_w - 2))
+        inner_width = width - 4
+        
+        # Calculate available height for command
+        # Fixed rows: Top(1) + Pad(1) + Prog(1) + Pad(1) + Bot(1) = 5
+        available_cmd_lines = max(5, term_h - 7)
+        
+        display_cmd = cmd_lines_raw[:available_cmd_lines]
+        if len(cmd_lines_raw) > available_cmd_lines:
+            display_cmd[-1] = '    ...'
+
+        # Title
+        clean_title = f' {title} '
+        title_plain_len = get_display_width(clean_title)
+        remain_w = max(0, width - 2 - title_plain_len)
+        left_line_len = 2
+        right_line_len = max(0, remain_w - left_line_len)
+        
+        top_bar = (
+            f"  ╭{'─' * left_line_len}"
+            f"{UI_COLORS['title']}\033[1m{clean_title}{UI_COLORS['reset']}"
+            f"{'─' * right_line_len}╮"
+        )
+        
+        # Build lines
+        lines = []
+        lines.append(top_bar)
+        lines.append(f"  │{' ' * (width - 2)}│") # Padding
+        
+        # Progress placeholder (will be overwritten by cursor jump)
+        if is_finished:
+             p_display = f"\033[97m\033[1m{progress_text}\033[0m"
+             c_w = get_display_width(progress_text)
+        else:
+             p_display = progress_text # Colored
+             c_w = get_display_width(ANSI_ESCAPE.sub('', progress_text))
+             
+        padding_p = ' ' * max(0, width - 2 - c_w)
+        # Note: We use 3 spaces indent for text safe distance
+        # But progress text logic usually assumes simple padding. 
+        # Let's just center or indent? 
+        # The user asked for safe distance. Let's indent by 2 spaces inside the box.
+        # "  │  Progress..."
+        
+        # Re-calculating for indent
+        safe_indent = '  '
+        avail_text_w = width - 2 - len(safe_indent) * 2
+        
+        # If we just print it, render_box logic was: "  │{text}{padding}│"
+        # Let's manually construct the line for consistent indent
+        
+        # We handle the dynamic update separately, but for the static draw we need a placeholder or the current text
+        # Let's use the helper `build_progress_line` to ensure consistency
+        lines.append(build_progress_line(progress_text, width, is_finished))
+        
+        lines.append(f"  │{' ' * (width - 2)}│") # Padding
+
+        # Command Lines
+        for line in display_cmd:
+            # cmd_lines_raw already has indentation from format_preview_lines (2 or 4 spaces)
+            # We want to fit it in inner_width
+            # The format_preview_lines output looks like "  ffmpeg" or "    -i ..."
+            # We add it to the box
+            plain = ANSI_ESCAPE.sub('', line)
+            trunc = trim_to_display_width(plain, inner_width - 2) # -2 for safe margin
+            colored = f"{UI_COLORS['muted']}{trunc}{UI_COLORS['reset']}"
+            pad = ' ' * max(0, width - 2 - get_display_width(trunc))
+            lines.append(f"  │{colored}{pad}│")
+            
+        lines.append(f"  ╰{'─' * (width - 2)}╯")
+        
+        print(CURSOR_HOME, end='', flush=True)
+        print('\033[J', end='', flush=True) # Clear screen
+        print('\n'.join(lines), flush=True)
+        
+        return (term_w, term_h)
+
+    def build_progress_line(text, width, is_finished):
+        # Indent inside box
+        indent = '  '
+        inner_w = width - 2
+        
+        if is_finished:
+             p_display = f"\033[97m\033[1m{text}\033[0m"
+             plain_len = get_display_width(text)
+        else:
+             p_display = text
+             plain_len = get_display_width(ANSI_ESCAPE.sub('', text))
+        
+        # Truncate if too long for safe area
+        max_text_len = inner_w - len(indent)*2
+        if plain_len > max_text_len:
+            # Simple truncation not implemented for colored text easily, 
+            # assuming progress text fits in 70+ cols
+            pass
+            
+        pad_len = max(0, inner_w - len(indent) - plain_len)
+        return f"  │{indent}{p_display}{' ' * pad_len}│"
+
+    try:
+        start_time = time.time()
+        
+        # Initial Draw
+        last_term_size = draw_full_interface(last_plain_text, "运行中", False)
+        
+        while not state['done']:
+            now = time.time()
+            elapsed = now - start_time
+            
+            with state['lock']:
+                curr_ms = state['current_ms']
+                spd = state['speed']
+                has_started = state['started']
+            
+            if not has_started:
+                plain_text = '正在初始化进程...'
+            else:
+                curr_sec = curr_ms / 1000000.0
+                if total_duration > 0:
+                    pct = min(100.0, curr_sec / total_duration * 100)
+                    rem = max(0, total_duration - curr_sec)
+                    eta = rem / spd if spd > 0.01 else 0
+                    plain_text = f'进度：{format_hms(curr_sec)}/{format_hms(total_duration)} ({pct:>6.2f}%) │ 速度：{spd:.2f}x │ 用时：{format_hms(elapsed)} │ 剩余：{format_hms(eta)}'
+                else:
+                    plain_text = f'进度：{format_hms(curr_sec)} │ 速度：{spd:.2f}x │ 用时：{format_hms(elapsed)}'
+            
+            last_plain_text = plain_text
+            
+            # Check Resize
+            current_term_size = shutil.get_terminal_size((120, 30))
+            if current_term_size != last_term_size:
+                # Redraw Everything
+                cycle = 2.0
+                shimmer_offset = (now % cycle) / cycle
+                styled_text = get_shimmer_text(plain_text, shimmer_offset)
+                last_term_size = draw_full_interface(styled_text, "运行中", False)
+            else:
+                # Update Only Progress Line
+                cycle = 2.0
+                shimmer_offset = (now % cycle) / cycle
+                styled_text = get_shimmer_text(plain_text, shimmer_offset)
+                
+                width = max(70, min(120, current_term_size.columns - 2))
+                line_str = build_progress_line(styled_text, width, False)
+                
+                # Move cursor to Row 3 (Progress Row) and overwrite
+                print(f'\033[{PROGRESS_ROW_IDX};1H{line_str}', end='', flush=True)
+            
+            time.sleep(0.05)
+            
+            if process.poll() is not None and not state['done']:
+                state['done'] = True
+
+        process.wait()
+        t_read.join(timeout=1.0)
+        t_err.join(timeout=1.0)
+        
+        if process.returncode != 0:
+            msg = f'FFmpeg 执行失败，返回码: {process.returncode}'
+            if stderr_tail:
+                msg += '\n' + '\n'.join(stderr_tail)
+            raise RuntimeError(msg)
+            
+        # Final Render: Completed state
+        draw_full_interface(last_plain_text, "已完成", True)
+
+    finally:
+        unregister_child_process(process)
+
+
+def process_files():
+    if len(sys.argv) > 1:
+        input_file = sys.argv[1]
+    else:
+        input_file = choose_file('选择要处理的媒体文件', [('视频文件', '*.mp4 *.mkv *.mov *.avi *.flv *.wmv'), ('所有文件', '*.*')])
+
+    if not input_file:
+        print('未选择任何文件')
+        return
+
+    first_width, first_height = get_video_resolution(input_file)
+
+    settings = {
+        'video': {'hevc': True, 'resolution': None, 'crop_top': 0, 'crop_left': 0, 'ss': None, 'to': None},
+        'audio': {'codec': 'copy', 'internal_streams': {}},
+        'subtitle': {'mode': 'internal', 'files': [], 'burn_in': False, 'disable': False, 'codec': 'copy', 'internal_streams': {}, 'external_streams': {}},
+    }
+
+    resolution_options = build_resolution_options(first_width, first_height)
+    audio_codec_options = ['copy', 'aac', 'mp3', 'ac3', 'flac']
+
+    def should_use_simple_map0():
+        # Check if we can use -map 0 (all streams)
+        # This is allowed if we are not selectively dropping streams or using external inputs
+        
+        # Audio: All internal streams must be enabled (or not yet configured/visited)
+        if not all(settings['audio']['internal_streams'].values()):
+            return False
+            
+        # Subtitle: Must be internal mode, no burn-in, not disabled, all streams enabled
+        if settings['subtitle']['mode'] != 'internal':
+            return False
+        if settings['subtitle']['burn_in']:
+            return False
+        if settings['subtitle']['disable']:
+            return False
+        if not all(settings['subtitle']['internal_streams'].values()):
+            return False
+            
+        return True
+
+    def build_crop_filter_text():
+        return f"crop=in_w-{settings['video']['crop_left']*2}:in_h-{settings['video']['crop_top']*2}:{settings['video']['crop_left']}:{settings['video']['crop_top']}"
+
+    def build_ffmpeg_command(input_file):
+        out_path = os.path.join(os.path.dirname(input_file), '[FF] ' + os.path.splitext(os.path.basename(input_file))[0] + '.mp4')
+        cmd = ['ffmpeg', '-y', '-hide_banner', '-i', input_file]
+        vf_filters = []
+        if settings['video']['crop_top'] > 0 or settings['video']['crop_left'] > 0:
+            vf_filters.append(build_crop_filter_text())
+
+        subtitle_streams = get_subtitle_streams(input_file)
+        selected_internal_sub = [p for p, s in enumerate(subtitle_streams) if settings['subtitle']['internal_streams'].get(str(s['index']), True)]
+        selected_audio_streams = [s for s in get_audio_streams(input_file) if settings['audio']['internal_streams'].get(str(s['index']), True)]
+        selected_external_sub = [f for i, f in enumerate(settings['subtitle']['files']) if settings['subtitle']['external_streams'].get(str(i), True)]
+
+        if settings['subtitle']['burn_in'] and not settings['subtitle']['disable']:
+            if settings['subtitle']['mode'] == 'internal' and selected_internal_sub:
+                vf_filters.append(f"subtitles={input_file.replace('\\', '/')}:si={selected_internal_sub[0]}")
+            elif settings['subtitle']['mode'] == 'external':
+                for i, f in enumerate(settings['subtitle']['files']):
+                    if settings['subtitle']['external_streams'].get(str(i), True):
+                        safe_path = f.replace('\\', '/').replace(':', '\\:').replace('[', '\\[').replace(']', '\\]')
+                        vf_filters.append(f"subtitles={safe_path}")
+                        break
+
+        if should_use_simple_map0():
+            cmd.extend(['-map', '0'])
+        else:
+            cmd.extend(['-map', '0:v'])
+            for s in selected_audio_streams:
+                cmd.extend(['-map', f"0:{s['index']}"])
+
+            if not settings['subtitle']['disable'] and not settings['subtitle']['burn_in']:
+                if settings['subtitle']['mode'] == 'internal':
+                    for p in selected_internal_sub:
+                        cmd.extend(['-map', f'0:s:{p}'])
+                else:
+                    base = 1
+                    for f in selected_external_sub:
+                        cmd.extend(['-i', f])
+                    for i in range(len(selected_external_sub)):
+                        cmd.extend(['-map', f'{base+i}:s:0'])
+
+        if settings['video']['hevc']:
+            cmd.extend(['-c:v', 'hevc', '-crf', '23'])
+        else:
+            cmd.extend(['-c:v', 'libx264'])
+        
+        # Audio codec: Only specify if NOT 'copy' (per user request to "not regulate" default)
+        if settings['audio']['codec'] != 'copy':
+            cmd.extend(['-c:a', settings['audio']['codec']])
+            
+        if settings['subtitle']['disable']:
+            cmd.append('-sn')
+        elif not settings['subtitle']['burn_in']:
+            has_subtitle_stream = (settings['subtitle']['mode'] == 'internal' and len(selected_internal_sub) > 0) or (settings['subtitle']['mode'] == 'external' and len(selected_external_sub) > 0)
+            if has_subtitle_stream:
+                # Always specify subtitle codec if it is 'copy', otherwise ffmpeg might fail to find a default encoder
+                # for certain subtitle types (like mov_text) in mp4 containers.
+                if settings['subtitle']['codec'] == 'copy':
+                    cmd.extend(['-c:s', 'copy'])
+                else:
+                    cmd.extend(['-c:s', settings['subtitle']['codec']])
+
+        cmd.extend(['-map_metadata', '0', '-map_chapters', '0', '-metadata', 'handler_name=@Cairl'])
+        if vf_filters:
+            cmd.extend(['-vf', ','.join(vf_filters)])
+        if settings['video']['resolution']:
+            cmd.extend(['-s', settings['video']['resolution'], '-aspect', settings['video']['resolution'].replace('x', ':')])
+        if settings['video']['ss']:
+            cmd.extend(['-ss', settings['video']['ss']])
+        if settings['video']['to']:
+            cmd.extend(['-to', settings['video']['to']])
+
+        cmd.append(out_path)
+        return cmd
+
+    main_index = 0
+    while True:
+        print(CURSOR_HOME, end='', flush=True)
+        hide_cursor()
+
+        context = []
+
+        menu = [
+            menu_item('开始处理'),
+            MENU_SEPARATOR,
+            menu_item('视频设置'),
+            menu_item('音频设置'),
+            menu_item('字幕设置'),
+            MENU_SEPARATOR,
+            menu_item('查看 FFmpeg 命令预览'),
+        ]
+        render_screen_menu('主界面', context, menu, selected_index=main_index, footer_hint='↑↓ 选择   Enter 进入   Backspace 返回')
+        main_index = normalize_selected_index(menu, main_index) or 0
+        k = read_navigation_key()
+        if k == 'UP':
+            main_index = get_next_selectable(menu, main_index, -1)
+            continue
+        if k == 'DOWN':
+            main_index = get_next_selectable(menu, main_index, 1)
+            continue
+        if k != 'ENTER':
+            continue
+
+        selectable = get_selectable_indices(menu)
+        if main_index not in selectable:
+            continue
+        actual = selectable.index(main_index)
+
+        if actual == 0:
+            break
+        if actual == 1:
+            v_idx = 0
+            while True:
+                print(CURSOR_HOME, end='', flush=True)
+                hide_cursor()
+                crop_hint = f"-vf {build_crop_filter_text()}"
+                res = settings['video']['resolution']
+                vm = [
+                    with_ffmpeg_hint(menu_item('H.265 编码', format_on_off(settings['video']['hevc'])), '-c:v hevc -crf 23', settings['video']['hevc']),
+                    with_ffmpeg_hint(menu_item('分辨率', res if res else f'{first_width}x{first_height} (原始)'), f"-s {res} -aspect {res.replace('x', ':')}" if res else None, bool(res)),
+                    MENU_SEPARATOR,
+                    with_ffmpeg_hint(menu_item('开始时间', settings['video']['ss'] or '00:00:00'), f"-ss {settings['video']['ss']}" if settings['video']['ss'] else None, bool(settings['video']['ss'])),
+                    with_ffmpeg_hint(menu_item('结束时间', settings['video']['to'] or '00:00:00'), f"-to {settings['video']['to']}" if settings['video']['to'] else None, bool(settings['video']['to'])),
+                    MENU_SEPARATOR,
+                    with_ffmpeg_hint(menu_item('裁剪上下黑边', f"{settings['video']['crop_top']}px" if settings['video']['crop_top'] > 0 else '不裁剪'), crop_hint, settings['video']['crop_top'] > 0),
+                    with_ffmpeg_hint(menu_item('裁剪左右黑边', f"{settings['video']['crop_left']}px" if settings['video']['crop_left'] > 0 else '不裁剪'), crop_hint, settings['video']['crop_left'] > 0),
+                    MENU_SEPARATOR,
+                    menu_item('返回主菜单'),
+                ]
+                render_screen_menu('视频设置', [], vm, selected_index=v_idx, footer_hint='↑↓ 选择   ←→ 调整   Enter 切换')
+                v_idx = normalize_selected_index(vm, v_idx) or 0
+                kk = read_navigation_key()
+                if kk == 'UP':
+                    v_idx = get_next_selectable(vm, v_idx, -1)
+                    continue
+                if kk == 'DOWN':
+                    v_idx = get_next_selectable(vm, v_idx, 1)
+                    continue
+                if kk == 'BACKSPACE':
+                    break
+                if kk not in ('LEFT', 'RIGHT', 'ENTER'):
+                    continue
+                s = get_selectable_indices(vm)
+                if v_idx not in s:
+                    continue
+                ai = s.index(v_idx)
+                step = -1 if kk == 'LEFT' else 1
+                if ai == 0:
+                    settings['video']['hevc'] = not settings['video']['hevc']
+                elif ai == 1:
+                    settings['video']['resolution'] = cycle_option(settings['video']['resolution'], resolution_options, -1 if kk == 'LEFT' else 1)
+                elif ai == 2 and kk in ('LEFT', 'RIGHT'):
+                    settings['video']['ss'] = adjust_time_setting(settings['video']['ss'], step * 5)
+                elif ai == 3 and kk in ('LEFT', 'RIGHT'):
+                    settings['video']['to'] = adjust_time_setting(settings['video']['to'], step * 5)
+                elif ai == 4 and kk in ('LEFT', 'RIGHT'):
+                    settings['video']['crop_top'] = max(0, min(max(0, first_height // 2 - 1), settings['video']['crop_top'] + step * 2))
+                elif ai == 5 and kk in ('LEFT', 'RIGHT'):
+                    settings['video']['crop_left'] = max(0, min(max(0, first_width // 2 - 1), settings['video']['crop_left'] + step * 2))
+                elif ai == 6:
+                    break
+        elif actual == 2:
+            a_idx = 0
+            cached_audio_streams = None
+            while True:
+                print(CURSOR_HOME, end='', flush=True)
+                hide_cursor()
+                if cached_audio_streams is None:
+                    cached_audio_streams = get_audio_streams(input_file)
+                audio_streams = cached_audio_streams
+                for s in audio_streams:
+                    key = str(s['index'])
+                    if key not in settings['audio']['internal_streams']:
+                        settings['audio']['internal_streams'][key] = True
+
+                codec_hint = f"-c:a {settings['audio']['codec']}" if not is_default_mode_active() else None
+
+                am = []
+                for s in audio_streams:
+                    key = str(s['index'])
+                    enabled = settings['audio']['internal_streams'].get(key, True)
+                    status = format_on_off(enabled)
+                    channels = f"{s['channels']}ch" if s['channels'] else '2ch'
+                    line = menu_item(f"流 #{s['index']} | {s['codec'].upper()} | {channels} | {s['language']}", status)
+                    hint = f"-map 0:{s['index']}" if enabled else None
+                    am.append(with_ffmpeg_hint(line, hint, bool(hint)))
+
+                am.extend([
+                    MENU_SEPARATOR,
+                    with_ffmpeg_hint(menu_item('音频编码', settings['audio']['codec'].upper()), codec_hint, bool(codec_hint)),
+                    MENU_SEPARATOR,
+                    menu_item('返回主菜单'),
+                ])
+                render_screen_menu('音频设置', [], am, selected_index=a_idx, footer_hint='↑↓ 选择   ←→ 调整   Enter 执行')
+                a_idx = normalize_selected_index(am, a_idx) or 0
+
+                kk = read_navigation_key()
+                if kk == 'UP':
+                    a_idx = get_next_selectable(am, a_idx, -1)
+                    continue
+                if kk == 'DOWN':
+                    a_idx = get_next_selectable(am, a_idx, 1)
+                    continue
+                if kk == 'BACKSPACE':
+                    break
+                if kk not in ('LEFT', 'RIGHT', 'ENTER'):
+                    continue
+
+                selectable = get_selectable_indices(am)
+                if a_idx not in selectable:
+                    continue
+                selected_line = ANSI_ESCAPE.sub('', am[a_idx]).strip()
+                if re.search(r'音频编码\s*:', selected_line):
+                    settings['audio']['codec'] = cycle_option(settings['audio']['codec'], audio_codec_options, -1 if kk == 'LEFT' else 1)
+                elif re.search(r'返回主菜单$', selected_line):
+                    break
+                else:
+                    stream_match = re.search(r'流 #(\d+)', selected_line)
+                    if stream_match:
+                        skey = stream_match.group(1)
+                        cur = settings['audio']['internal_streams'].get(skey, True)
+                        settings['audio']['internal_streams'][skey] = not cur
+
+        elif actual == 3:
+            s_idx = 0
+            cached_sub_streams = None
+            while True:
+                print(CURSOR_HOME, end='', flush=True)
+                hide_cursor()
+                if cached_sub_streams is None:
+                    cached_sub_streams = get_subtitle_streams(input_file)
+                subtitle_streams = cached_sub_streams
+                for s in subtitle_streams:
+                    key = str(s['index'])
+                    if key not in settings['subtitle']['internal_streams']:
+                        settings['subtitle']['internal_streams'][key] = True
+
+                if settings['subtitle']['mode'] == 'external' and not settings['subtitle']['files']:
+                    settings['subtitle']['mode'] = 'internal'
+
+                enabled_internal_pos = [pos for pos, s in enumerate(subtitle_streams) if settings['subtitle']['internal_streams'].get(str(s['index']), True)]
+                selected_internal_pos = enabled_internal_pos[0] if enabled_internal_pos else None
+                enabled_external_idx = [i for i in range(len(settings['subtitle']['files'])) if settings['subtitle']['external_streams'].get(str(i), True)]
+                selected_external_idx = enabled_external_idx[0] if enabled_external_idx else None
+
+                disable_status = format_on_off(settings['subtitle']['disable'])
+                burn_status = format_on_off(settings['subtitle']['burn_in'])
+                disable_hint = '-sn' if settings['subtitle']['disable'] else None
+                burn_hint = None
+                if settings['subtitle']['burn_in'] and not settings['subtitle']['disable']:
+                    if settings['subtitle']['mode'] == 'internal' and selected_internal_pos is not None:
+                        burn_hint = f'-vf subtitles=input:si={selected_internal_pos}'
+                    elif settings['subtitle']['mode'] == 'external' and selected_external_idx is not None:
+                        burn_hint = f"-vf subtitles={os.path.basename(settings['subtitle']['files'][selected_external_idx])}"
+                    else:
+                        burn_hint = '-vf subtitles=...'
+
+                import_value = f"{len(settings['subtitle']['files'])} 个文件" if settings['subtitle']['files'] else '未导入'
+                import_hint = None
+                if settings['subtitle']['mode'] == 'external':
+                    if settings['subtitle']['burn_in'] and selected_external_idx is not None and not settings['subtitle']['disable']:
+                        import_hint = f"-vf subtitles={os.path.basename(settings['subtitle']['files'][selected_external_idx])}"
+                    elif not settings['subtitle']['burn_in'] and enabled_external_idx and not settings['subtitle']['disable']:
+                        import_hint = '-i <字幕文件> -map N:s:0'
+
+                sm = [
+                    with_ffmpeg_hint(menu_item('禁用内置字幕流', disable_status), disable_hint, bool(disable_hint)),
+                    MENU_SEPARATOR,
+                    with_ffmpeg_hint(menu_item('烧制字幕', burn_status), burn_hint, bool(burn_hint)),
+                    MENU_SEPARATOR,
+                    with_ffmpeg_hint(menu_item('导入字幕', import_value), import_hint, bool(import_hint)),
+                    MENU_SEPARATOR,
+                ]
+
+                if settings['subtitle']['mode'] == 'internal':
+                    for pos, s in enumerate(subtitle_streams):
+                        key = str(s['index'])
+                        enabled = settings['subtitle']['internal_streams'].get(key, True)
+                        status = format_on_off(enabled)
+                        line = menu_item(f"流 #{s['index']} | .{s['codec'].upper()} | {s['language']}", status)
+                        hint = None
+                        if enabled:
+                            if settings['subtitle']['burn_in'] and selected_internal_pos == pos:
+                                hint = f'-vf subtitles=input:si={pos}'
+                            elif not settings['subtitle']['burn_in'] and not settings['subtitle']['disable']:
+                                hint = f'-map 0:s:{pos}'
+                        sm.append(with_ffmpeg_hint(line, hint, bool(hint)))
+                else:
+                    for i, f in enumerate(settings['subtitle']['files']):
+                        enabled = settings['subtitle']['external_streams'].get(str(i), True)
+                        status = format_on_off(enabled)
+                        line = menu_item(f"[{i}] {os.path.basename(f)}", status)
+                        hint = None
+                        if enabled:
+                            if settings['subtitle']['burn_in'] and selected_external_idx == i and not settings['subtitle']['disable']:
+                                hint = f"-vf subtitles={os.path.basename(f)}"
+                            elif not settings['subtitle']['burn_in'] and not settings['subtitle']['disable']:
+                                hint = f"-i {os.path.basename(f)} -map N:s:0"
+                        sm.append(with_ffmpeg_hint(line, hint, bool(hint)))
+
+                sm.extend([MENU_SEPARATOR, menu_item('返回主菜单')])
+                render_screen_menu('字幕设置', [], sm, selected_index=s_idx, footer_hint='↑↓ 选择   ←→ 调整   Enter 执行')
+                s_idx = normalize_selected_index(sm, s_idx) or 0
+
+                kk = read_navigation_key()
+                if kk == 'UP':
+                    s_idx = get_next_selectable(sm, s_idx, -1)
+                    continue
+                if kk == 'DOWN':
+                    s_idx = get_next_selectable(sm, s_idx, 1)
+                    continue
+                if kk == 'BACKSPACE':
+                    break
+                if kk not in ('LEFT', 'RIGHT', 'ENTER'):
+                    continue
+
+                selectable = get_selectable_indices(sm)
+                if s_idx not in selectable:
+                    continue
+                selected_line = ANSI_ESCAPE.sub('', sm[s_idx]).strip()
+                if re.search(r'禁用内置字幕流\s*:', selected_line):
+                    settings['subtitle']['disable'] = not settings['subtitle']['disable']
+                elif re.search(r'烧制字幕\s*:', selected_line):
+                    settings['subtitle']['burn_in'] = not settings['subtitle']['burn_in']
+                    if settings['subtitle']['burn_in']:
+                        d = settings['subtitle']['internal_streams'] if settings['subtitle']['mode'] == 'internal' else settings['subtitle']['external_streams']
+                        found = False
+                        for key in list(d.keys()):
+                            if d[key] and not found:
+                                found = True
+                            else:
+                                d[key] = False
+                elif re.search(r'导入字幕\s*:', selected_line):
+                    if kk in ('RIGHT', 'ENTER'):
+                        files = choose_files('选择字幕文件', [('字幕文件', '*.srt *.ass *.ssa *.vtt *.sup'), ('所有文件', '*.*')])
+                        if files:
+                            settings['subtitle']['mode'] = 'external'
+                            settings['subtitle']['files'] = files
+                            settings['subtitle']['external_streams'] = {str(i): (not settings['subtitle']['burn_in'] or i == 0) for i in range(len(files))}
+                elif re.search(r'返回主菜单$', selected_line):
+                    break
+                else:
+                    stream_match = re.search(r'流 #(\d+)', selected_line)
+                    file_match = re.search(r'\[(\d+)\]', selected_line)
+                    if settings['subtitle']['mode'] == 'internal' and stream_match:
+                        skey = stream_match.group(1)
+                        if settings['subtitle']['burn_in']:
+                            for key in settings['subtitle']['internal_streams']:
+                                settings['subtitle']['internal_streams'][key] = False
+                            settings['subtitle']['internal_streams'][skey] = True
+                        else:
+                            cur = settings['subtitle']['internal_streams'].get(skey, True)
+                            settings['subtitle']['internal_streams'][skey] = not cur
+                    elif settings['subtitle']['mode'] == 'external' and file_match:
+                        fkey = file_match.group(1)
+                        if settings['subtitle']['burn_in']:
+                            for key in settings['subtitle']['external_streams']:
+                                settings['subtitle']['external_streams'][key] = False
+                            settings['subtitle']['external_streams'][fkey] = True
+                        else:
+                            cur = settings['subtitle']['external_streams'].get(fkey, True)
+                            settings['subtitle']['external_streams'][fkey] = not cur
+        elif actual == 4:
+            p_idx = 0
+            while True:
+                print(CURSOR_HOME, end='', flush=True)
+                hide_cursor()
+                preview_command = build_ffmpeg_command(input_file)
+                preview_lines = format_preview_lines(preview_command, input_file=input_file, output_file=preview_command[-1])
+                pm = [menu_item('返回主菜单')]
+                render_screen_menu('FFmpeg 命令预览', preview_lines, pm, selected_index=p_idx, footer_hint='↑↓ 选择   Enter 返回')
+                p_idx = normalize_selected_index(pm, p_idx) or 0
+                kk = read_navigation_key()
+                if kk in ('BACKSPACE', 'ENTER'):
+                    break
+                if kk == 'UP':
+                    p_idx = get_next_selectable(pm, p_idx, -1)
+                elif kk == 'DOWN':
+                    p_idx = get_next_selectable(pm, p_idx, 1)
+
+    show_cursor()
+    try:
+        command = build_ffmpeg_command(input_file)
+        
+        # Calculate effective duration
+        start_sec = parse_time_to_seconds(settings['video']['ss'])
+        end_sec = parse_time_to_seconds(settings['video']['to'])
+        file_duration = get_video_duration(input_file)
+        
+        calc_duration = file_duration
+        if end_sec > 0:
+            calc_duration = end_sec
+        if start_sec > 0:
+            calc_duration -= start_sec
+        calc_duration = max(0, calc_duration)
+
+        run_ffmpeg_with_progress(command, calc_duration)
+        
+        # Wait for keypress to exit, no text prompt
+        read_navigation_key()
+
+    except Exception as e:
+        show_cursor()
+        print(f'\n处理失败: {e}')
+        input('\n按回车键退出...')
+
+
+if __name__ == '__main__':
+    try:
+        hide_cursor()
+        process_files()
+    except Exception as e:
+        show_cursor()
+        print(f'发生错误: {e}')
+        input('\n按回车键退出...')
+    finally:
+        show_cursor()

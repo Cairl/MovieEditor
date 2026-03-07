@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.env
+.DS_Store
+.vscode/
+.idea/
+dist/
+build/
+*.spec
+venv/
+新建 文本文档.txt
+
+
+iFlow.lnk
