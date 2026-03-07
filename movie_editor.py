@@ -165,7 +165,7 @@ def trim_to_display_width(text, max_width):
     return out + suffix
 
 
-def build_top_border(inner_width, title_text=None, divider_pos=None):
+def build_top_border(inner_width, title_text=None, divider_pos=None, right_title=None):
     if divider_pos is None:
         if not title_text:
             return f"  ╭{'─' * inner_width}╮"
@@ -179,21 +179,40 @@ def build_top_border(inner_width, title_text=None, divider_pos=None):
         right = remain - left
         return f"  ╭{'─' * left}{UI_COLORS['title']}\033[1m{title_plain}{UI_COLORS['reset']}{'─' * right}╮"
     else:
-        # Split top border with T-junction
-        left_part = '─' * divider_pos
-        right_part = '─' * (inner_width - divider_pos - 1)
-        if not title_text:
-            return f"  ╭{left_part}┬{right_part}╮"
-        clean_title = str(title_text).replace('\n', ' ').strip()
-        title_plain = f' {clean_title} '
-        title_w = get_display_width(title_plain)
-        if title_w < divider_pos - 2:
-            remain = divider_pos - title_w
-            left = min(2, remain)
-            right = remain - left
-            return f"  ╭{'─' * left}{UI_COLORS['title']}\033[1m{title_plain}{UI_COLORS['reset']}{'─' * right}┬{right_part}╮"
+        # Split top border with T-junction and optional right title
+        # Left part
+        left_str = ""
+        if title_text:
+            clean_title = str(title_text).replace('\n', ' ').strip()
+            title_p = f' {clean_title} '
+            tw = get_display_width(title_p)
+            if tw < divider_pos - 2:
+                rem = divider_pos - tw
+                l_len = min(2, rem)
+                r_len = rem - l_len
+                left_str = f"{'─' * l_len}{UI_COLORS['title']}\033[1m{title_p}{UI_COLORS['reset']}{'─' * r_len}"
+            else:
+                left_str = '─' * divider_pos
         else:
-            return f"  ╭{left_part}┬{right_part}╮"
+            left_str = '─' * divider_pos
+
+        # Right part
+        right_avail = inner_width - divider_pos - 1
+        right_str = ""
+        if right_title:
+            rt_p = f' {right_title} '
+            rtw = get_display_width(rt_p)
+            if rtw < right_avail - 2:
+                rem_r = right_avail - rtw
+                rl_len = min(2, rem_r)
+                rr_len = rem_r - rl_len
+                right_str = f"{'─' * rl_len}{UI_COLORS['title']}\033[1m{rt_p}{UI_COLORS['reset']}{'─' * rr_len}"
+            else:
+                right_str = '─' * right_avail
+        else:
+            right_str = '─' * right_avail
+
+        return f"  ╭{left_str}┬{right_str}╮"
 
 
 def render_menu_box(lines, selected_index=None):
@@ -231,7 +250,10 @@ def render_menu_box(lines, selected_index=None):
     divider_pos = None
     if has_any_hint:
         divider_pos = max_left_w + 4
-        inner_width = divider_pos + max_right_w + 4
+        # Ensure right title ' 参数 ' fits
+        min_right_w = get_display_width(' 参数 ') + 4
+        current_right_w = max(max_right_w, min_right_w)
+        inner_width = divider_pos + current_right_w + 4
     else:
         inner_width = max_left_w + 4
         
@@ -256,7 +278,8 @@ def render_menu_box(lines, selected_index=None):
 
     visible_content = content_lines[start_row : start_row + max_rows]
 
-    out = [build_top_border(inner_width, border_title, divider_pos)]
+    # Build top border with '参数' on the right if applicable
+    out = [build_top_border(inner_width, border_title, divider_pos, right_title="参数" if divider_pos else None)]
     if border_title:
         if divider_pos:
             out.append(f"  │{' ' * divider_pos}│{' ' * (inner_width - divider_pos - 1)}│")
@@ -540,25 +563,48 @@ def get_video_duration(file_path):
 def _probe_streams_json(file_path, selector, entries):
     try:
         import json
-        cmd = ['ffprobe', '-v', 'error', '-select_streams', selector, '-show_entries', entries, '-of', 'json', file_path]
-        result = subprocess.run(cmd, capture_output=True, text=True)
-        data = json.loads(result.stdout or '{}')
+        # Increased probesize and duration for large 4K/BluRay files
+        cmd = [
+            'ffprobe', '-v', 'quiet', 
+            '-probesize', '50M', '-analyzeduration', '100M',
+            '-select_streams', selector, 
+            '-show_entries', entries, 
+            '-of', 'json', file_path
+        ]
+        # Use bytes and manual decode to avoid Windows locale encoding issues
+        result = subprocess.run(cmd, capture_output=True, check=True)
+        stdout_text = result.stdout.decode('utf-8', errors='replace')
+        data = json.loads(stdout_text or '{}')
         return data.get('streams', [])
     except Exception:
-        return []
+        # Fallback attempt without extra probe params
+        try:
+            cmd = ['ffprobe', '-v', 'quiet', '-select_streams', selector, '-show_entries', entries, '-of', 'json', file_path]
+            result = subprocess.run(cmd, capture_output=True, check=True)
+            stdout_text = result.stdout.decode('utf-8', errors='replace')
+            data = json.loads(stdout_text or '{}')
+            return data.get('streams', [])
+        except Exception:
+            return []
 
 
 def get_audio_streams(file_path):
     streams = []
     for s in _probe_streams_json(file_path, 'a', 'stream=index,codec_name,channels:stream_tags=language'):
-        streams.append({'index': s.get('index'), 'codec': s.get('codec_name', 'unknown'), 'channels': s.get('channels', 2), 'language': s.get('tags', {}).get('language', 'und')})
+        streams.append({
+            'index': s.get('index'), 
+            'codec': s.get('codec_name', 'unknown'), 
+            'channels': s.get('channels', 2), 
+            'language': s.get('tags', {}).get('language', 'und')
+        })
     return streams
 
 
 def get_subtitle_streams(file_path):
-    # 1. Get detailed stream info from JSON for indices and metadata
+    # 1. Get structured data using robust JSON probe
+    streams_data = _probe_streams_json(file_path, 's', 'stream=index,codec_name:stream_tags=language,title')
     streams = []
-    for s in _probe_streams_json(file_path, 's', 'stream=index,codec_name:stream_tags=language,title'):
+    for s in streams_data:
         tags = s.get('tags', {})
         streams.append({
             'index': s.get('index'), 
@@ -568,21 +614,22 @@ def get_subtitle_streams(file_path):
             'raw_display_name': None
         })
     
-    # 2. Capture ffprobe's standard stream info output to find the "(alias)" part
+    if not streams:
+        return []
+
+    # 2. Capture alias name from parentheses in raw output
     try:
         cmd = ['ffprobe', '-hide_banner', '-i', file_path]
-        result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace')
-        stderr_content = result.stderr
+        result = subprocess.run(cmd, capture_output=True)
+        stderr_content = result.stderr.decode('utf-8', errors='replace')
         
         for s in streams:
-            # Look for lines like "Stream #0:2: Subtitle: subrip (srt)"
-            # Pattern: Stream #\d+:sidx ... Subtitle: codec (alias)
-            pattern = rf"Stream #\d+:{s['index']}.*?Subtitle: \w+ \((\w+)\)"
+            # Improved regex to handle language tags like Stream #0:2(eng)
+            pattern = rf"Stream #\d+:{s['index']}.*?Subtitle: [^(]+?\((\w+)\)"
             match = re.search(pattern, stderr_content)
             if match:
                 s['raw_display_name'] = match.group(1)
             else:
-                # Fallback to codec_name if no parentheses found
                 s['raw_display_name'] = s['codec']
     except Exception:
         for s in streams:
@@ -1068,13 +1115,10 @@ def process_files():
                 vm = [
                     with_ffmpeg_hint(menu_item('H.265 编码', format_on_off(settings['video']['hevc'])), '-c:v hevc -crf 23', settings['video']['hevc']),
                     with_ffmpeg_hint(menu_item('分辨率', res if res else f'{first_width}x{first_height} (原始)'), f"-s {res} -aspect {res.replace('x', ':')}" if res else None, bool(res)),
-                    MENU_SEPARATOR,
                     with_ffmpeg_hint(menu_item('开始时间', settings['video']['ss'] or '00:00:00'), f"-ss {settings['video']['ss']}" if settings['video']['ss'] else None, bool(settings['video']['ss'])),
                     with_ffmpeg_hint(menu_item('结束时间', settings['video']['to'] or '00:00:00'), f"-to {settings['video']['to']}" if settings['video']['to'] else None, bool(settings['video']['to'])),
-                    MENU_SEPARATOR,
                     with_ffmpeg_hint(menu_item('裁剪上下黑边', f"{settings['video']['crop_top']}px" if settings['video']['crop_top'] > 0 else '不裁剪'), crop_hint, settings['video']['crop_top'] > 0),
                     with_ffmpeg_hint(menu_item('裁剪左右黑边', f"{settings['video']['crop_left']}px" if settings['video']['crop_left'] > 0 else '不裁剪'), crop_hint, settings['video']['crop_left'] > 0),
-                    MENU_SEPARATOR,
                     menu_item('返回主菜单'),
                 ]
                 render_screen_menu('视频设置', [], vm, selected_index=v_idx, footer_hint='↑↓ 选择   ←→ 调整   Enter 切换')
@@ -1123,7 +1167,7 @@ def process_files():
                     if key not in settings['audio']['internal_streams']:
                         settings['audio']['internal_streams'][key] = True
 
-                codec_hint = f"-c:a {settings['audio']['codec']}" if not is_default_mode_active() else None
+                codec_hint = f"-c:a {settings['audio']['codec']}" if settings['audio']['codec'] != 'copy' else None
 
                 am = []
                 max_a_idx_w = max((len(str(i + 1)) for i in range(len(audio_streams))), default=1)
@@ -1139,9 +1183,7 @@ def process_files():
                     am.append(with_ffmpeg_hint(line, hint, bool(hint)))
 
                 am.extend([
-                    MENU_SEPARATOR,
                     with_ffmpeg_hint(menu_item('音频编码', settings['audio']['codec'].upper()), codec_hint, bool(codec_hint)),
-                    MENU_SEPARATOR,
                     menu_item('返回主菜单'),
                 ])
                 render_screen_menu('音频设置', [], am, selected_index=a_idx, footer_hint='↑↓ 选择   ←→ 调整   Enter 执行')
@@ -1218,11 +1260,8 @@ def process_files():
 
                 sm = [
                     with_ffmpeg_hint(menu_item('禁用内置字幕流', disable_status), disable_hint, bool(disable_hint)),
-                    MENU_SEPARATOR,
                     with_ffmpeg_hint(menu_item('烧制字幕', burn_status), burn_hint, bool(burn_hint)),
-                    MENU_SEPARATOR,
                     with_ffmpeg_hint(menu_item('导入字幕', import_value), import_hint, bool(import_hint)),
-                    MENU_SEPARATOR,
                 ]
 
                 if settings['subtitle']['mode'] == 'internal':
@@ -1276,7 +1315,7 @@ def process_files():
                                 hint = f"-i {os.path.basename(f)} -map N:s:0"
                         sm.append(with_ffmpeg_hint(line, hint, bool(hint)))
 
-                sm.extend([MENU_SEPARATOR, menu_item('返回主菜单')])
+                sm.append(menu_item('返回主菜单'))
                 render_screen_menu('字幕设置', [], sm, selected_index=s_idx, footer_hint='↑↓ 选择   ←→ 调整   Enter 执行')
                 s_idx = normalize_selected_index(sm, s_idx) or 0
 
