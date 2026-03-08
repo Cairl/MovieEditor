@@ -1121,7 +1121,7 @@ def process_files():
                     with_ffmpeg_hint(menu_item('裁剪左右黑边', f"{settings['video']['crop_left']}px" if settings['video']['crop_left'] > 0 else '不裁剪'), crop_hint, settings['video']['crop_left'] > 0),
                     menu_item('返回主菜单'),
                 ]
-                render_screen_menu('视频设置', [], vm, selected_index=v_idx, footer_hint='↑↓ 选择   ←→ 调整   Enter 切换')
+                render_screen_menu('视频设置', [], vm, selected_index=v_idx)
                 v_idx = normalize_selected_index(vm, v_idx) or 0
                 kk = read_navigation_key()
                 if kk == 'UP':
@@ -1186,7 +1186,7 @@ def process_files():
                     with_ffmpeg_hint(menu_item('音频编码', settings['audio']['codec'].upper()), codec_hint, bool(codec_hint)),
                     menu_item('返回主菜单'),
                 ])
-                render_screen_menu('音频设置', [], am, selected_index=a_idx, footer_hint='↑↓ 选择   ←→ 调整   Enter 执行')
+                render_screen_menu('音频设置', [], am, selected_index=a_idx)
                 a_idx = normalize_selected_index(am, a_idx) or 0
 
                 kk = read_navigation_key()
