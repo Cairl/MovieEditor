@@ -9,6 +9,8 @@ from typing import Optional
 from ui.console import ANSI_ESCAPE, CURSOR_HOME, UI_COLORS, UI_ICONS, MENU_LABEL_WIDTH
 from core.helpers import truncate_name
 
+LAST_MENU_LINES = None
+
 def get_display_width(text: str) -> int:
     # Strip ANSI escape sequences before calculating width
     clean_text = ANSI_ESCAPE.sub('', str(text))
