@@ -1,5 +1,6 @@
 # 工具函数：时间解析、语言映射、编码映射、分辨率选项
 import os
+import re
 import shutil
 from typing import Optional
 
@@ -113,3 +114,41 @@ def get_subtitle_format_name(codec_name: str) -> str:
     }
     name = str(codec_name).lower()
     return mapping.get(name, name.upper())
+
+
+def extract_differential_name(file_paths: list[str]) -> list[str]:
+    """Extract the differentiating part of filenames.
+    E.g. ["Breaking.Bad.S01E01.Pilot.xxx.mkv", "Breaking.Bad.S01E02.Cats.xxx.mkv"]
+    Returns ["S01E01 Pilot", "S01E02 Cats"]
+    Splits by token boundaries (. _ -) to avoid cutting words.
+    """
+    if len(file_paths) <= 1:
+        return [os.path.splitext(os.path.basename(f))[0] for f in file_paths]
+
+    basenames = [os.path.splitext(os.path.basename(f))[0] for f in file_paths]
+    tokens_list = [re.split(r'[._\-]+', name) for name in basenames]
+
+    # Find common prefix tokens
+    prefix_len = 0
+    for i in range(len(tokens_list[0])):
+        if all(len(t) > i and t[i] == tokens_list[0][i] for t in tokens_list):
+            prefix_len = i + 1
+        else:
+            break
+
+    # Find common suffix tokens
+    suffix_len = 0
+    for i in range(1, min(len(t) for t in tokens_list) + 1):
+        if all(t[-i] == tokens_list[0][-i] for t in tokens_list):
+            suffix_len = i
+        else:
+            break
+
+    # Extract differential tokens
+    result = []
+    for tokens in tokens_list:
+        end = len(tokens) - suffix_len if suffix_len > 0 else len(tokens)
+        diff = tokens[prefix_len:end]
+        result.append(' '.join(diff) if diff else ' '.join(tokens))
+
+    return result

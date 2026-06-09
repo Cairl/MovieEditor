@@ -12,7 +12,7 @@ from ui.display import (
     MENU_SEPARATOR, menu_item, truncate_name,
     with_ffmpeg_hint, render_screen_menu,
 )
-from core.helpers import format_on_off, get_display_name
+from core.helpers import format_on_off, extract_differential_name
 from ui.navigation import (
     read_navigation_key, get_selectable_indices,
     get_next_selectable, normalize_selected_index,
@@ -173,7 +173,9 @@ def process_files() -> None:
         return max(0.0, calc_duration)
 
     def build_episode_context() -> list:
-        return [f"当前: {truncate_name(os.path.basename(first_file))} ({current_file_idx+1}/{len(input_paths)})"]
+        diff_names = extract_differential_name(input_paths)
+        ep_name = diff_names[current_file_idx] if current_file_idx < len(diff_names) else os.path.basename(first_file)
+        return [f"当前: {ep_name} ({current_file_idx+1}/{len(input_paths)})"]
 
     ctx = {
         'settings': settings,
@@ -200,39 +202,37 @@ def process_files() -> None:
         hide_cursor()
         refresh_ctx()
 
-        context = [
-            f"模式: {mode_title}",
-            f"文件: {len(input_paths)} 个"
-        ]
-        if is_series_mode and series_edit_mode == 'per_episode':
-            display_name = truncate_name(get_display_name(first_file))
-            context.append(f"当前针对: {display_name} ({current_file_idx+1}/{len(input_paths)})")
+        context = []
 
-        menu = [
-            menu_item('开始处理'),
-            MENU_SEPARATOR,
+        menu = []
+        if is_series_mode:
+            edit_mode_label = '统筹编辑' if series_edit_mode == 'batch' else '逐集编辑'
+            menu.append(menu_item(f'编辑模式: {edit_mode_label}'))
+            if series_edit_mode == 'per_episode':
+                diff_names = extract_differential_name(input_paths)
+                menu.append(menu_item(f'当前选择: {diff_names[current_file_idx]}'))
+            menu.append(MENU_SEPARATOR)
+
+        menu.extend([
             menu_item('视频设置'),
             menu_item('音频设置'),
             menu_item('字幕设置'),
-        ]
-        if is_series_mode:
-            edit_mode_label = '统筹编辑' if series_edit_mode == 'batch' else '逐集编辑'
-            menu.insert(2, menu_item('编辑模式', edit_mode_label))
-            menu.insert(3, MENU_SEPARATOR)
-        menu.extend([
             MENU_SEPARATOR,
-            menu_item('FFmpeg 命令预览'),
+            f'{UI_COLORS["green"]}\033[1m{menu_item("开始处理")}{UI_COLORS["reset"]}',
+            menu_item('预览 FFmpeg 命令'),
             '',
         ])
-        render_screen_menu('主界面', context, menu, selected_index=main_index)
+        render_screen_menu(mode_title, context, menu, selected_index=main_index)
         main_index = normalize_selected_index(menu, main_index) or 0
         k = read_navigation_key()
-        if is_series_mode and series_edit_mode == 'per_episode' and k in ('LEFT', 'RIGHT'):
-            update_current_episode(current_file_idx + (-1 if k == 'LEFT' else 1))
-            settings['video']['ss'] = None
-            settings['video']['to'] = None
-            settings['video']['crop_top'] = 0
-            settings['video']['crop_left'] = 0
+        if k in ('LEFT', 'RIGHT'):
+            selected_line = ANSI_ESCAPE.sub('', menu[main_index]).strip() if main_index < len(menu) else ''
+            if is_series_mode and '当前选择' in selected_line:
+                update_current_episode(current_file_idx + (-1 if k == 'LEFT' else 1))
+                settings['video']['ss'] = None
+                settings['video']['to'] = None
+                settings['video']['crop_top'] = 0
+                settings['video']['crop_left'] = 0
             continue
         if k == 'UP':
             main_index = get_next_selectable(menu, main_index, -1)
@@ -260,17 +260,14 @@ def process_files() -> None:
                     settings['video']['crop_left'] = 0
                     while True:
                         hide_cursor()
-                        ep_context = [
-                            f"逐集编辑模式",
-                            f"当前: {truncate_name(os.path.basename(first_file))} ({current_file_idx+1}/{len(input_paths)})",
-                        ]
+                        ep_context = build_episode_context()
                         ep_menu = [
                             menu_item('确认处理当前集'),
                             menu_item('视频设置'),
                             menu_item('音频设置'),
                             menu_item('字幕设置'),
                             MENU_SEPARATOR,
-                            menu_item('返回主菜单'),
+                            menu_item('返回菜单'),
                             '',
                         ]
                         ep_idx = 0
@@ -308,17 +305,17 @@ def process_files() -> None:
                             break
                         elif '视频设置' in ep_selected_line:
                             refresh_ctx()
-                            handle_video_settings_menu(ctx, build_episode_context(), allow_episode_nav=True)
+                            handle_video_settings_menu(ctx, [], allow_episode_nav=True)
                             continue
                         elif '音频设置' in ep_selected_line:
                             refresh_ctx()
-                            handle_audio_settings_menu(ctx, build_episode_context(), allow_episode_nav=True)
+                            handle_audio_settings_menu(ctx, [], allow_episode_nav=True)
                             continue
                         elif '字幕设置' in ep_selected_line:
                             refresh_ctx()
-                            handle_subtitle_settings_menu(ctx, build_episode_context(), allow_episode_nav=True)
+                            handle_subtitle_settings_menu(ctx, [], allow_episode_nav=True)
                             continue
-                        elif '返回主菜单' in ep_selected_line:
+                        elif '返回菜单' in ep_selected_line:
                             break
                     main_index = 0
                     continue
@@ -327,27 +324,18 @@ def process_files() -> None:
         elif '编辑模式' in selected_plain:
             series_edit_mode = 'batch' if series_edit_mode == 'per_episode' else 'per_episode'
         elif '视频设置' in selected_plain:
-            v_context = []
             allow_ep_nav = is_series_mode and series_edit_mode == 'per_episode'
-            if allow_ep_nav:
-                v_context = build_episode_context()
             refresh_ctx()
-            handle_video_settings_menu(ctx, v_context, allow_episode_nav=allow_ep_nav, return_label='返回主菜单')
+            handle_video_settings_menu(ctx, [], allow_episode_nav=allow_ep_nav, return_label='返回菜单')
         elif '音频设置' in selected_plain:
-            a_context = []
             allow_ep_nav = is_series_mode and series_edit_mode == 'per_episode'
-            if allow_ep_nav:
-                a_context = build_episode_context()
             refresh_ctx()
-            handle_audio_settings_menu(ctx, a_context, allow_episode_nav=allow_ep_nav, return_label='返回主菜单')
+            handle_audio_settings_menu(ctx, [], allow_episode_nav=allow_ep_nav, return_label='返回菜单')
         elif '字幕设置' in selected_plain:
-            s_context = []
             allow_ep_nav = is_series_mode and series_edit_mode == 'per_episode'
-            if allow_ep_nav:
-                s_context = build_episode_context()
             refresh_ctx()
-            handle_subtitle_settings_menu(ctx, s_context, allow_episode_nav=allow_ep_nav, return_label='返回主菜单')
-        elif 'FFmpeg 命令预览' in selected_plain:
+            handle_subtitle_settings_menu(ctx, [], allow_episode_nav=allow_ep_nav, return_label='返回菜单')
+        elif '预览 FFmpeg 命令' in selected_plain:
             f_idx = 0
             while True:
                 print(CURSOR_HOME, end='', flush=True)
@@ -360,17 +348,14 @@ def process_files() -> None:
                 preview_command = build_ffmpeg_command(first_file, audio_streams, subtitle_streams, series_mode=is_series_mode, external_subtitle=ext_sub)
                 cmd_lines = format_preview_lines(preview_command, input_file=first_file, output_file=preview_command[-1])
 
-                fm = []
+                fm = [MENU_SEPARATOR, menu_item('返回菜单'), '']
 
                 f_context = []
-                if is_series_mode and series_edit_mode == 'per_episode':
-                    display_name = truncate_name(get_display_name(first_file))
-                    f_context.append(f"当前针对: {display_name} ({current_file_idx+1}/{len(input_paths)})")
                 for cl in cmd_lines:
                     f_context.append(f"{UI_COLORS['muted']}{cl}{UI_COLORS['reset']}")
                 f_context.append('')
 
-                render_screen_menu('FFmpeg 命令预览', f_context, fm, selected_index=f_idx, footer_hint=None)
+                render_screen_menu('预览 FFmpeg 命令', f_context, fm, selected_index=f_idx)
                 f_idx = normalize_selected_index(fm, f_idx) or 0
 
                 kk = read_navigation_key()
@@ -385,6 +370,12 @@ def process_files() -> None:
                     continue
                 if kk == 'BACKSPACE':
                     break
+                if kk == 'ENTER':
+                    sel = get_selectable_indices(fm)
+                    if f_idx in sel:
+                        selected_item = ANSI_ESCAPE.sub('', fm[f_idx]).strip()
+                        if '返回菜单' in selected_item:
+                            break
 
     show_cursor()
     try:

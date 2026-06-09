@@ -21,6 +21,7 @@ def get_display_width(text: str) -> int:
 
 
 TITLE_MARKER = "__TITLE__ "
+CONTEXT_MARKER = "__CTX__ "
 MENU_SEPARATOR = "─" * 52
 
 
@@ -163,8 +164,10 @@ def render_menu_box(lines: list[str], selected_index: Optional[int] = None) -> N
             parsed_lines.append({'type': 'item', 'left': left_part, 'right': right_part, 'left_plain': left_plain, 'right_plain': right_plain})
         else:
             left_plain = plain
+            # Strip context marker for width calculation
+            measure_plain = left_plain[len(CONTEXT_MARKER):] if left_plain.startswith(CONTEXT_MARKER) else left_plain
             if not is_sep and not is_empty:
-                max_left_w = max(max_left_w, get_display_width(left_plain))
+                max_left_w = max(max_left_w, get_display_width(measure_plain))
             parsed_lines.append({'type': 'item', 'left': line, 'right': None, 'left_plain': left_plain, 'right_plain': ''})
 
     term_w, term_h = shutil.get_terminal_size((120, 30))
@@ -219,6 +222,7 @@ def render_menu_box(lines: list[str], selected_index: Optional[int] = None) -> N
         stripped = left_plain.strip()
         is_separator = len(stripped) > 0 and len(set(stripped)) == 1 and stripped[0] in ('─', '-', '=')
         is_empty = stripped == ''
+        is_context = left_plain.startswith(CONTEXT_MARKER)
 
         if is_separator:
             if divider_pos:
@@ -230,6 +234,19 @@ def render_menu_box(lines: list[str], selected_index: Optional[int] = None) -> N
                 # Single column: space + line + space
                 sep = '─' * max(0, inner_width - 2)
                 out.append(f"  │ {UI_COLORS['muted']}{sep}{UI_COLORS['reset']} │")
+            continue
+
+        if is_context:
+            ctx_text = left_plain[len(CONTEXT_MARKER):]
+            ctx_display = f"  {ctx_text}"
+            ctx_w = get_display_width(ctx_display)
+            l_avail = divider_pos - 2 if divider_pos else inner_width - 2
+            ctx_trunc = trim_to_display_width(ctx_display, l_avail)
+            ctx_pad = ' ' * max(0, l_avail - get_display_width(ctx_trunc))
+            if divider_pos:
+                out.append(f"  │{UI_COLORS['muted']}{ctx_trunc}{ctx_pad}{UI_COLORS['reset']}│{' ' * (inner_width - divider_pos - 1)}│")
+            else:
+                out.append(f"  │{UI_COLORS['muted']}{ctx_trunc}{ctx_pad}{UI_COLORS['reset']}│")
             continue
 
         if is_empty:
@@ -248,7 +265,22 @@ def render_menu_box(lines: list[str], selected_index: Optional[int] = None) -> N
         l_marker = f" {UI_ICONS['focus']} " if is_selected else "   "
         l_text = f"{l_marker}{l_trunc}"
         # Apply background color and bold font for selected row
-        l_color = UI_COLORS['selected_row'] + '\033[1m' if is_selected else ""
+        l_color = UI_COLORS['selected_row'] + '\033[38;2;205;214;244m\033[1m' if is_selected else ""
+        # For non-selected rows with embedded ANSI colors, preserve them
+        if not is_selected:
+            raw = item.get('left', '')
+            # Extract all leading ANSI codes (e.g. color + bold)
+            ansi_prefix = ''
+            pos = 0
+            while pos < len(raw):
+                m = re.match(r'(\x1b\[[0-9;]*m)', raw[pos:])
+                if m:
+                    ansi_prefix += m.group(1)
+                    pos += len(m.group(1))
+                else:
+                    break
+            if ansi_prefix:
+                l_color = ansi_prefix
         l_pad = ' ' * max(0, (divider_pos if divider_pos else inner_width) - get_display_width(l_text))
         
         if divider_pos:
@@ -256,7 +288,7 @@ def render_menu_box(lines: list[str], selected_index: Optional[int] = None) -> N
             r_avail = inner_width - divider_pos - 5
             r_trunc = trim_to_display_width(r_content or "", r_avail)
             # Bold the right column text as well if selected
-            r_style = UI_COLORS['muted'] + ('\033[1m' if is_selected else "")
+            r_style = UI_COLORS['muted'] + ('\033[38;2;205;214;244m\033[1m' if is_selected else "")
             r_text = f" {r_style}{r_trunc}{UI_COLORS['reset']}" if r_content else ""
             r_pad = ' ' * max(0, (inner_width - divider_pos - 1) - get_display_width(r_text))
             out.append(f"  │{l_color}{l_text}{l_pad}{UI_COLORS['reset']}│{r_text}{r_pad}│")
@@ -331,7 +363,8 @@ def get_selectable_indices(lines: list[str]) -> list[int]:
         is_empty = stripped == ''
         is_separator = len(stripped) > 0 and len(set(stripped)) == 1 and stripped[0] in ('─', '-', '=')
         is_header = plain.startswith(TITLE_MARKER)
-        if not is_empty and not is_separator and not is_header:
+        is_context = plain.startswith(CONTEXT_MARKER)
+        if not is_empty and not is_separator and not is_header and not is_context:
             selectable.append(i)
     return selectable
 

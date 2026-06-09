@@ -85,10 +85,8 @@ def handle_subtitle_settings_menu(ctx: dict, context_lines: list, allow_episode_
                     elif not settings['subtitle']['burn_in']:
                         hint = f"-i {truncate_name(os.path.basename(f))} -map N:s:0"
                 sm.append(with_ffmpeg_hint(line, hint, bool(hint)))
-        sm.append('')
-        sm.append(menu_item(return_label))
-        sm.append('')
-        render_screen_menu('字幕设置', context_lines, sm, selected_index=s_idx, footer_hint='↑↓ 选择   Shift+↑↓ 排序   Enter 执行')
+        sm.extend([MENU_SEPARATOR, menu_item(return_label), ''])
+        render_screen_menu('字幕设置', context_lines, sm, selected_index=s_idx)
         s_idx = normalize_selected_index(sm, s_idx) or 0
         key = read_navigation_key()
         if allow_episode_nav and key in ('LEFT', 'RIGHT'):

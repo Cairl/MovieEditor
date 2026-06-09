@@ -1,4 +1,4 @@
-# 控制台底层：键盘读取、光标控制、ANSI 常量、子进程管理
+﻿# 鎺у埗鍙板簳灞傦細閿洏璇诲彇銆佸厜鏍囨帶鍒躲€丄NSI 甯搁噺銆佸瓙杩涚▼绠＄悊
 import io
 import sys
 import re
@@ -22,10 +22,10 @@ ACTIVE_CHILD_LOCK = threading.Lock()
 LAST_MENU_LINES = None
 LAST_PREVIEW_LINES = None
 
-# 全局退出标志，由 Ctrl+C 信号处理器设置
+# 鍏ㄥ眬閫€鍑烘爣蹇楋紝鐢?Ctrl+C 淇″彿澶勭悊鍣ㄨ缃?
 _shutdown_requested = threading.Event()
 
-# 非阻塞键盘读取（不使用独立线程）
+# 闈為樆濉為敭鐩樿鍙栵紙涓嶄娇鐢ㄧ嫭绔嬬嚎绋嬶級
 def _console_has_input() -> bool:
     if sys.platform == 'win32':
         return msvcrt.kbhit()
@@ -83,6 +83,7 @@ UI_COLORS = {
     "title": "[38;2;249;226;175m",
     "muted": "[38;2;108;112;134m",
     "selected_row": "[48;2;69;71;90m",
+    "green": "[38;2;166;227;161m",
 }
 UI_ICONS = {
     "focus": "›",
