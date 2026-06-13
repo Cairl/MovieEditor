@@ -35,9 +35,9 @@ def read_navigation_key() -> str:
             if ext == b'P':
                 return 'SHIFT_DOWN' if is_shift else 'DOWN'
             if ext == b'K':
-                return 'LEFT'
+                return 'SHIFT_LEFT' if is_shift else 'LEFT'
             if ext == b'M':
-                return 'RIGHT'
+                return 'SHIFT_RIGHT' if is_shift else 'RIGHT'
         elif key in (b'\r', b'\n'):
             return 'ENTER'
         elif key == b'\x08':

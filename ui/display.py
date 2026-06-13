@@ -424,7 +424,7 @@ def run_menu_loop(
             continue
         if key == 'BACKSPACE':
             return None
-        if key not in ('LEFT', 'RIGHT', 'ENTER', 'SHIFT_UP', 'SHIFT_DOWN'):
+        if key not in ('LEFT', 'RIGHT', 'SHIFT_LEFT', 'SHIFT_RIGHT', 'ENTER', 'SHIFT_UP', 'SHIFT_DOWN'):
             continue
 
         sel = get_selectable_indices(menu)

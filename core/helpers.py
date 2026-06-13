@@ -40,7 +40,11 @@ def parse_time_to_seconds(time_text: Optional[str]) -> Optional[int]:
 def adjust_time_setting(time_text: Optional[str], delta_seconds: int) -> Optional[str]:
     seconds = parse_time_to_seconds(time_text)
     if seconds is None:
-        return None
+        # Start from 0 when pressing RIGHT; LEFT on unset time is a no-op
+        if delta_seconds > 0:
+            seconds = 0
+        else:
+            return None
     new_seconds = max(0, seconds + delta_seconds)
     return format_hms(new_seconds) if new_seconds > 0 else None
 

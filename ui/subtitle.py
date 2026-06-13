@@ -80,7 +80,7 @@ def handle_subtitle_settings_menu(ctx: dict, context_lines: list, allow_episode_
                     elif not settings['subtitle']['burn_in']:
                         hint = f"-i {truncate_name(os.path.basename(f))} -map N:s:0"
                 sm.append(with_ffmpeg_hint(line, hint, bool(hint)))
-        sm.extend([MENU_SEPARATOR, f"{UI_COLORS['muted']}{return_label} \u2190{UI_COLORS['reset']}", ''])
+        sm.extend([MENU_SEPARATOR, f"{UI_COLORS['muted']}{return_label} \u00ab{UI_COLORS['reset']}", ''])
         return sm
 
     def action_handler(key, selected_item, idx_in_sel):

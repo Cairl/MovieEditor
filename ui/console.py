@@ -20,7 +20,7 @@ CURSOR_HOME = '\033[H'
 ACTIVE_CHILD_PROCESSES = set()
 ACTIVE_CHILD_LOCK = threading.Lock()
 
-# 鍏ㄥ眬閫€鍑烘爣蹇楋紝鐢?Ctrl+C 淇″彿澶勭悊鍣ㄨ缃?
+# 鍏ㄥ眬閫€鍑烘爣蹇楋紝鐢?Ctrl+C 淇″彿澶勭悊鍣ㄨ�??
 _shutdown_requested = threading.Event()
 
 # 闈為樆濉為敭鐩樿鍙栵紙涓嶄娇鐢ㄧ嫭绔嬬嚎绋嬶級
@@ -61,12 +61,15 @@ def _check_console_ctrl() -> bool:
                             ("Event", KEY_EVENT_RECORD)
                         ]
                     record = INPUT_RECORD()
-                    num_read = ctypes.c_ulong()
-                    if ctypes.windll.kernel32.ReadConsoleInputW(handle, ctypes.byref(record), 1, ctypes.byref(num_read)):
-                        if num_read.value > 0 and record.EventType == 1:
+                    peeked = ctypes.c_ulong()
+                    # Peek (non-destructive) first �� don't consume non-Ctrl+C events
+                    if ctypes.windll.kernel32.PeekConsoleInputW(handle, ctypes.byref(record), 1, ctypes.byref(peeked)):
+                        if peeked.value > 0 and record.EventType == 1:
                             vk = record.Event.wVirtualKeyCode
                             ctrl = record.Event.dwControlKeyState
                             if vk == 0x43 and (ctrl & 0x0008):  # Ctrl+C
+                                # Consume only if it IS Ctrl+C
+                                ctypes.windll.kernel32.ReadConsoleInputW(handle, ctypes.byref(record), 1, ctypes.byref(peeked))
                                 return True
         except OSError:
             pass
@@ -79,7 +82,7 @@ TITLE_MARKER = "__TITLE__ "
 CONTEXT_MARKER = "__CTX__ "
 
 def _is_separator(text: str) -> bool:
-    return len(text) > 0 and len(set(text)) == 1 and text[0] in ('─', '-', '=')
+    return len(text) > 0 and len(set(text)) == 1 and text[0] in ('\u2500', '-', '=')
 
 UI_COLORS = {
     "reset": "[0m",
@@ -90,7 +93,7 @@ UI_COLORS = {
     "green": "[38;2;166;227;161m",
 }
 UI_ICONS = {
-    "focus": "›",
+    "focus": "\u25b6",
 }
 MENU_LABEL_WIDTH = 28
 

@@ -33,7 +33,7 @@ def handle_audio_settings_menu(ctx: dict, context_lines: list, allow_episode_nav
             line = f"#{padded_idx} | {s['codec'].upper()} | {channels} | {s['language']} : {status}"
             hint = f"-map 0:a:{s['rel_index']}" if enabled else None
             am.append(with_ffmpeg_hint(line, hint, bool(hint)))
-        am.extend([MENU_SEPARATOR, f"{UI_COLORS['muted']}{return_label} \u2190{UI_COLORS['reset']}", ''])
+        am.extend([MENU_SEPARATOR, f"{UI_COLORS['muted']}{return_label} \u00ab{UI_COLORS['reset']}", ''])
         return am
 
     def action_handler(key, selected_item, idx_in_sel):

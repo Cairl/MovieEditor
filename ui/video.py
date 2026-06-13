@@ -3,7 +3,7 @@ from ui.console import UI_COLORS
 from ui.display import MENU_SEPARATOR, menu_item, with_ffmpeg_hint, Action, run_menu_loop
 from core.helpers import format_on_off, adjust_time_setting
 
-TIME_ADJUST_STEP = 5   # seconds per LEFT/RIGHT press
+TIME_ADJUST_STEP = 1   # seconds per LEFT/RIGHT press
 CROP_ADJUST_STEP = 2   # pixels per LEFT/RIGHT press
 
 
@@ -18,23 +18,23 @@ def handle_video_settings_menu(ctx: dict, context_lines: list, allow_episode_nav
     HW_LABELS = {'none': 'CPU (默认)', 'nvenc': 'NVIDIA NVENC', 'qsv': 'Intel QSV', 'amf': 'AMD AMF'}
     HW_HINTS = {
         'none': None,
-        'nvenc': '-c:v hevc_nvenc -preset p4',
-        'qsv': '-c:v hevc_qsv -global_quality 23',
-        'amf': '-c:v hevc_amf -quality balanced',
+        'nvenc': '-preset p4',
+        'qsv': '-global_quality 23',
+        'amf': '-quality balanced',
     }
 
     def _hevc_hint():
-        """Dynamic H.265 hint reflecting current hardware encoder."""
+        """Dynamic H.265 hint — just the codec; HW flags live on the encoder row."""
         hw = settings['video'].get('hw_encoder', 'none')
         hevc = settings['video']['hevc']
         if hw == 'nvenc':
-            return '-c:v hevc_nvenc -preset p4' if hevc else '-c:v h264_nvenc -preset p4'
+            return '-c:v hevc_nvenc' if hevc else '-c:v h264_nvenc'
         elif hw == 'qsv':
-            return '-c:v hevc_qsv -global_quality 23' if hevc else '-c:v h264_qsv -global_quality 23'
+            return '-c:v hevc_qsv' if hevc else '-c:v h264_qsv'
         elif hw == 'amf':
-            return '-c:v hevc_amf -quality balanced' if hevc else '-c:v h264_amf -quality balanced'
+            return '-c:v hevc_amf' if hevc else '-c:v h264_amf'
         else:
-            return '-c:v libx265 -crf 23' if hevc else '-c:v libx264'
+            return '-c:v hevc -crf 23' if hevc else '-c:v h264'
 
     def build_menu():
         crop_hint = f"-vf {build_crop_filter_text()}"
@@ -51,12 +51,12 @@ def handle_video_settings_menu(ctx: dict, context_lines: list, allow_episode_nav
             with_ffmpeg_hint(menu_item('裁剪上下黑边', f"{settings['video']['crop_top']}px" if settings['video']['crop_top'] > 0 else '不裁剪'), crop_hint, settings['video']['crop_top'] > 0),
             with_ffmpeg_hint(menu_item('裁剪左右黑边', f"{settings['video']['crop_left']}px" if settings['video']['crop_left'] > 0 else '不裁剪'), crop_hint, settings['video']['crop_left'] > 0),
             MENU_SEPARATOR,
-            f"{UI_COLORS['muted']}{return_label} \u2190{UI_COLORS['reset']}",
+            f"{UI_COLORS['muted']}{return_label} \u00ab{UI_COLORS['reset']}",
             '',
         ]
 
     def action_handler(key, selected_item, idx_in_sel):
-        step = -1 if key == 'LEFT' else 1
+        step = -1 if key in ('LEFT', 'SHIFT_LEFT') else 1
         if idx_in_sel == 0:
             settings['video']['hevc'] = not settings['video']['hevc']
         elif idx_in_sel == 1 and key in ('LEFT', 'RIGHT'):
@@ -65,10 +65,12 @@ def handle_video_settings_menu(ctx: dict, context_lines: list, allow_episode_nav
             cur_idx = hw_list.index(cur_hw) if cur_hw in hw_list else 0
             new_idx = (cur_idx + step) % len(hw_list)
             settings['video']['hw_encoder'] = hw_list[new_idx]
-        elif idx_in_sel == 2 and key in ('LEFT', 'RIGHT'):
-            settings['video']['ss'] = adjust_time_setting(settings['video']['ss'], step * TIME_ADJUST_STEP)
-        elif idx_in_sel == 3 and key in ('LEFT', 'RIGHT'):
-            settings['video']['to'] = adjust_time_setting(settings['video']['to'], step * TIME_ADJUST_STEP)
+        elif idx_in_sel == 2 and key in ('LEFT', 'RIGHT', 'SHIFT_LEFT', 'SHIFT_RIGHT'):
+            delta = 60 if key in ('SHIFT_LEFT', 'SHIFT_RIGHT') else TIME_ADJUST_STEP
+            settings['video']['ss'] = adjust_time_setting(settings['video']['ss'], step * delta)
+        elif idx_in_sel == 3 and key in ('LEFT', 'RIGHT', 'SHIFT_LEFT', 'SHIFT_RIGHT'):
+            delta = 60 if key in ('SHIFT_LEFT', 'SHIFT_RIGHT') else TIME_ADJUST_STEP
+            settings['video']['to'] = adjust_time_setting(settings['video']['to'], step * delta)
         elif idx_in_sel == 4 and key in ('LEFT', 'RIGHT'):
             settings['video']['crop_top'] = max(0, min(max(0, first_height // 4 - 1), settings['video']['crop_top'] + step * CROP_ADJUST_STEP))
         elif idx_in_sel == 5 and key in ('LEFT', 'RIGHT'):
