@@ -2,6 +2,7 @@
 import os
 import json
 import logging
+import traceback
 from datetime import datetime
 from typing import Optional
 
@@ -12,6 +13,23 @@ def _get_log_dir() -> str:
     log_dir = os.path.join(base, 'log')
     os.makedirs(log_dir, exist_ok=True)
     return log_dir
+
+
+class _StandardizedFormatter(logging.Formatter):
+    """标准化日志格式化器：ISO 8601 时间戳 + 固定宽度级别 + 模块名"""
+
+    # WARNING → WARN, CRITICAL → CRIT (统一5字符宽度)
+    _LEVEL_MAP = {'WARNING': 'WARN ', 'CRITICAL': 'CRIT '}
+
+    def format(self, record):
+        original_levelname = record.levelname
+        record.levelname = self._LEVEL_MAP.get(
+            original_levelname, original_levelname.ljust(5)
+        )
+        try:
+            return super().format(record)
+        finally:
+            record.levelname = original_levelname
 
 
 def _make_logger() -> logging.Logger:
@@ -26,10 +44,26 @@ def _make_logger() -> logging.Logger:
 
     fh = logging.FileHandler(log_file, encoding='utf-8')
     fh.setLevel(logging.DEBUG)
-    fmt = logging.Formatter('%(asctime)s | %(levelname)s | %(message)s', datefmt='%H:%M:%S')
+    fmt = _StandardizedFormatter(
+        '%(asctime)s.%(msecs)03d | %(levelname)s | %(name)s | %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S'
+    )
     fh.setFormatter(fmt)
     logger.addHandler(fh)
     return logger
+
+
+def _log_multiline(
+    logger: logging.Logger,
+    level: int,
+    header: str,
+    lines: list[str],
+    max_lines: int = 20,
+) -> None:
+    """结构化多行日志：首行用 header，后续行用 '  | ' 前缀标记续行。"""
+    logger.log(level, header)
+    for line in lines[-max_lines:]:
+        logger.log(level, f'  | {line}')
 
 
 def log_ffmpeg_start(
@@ -54,9 +88,11 @@ def log_ffmpeg_start(
     if video_info:
         logger.info(f'视频信息: {json.dumps(video_info, ensure_ascii=False)}')
 
-    logger.debug(f'命令详情:')
-    for i, token in enumerate(command):
-        logger.debug(f'  [{i:3d}] {token}')
+    _log_multiline(
+        logger, logging.DEBUG,
+        '命令详情:',
+        [f'[{i:3d}] {token}' for i, token in enumerate(command)]
+    )
 
     return run_id
 
@@ -90,14 +126,19 @@ def log_ffmpeg_end(
     logger.info(f'[{run_id}] 结束: {status} (返回码 {returncode}) | 用时: {elapsed:.1f}s')
 
     if stderr_lines:
-        logger.warning(f'[{run_id}] stderr 输出 ({len(stderr_lines)} 行):')
-        for line in stderr_lines[-20:]:  # 最多保留最后 20 行
-            logger.warning(f'  {line}')
+        _log_multiline(
+            logger, logging.WARNING,
+            f'[{run_id}] stderr 输出 ({len(stderr_lines)} 行):',
+            stderr_lines, max_lines=20
+        )
 
     logger.info(f'===== FFmpeg 结束 [{run_id}] =====\n')
 
 
 def log_ffmpeg_error(run_id: str, error: Exception) -> None:
-    """记录异常。"""
+    """记录异常（自动附加格式化的堆栈跟踪）。"""
     logger = _make_logger()
-    logger.error(f'[{run_id}] 异常: {type(error).__name__}: {error}')
+    logger.error(
+        f'[{run_id}] 异常: {type(error).__name__}: {error}',
+        exc_info=(type(error), error, error.__traceback__)
+    )

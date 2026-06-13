@@ -8,10 +8,9 @@ import threading
 import json
 import subprocess
 from collections import deque
-from typing import Optional
 
 from ui.console import (
-    ANSI_ESCAPE, hide_cursor, register_child_process,
+    ANSI_ESCAPE, hide_cursor, show_cursor, register_child_process,
     unregister_child_process, _shutdown_requested, UI_COLORS,
 )
 from ui.display import get_display_width, trim_to_display_width
@@ -124,7 +123,7 @@ def get_subtitle_streams(file_path: str) -> list[dict]:
     return streams
 
 
-def format_preview_lines(command: list[str], input_file: Optional[str] = None, output_file: Optional[str] = None) -> list[str]:
+def format_preview_lines(command: list[str]) -> list[str]:
     lines = [f'  {command[0]}']
     i = 1
     
@@ -204,7 +203,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
         pass
 
     # Format command lines vertically
-    cmd_lines_raw = format_preview_lines(command, input_file, output_file)
+    cmd_lines_raw = format_preview_lines(command)
 
     # 日志：记录启动信息
     run_id = log_ffmpeg_start(command, input_file, output_file, total_duration, title_prefix)
@@ -386,10 +385,10 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
             try:
                 process.terminate()
                 process.wait(timeout=2)
-            except OSError:
+            except (OSError, subprocess.TimeoutExpired):
                 try:
                     process.kill()
-                except OSError:
+                except (OSError, subprocess.TimeoutExpired):
                     pass
             raise KeyboardInterrupt("处理已取消")
 
@@ -403,7 +402,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
             log_ffmpeg_end(run_id, process.returncode, elapsed_final, stderr_list)
             msg = f'FFmpeg 执行失败，返回码: {process.returncode}'
             if stderr_list:
-                msg += '\n' + '\n'.join(stderr_list)
+                msg += '\n' + '\n'.join(f'  | {line}' for line in stderr_list[-5:])
             raise RuntimeError(msg)
             
         # Final Render: Completed state
@@ -414,6 +413,18 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
         elapsed_final = time.time() - start_time
         log_ffmpeg_end(run_id, process.returncode, elapsed_final, list(stderr_tail))
 
+    except KeyboardInterrupt:
+        # Ensure FFmpeg subprocess is terminated on Ctrl+C before unregister
+        try:
+            process.terminate()
+            process.wait(timeout=2)
+        except (OSError, subprocess.TimeoutExpired):
+            try:
+                process.kill()
+            except OSError:
+                pass
+        show_cursor()
+        raise
     finally:
         unregister_child_process(process)
 

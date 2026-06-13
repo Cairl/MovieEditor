@@ -2,6 +2,7 @@
 import os
 import re
 import sys
+from datetime import datetime
 
 from ui.console import (
     ANSI_ESCAPE, CURSOR_HOME, UI_COLORS, hide_cursor, show_cursor,
@@ -21,6 +22,7 @@ from ui.navigation import (
     get_next_selectable, normalize_selected_index,
 )
 from ui.dialogs import choose_files, get_video_files_in_dir
+from core.logger import log_ffmpeg_error
 from core.ffmpeg import (
     get_video_resolution, get_video_duration, get_audio_streams,
     get_subtitle_streams, run_ffmpeg_with_progress, format_preview_lines,
@@ -78,11 +80,13 @@ def process_files() -> None:
 
     update_current_episode(0)
 
+    batch_timestamp = datetime.now().strftime('%Y%m%d-%H%M%S')
+
     mode_title = "剧集模式" if is_series_mode else "电影模式"
     series_edit_mode = 'batch'
 
     settings = {
-        'video': {'hevc': True, 'resolution': None, 'crop_top': 0, 'crop_left': 0, 'ss': None, 'to': None},
+        'video': {'hevc': True, 'hw_encoder': 'none', 'resolution': None, 'crop_top': 0, 'crop_left': 0, 'ss': None, 'to': None},
         'audio': {'reencode': True, 'codec': 'copy', 'internal_streams': {}},
         'subtitle': {'mode': 'internal', 'files': [], 'burn_in': False, 'disable': False, 'codec': 'copy', 'internal_streams': {}, 'external_streams': {}},
     }
@@ -98,12 +102,15 @@ def process_files() -> None:
     def build_crop_filter_text():
         return f"crop=in_w-{settings['video']['crop_left']*2}:in_h-{settings['video']['crop_top']*2}:{settings['video']['crop_left']}:{settings['video']['crop_top']}"
 
-    def build_ffmpeg_command(input_file, audio_streams, subtitle_streams, series_mode=False, external_subtitle=None):
+    def build_ffmpeg_command(input_file, audio_streams, subtitle_streams, series_mode=False, external_subtitle=None, timestamp=None):
+        parent_dir = os.path.dirname(input_file)
+        stem = os.path.splitext(os.path.basename(input_file))[0]
         if series_mode:
-            out_dir = os.path.join(os.path.dirname(input_file), 'Edited')
-            out_path = os.path.join(out_dir, os.path.splitext(os.path.basename(input_file))[0] + '.mp4')
+            out_dir = os.path.join(parent_dir, f'{os.path.basename(parent_dir)} (MovieEditor+{timestamp})')
+            os.makedirs(out_dir, exist_ok=True)
+            out_path = os.path.join(out_dir, f'{stem}.mp4')
         else:
-            out_path = os.path.join(os.path.dirname(input_file), '[FF] ' + os.path.splitext(os.path.basename(input_file))[0] + '.mp4')
+            out_path = os.path.join(parent_dir, f'{stem} (MovieEditor+{timestamp}).mp4')
 
         cmd = ['ffmpeg', '-y', '-hide_banner', '-ignore_unknown', '-i', input_file]
         vf_filters = []
@@ -115,6 +122,11 @@ def process_files() -> None:
         selected_external_sub = []
         if external_subtitle:
             selected_external_sub = [0]
+
+        # Always map the first video stream from input 0.
+        # Without this, FFmpeg drops video entirely once any explicit
+        # -map is used (e.g. for audio/subtitle streams).
+        cmd.extend(['-map', '0:v:0'])
 
         for i, s in enumerate(audio_streams):
             key = str(s['index'])
@@ -136,10 +148,18 @@ def process_files() -> None:
             elif settings['subtitle']['mode'] == 'external' and external_subtitle:
                 cmd.extend(['-i', external_subtitle, '-map', '1:s:0'])
 
-        if settings['video']['hevc']:
-            cmd.extend(['-c:v', 'libx265', '-crf', '23'])
+        hw = settings['video'].get('hw_encoder', 'none')
+        if hw == 'nvenc':
+            cmd.extend(['-c:v', 'hevc_nvenc' if settings['video']['hevc'] else 'h264_nvenc', '-preset', 'p4'])
+        elif hw == 'qsv':
+            cmd.extend(['-c:v', 'hevc_qsv' if settings['video']['hevc'] else 'h264_qsv', '-global_quality', '23'])
+        elif hw == 'amf':
+            cmd.extend(['-c:v', 'hevc_amf' if settings['video']['hevc'] else 'h264_amf', '-quality', 'balanced'])
         else:
-            cmd.extend(['-c:v', 'libx264'])
+            if settings['video']['hevc']:
+                cmd.extend(['-c:v', 'libx265', '-crf', '23'])
+            else:
+                cmd.extend(['-c:v', 'libx264'])
 
         if not settings['audio']['reencode']:
             cmd.extend(['-c:a', 'copy'])
@@ -279,12 +299,11 @@ def process_files() -> None:
 
                 def ep_action_handler(key, selected_item, idx_in_sel):
                     if '确认处理当前集' in selected_item:
-                        os.makedirs(os.path.join(os.path.dirname(first_file), 'Edited'), exist_ok=True)
                         ext_sub = None
                         if settings['subtitle']['mode'] == 'external' and settings['subtitle']['files']:
                             if current_file_idx < len(settings['subtitle']['files']):
                                 ext_sub = settings['subtitle']['files'][current_file_idx]
-                        command = build_ffmpeg_command(first_file, audio_streams, subtitle_streams, series_mode=True, external_subtitle=ext_sub)
+                        command = build_ffmpeg_command(first_file, audio_streams, subtitle_streams, series_mode=True, external_subtitle=ext_sub, timestamp=batch_timestamp)
                         _batch_diff = extract_differential_name(input_paths)
                         prefix = _batch_diff[current_file_idx] if current_file_idx < len(_batch_diff) else os.path.splitext(os.path.basename(first_file))[0]
                         run_ffmpeg_with_progress(command, calculate_effective_duration(first_file), title_prefix=prefix)
@@ -330,8 +349,8 @@ def process_files() -> None:
                 if is_series_mode and settings['subtitle']['mode'] == 'external' and settings['subtitle']['files']:
                     if current_file_idx < len(settings['subtitle']['files']):
                         ext_sub = settings['subtitle']['files'][current_file_idx]
-                preview_command = build_ffmpeg_command(first_file, audio_streams, subtitle_streams, series_mode=is_series_mode, external_subtitle=ext_sub)
-                cmd_lines = format_preview_lines(preview_command, input_file=first_file, output_file=preview_command[-1])
+                preview_command = build_ffmpeg_command(first_file, audio_streams, subtitle_streams, series_mode=is_series_mode, external_subtitle=ext_sub, timestamp=batch_timestamp)
+                cmd_lines = format_preview_lines(preview_command)
                 ctx = [f"{UI_COLORS['muted']}{cl}{UI_COLORS['reset']}" for cl in cmd_lines]
                 ctx.append('')
                 return ctx
@@ -354,9 +373,6 @@ def process_files() -> None:
     try:
         total_count = len(input_paths)
         for i, path in enumerate(input_paths):
-            if is_series_mode:
-                os.makedirs(os.path.join(os.path.dirname(path), 'Edited'), exist_ok=True)
-
             # Probe per-file streams to avoid stale data from last update_current_episode()
             file_audio_streams = get_audio_streams(path)
             file_subtitle_streams = get_subtitle_streams(path)
@@ -366,7 +382,7 @@ def process_files() -> None:
                 if i < len(settings['subtitle']['files']):
                     ext_sub = settings['subtitle']['files'][i]
 
-            command = build_ffmpeg_command(path, file_audio_streams, file_subtitle_streams, series_mode=is_series_mode, external_subtitle=ext_sub)
+            command = build_ffmpeg_command(path, file_audio_streams, file_subtitle_streams, series_mode=is_series_mode, external_subtitle=ext_sub, timestamp=batch_timestamp)
             _diff_all = extract_differential_name(input_paths)
             prefix = _diff_all[i] if i < len(_diff_all) else os.path.splitext(os.path.basename(path))[0]
             run_ffmpeg_with_progress(command, calculate_effective_duration(path), title_prefix=prefix)
@@ -378,5 +394,6 @@ def process_files() -> None:
         print('\n\n操作已取消')
         terminate_active_children()
     except (OSError, RuntimeError) as e:
+        log_ffmpeg_error('batch', e)
         show_cursor()
         print(f'\n发生错误: {e}')
