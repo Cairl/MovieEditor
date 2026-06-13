@@ -1,4 +1,4 @@
-﻿# 鎺у埗鍙板簳灞傦細閿洏璇诲彇銆佸厜鏍囨帶鍒躲€丄NSI 甯搁噺銆佸瓙杩涚▼绠＄悊
+# 控制台底层：键盘读取、光标控制、ANSI 常量、子进程管理
 import io
 import sys
 import re
@@ -19,8 +19,6 @@ CURSOR_HOME = '\033[H'
 
 ACTIVE_CHILD_PROCESSES = set()
 ACTIVE_CHILD_LOCK = threading.Lock()
-LAST_MENU_LINES = None
-LAST_PREVIEW_LINES = None
 
 # 鍏ㄥ眬閫€鍑烘爣蹇楋紝鐢?Ctrl+C 淇″彿澶勭悊鍣ㄨ缃?
 _shutdown_requested = threading.Event()
@@ -77,6 +75,12 @@ def _check_console_ctrl() -> bool:
 
 MAX_DISPLAY_NAME_LEN = 40
 
+TITLE_MARKER = "__TITLE__ "
+CONTEXT_MARKER = "__CTX__ "
+
+def _is_separator(text: str) -> bool:
+    return len(text) > 0 and len(set(text)) == 1 and text[0] in ('─', '-', '=')
+
 UI_COLORS = {
     "reset": "[0m",
     "accent": "[38;2;137;180;250m",
@@ -103,26 +107,17 @@ def unregister_child_process(process: subprocess.Popen) -> None:
 def terminate_active_children() -> None:
     with ACTIVE_CHILD_LOCK:
         processes = list(ACTIVE_CHILD_PROCESSES)
-    for process in processes:
-        try:
-            if process.poll() is None:
-                process.terminate()
-                try:
-                    process.wait(timeout=1)
-                except subprocess.TimeoutExpired:
-                    pass
-        except OSError:
-            pass
-    for process in processes:
-        try:
-            if process.poll() is None:
-                process.kill()
-                try:
-                    process.wait(timeout=1)
-                except subprocess.TimeoutExpired:
-                    pass
-        except OSError:
-            pass
+    for action in (subprocess.Popen.terminate, subprocess.Popen.kill):
+        for process in processes:
+            try:
+                if process.poll() is None:
+                    action(process)
+                    try:
+                        process.wait(timeout=1)
+                    except subprocess.TimeoutExpired:
+                        pass
+            except OSError:
+                pass
 
 
 def hide_cursor() -> None:

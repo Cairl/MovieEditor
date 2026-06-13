@@ -2,7 +2,6 @@
 import os
 import re
 import sys
-from typing import Optional
 
 from ui.console import (
     ANSI_ESCAPE, CURSOR_HOME, UI_COLORS, hide_cursor, show_cursor,
@@ -10,17 +9,18 @@ from ui.console import (
 )
 from ui.display import (
     MENU_SEPARATOR, menu_item, truncate_name,
-    with_ffmpeg_hint, render_screen_menu,
+    with_ffmpeg_hint, render_screen_menu, run_menu_loop, Action,
+    reset_menu_cache,
 )
-from core.helpers import format_on_off, extract_differential_name
+from core.helpers import (
+    format_on_off, extract_differential_name, escape_ffmpeg_filter_path,
+    format_hms, parse_time_to_seconds, build_resolution_options,
+)
 from ui.navigation import (
     read_navigation_key, get_selectable_indices,
     get_next_selectable, normalize_selected_index,
 )
-from ui.dialogs import choose_files, choose_file, get_video_files_in_dir
-from core.helpers import (
-    format_hms, parse_time_to_seconds, build_resolution_options,
-)
+from ui.dialogs import choose_files, get_video_files_in_dir
 from core.ffmpeg import (
     get_video_resolution, get_video_duration, get_audio_streams,
     get_subtitle_streams, run_ffmpeg_with_progress, format_preview_lines,
@@ -28,6 +28,12 @@ from core.ffmpeg import (
 from ui.video import handle_video_settings_menu
 from ui.audio import handle_audio_settings_menu
 from ui.subtitle import handle_subtitle_settings_menu
+
+_SETTINGS_HANDLERS = {
+    '视频设置': handle_video_settings_menu,
+    '音频设置': handle_audio_settings_menu,
+    '字幕设置': handle_subtitle_settings_menu,
+}
 
 
 def process_files() -> None:
@@ -83,6 +89,12 @@ def process_files() -> None:
 
     audio_codec_options = ['copy', 'aac', 'mp3', 'ac3', 'flac']
 
+    def reset_video_trim():
+        settings['video']['ss'] = None
+        settings['video']['to'] = None
+        settings['video']['crop_top'] = 0
+        settings['video']['crop_left'] = 0
+
     def build_crop_filter_text():
         return f"crop=in_w-{settings['video']['crop_left']*2}:in_h-{settings['video']['crop_top']*2}:{settings['video']['crop_left']}:{settings['video']['crop_top']}"
 
@@ -109,12 +121,14 @@ def process_files() -> None:
             if settings['audio']['internal_streams'].get(key, True):
                 cmd.extend(['-map', f"0:a:{s['rel_index']}"])
 
-        if settings['subtitle']['burn_in'] and subtitle_streams:
+        if settings['subtitle']['burn_in'] and (subtitle_streams or selected_external_sub):
             if settings['subtitle']['mode'] == 'internal' and selected_internal_sub:
                 sub_idx = selected_internal_sub[0]
                 vf_filters.append(f"subtitles=input:si={subtitle_streams[sub_idx]['rel_index']}")
             elif settings['subtitle']['mode'] == 'external' and selected_external_sub:
-                vf_filters.append(f"subtitles={os.path.basename(settings['subtitle']['files'][0])}")
+                # Use full absolute path with FFmpeg filter escaping
+                sub_path = external_subtitle if external_subtitle else settings['subtitle']['files'][0]
+                vf_filters.append(f"subtitles={escape_ffmpeg_filter_path(os.path.abspath(sub_path))}")
         elif not settings['subtitle']['disable']:
             if settings['subtitle']['mode'] == 'internal':
                 for pos in selected_internal_sub:
@@ -134,13 +148,10 @@ def process_files() -> None:
 
         if settings['subtitle']['burn_in']:
             cmd.append('-sn')
-        elif not settings['subtitle']['burn_in']:
+        else:
             has_subtitle_stream = (settings['subtitle']['mode'] == 'internal' and len(selected_internal_sub) > 0) or (settings['subtitle']['mode'] == 'external' and len(selected_external_sub) > 0)
             if has_subtitle_stream:
-                if settings['subtitle']['codec'] == 'copy':
-                    cmd.extend(['-c:s', 'mov_text'])
-                else:
-                    cmd.extend(['-c:s', settings['subtitle']['codec']])
+                cmd.extend(['-c:s', 'mov_text' if settings['subtitle']['codec'] == 'copy' else settings['subtitle']['codec']])
 
         cmd.extend([
             '-map_metadata', '0',
@@ -199,6 +210,8 @@ def process_files() -> None:
 
     main_index = 0
     while True:
+        if _shutdown_requested.is_set():
+            break
         hide_cursor()
         refresh_ctx()
 
@@ -229,10 +242,7 @@ def process_files() -> None:
             selected_line = ANSI_ESCAPE.sub('', menu[main_index]).strip() if main_index < len(menu) else ''
             if is_series_mode and '当前选择' in selected_line:
                 update_current_episode(current_file_idx + (-1 if k == 'LEFT' else 1))
-                settings['video']['ss'] = None
-                settings['video']['to'] = None
-                settings['video']['crop_top'] = 0
-                settings['video']['crop_left'] = 0
+                reset_video_trim()
             continue
         if k == 'UP':
             main_index = get_next_selectable(menu, main_index, -1)
@@ -252,131 +262,94 @@ def process_files() -> None:
 
         if '开始处理' in selected_plain:
             if is_series_mode and series_edit_mode == 'per_episode':
+                def clamped_update_episode(idx):
+                    if 0 <= idx < len(input_paths):
+                        update_current_episode(idx)
+
+                def ep_build_menu():
+                    return [
+                        menu_item('确认处理当前集'),
+                        menu_item('视频设置'),
+                        menu_item('音频设置'),
+                        menu_item('字幕设置'),
+                        MENU_SEPARATOR,
+                        menu_item('返回菜单'),
+                        '',
+                    ]
+
+                def ep_action_handler(key, selected_item, idx_in_sel):
+                    if '确认处理当前集' in selected_item:
+                        os.makedirs(os.path.join(os.path.dirname(first_file), 'Edited'), exist_ok=True)
+                        ext_sub = None
+                        if settings['subtitle']['mode'] == 'external' and settings['subtitle']['files']:
+                            if current_file_idx < len(settings['subtitle']['files']):
+                                ext_sub = settings['subtitle']['files'][current_file_idx]
+                        command = build_ffmpeg_command(first_file, audio_streams, subtitle_streams, series_mode=True, external_subtitle=ext_sub)
+                        _batch_diff = extract_differential_name(input_paths)
+                        prefix = _batch_diff[current_file_idx] if current_file_idx < len(_batch_diff) else os.path.splitext(os.path.basename(first_file))[0]
+                        run_ffmpeg_with_progress(command, calculate_effective_duration(first_file), title_prefix=prefix)
+                        return 'DONE'
+                    elif '返回菜单' in selected_item:
+                        return Action.BREAK
+                    for label, handler in _SETTINGS_HANDLERS.items():
+                        if label in selected_item:
+                            refresh_ctx()
+                            handler(ctx, [], allow_episode_nav=True)
+                            break
+                    return None
+
                 for i in range(len(input_paths)):
                     update_current_episode(i)
-                    settings['video']['ss'] = None
-                    settings['video']['to'] = None
-                    settings['video']['crop_top'] = 0
-                    settings['video']['crop_left'] = 0
-                    while True:
-                        hide_cursor()
-                        ep_context = build_episode_context()
-                        ep_menu = [
-                            menu_item('确认处理当前集'),
-                            menu_item('视频设置'),
-                            menu_item('音频设置'),
-                            menu_item('字幕设置'),
-                            MENU_SEPARATOR,
-                            menu_item('返回菜单'),
-                            '',
-                        ]
-                        ep_idx = 0
-                        render_screen_menu('逐集处理', ep_context, ep_menu, selected_index=ep_idx)
-                        ep_idx = normalize_selected_index(ep_menu, ep_idx) or 0
-                        ep_key = read_navigation_key()
-                        if ep_key in ('LEFT', 'RIGHT'):
-                            new_idx = current_file_idx + (-1 if ep_key == 'LEFT' else 1)
-                            if 0 <= new_idx < len(input_paths):
-                                update_current_episode(new_idx)
-                            continue
-                        if ep_key == 'UP':
-                            ep_idx = get_next_selectable(ep_menu, ep_idx, -1)
-                            continue
-                        if ep_key == 'DOWN':
-                            ep_idx = get_next_selectable(ep_menu, ep_idx, 1)
-                            continue
-                        if ep_key == 'BACKSPACE':
-                            break
-                        if ep_key != 'ENTER':
-                            continue
-                        ep_sel = get_selectable_indices(ep_menu)
-                        if ep_idx not in ep_sel:
-                            continue
-                        ep_selected_line = ANSI_ESCAPE.sub('', ep_menu[ep_idx]).strip()
-                        if '确认处理当前集' in ep_selected_line:
-                            os.makedirs(os.path.join(os.path.dirname(first_file), 'Edited'), exist_ok=True)
-                            ext_sub = None
-                            if settings['subtitle']['mode'] == 'external' and settings['subtitle']['files']:
-                                if current_file_idx < len(settings['subtitle']['files']):
-                                    ext_sub = settings['subtitle']['files'][current_file_idx]
-                            command = build_ffmpeg_command(first_file, audio_streams, subtitle_streams, series_mode=True, external_subtitle=ext_sub)
-                            prefix = f"[{current_file_idx+1}/{len(input_paths)}] {truncate_name(os.path.basename(first_file))}"
-                            run_ffmpeg_with_progress(command, calculate_effective_duration(first_file), title_prefix=prefix)
-                            break
-                        elif '视频设置' in ep_selected_line:
-                            refresh_ctx()
-                            handle_video_settings_menu(ctx, [], allow_episode_nav=True)
-                            continue
-                        elif '音频设置' in ep_selected_line:
-                            refresh_ctx()
-                            handle_audio_settings_menu(ctx, [], allow_episode_nav=True)
-                            continue
-                        elif '字幕设置' in ep_selected_line:
-                            refresh_ctx()
-                            handle_subtitle_settings_menu(ctx, [], allow_episode_nav=True)
-                            continue
-                        elif '返回菜单' in ep_selected_line:
-                            break
+                    reset_video_trim()
+                    result = run_menu_loop(
+                        '逐集处理', build_episode_context, ep_build_menu, ep_action_handler,
+                        allow_episode_nav=True,
+                        update_current_episode=clamped_update_episode,
+                        current_file_idx_ref=[current_file_idx],
+                    )
+                    # BACKSPACE (None) or "返回菜单" (Action.BREAK) → return to main menu
+                    if result is None or result == Action.BREAK:
+                        break
                     main_index = 0
-                    continue
+                reset_menu_cache()  # force full redraw after per-episode FFmpeg
             else:
                 break
         elif '编辑模式' in selected_plain:
             series_edit_mode = 'batch' if series_edit_mode == 'per_episode' else 'per_episode'
-        elif '视频设置' in selected_plain:
+        elif any(label in selected_plain for label in _SETTINGS_HANDLERS):
             allow_ep_nav = is_series_mode and series_edit_mode == 'per_episode'
             refresh_ctx()
-            handle_video_settings_menu(ctx, [], allow_episode_nav=allow_ep_nav, return_label='返回菜单')
-        elif '音频设置' in selected_plain:
-            allow_ep_nav = is_series_mode and series_edit_mode == 'per_episode'
-            refresh_ctx()
-            handle_audio_settings_menu(ctx, [], allow_episode_nav=allow_ep_nav, return_label='返回菜单')
-        elif '字幕设置' in selected_plain:
-            allow_ep_nav = is_series_mode and series_edit_mode == 'per_episode'
-            refresh_ctx()
-            handle_subtitle_settings_menu(ctx, [], allow_episode_nav=allow_ep_nav, return_label='返回菜单')
+            for label, handler in _SETTINGS_HANDLERS.items():
+                if label in selected_plain:
+                    handler(ctx, [], allow_episode_nav=allow_ep_nav, return_label='返回菜单')
+                    break
+            reset_menu_cache()  # force full redraw after settings menu
         elif '预览 FFmpeg 命令' in selected_plain:
-            f_idx = 0
-            while True:
-                print(CURSOR_HOME, end='', flush=True)
-                hide_cursor()
-
+            def build_preview_context():
                 ext_sub = None
                 if is_series_mode and settings['subtitle']['mode'] == 'external' and settings['subtitle']['files']:
                     if current_file_idx < len(settings['subtitle']['files']):
                         ext_sub = settings['subtitle']['files'][current_file_idx]
                 preview_command = build_ffmpeg_command(first_file, audio_streams, subtitle_streams, series_mode=is_series_mode, external_subtitle=ext_sub)
                 cmd_lines = format_preview_lines(preview_command, input_file=first_file, output_file=preview_command[-1])
+                ctx = [f"{UI_COLORS['muted']}{cl}{UI_COLORS['reset']}" for cl in cmd_lines]
+                ctx.append('')
+                return ctx
 
-                fm = [MENU_SEPARATOR, menu_item('返回菜单'), '']
+            allow_ep_nav = is_series_mode and series_edit_mode == 'per_episode'
+            run_menu_loop(
+                '预览 FFmpeg 命令', build_preview_context,
+                lambda: [MENU_SEPARATOR, menu_item('返回菜单'), ''],
+                lambda k, s, i: Action.BREAK if '返回菜单' in s and k == 'ENTER' else None,
+                allow_episode_nav=allow_ep_nav,
+                update_current_episode=update_current_episode,
+                current_file_idx_ref=[current_file_idx],
+            )
+            reset_menu_cache()
 
-                f_context = []
-                for cl in cmd_lines:
-                    f_context.append(f"{UI_COLORS['muted']}{cl}{UI_COLORS['reset']}")
-                f_context.append('')
-
-                render_screen_menu('预览 FFmpeg 命令', f_context, fm, selected_index=f_idx)
-                f_idx = normalize_selected_index(fm, f_idx) or 0
-
-                kk = read_navigation_key()
-                if is_series_mode and series_edit_mode == 'per_episode' and kk in ('LEFT', 'RIGHT'):
-                    update_current_episode(current_file_idx + (-1 if kk == 'LEFT' else 1))
-                    continue
-                if kk == 'UP':
-                    f_idx = get_next_selectable(fm, f_idx, -1)
-                    continue
-                if kk == 'DOWN':
-                    f_idx = get_next_selectable(fm, f_idx, 1)
-                    continue
-                if kk == 'BACKSPACE':
-                    break
-                if kk == 'ENTER':
-                    sel = get_selectable_indices(fm)
-                    if f_idx in sel:
-                        selected_item = ANSI_ESCAPE.sub('', fm[f_idx]).strip()
-                        if '返回菜单' in selected_item:
-                            break
-
+    if _shutdown_requested.is_set():
+        show_cursor()
+        return
     show_cursor()
     try:
         total_count = len(input_paths)
@@ -384,13 +357,18 @@ def process_files() -> None:
             if is_series_mode:
                 os.makedirs(os.path.join(os.path.dirname(path), 'Edited'), exist_ok=True)
 
+            # Probe per-file streams to avoid stale data from last update_current_episode()
+            file_audio_streams = get_audio_streams(path)
+            file_subtitle_streams = get_subtitle_streams(path)
+
             ext_sub = None
             if is_series_mode and settings['subtitle']['mode'] == 'external':
                 if i < len(settings['subtitle']['files']):
                     ext_sub = settings['subtitle']['files'][i]
 
-            command = build_ffmpeg_command(path, audio_streams, subtitle_streams, series_mode=is_series_mode, external_subtitle=ext_sub)
-            prefix = f"[{i+1}/{total_count}] {truncate_name(os.path.basename(path))}"
+            command = build_ffmpeg_command(path, file_audio_streams, file_subtitle_streams, series_mode=is_series_mode, external_subtitle=ext_sub)
+            _diff_all = extract_differential_name(input_paths)
+            prefix = _diff_all[i] if i < len(_diff_all) else os.path.splitext(os.path.basename(path))[0]
             run_ffmpeg_with_progress(command, calculate_effective_duration(path), title_prefix=prefix)
 
         read_navigation_key()

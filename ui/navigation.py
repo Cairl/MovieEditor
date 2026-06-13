@@ -1,16 +1,18 @@
 # 导航键读取、可选索引计算
-import sys
 import time
 import msvcrt
 from typing import Optional
 
-from ui.console import _console_has_input, _console_read_key, _check_console_ctrl, ANSI_ESCAPE
-from ui.display import TITLE_MARKER
+from ui.console import _console_read_key, _check_console_ctrl, ANSI_ESCAPE, TITLE_MARKER, CONTEXT_MARKER, _is_separator, _shutdown_requested
 
 def read_navigation_key() -> str:
     while True:
         # 检查并消耗控制台 Ctrl+C 事件（防止它触发 Python 的 KeyboardInterrupt）
         _check_console_ctrl()
+
+        # 响应外部退出信号
+        if _shutdown_requested.is_set():
+            return 'BACKSPACE'
 
         # 非阻塞读取
         key, is_shift = _console_read_key()
@@ -61,9 +63,10 @@ def get_selectable_indices(lines: list[str]) -> list[int]:
         plain = ANSI_ESCAPE.sub('', line)
         stripped = plain.strip()
         is_empty = stripped == ''
-        is_separator = len(stripped) > 0 and len(set(stripped)) == 1 and stripped[0] in ('─', '-', '=')
+        is_separator = _is_separator(stripped)
         is_header = plain.startswith(TITLE_MARKER)
-        if not is_empty and not is_separator and not is_header:
+        is_context = plain.startswith(CONTEXT_MARKER)
+        if not is_empty and not is_separator and not is_header and not is_context:
             selectable.append(i)
     return selectable
 

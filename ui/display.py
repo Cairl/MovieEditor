@@ -1,15 +1,21 @@
 # 显示层：菜单渲染、文本格式化、预览框
-import os
 import re
 import sys
 import shutil
 import unicodedata
+from enum import Enum
 from typing import Optional
 
-from ui.console import ANSI_ESCAPE, CURSOR_HOME, UI_COLORS, UI_ICONS, MENU_LABEL_WIDTH
+from ui.console import ANSI_ESCAPE, CURSOR_HOME, UI_COLORS, UI_ICONS, MENU_LABEL_WIDTH, TITLE_MARKER, CONTEXT_MARKER, _is_separator, hide_cursor, _shutdown_requested
 from core.helpers import truncate_name
+from ui.navigation import get_selectable_indices, get_next_selectable, normalize_selected_index, read_navigation_key
 
 LAST_MENU_LINES = None
+
+def reset_menu_cache() -> None:
+    """Reset the incremental render cache so the next menu render is a full redraw."""
+    global LAST_MENU_LINES
+    LAST_MENU_LINES = None
 
 def get_display_width(text: str) -> int:
     # Strip ANSI escape sequences before calculating width
@@ -20,10 +26,7 @@ def get_display_width(text: str) -> int:
     return width
 
 
-TITLE_MARKER = "__TITLE__ "
-CONTEXT_MARKER = "__CTX__ "
 MENU_SEPARATOR = "─" * 52
-
 
 
 def menu_section(title: str) -> str:
@@ -83,54 +86,37 @@ def trim_to_display_width(text: str, max_width: int) -> str:
     return out + suffix
 
 
+def _render_title_segment(title: Optional[str], width: int) -> str:
+    """Render a horizontal line segment with an optional centered title."""
+    if not title:
+        return '─' * width
+    clean = str(title).replace('\n', ' ').strip()
+    padded = f' {clean} '
+    tw = get_display_width(padded)
+    if tw >= width - 2:
+        return '─' * width
+    remain = width - tw
+    l_len = min(2, remain)
+    r_len = remain - l_len
+    return f"{'─' * l_len}{UI_COLORS['title']}\033[1m{padded}{UI_COLORS['reset']}{'─' * r_len}"
+
+
 def build_top_border(inner_width: int, title_text: Optional[str] = None, divider_pos: Optional[int] = None, right_title: Optional[str] = None) -> str:
     if divider_pos is None:
-        if not title_text:
-            return f"  ╭{'─' * inner_width}╮"
-        clean_title = str(title_text).replace('\n', ' ').strip()
-        title_plain = f' {clean_title} '
         max_title_width = max(1, inner_width - 2)
-        title_plain = trim_to_display_width(title_plain, max_title_width)
-        title_w = get_display_width(title_plain)
-        remain = max(0, inner_width - title_w)
-        left = min(2, remain)
-        right = remain - left
-        return f"  ╭{'─' * left}{UI_COLORS['title']}\033[1m{title_plain}{UI_COLORS['reset']}{'─' * right}╮"
-    else:
-        # Split top border with T-junction and optional right title
-        # Left part
-        left_str = ""
         if title_text:
             clean_title = str(title_text).replace('\n', ' ').strip()
-            title_p = f' {clean_title} '
-            tw = get_display_width(title_p)
-            if tw < divider_pos - 2:
-                rem = divider_pos - tw
-                l_len = min(2, rem)
-                r_len = rem - l_len
-                left_str = f"{'─' * l_len}{UI_COLORS['title']}\033[1m{title_p}{UI_COLORS['reset']}{'─' * r_len}"
-            else:
-                left_str = '─' * divider_pos
-        else:
-            left_str = '─' * divider_pos
-
-        # Right part
-        right_avail = inner_width - divider_pos - 1
-        right_str = ""
-        if right_title:
-            rt_p = f' {right_title} '
-            rtw = get_display_width(rt_p)
-            if rtw < right_avail - 2:
-                rem_r = right_avail - rtw
-                rl_len = min(2, rem_r)
-                rr_len = rem_r - rl_len
-                right_str = f"{'─' * rl_len}{UI_COLORS['title']}\033[1m{rt_p}{UI_COLORS['reset']}{'─' * rr_len}"
-            else:
-                right_str = '─' * right_avail
-        else:
-            right_str = '─' * right_avail
-
-        return f"  ╭{left_str}┬{right_str}╮"
+            title_plain = trim_to_display_width(f' {clean_title} ', max_title_width)
+            title_w = get_display_width(title_plain)
+            remain = max(0, inner_width - title_w)
+            left = min(2, remain)
+            right = remain - left
+            return f"  ╭{'─' * left}{UI_COLORS['title']}\033[1m{title_plain}{UI_COLORS['reset']}{'─' * right}╮"
+        return f"  ╭{'─' * inner_width}╮"
+    left_str = _render_title_segment(title_text, divider_pos)
+    right_avail = inner_width - divider_pos - 1
+    right_str = _render_title_segment(right_title, right_avail)
+    return f"  ╭{left_str}┬{right_str}╮"
 
 
 def render_menu_box(lines: list[str], selected_index: Optional[int] = None) -> None:
@@ -148,7 +134,7 @@ def render_menu_box(lines: list[str], selected_index: Optional[int] = None) -> N
             continue
 
         stripped = plain.strip()
-        is_sep = len(stripped) > 0 and len(set(stripped)) == 1 and stripped[0] in ('─', '-', '=')
+        is_sep = _is_separator(stripped)
         is_empty = stripped == ''
 
         if HINT_SEP in line:
@@ -205,6 +191,11 @@ def render_menu_box(lines: list[str], selected_index: Optional[int] = None) -> N
 
     visible_content = content_lines[start_row : start_row + max_rows]
 
+    # Pre-compute headers_before for selected_index (O(n) instead of O(n²))
+    headers_before_selected = 0
+    if selected_index is not None:
+        headers_before_selected = sum(1 for p in parsed_lines[:selected_index] if p['type'] == 'header')
+
     # Build top border with '参数' on the right if applicable
     out = [build_top_border(inner_width, border_title, divider_pos, right_title="参数" if divider_pos else None)]
     if border_title:
@@ -215,12 +206,11 @@ def render_menu_box(lines: list[str], selected_index: Optional[int] = None) -> N
 
     for idx, item in enumerate(visible_content):
         i = start_row + idx
-        headers_before = sum(1 for p in parsed_lines if p['type'] == 'header' and parsed_lines.index(p) <= selected_index) if selected_index is not None else 0
-        is_selected = selected_index is not None and (i + headers_before) == selected_index
+        is_selected = selected_index is not None and (i + headers_before_selected) == selected_index
         
         left_plain = item['left_plain']
         stripped = left_plain.strip()
-        is_separator = len(stripped) > 0 and len(set(stripped)) == 1 and stripped[0] in ('─', '-', '=')
+        is_separator = _is_separator(stripped)
         is_empty = stripped == ''
         is_context = left_plain.startswith(CONTEXT_MARKER)
 
@@ -239,14 +229,11 @@ def render_menu_box(lines: list[str], selected_index: Optional[int] = None) -> N
         if is_context:
             ctx_text = left_plain[len(CONTEXT_MARKER):]
             ctx_display = f"  {ctx_text}"
-            ctx_w = get_display_width(ctx_display)
             l_avail = divider_pos - 2 if divider_pos else inner_width - 2
             ctx_trunc = trim_to_display_width(ctx_display, l_avail)
             ctx_pad = ' ' * max(0, l_avail - get_display_width(ctx_trunc))
-            if divider_pos:
-                out.append(f"  │{UI_COLORS['muted']}{ctx_trunc}{ctx_pad}{UI_COLORS['reset']}│{' ' * (inner_width - divider_pos - 1)}│")
-            else:
-                out.append(f"  │{UI_COLORS['muted']}{ctx_trunc}{ctx_pad}{UI_COLORS['reset']}│")
+            right_pad = f"│{' ' * (inner_width - divider_pos - 1)}│" if divider_pos else "│"
+            out.append(f"  │{UI_COLORS['muted']}{ctx_trunc}{ctx_pad}{UI_COLORS['reset']}{right_pad}")
             continue
 
         if is_empty:
@@ -321,7 +308,7 @@ def render_menu_box(lines: list[str], selected_index: Optional[int] = None) -> N
 
 
 def render_preview_box(lines: list[str], title: Optional[str] = None) -> None:
-    global LAST_PREVIEW_LINES
+    global LAST_PREVIEW_LINES, LAST_MENU_LINES
     parsed_lines = []
     max_w = 0
     for line in lines:
@@ -353,39 +340,8 @@ def render_preview_box(lines: list[str], title: Optional[str] = None) -> None:
     sys.stdout.write('\n'.join(out) + '\n')
     sys.stdout.flush()
     LAST_PREVIEW_LINES = out
-
-
-def get_selectable_indices(lines: list[str]) -> list[int]:
-    selectable = []
-    for i, line in enumerate(lines):
-        plain = ANSI_ESCAPE.sub('', line)
-        stripped = plain.strip()
-        is_empty = stripped == ''
-        is_separator = len(stripped) > 0 and len(set(stripped)) == 1 and stripped[0] in ('─', '-', '=')
-        is_header = plain.startswith(TITLE_MARKER)
-        is_context = plain.startswith(CONTEXT_MARKER)
-        if not is_empty and not is_separator and not is_header and not is_context:
-            selectable.append(i)
-    return selectable
-
-
-def get_next_selectable(lines: list[str], current_index: int, direction: int) -> int:
-    selectable = get_selectable_indices(lines)
-    if not selectable:
-        return current_index
-    if current_index not in selectable:
-        return selectable[0] if direction > 0 else selectable[-1]
-    current_pos = selectable.index(current_index)
-    return selectable[(current_pos + direction) % len(selectable)]
-
-
-def normalize_selected_index(lines: list[str], selected_index: Optional[int]) -> Optional[int]:
-    selectable = get_selectable_indices(lines)
-    if not selectable:
-        return None
-    if selected_index in selectable:
-        return selected_index
-    return selectable[0]
+    # Force next menu render to do a full redraw (preview replaces menu content)
+    LAST_MENU_LINES = None
 
 
 def render_screen_menu(screen_title: str, context_lines: list[str], menu_lines: list[str], selected_index: Optional[int] = None, footer_hint: Optional[str] = None) -> None:
@@ -403,4 +359,80 @@ def render_screen_menu(screen_title: str, context_lines: list[str], menu_lines: 
     normalized = normalize_selected_index(menu_lines, selected_index)
     adjusted_selected = (normalized + menu_offset) if normalized is not None else None
     render_menu_box(composed, selected_index=adjusted_selected)
+
+
+class Action(Enum):
+    CONTINUE = 'continue'
+    BREAK = 'break'
+
+
+def run_menu_loop(
+    title: str,
+    context_lines,
+    build_menu,
+    action_handler,
+    footer_hint: str = None,
+    allow_episode_nav: bool = False,
+    update_current_episode=None,
+    current_file_idx_ref: list = None,
+    no_nav_indices: set = None,
+):
+    """Reusable menu loop handling UP/DOWN/BACKSPACE/LEFT/RIGHT/ENTER navigation.
+
+    Args:
+        context_lines: list or callable() -> list — context lines rendered above the menu.
+        build_menu: callable() -> list[str] — returns menu items each iteration.
+        action_handler: callable(key, selected_item, idx_in_sel) -> Action or None.
+            Return None to continue the loop, Action.BREAK to exit, or any other
+            value to exit and return it.
+        allow_episode_nav: whether LEFT/RIGHT triggers episode navigation.
+        update_current_episode: callable(new_idx) for episode navigation.
+        current_file_idx_ref: single-element list with current file index.
+        no_nav_indices: set of action-handler indices where episode nav is suppressed.
+    Returns:
+        The value returned by action_handler, or None if BACKSPACE was pressed.
+    """
+    idx = 0
+    while True:
+        if _shutdown_requested.is_set():
+            return None
+        print(CURSOR_HOME, end='', flush=True)
+        hide_cursor()
+        ctx = context_lines() if callable(context_lines) else context_lines
+        menu = build_menu()
+        render_screen_menu(title, ctx, menu, selected_index=idx, footer_hint=footer_hint)
+        idx = normalize_selected_index(menu, idx) or 0
+        key = read_navigation_key()
+
+        if allow_episode_nav and key in ('LEFT', 'RIGHT'):
+            should_nav = True
+            if no_nav_indices:
+                sel = get_selectable_indices(menu)
+                if idx in sel and sel.index(idx) in no_nav_indices:
+                    should_nav = False
+            if should_nav:
+                if update_current_episode and current_file_idx_ref is not None:
+                    new_idx = current_file_idx_ref[0] + (-1 if key == 'LEFT' else 1)
+                    update_current_episode(new_idx)
+                    current_file_idx_ref[0] = new_idx  # sync ref for next press
+                continue
+        if key == 'UP':
+            idx = get_next_selectable(menu, idx, -1)
+            continue
+        if key == 'DOWN':
+            idx = get_next_selectable(menu, idx, 1)
+            continue
+        if key == 'BACKSPACE':
+            return None
+        if key not in ('LEFT', 'RIGHT', 'ENTER', 'SHIFT_UP', 'SHIFT_DOWN'):
+            continue
+
+        sel = get_selectable_indices(menu)
+        if idx not in sel:
+            continue
+        selected_item = ANSI_ESCAPE.sub('', menu[idx]).strip()
+        result = action_handler(key, selected_item, sel.index(idx))
+        if result is None or result == Action.CONTINUE:
+            continue
+        return result
 

@@ -1,7 +1,6 @@
 # 工具函数：时间解析、语言映射、编码映射、分辨率选项
 import os
 import re
-import shutil
 from typing import Optional
 
 
@@ -13,10 +12,6 @@ def truncate_name(name: str, max_len: int = 40) -> str:
     return name[:max_len - 3] + '...'
 
 
-def get_display_name(path_or_name: str) -> str:
-    return os.path.basename(path_or_name)
-
-
 def format_hms(seconds: float) -> str:
     h = int(seconds // 3600)
     m = int((seconds % 3600) // 60)
@@ -26,7 +21,7 @@ def format_hms(seconds: float) -> str:
 
 def parse_time_to_seconds(time_text: Optional[str]) -> Optional[int]:
     if time_text is None:
-        return 0
+        return None
     value = str(time_text).strip()
     if value in ('', '0'):
         return 0
@@ -114,6 +109,16 @@ def get_subtitle_format_name(codec_name: str) -> str:
     }
     name = str(codec_name).lower()
     return mapping.get(name, name.upper())
+
+
+def escape_ffmpeg_filter_path(path: str) -> str:
+    """Escape a file path for use in FFmpeg filter arguments (e.g. subtitles=).
+
+    FFmpeg interprets backslashes and colons as escape sequences in filter
+    arguments.  This converts a Windows path so it survives filter parsing.
+    """
+    # Backslash → double backslash; colon → backslash-colon
+    return path.replace('\\', '\\\\').replace(':', '\\\\:')
 
 
 def extract_differential_name(file_paths: list[str]) -> list[str]:
