@@ -1,4 +1,5 @@
 # 视频设置菜单
+from ui.console import UI_COLORS
 from ui.display import MENU_SEPARATOR, menu_item, with_ffmpeg_hint, Action, run_menu_loop
 from core.helpers import format_on_off, adjust_time_setting
 
@@ -15,14 +16,34 @@ def handle_video_settings_menu(ctx: dict, context_lines: list, allow_episode_nav
 
     HW_ENCODERS = ['none', 'nvenc', 'qsv', 'amf']
     HW_LABELS = {'none': 'CPU (默认)', 'nvenc': 'NVIDIA NVENC', 'qsv': 'Intel QSV', 'amf': 'AMD AMF'}
+    HW_HINTS = {
+        'none': None,
+        'nvenc': '-c:v hevc_nvenc -preset p4',
+        'qsv': '-c:v hevc_qsv -global_quality 23',
+        'amf': '-c:v hevc_amf -quality balanced',
+    }
+
+    def _hevc_hint():
+        """Dynamic H.265 hint reflecting current hardware encoder."""
+        hw = settings['video'].get('hw_encoder', 'none')
+        hevc = settings['video']['hevc']
+        if hw == 'nvenc':
+            return '-c:v hevc_nvenc -preset p4' if hevc else '-c:v h264_nvenc -preset p4'
+        elif hw == 'qsv':
+            return '-c:v hevc_qsv -global_quality 23' if hevc else '-c:v h264_qsv -global_quality 23'
+        elif hw == 'amf':
+            return '-c:v hevc_amf -quality balanced' if hevc else '-c:v h264_amf -quality balanced'
+        else:
+            return '-c:v libx265 -crf 23' if hevc else '-c:v libx264'
 
     def build_menu():
         crop_hint = f"-vf {build_crop_filter_text()}"
         hw = settings['video'].get('hw_encoder', 'none')
         hw_label = HW_LABELS.get(hw, hw)
+        hw_hint_text = HW_HINTS.get(hw)
         return [
-            with_ffmpeg_hint(menu_item('H.265 编码', format_on_off(settings['video']['hevc'])), '-c:v hevc -crf 23', settings['video']['hevc']),
-            menu_item('硬件编码', hw_label),
+            with_ffmpeg_hint(menu_item('H.265 编码', format_on_off(settings['video']['hevc'])), _hevc_hint(), settings['video']['hevc']),
+            with_ffmpeg_hint(menu_item('硬件编码', hw_label), hw_hint_text, hw != 'none'),
             MENU_SEPARATOR,
             with_ffmpeg_hint(menu_item('开始时间', settings['video']['ss'] or '未设置'), f"-ss {settings['video']['ss']}" if settings['video']['ss'] else None, bool(settings['video']['ss'])),
             with_ffmpeg_hint(menu_item('结束时间', settings['video']['to'] or '未设置'), f"-to {settings['video']['to']}" if settings['video']['to'] else None, bool(settings['video']['to'])),
@@ -30,7 +51,7 @@ def handle_video_settings_menu(ctx: dict, context_lines: list, allow_episode_nav
             with_ffmpeg_hint(menu_item('裁剪上下黑边', f"{settings['video']['crop_top']}px" if settings['video']['crop_top'] > 0 else '不裁剪'), crop_hint, settings['video']['crop_top'] > 0),
             with_ffmpeg_hint(menu_item('裁剪左右黑边', f"{settings['video']['crop_left']}px" if settings['video']['crop_left'] > 0 else '不裁剪'), crop_hint, settings['video']['crop_left'] > 0),
             MENU_SEPARATOR,
-            menu_item(return_label),
+            f"{UI_COLORS['muted']}{return_label} \u2190{UI_COLORS['reset']}",
             '',
         ]
 
