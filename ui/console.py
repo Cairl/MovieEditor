@@ -93,7 +93,7 @@ UI_COLORS = {
     "green": "[38;2;166;227;161m",
 }
 UI_ICONS = {
-    "focus": "\u25b6",
+    "focus": "\u276f",
 }
 MENU_LABEL_WIDTH = 28
 

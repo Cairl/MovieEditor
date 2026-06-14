@@ -80,7 +80,7 @@ def process_files() -> None:
 
     update_current_episode(0)
 
-    batch_timestamp = datetime.now().strftime('%Y%m%d-%H%M%S')
+    batch_timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
 
     mode_title = "剧集模式" if is_series_mode else "电影模式"
     series_edit_mode = 'batch'
@@ -106,11 +106,12 @@ def process_files() -> None:
         parent_dir = os.path.dirname(input_file)
         stem = os.path.splitext(os.path.basename(input_file))[0]
         if series_mode:
-            out_dir = os.path.join(parent_dir, f'{os.path.basename(parent_dir)} (MovieEditor+{timestamp})')
+            parent_name = os.path.basename(parent_dir).strip() or 'MovieEditor'
+            out_dir = os.path.join(os.path.dirname(parent_dir), f'{parent_name} (MovieEditor{timestamp})')
             os.makedirs(out_dir, exist_ok=True)
             out_path = os.path.join(out_dir, f'{stem}.mp4')
         else:
-            out_path = os.path.join(parent_dir, f'{stem} (MovieEditor+{timestamp}).mp4')
+            out_path = os.path.join(parent_dir, f'{stem} (MovieEditor{timestamp}).mp4')
 
         cmd = ['ffmpeg', '-y', '-hide_banner', '-ignore_unknown', '-i', input_file]
         vf_filters = []
@@ -157,9 +158,9 @@ def process_files() -> None:
             cmd.extend(['-c:v', 'hevc_amf' if settings['video']['hevc'] else 'h264_amf', '-quality', 'balanced'])
         else:
             if settings['video']['hevc']:
-                cmd.extend(['-c:v', 'libx265', '-crf', '23'])
+                cmd.extend(['-c:v', 'hevc', '-crf', '23'])
             else:
-                cmd.extend(['-c:v', 'libx264'])
+                cmd.extend(['-c:v', 'h264'])
 
         if not settings['audio']['reencode']:
             cmd.extend(['-c:a', 'copy'])
@@ -306,7 +307,8 @@ def process_files() -> None:
                         command = build_ffmpeg_command(first_file, audio_streams, subtitle_streams, series_mode=True, external_subtitle=ext_sub, timestamp=batch_timestamp)
                         _batch_diff = extract_differential_name(input_paths)
                         prefix = _batch_diff[current_file_idx] if current_file_idx < len(_batch_diff) else os.path.splitext(os.path.basename(first_file))[0]
-                        run_ffmpeg_with_progress(command, calculate_effective_duration(first_file), title_prefix=prefix)
+                        run_ffmpeg_with_progress(command, calculate_effective_duration(first_file), title_prefix=prefix, is_last=True)
+                        reset_menu_cache()
                         return 'DONE'
                     elif '返回菜单' in selected_item:
                         return Action.BREAK
@@ -385,7 +387,7 @@ def process_files() -> None:
             command = build_ffmpeg_command(path, file_audio_streams, file_subtitle_streams, series_mode=is_series_mode, external_subtitle=ext_sub, timestamp=batch_timestamp)
             _diff_all = extract_differential_name(input_paths)
             prefix = _diff_all[i] if i < len(_diff_all) else os.path.splitext(os.path.basename(path))[0]
-            run_ffmpeg_with_progress(command, calculate_effective_duration(path), title_prefix=prefix)
+            run_ffmpeg_with_progress(command, calculate_effective_duration(path), title_prefix=prefix, is_last=(i == total_count - 1))
 
         read_navigation_key()
 

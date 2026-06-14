@@ -13,7 +13,7 @@ from ui.console import (
     ANSI_ESCAPE, hide_cursor, show_cursor, register_child_process,
     unregister_child_process, _shutdown_requested, UI_COLORS,
 )
-from ui.display import get_display_width, trim_to_display_width
+from ui.display import get_display_width, trim_to_display_width, reset_menu_cache
 from core.helpers import format_hms
 from core.logger import log_ffmpeg_start, log_ffmpeg_progress, log_ffmpeg_end, log_ffmpeg_error
 
@@ -187,7 +187,7 @@ def _build_progress_line(text, width, is_finished):
 
 
 # ---- 进度 UI ----
-def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_prefix: str = '') -> None:
+def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_prefix: str = '', is_last: bool = False) -> None:
     output_file = command[-1]
     # Prepare command for execution
     exec_command = command[:-1] + ['-progress', 'pipe:1', output_file]
@@ -321,7 +321,8 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
         lines.append(f"  │{' ' * (width - 2)}│") # Bottom padding
         lines.append(f"  ╰{'─' * (width - 2)}╯")
 
-        sys.stdout.write('\033[H\033[J')
+        sys.stdout.write('\033[2J\033[H')
+        reset_menu_cache()
         sys.stdout.write('\n'.join(lines) + '\n')
         sys.stdout.flush()
 
@@ -370,7 +371,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
             else:
                 width = max(70, min(120, current_term_size.columns - 2))
                 line_str = _build_progress_line(styled_text, width, False)
-                print(f'\033[{PROGRESS_ROW_IDX};1H{line_str}', end='', flush=True)
+                print(f'\033[{PROGRESS_ROW_IDX};1H{line_str}\033[K', end='', flush=True)
 
             # 日志：每 3 秒记录一次进度
             if int(now * 1000) % _PROGRESS_LOG_INTERVAL_MS < _PROGRESS_LOG_TOLERANCE_MS and has_started:
@@ -406,7 +407,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
             raise RuntimeError(msg)
             
         # Final Render: Completed state
-        finish_title = f"{title_prefix} - 已完成" if title_prefix else "已完成"
+        finish_title = "渲染完成" if is_last else (f"{title_prefix} - 已完成" if title_prefix else "已完成")
         draw_full_interface(last_plain_text, finish_title, True)
 
         # 日志：记录成功完成
