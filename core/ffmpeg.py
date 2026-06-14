@@ -331,6 +331,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
     try:
         display_title = f"正在运行: {title_prefix}" if title_prefix else "正在运行"
         last_term_size = draw_full_interface(last_plain_text, display_title, False)
+        last_width = max(70, min(120, last_term_size[0] - 2)) if isinstance(last_term_size, tuple) else 118
         
         while not state['done']:
             # 检查退出信号
@@ -366,10 +367,11 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
 
             shimmer_offset = (now % _SHIMMER_CYCLE_SEC) / _SHIMMER_CYCLE_SEC
             styled_text = _get_shimmer_text(plain_text, shimmer_offset)
-            if current_term_size != last_term_size or is_too_tall:
+            width = max(70, min(120, current_term_size.columns - 2))
+            if current_term_size != last_term_size or is_too_tall or width != last_width:
                 last_term_size = draw_full_interface(styled_text, display_title, False)
+                last_width = max(70, min(120, current_term_size.columns - 2))
             else:
-                width = max(70, min(120, current_term_size.columns - 2))
                 line_str = _build_progress_line(styled_text, width, False)
                 print(f'\033[{PROGRESS_ROW_IDX};1H{line_str}\033[K', end='', flush=True)
 

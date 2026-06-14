@@ -11,11 +11,13 @@ from core.helpers import truncate_name
 from ui.navigation import get_selectable_indices, get_next_selectable, normalize_selected_index, read_navigation_key
 
 LAST_MENU_LINES = None
+LAST_BOX_WIDTH = 0
 
 def reset_menu_cache() -> None:
     """Reset the incremental render cache so the next menu render is a full redraw."""
-    global LAST_MENU_LINES
+    global LAST_MENU_LINES, LAST_BOX_WIDTH
     LAST_MENU_LINES = None
+    LAST_BOX_WIDTH = 0
 
 def get_display_width(text: str) -> int:
     # Strip ANSI escape sequences before calculating width
@@ -288,7 +290,10 @@ def render_menu_box(lines: list[str], selected_index: Optional[int] = None) -> N
         out.append(f"  ╰{'─' * inner_width}╯")
 
     # Incremental render: only update changed lines
-    global LAST_MENU_LINES
+    global LAST_MENU_LINES, LAST_BOX_WIDTH
+    if LAST_MENU_LINES is not None and inner_width != LAST_BOX_WIDTH:
+        LAST_MENU_LINES = None  # Force full redraw when width changes
+    LAST_BOX_WIDTH = inner_width
     if LAST_MENU_LINES is None:
         # First render: clear screen and draw all
         sys.stdout.write('\033[2J\033[H')

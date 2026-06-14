@@ -352,6 +352,9 @@ def process_files() -> None:
                     if current_file_idx < len(settings['subtitle']['files']):
                         ext_sub = settings['subtitle']['files'][current_file_idx]
                 preview_command = build_ffmpeg_command(first_file, audio_streams, subtitle_streams, series_mode=is_series_mode, external_subtitle=ext_sub, timestamp=batch_timestamp)
+                preview_command = list(preview_command)
+                preview_command[preview_command.index('-i') + 1] = '<input>'
+                preview_command[-1] = '<output>'
                 cmd_lines = format_preview_lines(preview_command)
                 ctx = [f"{UI_COLORS['muted']}{cl}{UI_COLORS['reset']}" for cl in cmd_lines]
                 ctx.append('')
