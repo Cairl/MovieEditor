@@ -19,6 +19,11 @@ from ui.display import get_display_width, trim_to_display_width, reset_menu_cach
 from core.helpers import format_hms
 from core.logger import log_ffmpeg_start, log_ffmpeg_progress, log_ffmpeg_end, log_ffmpeg_error
 
+class FFmpegUserTerminated(Exception):
+    """Raised when the user explicitly terminates ffmpeg via the UI terminate button."""
+    pass
+
+
 # ---- 进度 UI helpers ----
 _SPEED_EMA_ALPHA = 0.1
 _PROGRESS_POLL_SEC = 0.05
@@ -268,15 +273,19 @@ def _build_progress_line(text, width, is_finished):
     return f"  │{indent}{p_display}{' ' * pad_len}│"
 
 
+_BAR_WIDTH = 20
+
+
 def _build_progress_bar(pct, width):
     """Build a visual progress bar line. pct is 0-100."""
     indent = '  '
     inner_w = width - 2
-    bar_w = inner_w - len(indent) - 2  # 2 for brackets
-    filled = int(bar_w * min(pct, 100) / 100)
-    empty = bar_w - filled
+    filled = int(_BAR_WIDTH * min(pct, 100) / 100)
+    empty = _BAR_WIDTH - filled
     bar = f"\033[38;2;137;180;250m{'█' * filled}\033[38;2;108;112;134m{'░' * empty}\033[0m"
-    return f"  │{indent}[{bar}]│"
+    bar_vis = 2 + _BAR_WIDTH  # │ + bar + │
+    pad = ' ' * max(0, inner_w - len(indent) - bar_vis)
+    return f"  │{indent}│{bar}│{pad}│"
 
 
 # ---- 进度 UI ----
@@ -329,12 +338,6 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
         'lock': threading.Lock()
     }
 
-    ffmpeg_state = {
-        'paused': False,
-        'terminated': False,
-    }
-    stdin_lock = threading.Lock()
-
     def reader():
         try:
             if process.stdout:
@@ -374,31 +377,47 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
     
     # State for UI rendering
     last_term_size = (0, 0)
-    
+
     # Layout constants
-    PROGRESS_ROW_IDX = 3 # 1-based ANSI line number
+    PROGRESS_ROW_IDX = 3  # 1-based ANSI line number
     STATUS_ROW_IDX = 4
     BAR_ROW_IDX = 5
 
+    ffmpeg_state = {
+        'paused': False,
+        'terminated': False,
+        'selected_button': 0,  # 0=pause/resume, 1=terminate
+    }
+    stdin_lock = threading.Lock()
+
     def _check_key_input():
-        """Non-blocking keyboard check for pause (P) and terminate (Q)."""
+        """Non-blocking keyboard check for button navigation (LEFT/RIGHT/ENTER)."""
         while _console_has_input():
             key, _ = _console_read_key()
             if key is None:
                 break
-            k = key.lower()
-            if k == b'p':
-                was_paused = ffmpeg_state['paused']
-                now_paused = _toggle_ffmpeg_pause(process)
-                ffmpeg_state['paused'] = now_paused
-            elif k == b'q':
-                if not ffmpeg_state['terminated']:
-                    ffmpeg_state['terminated'] = True
-                    # 挂起状态下必须先恢复线程，否则无法读取 stdin
-                    if ffmpeg_state['paused']:
-                        _reset_ffmpeg_pause(process)
-                        ffmpeg_state['paused'] = False
-                    _terminate_ffmpeg_via_stdin(process, stdin_lock)
+            if key == b'\xe0':
+                # Arrow key prefix on Windows
+                if _console_has_input():
+                    arrow, _ = _console_read_key()
+                    if arrow == b'K':  # LEFT
+                        ffmpeg_state['selected_button'] = max(0, ffmpeg_state['selected_button'] - 1)
+                    elif arrow == b'M':  # RIGHT
+                        ffmpeg_state['selected_button'] = min(1, ffmpeg_state['selected_button'] + 1)
+                continue
+            if key in (b'\r', b'\n'):  # ENTER
+                btn = ffmpeg_state['selected_button']
+                if btn == 0:  # Pause / Resume
+                    now_paused = _toggle_ffmpeg_pause(process)
+                    ffmpeg_state['paused'] = now_paused
+                elif btn == 1:  # Terminate
+                    if not ffmpeg_state['terminated']:
+                        ffmpeg_state['terminated'] = True
+                        if ffmpeg_state['paused']:
+                            _reset_ffmpeg_pause(process)
+                            ffmpeg_state['paused'] = False
+                        _terminate_ffmpeg_via_stdin(process, stdin_lock)
+                continue
 
     def draw_full_interface(progress_text, title, is_finished, pct=0, ffmpeg_state=None):
         term_w, term_h = shutil.get_terminal_size((120, 30))
@@ -452,17 +471,26 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
 
         lines.append(f"  │{' ' * (width - 2)}│") # Bottom padding
 
-        # Control hint row
+        # Control buttons row
         if ffmpeg_state and not is_finished:
             is_paused = ffmpeg_state.get('paused', False)
-            if is_paused:
-                hint = '[P] 恢复   [Q] 终止'
-            else:
-                hint = '[P] 暂停   [Q] 终止'
-            hint_display = f"{UI_COLORS['muted']}{hint}{UI_COLORS['reset']}"
-            hint_plain_len = get_display_width(hint)
-            hint_pad = ' ' * max(0, width - 4 - hint_plain_len)
-            lines.append(f"  │  {hint_display}{hint_pad}│")
+            selected_btn = ffmpeg_state.get('selected_button', 0)
+
+            pause_label = '恢复' if is_paused else '暂停'
+            terminate_label = '终止'
+
+            def _style_btn(label, is_sel):
+                if is_sel:
+                    return f"\033[48;2;69;71;90m\033[38;2;137;180;250m {label} \033[0m"
+                return f"{UI_COLORS['muted']} {label} {UI_COLORS['reset']}"
+
+            btn_pause = _style_btn(pause_label, selected_btn == 0)
+            btn_terminate = _style_btn(terminate_label, selected_btn == 1)
+
+            # Padding: leading 2 spaces + " label " + 4 gap + " label "
+            fixed_vis = 2 + get_display_width(pause_label) + 2 + 4 + get_display_width(terminate_label) + 2
+            btn_pad = ' ' * max(0, (width - 2) - fixed_vis)
+            lines.append(f"  │  {btn_pause}    {btn_terminate}{btn_pad}│")
             lines.append(f"  │{' ' * (width - 2)}│")
 
         lines.append(f"  ╰{'─' * (width - 2)}╯")
@@ -480,6 +508,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
         last_term_size = draw_full_interface(last_plain_text, display_title, False, 0, ffmpeg_state)
         last_width = max(70, min(120, last_term_size[0] - 2)) if isinstance(last_term_size, tuple) else 118
         cur_pct = 0.0
+        last_selected_button = ffmpeg_state.get('selected_button', 0)
         
         while not state['done']:
             # 非阻塞键盘检测
@@ -520,12 +549,16 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
             else:
                 display_title_eff = display_title
 
+            cur_selected = ffmpeg_state.get('selected_button', 0)
+            button_changed = cur_selected != last_selected_button
+            last_selected_button = cur_selected
+
             current_term_size = shutil.get_terminal_size((120, 30))
             content_height = len(cmd_lines_raw) + 10
             is_too_tall = content_height > current_term_size.lines
 
             width = max(70, min(120, current_term_size.columns - 2))
-            if current_term_size != last_term_size or is_too_tall or width != last_width:
+            if current_term_size != last_term_size or is_too_tall or width != last_width or button_changed:
                 last_term_size = draw_full_interface(plain_text, display_title_eff, False, cur_pct, ffmpeg_state)
                 last_width = max(70, min(120, current_term_size.columns - 2))
             else:
@@ -571,7 +604,13 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
         process.wait()
         t_read.join(timeout=1.0)
         t_err.join(timeout=1.0)
-        
+
+        # User terminated via UI button — stop this task and signal queue halt
+        if ffmpeg_state.get('terminated'):
+            elapsed_final = time.time() - start_time
+            log_ffmpeg_end(run_id, process.returncode, elapsed_final, list(stderr_tail))
+            raise FFmpegUserTerminated()
+
         if process.returncode != 0:
             _reset_ffmpeg_pause(process)
             elapsed_final = time.time() - start_time

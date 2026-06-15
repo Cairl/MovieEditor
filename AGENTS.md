@@ -6,7 +6,7 @@
 
 **入口**: `main.py` → `ui/app.py:process_files()`
 **运行**: `python main.py <file_or_dir> [<file_or_dir>...]`
-**总量**: 13 个模块，2571 行
+**总量**: 13 个模块，2629 行
 
 ---
 
@@ -21,7 +21,7 @@
 │  │  ui/console.py   │  │  ui/display.py   │  │  core/ffmpeg.py       │  │
 │  │  键盘读取 (msvcrt)│  │  TUI 渲染层      │  │  FFmpeg 探针 + 执行    │  │
 │  │  光标/ANSI 控制   │  │  菜单 + 预览框    │  │  进程挂起/恢复        │  │
-│  │  子进程注册管理    │  │  增量 diff render │  │  暂停/终止控制         │  │
+│  │  子进程注册管理    │  │  增量 diff render │  │  交互按钮暂停/终止    │  │
 │  └────────┬─────────┘  └────────┬─────────┘  └──────────┬────────────┘  │
 │           │                     │                        │              │
 │  ┌────────┴─────────┐  ┌───────┴──────────┐  ┌─────────┴────────────┐  │
@@ -39,9 +39,9 @@
 | 模块 | 行数 | 职责 |
 |------|------|------|
 | `main.py` | 9 | 入口，光标隐藏/恢复 |
-| `ui/app.py` | 478 | `process_files()` 主流程：菜单循环、命令组装、批量处理 |
+| `ui/app.py` | 484 | `process_files()` 主流程：菜单循环、命令组装、批量处理 |
 | `ui/display.py` | 445 | TUI 渲染：`render_menu_box`、`render_preview_box`、`run_menu_loop` |
-| `core/ffmpeg.py` | 619 | FFmpeg 探针、命令预览、`run_ffmpeg_with_progress`、线程挂起/恢复暂停、终止控制 |
+| `core/ffmpeg.py` | 658 | FFmpeg 探针、命令预览、`run_ffmpeg_with_progress`、线程挂起/恢复暂停、交互按钮暂停/终止、`FFmpegUserTerminated` 队列中断 |
 | `ui/console.py` | 132 | 底层：`msvcrt` 键盘读取、光标控制、ANSI 常量、子进程注册/终止 |
 | `ui/subtitle.py` | 156 | 字幕设置菜单：流选择、burn_in 切换、排序 |
 | `core/progress.py` | 151 | `ProgressManager` 进度状态管理 |
@@ -78,11 +78,14 @@
 - `-ss`/`-to` 放在输出文件前作为输出选项
 
 ### FFmpeg 运行时控制
-- **暂停（P 键）**: FFmpeg 无原生暂停。通过 `SuspendThread` 挂起 ffmpeg.exe 的所有线程，进程存在但 CPU 利用率为零；再按 `ResumeThread` 恢复
-- **终止（Q 键）**: 向 FFmpeg 的 stdin 写入 `q`（FFmpeg 原生优雅退出信号），完成当前帧写入后退出。挂起状态下先恢复线程再发送
+- **交互按钮**: 底部显示两个按钮（`暂停`/`恢复` 和 `终止`），通过 ←/→ 方向键选择，Enter 确认。选中按钮有背景高亮（`\033[48;2;69;71;90m`）
+- **按钮状态机**: `ffmpeg_state['selected_button']`（0=暂停/恢复，1=终止），方向键切换时 `button_changed` 触发全屏重绘
+- **暂停**: FFmpeg 无原生暂停。通过 `SuspendThread` 挂起 ffmpeg.exe 的所有线程，进程存在但 CPU 利用率为零；再通过 `ResumeThread` 恢复
+- **终止**: 向 FFmpeg 的 stdin 写入 `q`（FFmpeg 原生优雅退出信号），完成当前帧写入后退出。挂起状态下先恢复线程再发送。终止后抛出 `FFmpegUserTerminated` 异常，中断整个任务队列
+- **队列中断**: `FFmpegUserTerminated` 在 `process.wait()` 后检测 `ffmpeg_state['terminated']` 触发。`ui/app.py` 的批量循环中捕获该异常并 `break`，确保终止当前任务后队列不再继续
 - **subprocess**: `run_ffmpeg_with_progress` 使用 `stdin=subprocess.PIPE`，stdin 由 `stdin_lock`（threading.Lock）保护写入安全
 - **线程枚举**: `CreateToolhelp32Snapshot` + `Thread32First/Next` 遍历进程线程，逐个 `OpenThread` → `SuspendThread/ResumeThread`
-- **UI 反馈**: 暂停时标题栏显示 `⏸ 已暂停`，进度条替换为黄色暂停提示，底部显示 `[P] 恢复   [Q] 终止`
+- **UI 反馈**: 暂停时标题栏显示 `⏸ 已暂停`，进度条替换为黄色暂停提示，底部显示交互按钮
 - **安全退出**: 所有退出路径（正常完成、shutdown 信号、RuntimeError、Ctrl+C、finally）均调用 `_reset_ffmpeg_pause` 恢复线程
 
 ## 依赖

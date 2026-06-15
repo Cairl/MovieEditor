@@ -27,6 +27,7 @@ from core.progress import ProgressManager
 from core.ffmpeg import (
     get_video_resolution, get_video_duration, get_audio_streams,
     get_subtitle_streams, run_ffmpeg_with_progress, format_preview_lines,
+    FFmpegUserTerminated,
 )
 from ui.video import handle_video_settings_menu
 from ui.audio import handle_audio_settings_menu
@@ -454,6 +455,11 @@ def process_files() -> None:
                 # Mark completed
                 if is_series_mode and progress_mgr:
                     progress_mgr.mark_completed(i)
+            except FFmpegUserTerminated:
+                if is_series_mode and progress_mgr:
+                    progress_mgr.mark_failed(i)
+                print('\n任务已终止')
+                break
             except (OSError, RuntimeError) as ep_err:
                 # Mark failed but continue to next episode
                 has_failures = True
