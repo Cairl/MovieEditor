@@ -6,25 +6,84 @@ import time
 import shutil
 import threading
 import json
+import ctypes
 import subprocess
 from collections import deque
 
 from ui.console import (
     ANSI_ESCAPE, hide_cursor, show_cursor, register_child_process,
     unregister_child_process, _shutdown_requested, UI_COLORS,
+    _console_has_input, _console_read_key,
 )
 from ui.display import get_display_width, trim_to_display_width, reset_menu_cache
 from core.helpers import format_hms
 from core.logger import log_ffmpeg_start, log_ffmpeg_progress, log_ffmpeg_end, log_ffmpeg_error
 
-# ---- Shimmer & progress constants ----
-_SHIMMER_WAVE_WIDTH = 12
-_SHIMMER_CYCLE_SEC = 2.0
+# ---- 进度 UI helpers ----
 _SPEED_EMA_ALPHA = 0.1
 _PROGRESS_POLL_SEC = 0.05
 _PROGRESS_LOG_INTERVAL_MS = 3000
 _PROGRESS_LOG_TOLERANCE_MS = 60
 _FFPROBE_TIMEOUT = 30  # seconds: prevent hangs on damaged / network files
+
+# ---- Windows 进程优先级管理 ----
+_IDLE_PRIORITY_CLASS = 0x00000040    # PROCESS_IDLE_PRIORITY_CLASS
+_NORMAL_PRIORITY_CLASS = 0x00000020  # PROCESS_NORMAL_PRIORITY_CLASS
+_process_priority_lock = threading.Lock()
+_process_priority_paused = False
+
+
+def _set_priority(process, priority_class):
+    """Set Windows process priority via ctypes (silent on failure)."""
+    if os.name != 'nt' or process.poll() is not None:
+        return
+    try:
+        handle = ctypes.windll.kernel32.OpenProcess(0x0200, False, process.pid)  # PROCESS_SET_INFORMATION
+        if handle:
+            ctypes.windll.kernel32.SetPriorityClass(handle, priority_class)
+            ctypes.windll.kernel32.CloseHandle(handle)
+    except (OSError, AttributeError):
+        pass
+
+
+def _reset_ffmpeg_priority(process):
+    """Restore ffmpeg process to normal priority if it was paused."""
+    global _process_priority_paused
+    with _process_priority_lock:
+        if _process_priority_paused:
+            _set_priority(process, _NORMAL_PRIORITY_CLASS)
+            _process_priority_paused = False
+
+
+def _toggle_ffmpeg_pause(process):
+    """Toggle ffmpeg pause: lower priority to IDLE, or restore to NORMAL."""
+    global _process_priority_paused
+    with _process_priority_lock:
+        if _process_priority_paused:
+            _set_priority(process, _NORMAL_PRIORITY_CLASS)
+            _process_priority_paused = False
+        else:
+            _set_priority(process, _IDLE_PRIORITY_CLASS)
+            _process_priority_paused = True
+    return _process_priority_paused
+
+
+def _terminate_ffmpeg_via_stdin(process, stdin_lock):
+    """Send 'q' to ffmpeg stdin for graceful termination, then close stdin."""
+    with stdin_lock:
+        try:
+            if process.stdin and not process.stdin.closed:
+                process.stdin.write('q')
+                process.stdin.flush()
+        except (IOError, OSError):
+            pass
+        finally:
+            try:
+                if process.stdin and not process.stdin.closed:
+                    process.stdin.close()
+            except (IOError, OSError):
+                pass
+
 
 # ---- 探测函数 ----
 def get_video_resolution(file_path: str) -> tuple[int, int]:
@@ -146,48 +205,34 @@ def format_preview_lines(command: list[str]) -> list[str]:
     return lines
 
 
-# ---- 进度 UI helpers ----
-def _get_shimmer_text(text, offset):
-    """Apply a wave-like color shimmer effect to text."""
-    C_DIM = '\033[38;2;108;112;134m'
-    C_MID = '\033[38;2;186;194;222m'
-    C_BRIGHT = '\033[38;2;205;214;244m\033[1m'
-    C_RESET = '\033[0m'
-    out = []
-    total_w = get_display_width(text)
-    center = (offset * (total_w + _SHIMMER_WAVE_WIDTH * 2)) - _SHIMMER_WAVE_WIDTH
-    pos = 0
-    for char in text:
-        cw = max(1, get_display_width(char))
-        dist = abs(pos + cw // 2 - center)
-        if dist < 2:
-            color = C_BRIGHT
-        elif dist < 5:
-            color = C_MID
-        else:
-            color = C_DIM
-        out.append(f'{color}{char}')
-        pos += cw
-    out.append(C_RESET)
-    return ''.join(out)
-
 
 def _build_progress_line(text, width, is_finished):
-    """Build a single progress bar line with proper padding."""
+    """Build a single progress text line with proper padding."""
     indent = '  '
     inner_w = width - 2
     if is_finished:
         p_display = f"\033[38;2;205;214;244m\033[1m{text}\033[0m"
         plain_len = get_display_width(text)
     else:
-        p_display = text
-        plain_len = get_display_width(ANSI_ESCAPE.sub('', text))
+        p_display = f"\033[38;2;205;214;244m{text}\033[0m"
+        plain_len = get_display_width(text)
     pad_len = max(0, inner_w - len(indent) - plain_len)
     return f"  │{indent}{p_display}{' ' * pad_len}│"
 
 
+def _build_progress_bar(pct, width):
+    """Build a visual progress bar line. pct is 0-100."""
+    indent = '  '
+    inner_w = width - 2
+    bar_w = inner_w - len(indent) - 2  # 2 for brackets
+    filled = int(bar_w * min(pct, 100) / 100)
+    empty = bar_w - filled
+    bar = f"\033[38;2;137;180;250m{'█' * filled}\033[38;2;108;112;134m{'░' * empty}\033[0m"
+    return f"  │{indent}[{bar}]│"
+
+
 # ---- 进度 UI ----
-def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_prefix: str = '', is_last: bool = False) -> None:
+def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_prefix: str = '', is_last: bool = False, episode_progress: str = '', finish_title: str = '') -> None:
     output_file = command[-1]
     # Prepare command for execution
     exec_command = command[:-1] + ['-progress', 'pipe:1', output_file]
@@ -209,7 +254,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
     run_id = log_ffmpeg_start(command, input_file, output_file, total_duration, title_prefix)
 
     creationflags = subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0
-    process = subprocess.Popen(exec_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, encoding='utf-8', errors='replace', creationflags=creationflags)
+    process = subprocess.Popen(exec_command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, encoding='utf-8', errors='replace', creationflags=creationflags)
     register_child_process(process)
     
     start_time = time.time()
@@ -235,6 +280,12 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
         'started': False,
         'lock': threading.Lock()
     }
+
+    ffmpeg_state = {
+        'paused': False,
+        'terminated': False,
+    }
+    stdin_lock = threading.Lock()
 
     def reader():
         try:
@@ -278,15 +329,33 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
     
     # Layout constants
     PROGRESS_ROW_IDX = 3 # 1-based ANSI line number
+    STATUS_ROW_IDX = 4
+    BAR_ROW_IDX = 5
 
-    def draw_full_interface(progress_text, title, is_finished):
+    def _check_key_input():
+        """Non-blocking keyboard check for pause (P) and terminate (Q)."""
+        while _console_has_input():
+            key, _ = _console_read_key()
+            if key is None:
+                break
+            k = key.lower()
+            if k == b'p':
+                was_paused = ffmpeg_state['paused']
+                now_paused = _toggle_ffmpeg_pause(process)
+                ffmpeg_state['paused'] = now_paused
+            elif k == b'q':
+                if not ffmpeg_state['terminated']:
+                    ffmpeg_state['terminated'] = True
+                    _terminate_ffmpeg_via_stdin(process, stdin_lock)
+
+    def draw_full_interface(progress_text, title, is_finished, pct=0, ffmpeg_state=None):
         term_w, term_h = shutil.get_terminal_size((120, 30))
         width = max(70, min(120, term_w - 2))
         inner_width = width - 4
         
         # Truncate command lines if they are too many for the current terminal height
         display_cmd = cmd_lines_raw
-        max_cmd_lines = max(3, term_h - 11)
+        max_cmd_lines = max(3, term_h - 13)
         if len(display_cmd) > max_cmd_lines:
             display_cmd = display_cmd[:max_cmd_lines-1] + ["    ... (更多参数已在下方省略)"]
 
@@ -308,6 +377,17 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
         lines.append(top_bar)
         lines.append(f"  │{' ' * (width - 2)}│") # Padding
         lines.append(_build_progress_line(progress_text, width, is_finished))
+        
+        # Status / pause indicator
+        if ffmpeg_state and ffmpeg_state.get('paused') and not is_finished:
+            status_text = '⏸ 已暂停 — FFmpeg 进程优先级已降至最低'
+            status_display = f"\033[38;2;249;226;175m{status_text}\033[0m"
+            status_plain_len = get_display_width(status_text)
+            status_pad = ' ' * max(0, width - 4 - status_plain_len)
+            lines.append(f"  │  {status_display}{status_pad}│")
+        else:
+            lines.append(_build_progress_bar(pct if not is_finished else 100, width))
+
         lines.append(f"  │{' ' * (width - 2)}│") # Padding
 
         # Command Lines
@@ -319,6 +399,20 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
             lines.append(f"  │{colored}{pad}│")
 
         lines.append(f"  │{' ' * (width - 2)}│") # Bottom padding
+
+        # Control hint row
+        if ffmpeg_state and not is_finished:
+            is_paused = ffmpeg_state.get('paused', False)
+            if is_paused:
+                hint = '[P] 恢复   [Q] 终止'
+            else:
+                hint = '[P] 暂停   [Q] 终止'
+            hint_display = f"{UI_COLORS['muted']}{hint}{UI_COLORS['reset']}"
+            hint_plain_len = get_display_width(hint)
+            hint_pad = ' ' * max(0, width - 4 - hint_plain_len)
+            lines.append(f"  │  {hint_display}{hint_pad}│")
+            lines.append(f"  │{' ' * (width - 2)}│")
+
         lines.append(f"  ╰{'─' * (width - 2)}╯")
 
         sys.stdout.write('\033[2J\033[H')
@@ -329,11 +423,16 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
         return (term_w, term_h)
 
     try:
-        display_title = f"正在运行: {title_prefix}" if title_prefix else "正在运行"
-        last_term_size = draw_full_interface(last_plain_text, display_title, False)
+        progress_tag = f' ({episode_progress})' if episode_progress else ''
+        display_title = f"正在运行{progress_tag}: {title_prefix}" if title_prefix else f"正在运行{progress_tag}"
+        last_term_size = draw_full_interface(last_plain_text, display_title, False, 0, ffmpeg_state)
         last_width = max(70, min(120, last_term_size[0] - 2)) if isinstance(last_term_size, tuple) else 118
+        cur_pct = 0.0
         
         while not state['done']:
+            # 非阻塞键盘检测
+            _check_key_input()
+
             # 检查退出信号
             if _shutdown_requested.is_set():
                 state['done'] = True
@@ -349,31 +448,48 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
 
             if not has_started:
                 plain_text = '正在初始化进程...'
+                cur_pct = 0.0
             else:
                 curr_sec = curr_ms / 1000000.0
                 if total_duration > 0:
-                    pct = min(100.0, curr_sec / total_duration * 100)
+                    cur_pct = min(100.0, curr_sec / total_duration * 100)
                     rem = max(0, total_duration - curr_sec)
                     eta = rem / spd if spd > 0.01 else 0
-                    plain_text = f'进度：{format_hms(curr_sec)}/{format_hms(total_duration)} ({pct:>6.2f}%) │ 速度：{spd:.2f}x │ 用时：{format_hms(elapsed)} │ 剩余：{format_hms(eta)}'
+                    plain_text = f'进度：{format_hms(curr_sec)}/{format_hms(total_duration)} ({cur_pct:>6.2f}%) | 速度：{spd:.2f}x | 用时：{format_hms(elapsed)} | 剩余：{format_hms(eta)}'
                 else:
-                    plain_text = f'进度：{format_hms(curr_sec)} │ 速度：{spd:.2f}x │ 用时：{format_hms(elapsed)}'
+                    plain_text = f'进度：{format_hms(curr_sec)} | 速度：{spd:.2f}x | 用时：{format_hms(elapsed)}'
 
             last_plain_text = plain_text
 
+            # 暂停时更新标题
+            is_paused_now = ffmpeg_state['paused']
+            if is_paused_now:
+                display_title_eff = f"⏸ 已暂停{progress_tag}: {title_prefix}" if title_prefix else f"⏸ 已暂停{progress_tag}"
+            else:
+                display_title_eff = display_title
+
             current_term_size = shutil.get_terminal_size((120, 30))
-            content_height = len(cmd_lines_raw) + 8
+            content_height = len(cmd_lines_raw) + 10
             is_too_tall = content_height > current_term_size.lines
 
-            shimmer_offset = (now % _SHIMMER_CYCLE_SEC) / _SHIMMER_CYCLE_SEC
-            styled_text = _get_shimmer_text(plain_text, shimmer_offset)
             width = max(70, min(120, current_term_size.columns - 2))
             if current_term_size != last_term_size or is_too_tall or width != last_width:
-                last_term_size = draw_full_interface(styled_text, display_title, False)
+                last_term_size = draw_full_interface(plain_text, display_title_eff, False, cur_pct, ffmpeg_state)
                 last_width = max(70, min(120, current_term_size.columns - 2))
             else:
-                line_str = _build_progress_line(styled_text, width, False)
+                line_str = _build_progress_line(plain_text, width, False)
                 print(f'\033[{PROGRESS_ROW_IDX};1H{line_str}\033[K', end='', flush=True)
+                if is_paused_now:
+                    status_text = '⏸ 已暂停 — FFmpeg 进程优先级已降至最低'
+                    status_display = f"\033[38;2;249;226;175m{status_text}\033[0m"
+                    status_plain_len = get_display_width(status_text)
+                    status_pad = ' ' * max(0, width - 4 - status_plain_len)
+                    status_line = f"  │  {status_display}{status_pad}│"
+                    print(f'\033[{STATUS_ROW_IDX};1H{status_line}\033[K', end='', flush=True)
+                else:
+                    bar_str = _build_progress_bar(cur_pct, width)
+                    print(f'\033[{STATUS_ROW_IDX};1H\033[K', end='', flush=True)
+                    print(f'\033[{BAR_ROW_IDX};1H{bar_str}\033[K', end='', flush=True)
 
             # 日志：每 3 秒记录一次进度
             if int(now * 1000) % _PROGRESS_LOG_INTERVAL_MS < _PROGRESS_LOG_TOLERANCE_MS and has_started:
@@ -383,16 +499,21 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
                 state['done'] = True
 
         if _shutdown_requested.is_set():
+            _reset_ffmpeg_priority(process)
             elapsed_final = time.time() - start_time
             log_ffmpeg_end(run_id, -1, elapsed_final, list(stderr_tail))
+            _terminate_ffmpeg_via_stdin(process, stdin_lock)
             try:
-                process.terminate()
-                process.wait(timeout=2)
-            except (OSError, subprocess.TimeoutExpired):
+                process.wait(timeout=3)
+            except subprocess.TimeoutExpired:
                 try:
-                    process.kill()
+                    process.terminate()
+                    process.wait(timeout=2)
                 except (OSError, subprocess.TimeoutExpired):
-                    pass
+                    try:
+                        process.kill()
+                    except (OSError, subprocess.TimeoutExpired):
+                        pass
             raise KeyboardInterrupt("处理已取消")
 
         process.wait()
@@ -400,6 +521,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
         t_err.join(timeout=1.0)
         
         if process.returncode != 0:
+            _reset_ffmpeg_priority(process)
             elapsed_final = time.time() - start_time
             stderr_list = list(stderr_tail)
             log_ffmpeg_end(run_id, process.returncode, elapsed_final, stderr_list)
@@ -409,25 +531,37 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
             raise RuntimeError(msg)
             
         # Final Render: Completed state
-        finish_title = "渲染完成" if is_last else (f"{title_prefix} - 已完成" if title_prefix else "已完成")
-        draw_full_interface(last_plain_text, finish_title, True)
+        if finish_title:
+            final_title = finish_title
+        elif is_last:
+            final_title = "渲染完成"
+        else:
+            final_title = f"{title_prefix} - 已完成" if title_prefix else "已完成"
+        draw_full_interface(last_plain_text, final_title, True, 100, ffmpeg_state)
 
         # 日志：记录成功完成
         elapsed_final = time.time() - start_time
         log_ffmpeg_end(run_id, process.returncode, elapsed_final, list(stderr_tail))
 
     except KeyboardInterrupt:
+        _reset_ffmpeg_priority(process)
         # Ensure FFmpeg subprocess is terminated on Ctrl+C before unregister
+        _terminate_ffmpeg_via_stdin(process, stdin_lock)
         try:
-            process.terminate()
-            process.wait(timeout=2)
-        except (OSError, subprocess.TimeoutExpired):
+            process.wait(timeout=3)
+        except subprocess.TimeoutExpired:
             try:
-                process.kill()
-            except OSError:
-                pass
+                process.terminate()
+                process.wait(timeout=2)
+            except (OSError, subprocess.TimeoutExpired):
+                try:
+                    process.kill()
+                except OSError:
+                    pass
         show_cursor()
         raise
     finally:
+        _reset_ffmpeg_priority(process)
+        show_cursor()
         unregister_child_process(process)
 

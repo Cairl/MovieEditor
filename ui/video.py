@@ -18,7 +18,7 @@ def handle_video_settings_menu(ctx: dict, context_lines: list, allow_episode_nav
     HW_LABELS = {'none': 'CPU (默认)', 'nvenc': 'NVIDIA NVENC', 'qsv': 'Intel QSV', 'amf': 'AMD AMF'}
     HW_HINTS = {
         'none': None,
-        'nvenc': '-preset p4',
+        'nvenc': None,
         'qsv': '-global_quality 23',
         'amf': '-quality balanced',
     }

@@ -20,7 +20,7 @@ CURSOR_HOME = '\033[H'
 ACTIVE_CHILD_PROCESSES = set()
 ACTIVE_CHILD_LOCK = threading.Lock()
 
-# 鍏ㄥ眬閫€鍑烘爣蹇楋紝鐢?Ctrl+C 淇″彿澶勭悊鍣ㄨ�??
+# 鍏ㄥ眬閫€鍑烘爣蹇楋紝鐢?Ctrl+C 淇″彿澶勭悊鍣ㄨ�??
 _shutdown_requested = threading.Event()
 
 # 闈為樆濉為敭鐩樿鍙栵紙涓嶄娇鐢ㄧ嫭绔嬬嚎绋嬶級
@@ -62,7 +62,7 @@ def _check_console_ctrl() -> bool:
                         ]
                     record = INPUT_RECORD()
                     peeked = ctypes.c_ulong()
-                    # Peek (non-destructive) first �� don't consume non-Ctrl+C events
+                    # Peek (non-destructive) first �� don't consume non-Ctrl+C events
                     if ctypes.windll.kernel32.PeekConsoleInputW(handle, ctypes.byref(record), 1, ctypes.byref(peeked)):
                         if peeked.value > 0 and record.EventType == 1:
                             vk = record.Event.wVirtualKeyCode
@@ -89,8 +89,9 @@ UI_COLORS = {
     "accent": "[38;2;137;180;250m",
     "title": "[38;2;249;226;175m",
     "muted": "[38;2;108;112;134m",
-    "selected_row": "[48;2;69;71;90m",
-    "green": "[38;2;166;227;161m",
+    "selected_row": "\033[48;2;69;71;90m",
+    "green": "\033[38;2;166;227;161m",
+    "yellow": "\033[38;2;249;226;175m",
 }
 UI_ICONS = {
     "focus": "\u276f",

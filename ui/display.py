@@ -253,23 +253,25 @@ def render_menu_box(lines: list[str], selected_index: Optional[int] = None) -> N
         l_trunc = trim_to_display_width(left_plain, l_avail)
         l_marker = f" {UI_ICONS['focus']} " if is_selected else "   "
         l_text = f"{l_marker}{l_trunc}"
-        # Apply background color and bold font for selected row
-        l_color = UI_COLORS['selected_row'] + '\033[38;2;205;214;244m\033[1m' if is_selected else ""
-        # For non-selected rows with embedded ANSI colors, preserve them
-        if not is_selected:
-            raw = item.get('left', '')
-            # Extract all leading ANSI codes (e.g. color + bold)
-            ansi_prefix = ''
-            pos = 0
-            while pos < len(raw):
-                m = re.match(r'(\x1b\[[0-9;]*m)', raw[pos:])
-                if m:
-                    ansi_prefix += m.group(1)
-                    pos += len(m.group(1))
-                else:
-                    break
+        # Extract embedded ANSI colors from raw item (e.g. green/yellow + bold)
+        raw = item.get('left', '')
+        ansi_prefix = ''
+        pos = 0
+        while pos < len(raw):
+            m = re.match(r'(\x1b\[[0-9;]*m)', raw[pos:])
+            if m:
+                ansi_prefix += m.group(1)
+                pos += len(m.group(1))
+            else:
+                break
+        if is_selected:
+            # Keep original foreground color, add background highlight + bold
             if ansi_prefix:
-                l_color = ansi_prefix
+                l_color = UI_COLORS['selected_row'] + ansi_prefix
+            else:
+                l_color = UI_COLORS['selected_row'] + '\033[38;2;205;214;244m\033[1m'
+        else:
+            l_color = ansi_prefix
         l_pad = ' ' * max(0, (divider_pos if divider_pos else inner_width) - get_display_width(l_text))
         
         if divider_pos:

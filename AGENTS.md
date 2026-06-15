@@ -2,57 +2,55 @@
 
 ## 项目定位
 
-单文件 Python TUI 应用，通过 FFmpeg CLI 实现视频/音频/字幕编辑。支持**电影模式**（单文件）和**剧集模式**（批量目录），提供 ANSI 终端 UI 进行参数配置、FFmpeg 命令预览和实时进度展示。
+多模块 Python TUI 应用，通过 FFmpeg CLI 实现视频/音频/字幕编辑。支持**电影模式**（单文件）和**剧集模式**（批量目录），提供 ANSI 终端 UI 进行参数配置、FFmpeg 命令预览和实时进度展示。
 
-**入口**: `main.py` (1770 行)
+**入口**: `main.py` → `ui/app.py:process_files()`
 **运行**: `python main.py <file_or_dir> [<file_or_dir>...]`
+**总量**: 13 个模块，2519 行
 
 ---
 
 ## 核心架构
 
 ```
-┌──────────────────────────────────────────────────────┐
-│  main.py (单文件)                                      │
-│                                                        │
-│  ┌────────────┐  ┌────────────┐  ┌────────────────┐  │
-│  │ 键盘输入层  │  │ TUI 渲染层  │  │  FFmpeg 探针   │  │
-│  │ msvcrt     │  │ ANSI box   │  │  ffprobe CLI   │  │
-│  │ ctypes     │  │ diff render│  │  subprocess    │  │
-│  └─────┬──────┘  └─────┬──────┘  └───────┬────────┘  │
-│        │               │                  │           │
-│        └───────┬───────┘                  │           │
-│                ▼                          │           │
-│  ┌──────────────────────┐                 │           │
-│  │   菜单系统 (嵌套)     │◄──────────────┘           │
-│  │  主菜单 → 设置子菜单  │                              │
-│  │  → FFmpeg 命令预览    │                              │
-│  └──────────┬───────────┘                              │
-│             ▼                                          │
-│  ┌──────────────────────┐  ┌────────────────┐         │
-│  │  build_ffmpeg_command │  │ run_ffmpeg_    │         │
-│  │  (参数组装)           │──│ with_progress  │         │
-│  └──────────────────────┘  │ (进度条+shimmer)│         │
-│                            └────────────────┘         │
-└──────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────────────────┐
+│  main.py (9 行入口)                                                    │
+│    └─► ui/app.py:process_files()                                      │
+│                                                                        │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌───────────────────────┐  │
+│  │  ui/console.py   │  │  ui/display.py   │  │  core/ffmpeg.py       │  │
+│  │  键盘读取 (msvcrt)│  │  TUI 渲染层      │  │  FFmpeg 探针 + 执行    │  │
+│  │  光标/ANSI 控制   │  │  菜单 + 预览框    │  │  进程优先级管理        │  │
+│  │  子进程注册管理    │  │  增量 diff render │  │  暂停/终止控制         │  │
+│  └────────┬─────────┘  └────────┬─────────┘  └──────────┬────────────┘  │
+│           │                     │                        │              │
+│  ┌────────┴─────────┐  ┌───────┴──────────┐  ┌─────────┴────────────┐  │
+│  │  ui/navigation.py │  │  ui/video.py     │  │  core/helpers.py      │  │
+│  │  方向键 + 选择逻辑 │  │  ui/audio.py     │  │  格式化/转义/解析工具   │  │
+│  │                   │  │  ui/subtitle.py   │  │  core/logger.py       │  │
+│  │  ui/dialogs.py    │  │  设置子菜单 ×3    │  │  core/progress.py     │  │
+│  │  文件/目录选择     │  │                  │  │  进度管理              │  │
+│  └───────────────────┘  └──────────────────┘  └──────────────────────┘  │
+└───────────────────────────────────────────────────────────────────────┘
 ```
 
 ## 代码分区
 
-| 分区 | 行号范围 | 职责 |
-|------|---------|------|
-| Windows VT 处理 | L1-25 | import、SetConsoleMode、stdout/stderr 重定向 |
-| 全局常量/UI 定义 | L27-100 | ANSI 颜色、图标、菜单宽度常量 |
-| 进程管理 | L115-148 | 子进程注册/注销/终止 |
-| 显示工具函数 | L103-226 | truncate_name、get_display_width、trim_to_display_width、pad_display |
-| 菜单组件 | L171-199 | menu_section、menu_item、with_ffmpeg_hint |
-| TUI 渲染层 | L228-498 | build_top_border、render_menu_box、render_preview_box、render_screen_menu |
-| 键盘输入层 | L39-628 | _console_has_input、read_navigation_key、clear_keyboard_buffer |
-| 文件选择 | L631-660 | choose_files、choose_file、choose_directory、get_video_files_in_dir |
-| FFmpeg 探针 | L663-758 | get_video_resolution/duration、get_audio/subtitle_streams |
-| FFmpeg 执行 | L761-1047 | format_preview_lines、run_ffmpeg_with_progress |
-| 语言/格式映射 | L1049-1078 | get_full_language_name、get_subtitle_format_name |
-| 主流程 | L1081-1770 | process_files 及其所有内部函数 |
+| 模块 | 行数 | 职责 |
+|------|------|------|
+| `main.py` | 9 | 入口，光标隐藏/恢复 |
+| `ui/app.py` | 478 | `process_files()` 主流程：菜单循环、命令组装、批量处理 |
+| `ui/display.py` | 445 | TUI 渲染：`render_menu_box`、`render_preview_box`、`run_menu_loop` |
+| `core/ffmpeg.py` | 567 | FFmpeg 探针（分辨率/时长/流信息）、命令预览、`run_ffmpeg_with_progress`、暂停/终止控制 |
+| `ui/console.py` | 132 | 底层：`msvcrt` 键盘读取、光标控制、ANSI 常量、子进程注册/终止 |
+| `ui/subtitle.py` | 156 | 字幕设置菜单：流选择、burn_in 切换、排序 |
+| `core/progress.py` | 151 | `ProgressManager` 进度状态管理 |
+| `core/logger.py` | 144 | FFmpeg 运行日志记录（启动/进度/完成/错误） |
+| `core/helpers.py` | 163 | 工具函数：`format_hms`、`format_on_off`、`escape_ffmpeg_filter_path`、`parse_time_to_seconds` |
+| `ui/video.py` | 88 | 视频设置菜单 |
+| `ui/audio.py` | 61 | 音频设置菜单 |
+| `ui/navigation.py` | 92 | 导航逻辑：`read_navigation_key`、`get_selectable_indices`、`get_next_selectable` |
+| `ui/dialogs.py` | 33 | tkinter 文件/目录选择对话框 |
 
 ## 关键技术细节
 
@@ -79,6 +77,13 @@
 - MP4 输出默认使用 `mov_text` 字幕编码
 - `-ss`/`-to` 放在输出文件前作为输出选项
 
+### FFmpeg 运行时控制
+- **暂停（P 键）**: FFmpeg 无原生暂停。通过 `ctypes.windll.kernel32.SetPriorityClass` 将进程优先级设为 `IDLE_PRIORITY_CLASS`（0x40），FFmpeg 仍在运行但几乎不占 CPU；再按恢复为 `NORMAL_PRIORITY_CLASS`（0x20）
+- **终止（Q 键）**: 向 FFmpeg 的 stdin 写入 `q`（FFmpeg 原生优雅退出信号），完成当前帧写入后退出。比 `process.terminate()` 更安全
+- **subprocess**: `run_ffmpeg_with_progress` 使用 `stdin=subprocess.PIPE`，stdin 由 `stdin_lock`（threading.Lock）保护写入安全
+- **UI 反馈**: 暂停时标题栏显示 `⏸ 已暂停`，进度条替换为黄色暂停提示，底部显示 `[P] 恢复   [Q] 终止`
+- **优先级重置**: 所有退出路径（正常完成、shutdown 信号、RuntimeError、Ctrl+C、finally）均调用 `_reset_ffmpeg_priority` 恢复优先级
+
 ## 依赖
 
 | 依赖 | 说明 |
@@ -86,7 +91,7 @@
 | Python 3.10+ | 使用 `tuple[...]` 类型注解 |
 | ffmpeg/ffprobe | 必须在 PATH 中 |
 | msvcrt | Windows only |
-| ctypes | Windows API (SetConsoleMode, GetKeyState) |
+| ctypes | Windows API (SetConsoleMode, GetKeyState, SetPriorityClass) |
 | tkinter | 文件选择对话框 (仅 `filedialog`) |
 
 ## 运行方式
@@ -104,7 +109,7 @@ python main.py "D:\TV\S01" "D:\TV\S02"
 
 ## 已知问题与注意事项
 
-1. **单文件架构**: 1770 行全部在 `main.py`，`process_files()` 内部嵌套定义了 20+ 个闭包函数
+1. **多模块架构**: 13 个文件，2519 行。`ui/app.py:process_files()` 仍有 478 行含 20+ 闭包
 2. **settings 用嵌套 dict**: 类型无检查，key 拼写错误运行时才暴露
 3. **菜单循环重复**: 三个 settings 子菜单 (video/audio/subtitle) 有 60-80 行重复的按键分发骨架
 4. **ffprobe 重复调用**: `update_current_episode()` 每次调用 3-4 次 ffprobe，逐集切换约 0.8-1.5s
@@ -197,8 +202,8 @@ python main.py "D:\TV\S01" "D:\TV\S02"
 | R-4 | `core/ffmpeg.py` | 日志 | `log_ffmpeg_end`/`log_ffmpeg_error` 已导入但从未调用，日志无完成记录 |
 | R-6 | `ui/app.py:121-123` | Bug | 字幕 filter 路径未做 FFmpeg 转义（`\` → `\\\\`，`:` → `\\:`） |
 | R-8 | `core/ffmpeg.py:44-58` | 错误处理 | ffprobe 错误被静默吞掉（含 `FileNotFoundError`），用户无反馈 |
-| Q-1 | `ui/app.py:33-405` | 结构 | `process_files()` 370+ 行，含 8+ 嵌套闭包、4 层嵌套循环 |
-| Q-2 | `ui/display.py:136-319` | 结构 | `render_menu_box()` 183 行，应拆分 |
+| Q-1 | `ui/app.py:33-478` | 结构 | `process_files()` 445+ 行，含 20+ 嵌套闭包 |
+| Q-2 | `ui/display.py` | 结构 | `render_menu_box()` 应拆分 |
 | Q-3 | `core/ffmpeg.py:152-413` | 结构 | `run_ffmpeg_with_progress()` 261 行含 6 嵌套函数 |
 | Q-4 | `ui/app.py:78-82` | 类型安全 | settings 用嵌套 dict，key 拼写错误无检查 |
 | Q-8 | `ui/app.py:180-191` | 抽象 | `ctx` dict 是 ad-hoc "上帝对象"，混合数据、函数、计算状态 |

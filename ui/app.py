@@ -23,6 +23,7 @@ from ui.navigation import (
 )
 from ui.dialogs import choose_files, get_video_files_in_dir
 from core.logger import log_ffmpeg_error
+from core.progress import ProgressManager
 from core.ffmpeg import (
     get_video_resolution, get_video_duration, get_audio_streams,
     get_subtitle_streams, run_ffmpeg_with_progress, format_preview_lines,
@@ -79,6 +80,12 @@ def process_files() -> None:
         resolution_options = build_resolution_options(first_width, first_height)
 
     update_current_episode(0)
+
+    # Progress tracking for series mode resume
+    progress_mgr = None
+    if is_series_mode and input_paths:
+        series_input_dir = os.path.dirname(input_paths[0])
+        progress_mgr = ProgressManager(series_input_dir)
 
     batch_timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
 
@@ -151,7 +158,7 @@ def process_files() -> None:
 
         hw = settings['video'].get('hw_encoder', 'none')
         if hw == 'nvenc':
-            cmd.extend(['-c:v', 'hevc_nvenc' if settings['video']['hevc'] else 'h264_nvenc', '-preset', 'p4'])
+            cmd.extend(['-c:v', 'hevc_nvenc' if settings['video']['hevc'] else 'h264_nvenc'])
         elif hw == 'qsv':
             cmd.extend(['-c:v', 'hevc_qsv' if settings['video']['hevc'] else 'h264_qsv', '-global_quality', '23'])
         elif hw == 'amf':
@@ -230,6 +237,7 @@ def process_files() -> None:
         ctx['current_file_idx'] = current_file_idx
 
     main_index = 0
+    resume_mode = False
     while True:
         if _shutdown_requested.is_set():
             break
@@ -247,12 +255,22 @@ def process_files() -> None:
                 menu.append(menu_item(f'当前选择: {diff_names[current_file_idx]}'))
             menu.append(MENU_SEPARATOR)
 
+        start_label = '开始列队' if is_series_mode else '开始渲染'
         menu.extend([
             menu_item('视频设置'),
             menu_item('音频设置'),
             menu_item('字幕设置'),
             MENU_SEPARATOR,
-            f'{UI_COLORS["green"]}\033[1m{menu_item("开始处理")}{UI_COLORS["reset"]}',
+            f'{UI_COLORS["green"]}\033[1m{menu_item(start_label)}{UI_COLORS["reset"]}',
+        ])
+        # Show "继续列队" button when there's unfinished progress
+        _resume_label = None
+        if is_series_mode and progress_mgr and progress_mgr.has_progress():
+            remaining = len(progress_mgr.get_remaining())
+            if remaining > 0 and remaining < progress_mgr.get_total():
+                _resume_label = f'继续列队 (剩余 {remaining} 集)'
+                menu.append(f'{UI_COLORS["yellow"]}\033[1m{menu_item(_resume_label)}{UI_COLORS["reset"]}')
+        menu.extend([
             menu_item('预览 FFmpeg 命令'),
             '',
         ])
@@ -281,7 +299,11 @@ def process_files() -> None:
         selected_line = ANSI_ESCAPE.sub('', menu[main_index]).strip()
         selected_plain = re.sub(r'\s*─+\s*$', '', selected_line).strip()
 
-        if '开始处理' in selected_plain:
+        if start_label in selected_plain:
+            # Clear existing progress if any
+            if is_series_mode and progress_mgr and progress_mgr.has_progress():
+                progress_mgr.clear()
+
             if is_series_mode and series_edit_mode == 'per_episode':
                 def clamped_update_episode(idx):
                     if 0 <= idx < len(input_paths):
@@ -335,6 +357,9 @@ def process_files() -> None:
                 reset_menu_cache()  # force full redraw after per-episode FFmpeg
             else:
                 break
+        elif '继续列队' in selected_plain and _resume_label:
+            resume_mode = True
+            break
         elif '编辑模式' in selected_plain:
             series_edit_mode = 'batch' if series_edit_mode == 'per_episode' else 'per_episode'
         elif any(label in selected_plain for label in _SETTINGS_HANDLERS):
@@ -375,9 +400,40 @@ def process_files() -> None:
         show_cursor()
         return
     show_cursor()
+
+    # Determine batch parameters (resume vs fresh start)
+    if resume_mode and progress_mgr:
+        progress_data = progress_mgr.load()
+        batch_timestamp = progress_data["batch_id"]
+        output_dir = progress_data["output_dir"]
+        skip_indices = set(progress_mgr.get_completed())
+        # Restore saved settings
+        saved_settings = progress_mgr.get_settings()
+        if saved_settings:
+            settings.update(saved_settings)
+    else:
+        skip_indices = set()
+
     try:
+        # Save progress for fresh start in series mode
+        if is_series_mode and progress_mgr and not resume_mode:
+            diff_names = extract_differential_name(input_paths)
+            first_input = input_paths[0]
+            parent_dir = os.path.dirname(first_input)
+            parent_name = os.path.basename(parent_dir).strip() or 'MovieEditor'
+            output_dir = os.path.join(os.path.dirname(parent_dir), f'{parent_name} (MovieEditor{batch_timestamp})')
+            progress_mgr.save(batch_timestamp, input_paths, output_dir, diff_names, settings)
+
         total_count = len(input_paths)
-        for i, path in enumerate(input_paths):
+        remaining_indices = [i for i in range(total_count) if i not in skip_indices]
+        has_failures = False
+        for idx_in_remaining, i in enumerate(remaining_indices):
+            path = input_paths[i]
+
+            # Mark as running
+            if is_series_mode and progress_mgr:
+                progress_mgr.mark_running(i)
+
             # Probe per-file streams to avoid stale data from last update_current_episode()
             file_audio_streams = get_audio_streams(path)
             file_subtitle_streams = get_subtitle_streams(path)
@@ -387,16 +443,34 @@ def process_files() -> None:
                 if i < len(settings['subtitle']['files']):
                     ext_sub = settings['subtitle']['files'][i]
 
-            command = build_ffmpeg_command(path, file_audio_streams, file_subtitle_streams, series_mode=is_series_mode, external_subtitle=ext_sub, timestamp=batch_timestamp)
             _diff_all = extract_differential_name(input_paths)
             prefix = _diff_all[i] if i < len(_diff_all) else os.path.splitext(os.path.basename(path))[0]
-            run_ffmpeg_with_progress(command, calculate_effective_duration(path), title_prefix=prefix, is_last=(i == total_count - 1))
+
+            try:
+                command = build_ffmpeg_command(path, file_audio_streams, file_subtitle_streams, series_mode=is_series_mode, external_subtitle=ext_sub, timestamp=batch_timestamp)
+                is_last_ep = (idx_in_remaining == len(remaining_indices) - 1)
+                ep_finish = '列队完成' if (is_last_ep and is_series_mode) else ''
+                run_ffmpeg_with_progress(command, calculate_effective_duration(path), title_prefix=prefix, is_last=is_last_ep, episode_progress=f'{i+1}/{total_count}', finish_title=ep_finish)
+                # Mark completed
+                if is_series_mode and progress_mgr:
+                    progress_mgr.mark_completed(i)
+            except (OSError, RuntimeError) as ep_err:
+                # Mark failed but continue to next episode
+                has_failures = True
+                if is_series_mode and progress_mgr:
+                    progress_mgr.mark_failed(i)
+                log_ffmpeg_error(f'episode_{i}', ep_err)
+                print(f'\n第 {i+1} 集处理失败: {ep_err}')
+
+        # All done — clear progress only if no failures
+        if is_series_mode and progress_mgr and not has_failures:
+            progress_mgr.clear()
 
         read_navigation_key()
 
     except KeyboardInterrupt:
         show_cursor()
-        print('\n\n操作已取消')
+        print('\n\n操作已取消（进度已保存，下次可继续）')
         terminate_active_children()
     except (OSError, RuntimeError) as e:
         log_ffmpeg_error('batch', e)

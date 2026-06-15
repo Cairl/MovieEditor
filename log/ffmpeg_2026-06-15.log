@@ -1,0 +1,525 @@
+2026-06-15 02:07:01.624 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [020701_62417] =====
+2026-06-15 02:07:01.624 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-15 02:07:01.624 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-15 02:07:01.624 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615020429)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 02:07:01.624 | INFO  | ffmpeg_runner | 预计时长: 30.00s
+2026-06-15 02:07:01.624 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v:0 -map 0:a:0 -map 0:s:2 -map 0:s:3 -map 0:s:4 -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl -to 00:00:30 U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615020429)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 02:07:01.624 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-15 02:07:01.624 | DEBUG | ffmpeg_runner |   | [ 11] 0:s:2
+2026-06-15 02:07:01.624 | DEBUG | ffmpeg_runner |   | [ 12] -map
+2026-06-15 02:07:01.624 | DEBUG | ffmpeg_runner |   | [ 13] 0:s:3
+2026-06-15 02:07:01.624 | DEBUG | ffmpeg_runner |   | [ 14] -map
+2026-06-15 02:07:01.624 | DEBUG | ffmpeg_runner |   | [ 15] 0:s:4
+2026-06-15 02:07:01.624 | DEBUG | ffmpeg_runner |   | [ 16] -c:v
+2026-06-15 02:07:01.624 | DEBUG | ffmpeg_runner |   | [ 17] hevc
+2026-06-15 02:07:01.624 | DEBUG | ffmpeg_runner |   | [ 18] -crf
+2026-06-15 02:07:01.624 | DEBUG | ffmpeg_runner |   | [ 19] 23
+2026-06-15 02:07:01.625 | DEBUG | ffmpeg_runner |   | [ 20] -c:s
+2026-06-15 02:07:01.625 | DEBUG | ffmpeg_runner |   | [ 21] mov_text
+2026-06-15 02:07:01.625 | DEBUG | ffmpeg_runner |   | [ 22] -map_metadata
+2026-06-15 02:07:01.625 | DEBUG | ffmpeg_runner |   | [ 23] 0
+2026-06-15 02:07:01.625 | DEBUG | ffmpeg_runner |   | [ 24] -map_chapters
+2026-06-15 02:07:01.625 | DEBUG | ffmpeg_runner |   | [ 25] 0
+2026-06-15 02:07:01.625 | DEBUG | ffmpeg_runner |   | [ 26] -metadata
+2026-06-15 02:07:01.625 | DEBUG | ffmpeg_runner |   | [ 27] handler_name=@Cairl
+2026-06-15 02:07:01.625 | DEBUG | ffmpeg_runner |   | [ 28] -to
+2026-06-15 02:07:01.625 | DEBUG | ffmpeg_runner |   | [ 29] 00:00:30
+2026-06-15 02:07:01.625 | DEBUG | ffmpeg_runner |   | [ 30] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615020429)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 02:08:57.167 | INFO  | ffmpeg_runner | [020701_62417] 结束: 成功 (返回码 0) | 用时: 115.5s
+2026-06-15 02:08:57.167 | WARN  | ffmpeg_runner | [020701_62417] stderr 输出 (10 行):
+2026-06-15 02:08:57.167 | WARN  | ffmpeg_runner |   | frame=  710 fps=6.2 q=25.4 size=   59392KiB time=N/A bitrate=N/A speed=N/A elapsed=0:01:53.65
+2026-06-15 02:08:57.167 | WARN  | ffmpeg_runner |   | frame=  716 fps=6.3 q=27.9 size=   59392KiB time=N/A bitrate=N/A speed=N/A elapsed=0:01:54.17
+2026-06-15 02:08:57.167 | WARN  | ffmpeg_runner |   | [out#0/mp4 @ 000001632b27d7c0] video:95755KiB audio:1409KiB subtitle:0KiB other streams:0KiB global headers:3KiB muxing overhead: 0.027127%
+2026-06-15 02:08:57.167 | WARN  | ffmpeg_runner |   | frame=  720 fps=6.3 q=27.7 Lsize=   97191KiB time=N/A bitrate=N/A speed=N/A elapsed=0:01:55.13
+2026-06-15 02:08:57.167 | WARN  | ffmpeg_runner |   | x265 [info]: frame I:      9, Avg QP:22.02  kb/s: 61285.59
+2026-06-15 02:08:57.167 | WARN  | ffmpeg_runner |   | x265 [info]: frame P:    191, Avg QP:23.18  kb/s: 52572.44
+2026-06-15 02:08:57.167 | WARN  | ffmpeg_runner |   | x265 [info]: frame B:    520, Avg QP:27.52  kb/s: 15796.05
+2026-06-15 02:08:57.167 | WARN  | ffmpeg_runner |   | x265 [info]: Weighted P-Frames: Y:8.9% UV:7.9%
+2026-06-15 02:08:57.167 | WARN  | ffmpeg_runner |   | encoded 720 frames in 114.96s (6.26 fps), 26120.63 kb/s, Avg QP:26.30
+2026-06-15 02:08:57.167 | WARN  | ffmpeg_runner |   | [aac @ 000001632b556040] Qavg: 3318.913
+2026-06-15 02:08:57.167 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [020701_62417] =====
+
+2026-06-15 02:08:57.469 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [020857_46972] =====
+2026-06-15 02:08:57.469 | INFO  | ffmpeg_runner | 任务: S01E02 The Cats in the Bag
+2026-06-15 02:08:57.469 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E02.The.Cats.in.the.Bag.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-15 02:08:57.469 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615020429)\Breaking.Bad.S01E02.The.Cats.in.the.Bag.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 02:08:57.469 | INFO  | ffmpeg_runner | 预计时长: 30.00s
+2026-06-15 02:08:57.470 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E02.The.Cats.in.the.Bag.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v:0 -map 0:a:0 -map 0:s:2 -map 0:s:3 -map 0:s:4 -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl -to 00:00:30 U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615020429)\Breaking.Bad.S01E02.The.Cats.in.the.Bag.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 02:08:57.470 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-15 02:08:57.470 | DEBUG | ffmpeg_runner |   | [ 11] 0:s:2
+2026-06-15 02:08:57.470 | DEBUG | ffmpeg_runner |   | [ 12] -map
+2026-06-15 02:08:57.470 | DEBUG | ffmpeg_runner |   | [ 13] 0:s:3
+2026-06-15 02:08:57.470 | DEBUG | ffmpeg_runner |   | [ 14] -map
+2026-06-15 02:08:57.470 | DEBUG | ffmpeg_runner |   | [ 15] 0:s:4
+2026-06-15 02:08:57.470 | DEBUG | ffmpeg_runner |   | [ 16] -c:v
+2026-06-15 02:08:57.470 | DEBUG | ffmpeg_runner |   | [ 17] hevc
+2026-06-15 02:08:57.470 | DEBUG | ffmpeg_runner |   | [ 18] -crf
+2026-06-15 02:08:57.470 | DEBUG | ffmpeg_runner |   | [ 19] 23
+2026-06-15 02:08:57.470 | DEBUG | ffmpeg_runner |   | [ 20] -c:s
+2026-06-15 02:08:57.470 | DEBUG | ffmpeg_runner |   | [ 21] mov_text
+2026-06-15 02:08:57.470 | DEBUG | ffmpeg_runner |   | [ 22] -map_metadata
+2026-06-15 02:08:57.470 | DEBUG | ffmpeg_runner |   | [ 23] 0
+2026-06-15 02:08:57.470 | DEBUG | ffmpeg_runner |   | [ 24] -map_chapters
+2026-06-15 02:08:57.470 | DEBUG | ffmpeg_runner |   | [ 25] 0
+2026-06-15 02:08:57.470 | DEBUG | ffmpeg_runner |   | [ 26] -metadata
+2026-06-15 02:08:57.470 | DEBUG | ffmpeg_runner |   | [ 27] handler_name=@Cairl
+2026-06-15 02:08:57.470 | DEBUG | ffmpeg_runner |   | [ 28] -to
+2026-06-15 02:08:57.470 | DEBUG | ffmpeg_runner |   | [ 29] 00:00:30
+2026-06-15 02:08:57.470 | DEBUG | ffmpeg_runner |   | [ 30] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615020429)\Breaking.Bad.S01E02.The.Cats.in.the.Bag.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 02:09:45.037 | DEBUG | ffmpeg_runner | [020857_46972] 进度: 17.1s/30.0s (56.9%) | 速度: 0.36x | 用时: 47.6s
+2026-06-15 02:09:48.050 | DEBUG | ffmpeg_runner | [020857_46972] 进度: 17.8s/30.0s (59.4%) | 速度: 0.36x | 用时: 50.6s
+2026-06-15 02:09:51.013 | DEBUG | ffmpeg_runner | [020857_46972] 进度: 18.6s/30.0s (62.1%) | 速度: 0.36x | 用时: 53.5s
+2026-06-15 02:09:54.026 | DEBUG | ffmpeg_runner | [020857_46972] 进度: 19.3s/30.0s (64.4%) | 速度: 0.35x | 用时: 56.5s
+2026-06-15 02:09:57.023 | DEBUG | ffmpeg_runner | [020857_46972] 进度: 20.1s/30.0s (66.9%) | 速度: 0.35x | 用时: 59.5s
+2026-06-15 02:10:00.046 | DEBUG | ffmpeg_runner | [020857_46972] 进度: 20.7s/30.0s (68.8%) | 速度: 0.34x | 用时: 62.6s
+2026-06-15 02:10:03.033 | DEBUG | ffmpeg_runner | [020857_46972] 进度: 20.7s/30.0s (68.8%) | 速度: 0.33x | 用时: 65.6s
+2026-06-15 02:10:06.005 | DEBUG | ffmpeg_runner | [020857_46972] 进度: 20.7s/30.0s (68.8%) | 速度: 0.32x | 用时: 68.5s
+2026-06-15 02:10:06.057 | DEBUG | ffmpeg_runner | [020857_46972] 进度: 20.7s/30.0s (68.8%) | 速度: 0.32x | 用时: 68.6s
+2026-06-15 02:10:09.014 | DEBUG | ffmpeg_runner | [020857_46972] 进度: 20.7s/30.0s (68.8%) | 速度: 0.31x | 用时: 71.5s
+2026-06-15 02:10:12.021 | DEBUG | ffmpeg_runner | [020857_46972] 进度: 20.7s/30.0s (68.8%) | 速度: 0.30x | 用时: 74.5s
+2026-06-15 02:10:15.046 | DEBUG | ffmpeg_runner | [020857_46972] 进度: 20.7s/30.0s (68.8%) | 速度: 0.28x | 用时: 77.6s
+2026-06-15 02:10:18.029 | DEBUG | ffmpeg_runner | [020857_46972] 进度: 20.7s/30.0s (68.8%) | 速度: 0.27x | 用时: 80.6s
+2026-06-15 02:10:21.044 | DEBUG | ffmpeg_runner | [020857_46972] 进度: 20.7s/30.0s (68.8%) | 速度: 0.26x | 用时: 83.6s
+2026-06-15 02:10:24.023 | DEBUG | ffmpeg_runner | [020857_46972] 进度: 20.7s/30.0s (68.8%) | 速度: 0.25x | 用时: 86.5s
+2026-06-15 02:10:27.027 | DEBUG | ffmpeg_runner | [020857_46972] 进度: 20.7s/30.0s (68.8%) | 速度: 0.24x | 用时: 89.6s
+2026-06-15 02:10:30.028 | DEBUG | ffmpeg_runner | [020857_46972] 进度: 20.7s/30.0s (68.8%) | 速度: 0.24x | 用时: 92.6s
+2026-06-15 02:10:33.022 | DEBUG | ffmpeg_runner | [020857_46972] 进度: 20.7s/30.0s (68.8%) | 速度: 0.23x | 用时: 95.5s
+2026-06-15 02:10:36.010 | DEBUG | ffmpeg_runner | [020857_46972] 进度: 22.0s/30.0s (73.3%) | 速度: 0.23x | 用时: 98.5s
+2026-06-15 02:10:36.892 | INFO  | ffmpeg_runner | [020857_46972] 结束: 成功 (返回码 0) | 用时: 99.4s
+2026-06-15 02:10:36.892 | WARN  | ffmpeg_runner | [020857_46972] stderr 输出 (10 行):
+2026-06-15 02:10:36.892 | WARN  | ffmpeg_runner |   | frame=  712 fps=7.3 q=24.1 size=   32000KiB time=N/A bitrate=N/A speed=N/A elapsed=0:01:38.10
+2026-06-15 02:10:36.892 | WARN  | ffmpeg_runner |   | frame=  717 fps=7.3 q=25.9 size=   32000KiB time=N/A bitrate=N/A speed=N/A elapsed=0:01:38.60
+2026-06-15 02:10:36.892 | WARN  | ffmpeg_runner |   | [out#0/mp4 @ 0000026f931d7080] video:59671KiB audio:1407KiB subtitle:0KiB other streams:0KiB global headers:3KiB muxing overhead: 0.043048%
+2026-06-15 02:10:36.892 | WARN  | ffmpeg_runner |   | frame=  720 fps=7.3 q=27.1 Lsize=   61104KiB time=00:00:20.65 bitrate=24237.1kbits/s speed=0.208x elapsed=0:01:39.13
+2026-06-15 02:10:36.892 | WARN  | ffmpeg_runner |   | x265 [info]: frame I:     10, Avg QP:23.45  kb/s: 48633.81
+2026-06-15 02:10:36.892 | WARN  | ffmpeg_runner |   | x265 [info]: frame P:    221, Avg QP:25.12  kb/s: 23015.75
+2026-06-15 02:10:36.892 | WARN  | ffmpeg_runner |   | x265 [info]: frame B:    489, Avg QP:27.50  kb/s: 12570.10
+2026-06-15 02:10:36.892 | WARN  | ffmpeg_runner |   | x265 [info]: Weighted P-Frames: Y:1.4% UV:1.4%
+2026-06-15 02:10:36.892 | WARN  | ffmpeg_runner |   | encoded 720 frames in 98.98s (7.27 fps), 16277.22 kb/s, Avg QP:26.72
+2026-06-15 02:10:36.892 | WARN  | ffmpeg_runner |   | [aac @ 0000026f931b7f00] Qavg: 2825.416
+2026-06-15 02:10:36.892 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [020857_46972] =====
+
+2026-06-15 02:10:37.164 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [021037_16418] =====
+2026-06-15 02:10:37.164 | INFO  | ffmpeg_runner | 任务: S01E03 And the Bags in the River
+2026-06-15 02:10:37.164 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-15 02:10:37.164 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615020429)\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 02:10:37.164 | INFO  | ffmpeg_runner | 预计时长: 30.00s
+2026-06-15 02:10:37.164 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v:0 -map 0:a:0 -map 0:s:2 -map 0:s:3 -map 0:s:4 -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl -to 00:00:30 U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615020429)\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 02:10:37.164 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-15 02:10:37.164 | DEBUG | ffmpeg_runner |   | [ 11] 0:s:2
+2026-06-15 02:10:37.164 | DEBUG | ffmpeg_runner |   | [ 12] -map
+2026-06-15 02:10:37.165 | DEBUG | ffmpeg_runner |   | [ 13] 0:s:3
+2026-06-15 02:10:37.165 | DEBUG | ffmpeg_runner |   | [ 14] -map
+2026-06-15 02:10:37.165 | DEBUG | ffmpeg_runner |   | [ 15] 0:s:4
+2026-06-15 02:10:37.165 | DEBUG | ffmpeg_runner |   | [ 16] -c:v
+2026-06-15 02:10:37.165 | DEBUG | ffmpeg_runner |   | [ 17] hevc
+2026-06-15 02:10:37.165 | DEBUG | ffmpeg_runner |   | [ 18] -crf
+2026-06-15 02:10:37.165 | DEBUG | ffmpeg_runner |   | [ 19] 23
+2026-06-15 02:10:37.165 | DEBUG | ffmpeg_runner |   | [ 20] -c:s
+2026-06-15 02:10:37.165 | DEBUG | ffmpeg_runner |   | [ 21] mov_text
+2026-06-15 02:10:37.165 | DEBUG | ffmpeg_runner |   | [ 22] -map_metadata
+2026-06-15 02:10:37.165 | DEBUG | ffmpeg_runner |   | [ 23] 0
+2026-06-15 02:10:37.165 | DEBUG | ffmpeg_runner |   | [ 24] -map_chapters
+2026-06-15 02:10:37.165 | DEBUG | ffmpeg_runner |   | [ 25] 0
+2026-06-15 02:10:37.165 | DEBUG | ffmpeg_runner |   | [ 26] -metadata
+2026-06-15 02:10:37.165 | DEBUG | ffmpeg_runner |   | [ 27] handler_name=@Cairl
+2026-06-15 02:10:37.165 | DEBUG | ffmpeg_runner |   | [ 28] -to
+2026-06-15 02:10:37.165 | DEBUG | ffmpeg_runner |   | [ 29] 00:00:30
+2026-06-15 02:10:37.165 | DEBUG | ffmpeg_runner |   | [ 30] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615020429)\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 02:15:21.420 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [021521_42096] =====
+2026-06-15 02:15:21.420 | INFO  | ffmpeg_runner | 任务: S01E03 And the Bags in the River
+2026-06-15 02:15:21.420 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-15 02:15:21.420 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615020429)\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 02:15:21.420 | INFO  | ffmpeg_runner | 预计时长: 2903.07s
+2026-06-15 02:15:21.420 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v:0 -map 0:a:0 -map 0:s:0 -map 0:s:1 -map 0:s:2 -map 0:s:3 -map 0:s:4 -map 0:s:5 -map 0:s:6 -map 0:s:7 -map 0:s:8 -map 0:s:9 -map 0:s:10 -map 0:s:11 -map 0:s:12 -map 0:s:13 -map 0:s:14 -map 0:s:15 -map 0:s:16 -map 0:s:17 -map 0:s:18 -map 0:s:19 -map 0:s:20 -map 0:s:21 -map 0:s:22 -map 0:s:23 -map 0:s:24 -map 0:s:25 -map 0:s:26 -map 0:s:27 -map 0:s:28 -map 0:s:29 -map 0:s:30 -map 0:s:31 -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615020429)\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 02:15:21.420 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-15 02:15:21.420 | DEBUG | ffmpeg_runner |   | [ 67] 0:s:28
+2026-06-15 02:15:21.422 | DEBUG | ffmpeg_runner |   | [ 68] -map
+2026-06-15 02:15:21.422 | DEBUG | ffmpeg_runner |   | [ 69] 0:s:29
+2026-06-15 02:15:21.422 | DEBUG | ffmpeg_runner |   | [ 70] -map
+2026-06-15 02:15:21.422 | DEBUG | ffmpeg_runner |   | [ 71] 0:s:30
+2026-06-15 02:15:21.422 | DEBUG | ffmpeg_runner |   | [ 72] -map
+2026-06-15 02:15:21.422 | DEBUG | ffmpeg_runner |   | [ 73] 0:s:31
+2026-06-15 02:15:21.422 | DEBUG | ffmpeg_runner |   | [ 74] -c:v
+2026-06-15 02:15:21.422 | DEBUG | ffmpeg_runner |   | [ 75] hevc
+2026-06-15 02:15:21.422 | DEBUG | ffmpeg_runner |   | [ 76] -crf
+2026-06-15 02:15:21.422 | DEBUG | ffmpeg_runner |   | [ 77] 23
+2026-06-15 02:15:21.422 | DEBUG | ffmpeg_runner |   | [ 78] -c:s
+2026-06-15 02:15:21.422 | DEBUG | ffmpeg_runner |   | [ 79] mov_text
+2026-06-15 02:15:21.422 | DEBUG | ffmpeg_runner |   | [ 80] -map_metadata
+2026-06-15 02:15:21.422 | DEBUG | ffmpeg_runner |   | [ 81] 0
+2026-06-15 02:15:21.422 | DEBUG | ffmpeg_runner |   | [ 82] -map_chapters
+2026-06-15 02:15:21.422 | DEBUG | ffmpeg_runner |   | [ 83] 0
+2026-06-15 02:15:21.422 | DEBUG | ffmpeg_runner |   | [ 84] -metadata
+2026-06-15 02:15:21.422 | DEBUG | ffmpeg_runner |   | [ 85] handler_name=@Cairl
+2026-06-15 02:15:21.422 | DEBUG | ffmpeg_runner |   | [ 86] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615020429)\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 02:36:37.139 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [023637_13837] =====
+2026-06-15 02:36:37.139 | INFO  | ffmpeg_runner | 任务: S01E03 And the Bags in the River
+2026-06-15 02:36:37.139 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-15 02:36:37.139 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615020429)\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 02:36:37.139 | INFO  | ffmpeg_runner | 预计时长: 2903.07s
+2026-06-15 02:36:37.139 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v:0 -map 0:a:0 -map 0:s:0 -map 0:s:1 -map 0:s:2 -map 0:s:3 -map 0:s:4 -map 0:s:5 -map 0:s:6 -map 0:s:7 -map 0:s:8 -map 0:s:9 -map 0:s:10 -map 0:s:11 -map 0:s:12 -map 0:s:13 -map 0:s:14 -map 0:s:15 -map 0:s:16 -map 0:s:17 -map 0:s:18 -map 0:s:19 -map 0:s:20 -map 0:s:21 -map 0:s:22 -map 0:s:23 -map 0:s:24 -map 0:s:25 -map 0:s:26 -map 0:s:27 -map 0:s:28 -map 0:s:29 -map 0:s:30 -map 0:s:31 -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615020429)\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 02:36:37.139 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-15 02:36:37.139 | DEBUG | ffmpeg_runner |   | [ 67] 0:s:28
+2026-06-15 02:36:37.139 | DEBUG | ffmpeg_runner |   | [ 68] -map
+2026-06-15 02:36:37.139 | DEBUG | ffmpeg_runner |   | [ 69] 0:s:29
+2026-06-15 02:36:37.139 | DEBUG | ffmpeg_runner |   | [ 70] -map
+2026-06-15 02:36:37.139 | DEBUG | ffmpeg_runner |   | [ 71] 0:s:30
+2026-06-15 02:36:37.139 | DEBUG | ffmpeg_runner |   | [ 72] -map
+2026-06-15 02:36:37.139 | DEBUG | ffmpeg_runner |   | [ 73] 0:s:31
+2026-06-15 02:36:37.139 | DEBUG | ffmpeg_runner |   | [ 74] -c:v
+2026-06-15 02:36:37.139 | DEBUG | ffmpeg_runner |   | [ 75] hevc
+2026-06-15 02:36:37.139 | DEBUG | ffmpeg_runner |   | [ 76] -crf
+2026-06-15 02:36:37.139 | DEBUG | ffmpeg_runner |   | [ 77] 23
+2026-06-15 02:36:37.139 | DEBUG | ffmpeg_runner |   | [ 78] -c:s
+2026-06-15 02:36:37.139 | DEBUG | ffmpeg_runner |   | [ 79] mov_text
+2026-06-15 02:36:37.139 | DEBUG | ffmpeg_runner |   | [ 80] -map_metadata
+2026-06-15 02:36:37.139 | DEBUG | ffmpeg_runner |   | [ 81] 0
+2026-06-15 02:36:37.139 | DEBUG | ffmpeg_runner |   | [ 82] -map_chapters
+2026-06-15 02:36:37.139 | DEBUG | ffmpeg_runner |   | [ 83] 0
+2026-06-15 02:36:37.139 | DEBUG | ffmpeg_runner |   | [ 84] -metadata
+2026-06-15 02:36:37.139 | DEBUG | ffmpeg_runner |   | [ 85] handler_name=@Cairl
+2026-06-15 02:36:37.139 | DEBUG | ffmpeg_runner |   | [ 86] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615020429)\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 02:52:06.882 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [025206_88232] =====
+2026-06-15 02:52:06.882 | INFO  | ffmpeg_runner | 任务: S01E03 And the Bags in the River
+2026-06-15 02:52:06.882 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-15 02:52:06.882 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615020429)\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 02:52:06.882 | INFO  | ffmpeg_runner | 预计时长: 2903.07s
+2026-06-15 02:52:06.882 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v:0 -map 0:a:0 -map 0:s:0 -map 0:s:1 -map 0:s:2 -map 0:s:3 -map 0:s:4 -map 0:s:5 -map 0:s:6 -map 0:s:7 -map 0:s:8 -map 0:s:9 -map 0:s:10 -map 0:s:11 -map 0:s:12 -map 0:s:13 -map 0:s:14 -map 0:s:15 -map 0:s:16 -map 0:s:17 -map 0:s:18 -map 0:s:19 -map 0:s:20 -map 0:s:21 -map 0:s:22 -map 0:s:23 -map 0:s:24 -map 0:s:25 -map 0:s:26 -map 0:s:27 -map 0:s:28 -map 0:s:29 -map 0:s:30 -map 0:s:31 -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615020429)\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 02:52:06.882 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-15 02:52:06.882 | DEBUG | ffmpeg_runner |   | [ 67] 0:s:28
+2026-06-15 02:52:06.882 | DEBUG | ffmpeg_runner |   | [ 68] -map
+2026-06-15 02:52:06.882 | DEBUG | ffmpeg_runner |   | [ 69] 0:s:29
+2026-06-15 02:52:06.882 | DEBUG | ffmpeg_runner |   | [ 70] -map
+2026-06-15 02:52:06.882 | DEBUG | ffmpeg_runner |   | [ 71] 0:s:30
+2026-06-15 02:52:06.882 | DEBUG | ffmpeg_runner |   | [ 72] -map
+2026-06-15 02:52:06.882 | DEBUG | ffmpeg_runner |   | [ 73] 0:s:31
+2026-06-15 02:52:06.882 | DEBUG | ffmpeg_runner |   | [ 74] -c:v
+2026-06-15 02:52:06.882 | DEBUG | ffmpeg_runner |   | [ 75] hevc
+2026-06-15 02:52:06.882 | DEBUG | ffmpeg_runner |   | [ 76] -crf
+2026-06-15 02:52:06.882 | DEBUG | ffmpeg_runner |   | [ 77] 23
+2026-06-15 02:52:06.882 | DEBUG | ffmpeg_runner |   | [ 78] -c:s
+2026-06-15 02:52:06.882 | DEBUG | ffmpeg_runner |   | [ 79] mov_text
+2026-06-15 02:52:06.882 | DEBUG | ffmpeg_runner |   | [ 80] -map_metadata
+2026-06-15 02:52:06.882 | DEBUG | ffmpeg_runner |   | [ 81] 0
+2026-06-15 02:52:06.882 | DEBUG | ffmpeg_runner |   | [ 82] -map_chapters
+2026-06-15 02:52:06.882 | DEBUG | ffmpeg_runner |   | [ 83] 0
+2026-06-15 02:52:06.882 | DEBUG | ffmpeg_runner |   | [ 84] -metadata
+2026-06-15 02:52:06.882 | DEBUG | ffmpeg_runner |   | [ 85] handler_name=@Cairl
+2026-06-15 02:52:06.882 | DEBUG | ffmpeg_runner |   | [ 86] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615020429)\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 03:02:24.479 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [030224_47939] =====
+2026-06-15 03:02:24.479 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-15 03:02:24.480 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-15 03:02:24.480 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615030128)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 03:02:24.480 | INFO  | ffmpeg_runner | 预计时长: 60.00s
+2026-06-15 03:02:24.480 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v:0 -map 0:a:0 -map 0:s:0 -map 0:s:1 -map 0:s:2 -map 0:s:3 -map 0:s:4 -map 0:s:5 -map 0:s:6 -map 0:s:7 -map 0:s:8 -map 0:s:9 -map 0:s:10 -map 0:s:11 -map 0:s:12 -map 0:s:13 -map 0:s:14 -map 0:s:15 -map 0:s:16 -map 0:s:17 -map 0:s:18 -map 0:s:19 -map 0:s:20 -map 0:s:21 -map 0:s:22 -map 0:s:23 -map 0:s:24 -map 0:s:25 -map 0:s:26 -map 0:s:27 -map 0:s:28 -map 0:s:29 -map 0:s:30 -map 0:s:31 -c:v hevc_nvenc -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl -to 00:01:00 U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615030128)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 03:02:24.480 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-15 03:02:24.480 | DEBUG | ffmpeg_runner |   | [ 67] 0:s:28
+2026-06-15 03:02:24.480 | DEBUG | ffmpeg_runner |   | [ 68] -map
+2026-06-15 03:02:24.480 | DEBUG | ffmpeg_runner |   | [ 69] 0:s:29
+2026-06-15 03:02:24.480 | DEBUG | ffmpeg_runner |   | [ 70] -map
+2026-06-15 03:02:24.480 | DEBUG | ffmpeg_runner |   | [ 71] 0:s:30
+2026-06-15 03:02:24.480 | DEBUG | ffmpeg_runner |   | [ 72] -map
+2026-06-15 03:02:24.480 | DEBUG | ffmpeg_runner |   | [ 73] 0:s:31
+2026-06-15 03:02:24.480 | DEBUG | ffmpeg_runner |   | [ 74] -c:v
+2026-06-15 03:02:24.480 | DEBUG | ffmpeg_runner |   | [ 75] hevc_nvenc
+2026-06-15 03:02:24.480 | DEBUG | ffmpeg_runner |   | [ 76] -c:s
+2026-06-15 03:02:24.480 | DEBUG | ffmpeg_runner |   | [ 77] mov_text
+2026-06-15 03:02:24.480 | DEBUG | ffmpeg_runner |   | [ 78] -map_metadata
+2026-06-15 03:02:24.480 | DEBUG | ffmpeg_runner |   | [ 79] 0
+2026-06-15 03:02:24.480 | DEBUG | ffmpeg_runner |   | [ 80] -map_chapters
+2026-06-15 03:02:24.480 | DEBUG | ffmpeg_runner |   | [ 81] 0
+2026-06-15 03:02:24.480 | DEBUG | ffmpeg_runner |   | [ 82] -metadata
+2026-06-15 03:02:24.480 | DEBUG | ffmpeg_runner |   | [ 83] handler_name=@Cairl
+2026-06-15 03:02:24.480 | DEBUG | ffmpeg_runner |   | [ 84] -to
+2026-06-15 03:02:24.480 | DEBUG | ffmpeg_runner |   | [ 85] 00:01:00
+2026-06-15 03:02:24.480 | DEBUG | ffmpeg_runner |   | [ 86] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615030128)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 03:02:42.676 | INFO  | ffmpeg_runner | [030224_47939] 结束: 成功 (返回码 0) | 用时: 18.2s
+2026-06-15 03:02:42.676 | WARN  | ffmpeg_runner | [030224_47939] stderr 输出 (10 行):
+2026-06-15 03:02:42.676 | WARN  | ffmpeg_runner |   | frame= 1255 fps= 87 q=44.0 size=   14336KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:14.42
+2026-06-15 03:02:42.676 | WARN  | ffmpeg_runner |   | frame= 1306 fps= 87 q=44.0 size=   14848KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:14.94
+2026-06-15 03:02:42.676 | WARN  | ffmpeg_runner |   | frame= 1355 fps= 88 q=42.0 size=   15616KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:15.46
+2026-06-15 03:02:42.676 | WARN  | ffmpeg_runner |   | frame= 1405 fps= 88 q=39.0 size=   16128KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:15.97
+2026-06-15 03:02:42.676 | WARN  | ffmpeg_runner |   | frame= 1439 fps= 87 q=43.0 size=   16128KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:16.50
+2026-06-15 03:02:42.676 | WARN  | ffmpeg_runner |   | frame= 1439 fps= 85 q=43.0 size=   16128KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:17.01
+2026-06-15 03:02:42.676 | WARN  | ffmpeg_runner |   | frame= 1439 fps= 82 q=43.0 size=   16128KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:17.53
+2026-06-15 03:02:42.676 | WARN  | ffmpeg_runner |   | [out#0/mp4 @ 000001bbc6455780] video:16114KiB audio:2862KiB subtitle:0KiB other streams:0KiB global headers:2KiB muxing overhead: 0.307609%
+2026-06-15 03:02:42.676 | WARN  | ffmpeg_runner |   | frame= 1439 fps= 80 q=43.0 Lsize=   19034KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:17.95
+2026-06-15 03:02:42.676 | WARN  | ffmpeg_runner |   | [aac @ 000001bbc6d226c0] Qavg: 1786.529
+2026-06-15 03:02:42.676 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [030224_47939] =====
+
+2026-06-15 03:02:42.892 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [030242_89299] =====
+2026-06-15 03:02:42.892 | INFO  | ffmpeg_runner | 任务: S01E02 The Cats in the Bag
+2026-06-15 03:02:42.892 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E02.The.Cats.in.the.Bag.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-15 03:02:42.892 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615030128)\Breaking.Bad.S01E02.The.Cats.in.the.Bag.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 03:02:42.892 | INFO  | ffmpeg_runner | 预计时长: 60.00s
+2026-06-15 03:02:42.892 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E02.The.Cats.in.the.Bag.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v:0 -map 0:a:0 -map 0:s:0 -map 0:s:1 -map 0:s:2 -map 0:s:3 -map 0:s:4 -map 0:s:5 -map 0:s:6 -map 0:s:7 -map 0:s:8 -map 0:s:9 -map 0:s:10 -map 0:s:11 -map 0:s:12 -map 0:s:13 -map 0:s:14 -map 0:s:15 -map 0:s:16 -map 0:s:17 -map 0:s:18 -map 0:s:19 -map 0:s:20 -map 0:s:21 -map 0:s:22 -map 0:s:23 -map 0:s:24 -map 0:s:25 -map 0:s:26 -map 0:s:27 -map 0:s:28 -map 0:s:29 -map 0:s:30 -map 0:s:31 -c:v hevc_nvenc -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl -to 00:01:00 U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615030128)\Breaking.Bad.S01E02.The.Cats.in.the.Bag.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 03:02:42.892 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-15 03:02:42.892 | DEBUG | ffmpeg_runner |   | [ 67] 0:s:28
+2026-06-15 03:02:42.893 | DEBUG | ffmpeg_runner |   | [ 68] -map
+2026-06-15 03:02:42.893 | DEBUG | ffmpeg_runner |   | [ 69] 0:s:29
+2026-06-15 03:02:42.893 | DEBUG | ffmpeg_runner |   | [ 70] -map
+2026-06-15 03:02:42.893 | DEBUG | ffmpeg_runner |   | [ 71] 0:s:30
+2026-06-15 03:02:42.893 | DEBUG | ffmpeg_runner |   | [ 72] -map
+2026-06-15 03:02:42.893 | DEBUG | ffmpeg_runner |   | [ 73] 0:s:31
+2026-06-15 03:02:42.893 | DEBUG | ffmpeg_runner |   | [ 74] -c:v
+2026-06-15 03:02:42.893 | DEBUG | ffmpeg_runner |   | [ 75] hevc_nvenc
+2026-06-15 03:02:42.893 | DEBUG | ffmpeg_runner |   | [ 76] -c:s
+2026-06-15 03:02:42.893 | DEBUG | ffmpeg_runner |   | [ 77] mov_text
+2026-06-15 03:02:42.893 | DEBUG | ffmpeg_runner |   | [ 78] -map_metadata
+2026-06-15 03:02:42.893 | DEBUG | ffmpeg_runner |   | [ 79] 0
+2026-06-15 03:02:42.893 | DEBUG | ffmpeg_runner |   | [ 80] -map_chapters
+2026-06-15 03:02:42.893 | DEBUG | ffmpeg_runner |   | [ 81] 0
+2026-06-15 03:02:42.893 | DEBUG | ffmpeg_runner |   | [ 82] -metadata
+2026-06-15 03:02:42.893 | DEBUG | ffmpeg_runner |   | [ 83] handler_name=@Cairl
+2026-06-15 03:02:42.893 | DEBUG | ffmpeg_runner |   | [ 84] -to
+2026-06-15 03:02:42.893 | DEBUG | ffmpeg_runner |   | [ 85] 00:01:00
+2026-06-15 03:02:42.893 | DEBUG | ffmpeg_runner |   | [ 86] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615030128)\Breaking.Bad.S01E02.The.Cats.in.the.Bag.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 03:02:51.031 | DEBUG | ffmpeg_runner | [030242_89299] 进度: 20.7s/60.0s (34.4%) | 速度: 3.05x | 用时: 8.1s
+2026-06-15 03:02:54.046 | DEBUG | ffmpeg_runner | [030242_89299] 进度: 20.7s/60.0s (34.4%) | 速度: 2.62x | 用时: 11.1s
+2026-06-15 03:02:57.050 | DEBUG | ffmpeg_runner | [030242_89299] 进度: 20.7s/60.0s (34.4%) | 速度: 2.15x | 用时: 14.2s
+2026-06-15 03:03:00.000 | DEBUG | ffmpeg_runner | [030242_89299] 进度: 20.7s/60.0s (34.4%) | 速度: 1.75x | 用时: 17.1s
+2026-06-15 03:03:00.052 | DEBUG | ffmpeg_runner | [030242_89299] 进度: 20.7s/60.0s (34.4%) | 速度: 1.75x | 用时: 17.2s
+2026-06-15 03:03:03.002 | DEBUG | ffmpeg_runner | [030242_89299] 进度: 20.7s/60.0s (34.4%) | 速度: 1.49x | 用时: 20.1s
+2026-06-15 03:03:03.053 | DEBUG | ffmpeg_runner | [030242_89299] 进度: 20.7s/60.0s (34.4%) | 速度: 1.49x | 用时: 20.2s
+2026-06-15 03:03:03.790 | INFO  | ffmpeg_runner | [030242_89299] 结束: 成功 (返回码 0) | 用时: 20.9s
+2026-06-15 03:03:03.790 | WARN  | ffmpeg_runner | [030242_89299] stderr 输出 (10 行):
+2026-06-15 03:03:03.790 | WARN  | ffmpeg_runner |   | frame= 1193 fps= 70 q=39.0 size=   13312KiB time=00:00:20.65 bitrate=5280.2kbits/s speed=1.21x elapsed=0:00:17.03
+2026-06-15 03:03:03.790 | WARN  | ffmpeg_runner |   | frame= 1226 fps= 70 q=27.0 size=   14336KiB time=00:00:20.65 bitrate=5686.4kbits/s speed=1.18x elapsed=0:00:17.55
+2026-06-15 03:03:03.790 | WARN  | ffmpeg_runner |   | frame= 1258 fps= 70 q=37.0 size=   14336KiB time=00:00:20.65 bitrate=5686.4kbits/s speed=1.14x elapsed=0:00:18.07
+2026-06-15 03:03:03.790 | WARN  | ffmpeg_runner |   | frame= 1290 fps= 69 q=36.0 size=   14848KiB time=00:00:20.65 bitrate=5889.5kbits/s speed=1.11x elapsed=0:00:18.59
+2026-06-15 03:03:03.790 | WARN  | ffmpeg_runner |   | frame= 1329 fps= 70 q=34.0 size=   15616KiB time=00:00:20.65 bitrate=6194.1kbits/s speed=1.08x elapsed=0:00:19.10
+2026-06-15 03:03:03.790 | WARN  | ffmpeg_runner |   | frame= 1360 fps= 69 q=29.0 size=   15872KiB time=00:00:20.65 bitrate=6295.6kbits/s speed=1.05x elapsed=0:00:19.62
+2026-06-15 03:03:03.790 | WARN  | ffmpeg_runner |   | frame= 1395 fps= 69 q=37.0 size=   16128KiB time=00:00:20.65 bitrate=6397.2kbits/s speed=1.03x elapsed=0:00:20.13
+2026-06-15 03:03:03.790 | WARN  | ffmpeg_runner |   | [out#0/mp4 @ 0000026febbd57c0] video:16502KiB audio:2850KiB subtitle:1KiB other streams:0KiB global headers:2KiB muxing overhead: 0.312908%
+2026-06-15 03:03:03.790 | WARN  | ffmpeg_runner |   | frame= 1439 fps= 70 q=37.0 Lsize=   19413KiB time=00:00:20.65 bitrate=7700.2kbits/s speed=0.999x elapsed=0:00:20.66
+2026-06-15 03:03:03.790 | WARN  | ffmpeg_runner |   | [aac @ 0000026fec18d9c0] Qavg: 1686.163
+2026-06-15 03:03:03.790 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [030242_89299] =====
+
+2026-06-15 03:03:04.011 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [030304_01143] =====
+2026-06-15 03:03:04.011 | INFO  | ffmpeg_runner | 任务: S01E03 And the Bags in the River
+2026-06-15 03:03:04.011 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-15 03:03:04.011 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615030128)\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 03:03:04.011 | INFO  | ffmpeg_runner | 预计时长: 60.00s
+2026-06-15 03:03:04.011 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v:0 -map 0:a:0 -map 0:s:0 -map 0:s:1 -map 0:s:2 -map 0:s:3 -map 0:s:4 -map 0:s:5 -map 0:s:6 -map 0:s:7 -map 0:s:8 -map 0:s:9 -map 0:s:10 -map 0:s:11 -map 0:s:12 -map 0:s:13 -map 0:s:14 -map 0:s:15 -map 0:s:16 -map 0:s:17 -map 0:s:18 -map 0:s:19 -map 0:s:20 -map 0:s:21 -map 0:s:22 -map 0:s:23 -map 0:s:24 -map 0:s:25 -map 0:s:26 -map 0:s:27 -map 0:s:28 -map 0:s:29 -map 0:s:30 -map 0:s:31 -c:v hevc_nvenc -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl -to 00:01:00 U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615030128)\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 03:03:04.011 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-15 03:03:04.011 | DEBUG | ffmpeg_runner |   | [ 67] 0:s:28
+2026-06-15 03:03:04.011 | DEBUG | ffmpeg_runner |   | [ 68] -map
+2026-06-15 03:03:04.011 | DEBUG | ffmpeg_runner |   | [ 69] 0:s:29
+2026-06-15 03:03:04.011 | DEBUG | ffmpeg_runner |   | [ 70] -map
+2026-06-15 03:03:04.011 | DEBUG | ffmpeg_runner |   | [ 71] 0:s:30
+2026-06-15 03:03:04.011 | DEBUG | ffmpeg_runner |   | [ 72] -map
+2026-06-15 03:03:04.011 | DEBUG | ffmpeg_runner |   | [ 73] 0:s:31
+2026-06-15 03:03:04.011 | DEBUG | ffmpeg_runner |   | [ 74] -c:v
+2026-06-15 03:03:04.011 | DEBUG | ffmpeg_runner |   | [ 75] hevc_nvenc
+2026-06-15 03:03:04.011 | DEBUG | ffmpeg_runner |   | [ 76] -c:s
+2026-06-15 03:03:04.011 | DEBUG | ffmpeg_runner |   | [ 77] mov_text
+2026-06-15 03:03:04.011 | DEBUG | ffmpeg_runner |   | [ 78] -map_metadata
+2026-06-15 03:03:04.011 | DEBUG | ffmpeg_runner |   | [ 79] 0
+2026-06-15 03:03:04.011 | DEBUG | ffmpeg_runner |   | [ 80] -map_chapters
+2026-06-15 03:03:04.011 | DEBUG | ffmpeg_runner |   | [ 81] 0
+2026-06-15 03:03:04.011 | DEBUG | ffmpeg_runner |   | [ 82] -metadata
+2026-06-15 03:03:04.011 | DEBUG | ffmpeg_runner |   | [ 83] handler_name=@Cairl
+2026-06-15 03:03:04.011 | DEBUG | ffmpeg_runner |   | [ 84] -to
+2026-06-15 03:03:04.011 | DEBUG | ffmpeg_runner |   | [ 85] 00:01:00
+2026-06-15 03:03:04.011 | DEBUG | ffmpeg_runner |   | [ 86] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615030128)\Breaking.Bad.S01E03.And.the.Bags.in.the.River.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 03:03:18.018 | DEBUG | ffmpeg_runner | [030304_01143] 进度: 52.4s/60.0s (87.3%) | 速度: 3.72x | 用时: 14.0s
+2026-06-15 03:03:19.954 | INFO  | ffmpeg_runner | [030304_01143] 结束: 成功 (返回码 0) | 用时: 15.9s
+2026-06-15 03:03:19.954 | WARN  | ffmpeg_runner | [030304_01143] stderr 输出 (10 行):
+2026-06-15 03:03:19.954 | WARN  | ffmpeg_runner |   | frame= 1101 fps= 89 q=38.0 size=   12032KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:12.37
+2026-06-15 03:03:19.954 | WARN  | ffmpeg_runner |   | frame= 1152 fps= 89 q=37.0 size=   15104KiB time=00:00:47.88 bitrate=2584.2kbits/s speed=3.71x elapsed=0:00:12.89
+2026-06-15 03:03:19.954 | WARN  | ffmpeg_runner |   | frame= 1206 fps= 90 q=30.0 size=   15360KiB time=00:00:50.17 bitrate=2507.8kbits/s speed=3.74x elapsed=0:00:13.40
+2026-06-15 03:03:19.954 | WARN  | ffmpeg_runner |   | frame= 1259 fps= 90 q=37.0 size=   16640KiB time=00:00:52.38 bitrate=2602.1kbits/s speed=3.76x elapsed=0:00:13.91
+2026-06-15 03:03:19.954 | WARN  | ffmpeg_runner |   | frame= 1311 fps= 91 q=37.0 size=   16896KiB time=00:00:54.55 bitrate=2537.1kbits/s speed=3.78x elapsed=0:00:14.43
+2026-06-15 03:03:19.954 | WARN  | ffmpeg_runner |   | frame= 1362 fps= 91 q=37.0 size=   17664KiB time=00:00:56.68 bitrate=2552.9kbits/s speed=3.79x elapsed=0:00:14.94
+2026-06-15 03:03:19.954 | WARN  | ffmpeg_runner |   | frame= 1412 fps= 91 q=31.0 size=   18176KiB time=00:00:58.76 bitrate=2533.7kbits/s speed= 3.8x elapsed=0:00:15.47
+2026-06-15 03:03:19.954 | WARN  | ffmpeg_runner |   | [out#0/mp4 @ 00000208a0d06fc0] video:16110KiB audio:2853KiB subtitle:6KiB other streams:0KiB global headers:2KiB muxing overhead: 0.345790%
+2026-06-15 03:03:19.954 | WARN  | ffmpeg_runner |   | frame= 1439 fps= 92 q=38.0 Lsize=   19035KiB time=00:00:59.89 bitrate=2603.5kbits/s speed=3.82x elapsed=0:00:15.67
+2026-06-15 03:03:19.954 | WARN  | ffmpeg_runner |   | [aac @ 00000208a2c5ee00] Qavg: 1822.105
+2026-06-15 03:03:19.954 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [030304_01143] =====
+
+2026-06-15 03:03:20.174 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [030320_17483] =====
+2026-06-15 03:03:20.174 | INFO  | ffmpeg_runner | 任务: S01E04 Cancer Man
+2026-06-15 03:03:20.174 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E04.Cancer.Man.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-15 03:03:20.174 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615030128)\Breaking.Bad.S01E04.Cancer.Man.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 03:03:20.174 | INFO  | ffmpeg_runner | 预计时长: 60.00s
+2026-06-15 03:03:20.174 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E04.Cancer.Man.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v:0 -map 0:a:0 -map 0:s:0 -map 0:s:1 -map 0:s:2 -map 0:s:3 -map 0:s:4 -map 0:s:5 -map 0:s:6 -map 0:s:7 -map 0:s:8 -map 0:s:9 -map 0:s:10 -map 0:s:11 -map 0:s:12 -map 0:s:13 -map 0:s:14 -map 0:s:15 -map 0:s:16 -map 0:s:17 -map 0:s:18 -map 0:s:19 -map 0:s:20 -map 0:s:21 -map 0:s:22 -map 0:s:23 -map 0:s:24 -map 0:s:25 -map 0:s:26 -map 0:s:27 -map 0:s:28 -map 0:s:29 -map 0:s:30 -map 0:s:31 -c:v hevc_nvenc -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl -to 00:01:00 U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615030128)\Breaking.Bad.S01E04.Cancer.Man.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 03:03:20.174 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-15 03:03:20.174 | DEBUG | ffmpeg_runner |   | [ 67] 0:s:28
+2026-06-15 03:03:20.174 | DEBUG | ffmpeg_runner |   | [ 68] -map
+2026-06-15 03:03:20.174 | DEBUG | ffmpeg_runner |   | [ 69] 0:s:29
+2026-06-15 03:03:20.174 | DEBUG | ffmpeg_runner |   | [ 70] -map
+2026-06-15 03:03:20.174 | DEBUG | ffmpeg_runner |   | [ 71] 0:s:30
+2026-06-15 03:03:20.174 | DEBUG | ffmpeg_runner |   | [ 72] -map
+2026-06-15 03:03:20.174 | DEBUG | ffmpeg_runner |   | [ 73] 0:s:31
+2026-06-15 03:03:20.174 | DEBUG | ffmpeg_runner |   | [ 74] -c:v
+2026-06-15 03:03:20.174 | DEBUG | ffmpeg_runner |   | [ 75] hevc_nvenc
+2026-06-15 03:03:20.174 | DEBUG | ffmpeg_runner |   | [ 76] -c:s
+2026-06-15 03:03:20.174 | DEBUG | ffmpeg_runner |   | [ 77] mov_text
+2026-06-15 03:03:20.174 | DEBUG | ffmpeg_runner |   | [ 78] -map_metadata
+2026-06-15 03:03:20.174 | DEBUG | ffmpeg_runner |   | [ 79] 0
+2026-06-15 03:03:20.174 | DEBUG | ffmpeg_runner |   | [ 80] -map_chapters
+2026-06-15 03:03:20.174 | DEBUG | ffmpeg_runner |   | [ 81] 0
+2026-06-15 03:03:20.174 | DEBUG | ffmpeg_runner |   | [ 82] -metadata
+2026-06-15 03:03:20.174 | DEBUG | ffmpeg_runner |   | [ 83] handler_name=@Cairl
+2026-06-15 03:03:20.175 | DEBUG | ffmpeg_runner |   | [ 84] -to
+2026-06-15 03:03:20.175 | DEBUG | ffmpeg_runner |   | [ 85] 00:01:00
+2026-06-15 03:03:20.175 | DEBUG | ffmpeg_runner |   | [ 86] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615030128)\Breaking.Bad.S01E04.Cancer.Man.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 03:03:24.011 | DEBUG | ffmpeg_runner | [030320_17483] 进度: 12.2s/60.0s (20.3%) | 速度: 2.81x | 用时: 3.8s
+2026-06-15 03:03:27.027 | DEBUG | ffmpeg_runner | [030320_17483] 进度: 24.3s/60.0s (40.5%) | 速度: 3.16x | 用时: 6.8s
+2026-06-15 03:03:30.046 | DEBUG | ffmpeg_runner | [030320_17483] 进度: 34.2s/60.0s (57.0%) | 速度: 3.37x | 用时: 9.9s
+2026-06-15 03:03:33.011 | DEBUG | ffmpeg_runner | [030320_17483] 进度: 46.1s/60.0s (76.9%) | 速度: 3.53x | 用时: 12.8s
+2026-06-15 03:03:36.043 | DEBUG | ffmpeg_runner | [030320_17483] 进度: 58.1s/60.0s (96.8%) | 速度: 3.63x | 用时: 15.9s
+2026-06-15 03:03:36.328 | INFO  | ffmpeg_runner | [030320_17483] 结束: 成功 (返回码 0) | 用时: 16.1s
+2026-06-15 03:03:36.328 | WARN  | ffmpeg_runner | [030320_17483] stderr 输出 (10 行):
+2026-06-15 03:03:36.328 | WARN  | ffmpeg_runner |   | frame= 1109 fps= 90 q=37.0 size=   13312KiB time=00:00:46.12 bitrate=2364.1kbits/s speed=3.73x elapsed=0:00:12.37
+2026-06-15 03:03:36.328 | WARN  | ffmpeg_runner |   | frame= 1155 fps= 90 q=35.0 size=   14080KiB time=00:00:48.04 bitrate=2400.6kbits/s speed=3.73x elapsed=0:00:12.89
+2026-06-15 03:03:36.328 | WARN  | ffmpeg_runner |   | frame= 1203 fps= 90 q=35.0 size=   14848KiB time=00:00:50.05 bitrate=2430.3kbits/s speed=3.73x elapsed=0:00:13.40
+2026-06-15 03:03:36.328 | WARN  | ffmpeg_runner |   | frame= 1247 fps= 90 q=35.0 size=   15104KiB time=00:00:51.88 bitrate=2384.7kbits/s speed=3.73x elapsed=0:00:13.92
+2026-06-15 03:03:36.328 | WARN  | ffmpeg_runner |   | frame= 1301 fps= 90 q=34.0 size=   16384KiB time=00:00:54.13 bitrate=2479.2kbits/s speed=3.75x elapsed=0:00:14.45
+2026-06-15 03:03:36.328 | WARN  | ffmpeg_runner |   | frame= 1347 fps= 90 q=38.0 size=   16640KiB time=00:00:56.05 bitrate=2431.8kbits/s speed=3.75x elapsed=0:00:14.96
+2026-06-15 03:03:36.328 | WARN  | ffmpeg_runner |   | frame= 1396 fps= 90 q=33.0 size=   16640KiB time=00:00:58.05 bitrate=2347.9kbits/s speed=3.75x elapsed=0:00:15.47
+2026-06-15 03:03:36.328 | WARN  | ffmpeg_runner |   | [out#0/mp4 @ 000001dc3e6c5980] video:15319KiB audio:2861KiB subtitle:31KiB other streams:0KiB global headers:2KiB muxing overhead: 0.441619%
+2026-06-15 03:03:36.328 | WARN  | ffmpeg_runner |   | frame= 1439 fps= 90 q=35.0 Lsize=   18291KiB time=00:00:59.89 bitrate=2501.8kbits/s speed=3.75x elapsed=0:00:15.95
+2026-06-15 03:03:36.328 | WARN  | ffmpeg_runner |   | [aac @ 000001dc3eba1080] Qavg: 1514.890
+2026-06-15 03:03:36.328 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [030320_17483] =====
+
+2026-06-15 03:03:36.543 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [030336_54347] =====
+2026-06-15 03:03:36.543 | INFO  | ffmpeg_runner | 任务: S01E05 Gray Matter
+2026-06-15 03:03:36.543 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E05.Gray.Matter.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-15 03:03:36.543 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615030128)\Breaking.Bad.S01E05.Gray.Matter.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 03:03:36.543 | INFO  | ffmpeg_runner | 预计时长: 60.00s
+2026-06-15 03:03:36.543 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E05.Gray.Matter.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v:0 -map 0:a:0 -map 0:s:0 -map 0:s:1 -map 0:s:2 -map 0:s:3 -map 0:s:4 -map 0:s:5 -map 0:s:6 -map 0:s:7 -map 0:s:8 -map 0:s:9 -map 0:s:10 -map 0:s:11 -map 0:s:12 -map 0:s:13 -map 0:s:14 -map 0:s:15 -map 0:s:16 -map 0:s:17 -map 0:s:18 -map 0:s:19 -map 0:s:20 -map 0:s:21 -map 0:s:22 -map 0:s:23 -map 0:s:24 -map 0:s:25 -map 0:s:26 -map 0:s:27 -map 0:s:28 -map 0:s:29 -map 0:s:30 -map 0:s:31 -c:v hevc_nvenc -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl -to 00:01:00 U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615030128)\Breaking.Bad.S01E05.Gray.Matter.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 03:03:36.543 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-15 03:03:36.543 | DEBUG | ffmpeg_runner |   | [ 67] 0:s:28
+2026-06-15 03:03:36.543 | DEBUG | ffmpeg_runner |   | [ 68] -map
+2026-06-15 03:03:36.543 | DEBUG | ffmpeg_runner |   | [ 69] 0:s:29
+2026-06-15 03:03:36.543 | DEBUG | ffmpeg_runner |   | [ 70] -map
+2026-06-15 03:03:36.543 | DEBUG | ffmpeg_runner |   | [ 71] 0:s:30
+2026-06-15 03:03:36.543 | DEBUG | ffmpeg_runner |   | [ 72] -map
+2026-06-15 03:03:36.543 | DEBUG | ffmpeg_runner |   | [ 73] 0:s:31
+2026-06-15 03:03:36.543 | DEBUG | ffmpeg_runner |   | [ 74] -c:v
+2026-06-15 03:03:36.543 | DEBUG | ffmpeg_runner |   | [ 75] hevc_nvenc
+2026-06-15 03:03:36.543 | DEBUG | ffmpeg_runner |   | [ 76] -c:s
+2026-06-15 03:03:36.543 | DEBUG | ffmpeg_runner |   | [ 77] mov_text
+2026-06-15 03:03:36.543 | DEBUG | ffmpeg_runner |   | [ 78] -map_metadata
+2026-06-15 03:03:36.543 | DEBUG | ffmpeg_runner |   | [ 79] 0
+2026-06-15 03:03:36.543 | DEBUG | ffmpeg_runner |   | [ 80] -map_chapters
+2026-06-15 03:03:36.543 | DEBUG | ffmpeg_runner |   | [ 81] 0
+2026-06-15 03:03:36.543 | DEBUG | ffmpeg_runner |   | [ 82] -metadata
+2026-06-15 03:03:36.543 | DEBUG | ffmpeg_runner |   | [ 83] handler_name=@Cairl
+2026-06-15 03:03:36.543 | DEBUG | ffmpeg_runner |   | [ 84] -to
+2026-06-15 03:03:36.543 | DEBUG | ffmpeg_runner |   | [ 85] 00:01:00
+2026-06-15 03:03:36.543 | DEBUG | ffmpeg_runner |   | [ 86] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615030128)\Breaking.Bad.S01E05.Gray.Matter.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 03:03:39.048 | DEBUG | ffmpeg_runner | [030336_54347] 进度: 5.0s/60.0s (8.4%) | 速度: 2.46x | 用时: 2.5s
+2026-06-15 03:03:42.048 | DEBUG | ffmpeg_runner | [030336_54347] 进度: 13.1s/60.0s (21.8%) | 速度: 2.48x | 用时: 5.5s
+2026-06-15 03:03:45.014 | DEBUG | ffmpeg_runner | [030336_54347] 进度: 21.1s/60.0s (35.2%) | 速度: 2.51x | 用时: 8.5s
+2026-06-15 03:03:48.021 | DEBUG | ffmpeg_runner | [030336_54347] 进度: 31.5s/60.0s (52.6%) | 速度: 2.63x | 用时: 11.5s
+2026-06-15 03:03:51.034 | DEBUG | ffmpeg_runner | [030336_54347] 进度: 37.4s/60.0s (62.4%) | 速度: 2.66x | 用时: 14.5s
+2026-06-15 03:03:54.044 | DEBUG | ffmpeg_runner | [030336_54347] 进度: 44.6s/60.0s (74.4%) | 速度: 2.64x | 用时: 17.5s
+2026-06-15 03:03:57.013 | DEBUG | ffmpeg_runner | [030336_54347] 进度: 56.1s/60.0s (93.4%) | 速度: 2.67x | 用时: 20.5s
+2026-06-15 03:03:57.980 | INFO  | ffmpeg_runner | [030336_54347] 结束: 成功 (返回码 0) | 用时: 21.4s
+2026-06-15 03:03:57.980 | WARN  | ffmpeg_runner | [030336_54347] stderr 输出 (10 行):
+2026-06-15 03:03:57.980 | WARN  | ffmpeg_runner |   | frame= 1101 fps= 63 q=39.0 size=   15616KiB time=00:00:45.79 bitrate=2793.4kbits/s speed=2.61x elapsed=0:00:17.53
+2026-06-15 03:03:57.980 | WARN  | ffmpeg_runner |   | frame= 1129 fps= 63 q=38.0 size=   16384KiB time=00:00:46.96 bitrate=2857.9kbits/s speed= 2.6x elapsed=0:00:18.04
+2026-06-15 03:03:57.980 | WARN  | ffmpeg_runner |   | frame= 1177 fps= 63 q=38.0 size=   16384KiB time=00:00:48.96 bitrate=2741.1kbits/s speed=2.64x elapsed=0:00:18.56
+2026-06-15 03:03:57.980 | WARN  | ffmpeg_runner |   | frame= 1233 fps= 65 q=39.0 size=   17152KiB time=00:00:51.30 bitrate=2738.9kbits/s speed=2.69x elapsed=0:00:19.07
+2026-06-15 03:03:57.980 | WARN  | ffmpeg_runner |   | frame= 1292 fps= 66 q=19.0 size=   18432KiB time=00:00:53.76 bitrate=2808.6kbits/s speed=2.74x elapsed=0:00:19.59
+2026-06-15 03:03:57.980 | WARN  | ffmpeg_runner |   | frame= 1347 fps= 67 q=39.0 size=   19200KiB time=00:00:56.05 bitrate=2805.9kbits/s speed=2.79x elapsed=0:00:20.10
+2026-06-15 03:03:57.980 | WARN  | ffmpeg_runner |   | frame= 1404 fps= 68 q=17.0 size=   19200KiB time=00:00:58.43 bitrate=2691.7kbits/s speed=2.83x elapsed=0:00:20.62
+2026-06-15 03:03:57.980 | WARN  | ffmpeg_runner |   | [out#0/mp4 @ 0000026f239a6200] video:19608KiB audio:2854KiB subtitle:25KiB other streams:0KiB global headers:2KiB muxing overhead: 0.349690%
+2026-06-15 03:03:57.980 | WARN  | ffmpeg_runner |   | frame= 1439 fps= 68 q=40.0 Lsize=   22565KiB time=00:00:58.65 bitrate=3151.4kbits/s speed=2.77x elapsed=0:00:21.14
+2026-06-15 03:03:57.980 | WARN  | ffmpeg_runner |   | [aac @ 0000026f23e7e300] Qavg: 1680.342
+2026-06-15 03:03:57.980 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [030336_54347] =====
+
+2026-06-15 03:03:58.195 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [030358_19522] =====
+2026-06-15 03:03:58.195 | INFO  | ffmpeg_runner | 任务: S01E06 Crazy Handful of Nothin
+2026-06-15 03:03:58.195 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E06.Crazy.Handful.of.Nothin.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-15 03:03:58.195 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615030128)\Breaking.Bad.S01E06.Crazy.Handful.of.Nothin.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 03:03:58.195 | INFO  | ffmpeg_runner | 预计时长: 60.00s
+2026-06-15 03:03:58.195 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E06.Crazy.Handful.of.Nothin.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v:0 -map 0:a:0 -map 0:s:0 -map 0:s:1 -map 0:s:2 -map 0:s:3 -map 0:s:4 -map 0:s:5 -map 0:s:6 -map 0:s:7 -map 0:s:8 -map 0:s:9 -map 0:s:10 -map 0:s:11 -map 0:s:12 -map 0:s:13 -map 0:s:14 -map 0:s:15 -map 0:s:16 -map 0:s:17 -map 0:s:18 -map 0:s:19 -map 0:s:20 -map 0:s:21 -map 0:s:22 -map 0:s:23 -map 0:s:24 -map 0:s:25 -map 0:s:26 -map 0:s:27 -map 0:s:28 -map 0:s:29 -map 0:s:30 -map 0:s:31 -c:v hevc_nvenc -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl -to 00:01:00 U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615030128)\Breaking.Bad.S01E06.Crazy.Handful.of.Nothin.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 03:03:58.195 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-15 03:03:58.195 | DEBUG | ffmpeg_runner |   | [ 67] 0:s:28
+2026-06-15 03:03:58.195 | DEBUG | ffmpeg_runner |   | [ 68] -map
+2026-06-15 03:03:58.195 | DEBUG | ffmpeg_runner |   | [ 69] 0:s:29
+2026-06-15 03:03:58.195 | DEBUG | ffmpeg_runner |   | [ 70] -map
+2026-06-15 03:03:58.195 | DEBUG | ffmpeg_runner |   | [ 71] 0:s:30
+2026-06-15 03:03:58.195 | DEBUG | ffmpeg_runner |   | [ 72] -map
+2026-06-15 03:03:58.195 | DEBUG | ffmpeg_runner |   | [ 73] 0:s:31
+2026-06-15 03:03:58.195 | DEBUG | ffmpeg_runner |   | [ 74] -c:v
+2026-06-15 03:03:58.195 | DEBUG | ffmpeg_runner |   | [ 75] hevc_nvenc
+2026-06-15 03:03:58.195 | DEBUG | ffmpeg_runner |   | [ 76] -c:s
+2026-06-15 03:03:58.196 | DEBUG | ffmpeg_runner |   | [ 77] mov_text
+2026-06-15 03:03:58.196 | DEBUG | ffmpeg_runner |   | [ 78] -map_metadata
+2026-06-15 03:03:58.196 | DEBUG | ffmpeg_runner |   | [ 79] 0
+2026-06-15 03:03:58.196 | DEBUG | ffmpeg_runner |   | [ 80] -map_chapters
+2026-06-15 03:03:58.196 | DEBUG | ffmpeg_runner |   | [ 81] 0
+2026-06-15 03:03:58.196 | DEBUG | ffmpeg_runner |   | [ 82] -metadata
+2026-06-15 03:03:58.196 | DEBUG | ffmpeg_runner |   | [ 83] handler_name=@Cairl
+2026-06-15 03:03:58.196 | DEBUG | ffmpeg_runner |   | [ 84] -to
+2026-06-15 03:03:58.196 | DEBUG | ffmpeg_runner |   | [ 85] 00:01:00
+2026-06-15 03:03:58.196 | DEBUG | ffmpeg_runner |   | [ 86] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615030128)\Breaking.Bad.S01E06.Crazy.Handful.of.Nothin.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 03:04:15.004 | DEBUG | ffmpeg_runner | [030358_19522] 进度: 57.0s/60.0s (95.0%) | 速度: 3.45x | 用时: 16.8s
+2026-06-15 03:04:15.055 | DEBUG | ffmpeg_runner | [030358_19522] 进度: 57.0s/60.0s (95.0%) | 速度: 3.45x | 用时: 16.9s
+2026-06-15 03:04:15.642 | INFO  | ffmpeg_runner | [030358_19522] 结束: 成功 (返回码 0) | 用时: 17.4s
+2026-06-15 03:04:15.642 | WARN  | ffmpeg_runner | [030358_19522] stderr 输出 (10 行):
+2026-06-15 03:04:15.642 | WARN  | ffmpeg_runner |   | frame= 1160 fps= 83 q=37.0 size=   12288KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:13.96
+2026-06-15 03:04:15.642 | WARN  | ffmpeg_runner |   | frame= 1202 fps= 83 q=27.0 size=   15360KiB time=00:00:50.00 bitrate=2516.2kbits/s speed=3.45x elapsed=0:00:14.47
+2026-06-15 03:04:15.642 | WARN  | ffmpeg_runner |   | frame= 1243 fps= 83 q=34.0 size=   15872KiB time=00:00:51.71 bitrate=2514.1kbits/s speed=3.45x elapsed=0:00:14.99
+2026-06-15 03:04:15.642 | WARN  | ffmpeg_runner |   | frame= 1294 fps= 83 q=36.0 size=   15872KiB time=00:00:53.84 bitrate=2414.8kbits/s speed=3.47x elapsed=0:00:15.50
+2026-06-15 03:04:15.642 | WARN  | ffmpeg_runner |   | frame= 1340 fps= 84 q=25.0 size=   16384KiB time=00:00:55.76 bitrate=2406.9kbits/s speed=3.48x elapsed=0:00:16.01
+2026-06-15 03:04:15.642 | WARN  | ffmpeg_runner |   | frame= 1370 fps= 83 q=38.0 size=   17408KiB time=00:00:57.01 bitrate=2501.2kbits/s speed=3.45x elapsed=0:00:16.52
+2026-06-15 03:04:15.642 | WARN  | ffmpeg_runner |   | frame= 1418 fps= 83 q=36.0 size=   17408KiB time=00:00:59.01 bitrate=2416.4kbits/s speed=3.46x elapsed=0:00:17.05
+2026-06-15 03:04:15.642 | WARN  | ffmpeg_runner |   | [out#0/mp4 @ 00000176dfcc6ec0] video:15640KiB audio:2854KiB subtitle:4KiB other streams:0KiB global headers:2KiB muxing overhead: 0.340719%
+2026-06-15 03:04:15.642 | WARN  | ffmpeg_runner |   | frame= 1439 fps= 84 q=35.0 Lsize=   18561KiB time=00:00:59.89 bitrate=2538.7kbits/s speed=3.48x elapsed=0:00:17.22
+2026-06-15 03:04:15.642 | WARN  | ffmpeg_runner |   | [aac @ 00000176e051ba80] Qavg: 1706.060
+2026-06-15 03:04:15.642 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [030358_19522] =====
+
+2026-06-15 03:04:15.861 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [030415_86135] =====
+2026-06-15 03:04:15.861 | INFO  | ffmpeg_runner | 任务: S01E07 A No Rough Stuff Type Deal
+2026-06-15 03:04:15.861 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E07.A.No-Rough-Stuff-Type.Deal.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-15 03:04:15.861 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615030128)\Breaking.Bad.S01E07.A.No-Rough-Stuff-Type.Deal.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 03:04:15.861 | INFO  | ffmpeg_runner | 预计时长: 60.00s
+2026-06-15 03:04:15.861 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E07.A.No-Rough-Stuff-Type.Deal.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v:0 -map 0:a:0 -map 0:s:0 -map 0:s:1 -map 0:s:2 -map 0:s:3 -map 0:s:4 -map 0:s:5 -map 0:s:6 -map 0:s:7 -map 0:s:8 -map 0:s:9 -map 0:s:10 -map 0:s:11 -map 0:s:12 -map 0:s:13 -map 0:s:14 -map 0:s:15 -map 0:s:16 -map 0:s:17 -map 0:s:18 -map 0:s:19 -map 0:s:20 -map 0:s:21 -map 0:s:22 -map 0:s:23 -map 0:s:24 -map 0:s:25 -map 0:s:26 -map 0:s:27 -map 0:s:28 -map 0:s:29 -map 0:s:30 -map 0:s:31 -c:v hevc_nvenc -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl -to 00:01:00 U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615030128)\Breaking.Bad.S01E07.A.No-Rough-Stuff-Type.Deal.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 03:04:15.861 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-15 03:04:15.861 | DEBUG | ffmpeg_runner |   | [ 67] 0:s:28
+2026-06-15 03:04:15.861 | DEBUG | ffmpeg_runner |   | [ 68] -map
+2026-06-15 03:04:15.861 | DEBUG | ffmpeg_runner |   | [ 69] 0:s:29
+2026-06-15 03:04:15.861 | DEBUG | ffmpeg_runner |   | [ 70] -map
+2026-06-15 03:04:15.861 | DEBUG | ffmpeg_runner |   | [ 71] 0:s:30
+2026-06-15 03:04:15.861 | DEBUG | ffmpeg_runner |   | [ 72] -map
+2026-06-15 03:04:15.861 | DEBUG | ffmpeg_runner |   | [ 73] 0:s:31
+2026-06-15 03:04:15.861 | DEBUG | ffmpeg_runner |   | [ 74] -c:v
+2026-06-15 03:04:15.861 | DEBUG | ffmpeg_runner |   | [ 75] hevc_nvenc
+2026-06-15 03:04:15.861 | DEBUG | ffmpeg_runner |   | [ 76] -c:s
+2026-06-15 03:04:15.861 | DEBUG | ffmpeg_runner |   | [ 77] mov_text
+2026-06-15 03:04:15.861 | DEBUG | ffmpeg_runner |   | [ 78] -map_metadata
+2026-06-15 03:04:15.861 | DEBUG | ffmpeg_runner |   | [ 79] 0
+2026-06-15 03:04:15.861 | DEBUG | ffmpeg_runner |   | [ 80] -map_chapters
+2026-06-15 03:04:15.861 | DEBUG | ffmpeg_runner |   | [ 81] 0
+2026-06-15 03:04:15.861 | DEBUG | ffmpeg_runner |   | [ 82] -metadata
+2026-06-15 03:04:15.861 | DEBUG | ffmpeg_runner |   | [ 83] handler_name=@Cairl
+2026-06-15 03:04:15.861 | DEBUG | ffmpeg_runner |   | [ 84] -to
+2026-06-15 03:04:15.861 | DEBUG | ffmpeg_runner |   | [ 85] 00:01:00
+2026-06-15 03:04:15.861 | DEBUG | ffmpeg_runner |   | [ 86] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260615030128)\Breaking.Bad.S01E07.A.No-Rough-Stuff-Type.Deal.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-15 03:04:18.012 | DEBUG | ffmpeg_runner | [030415_86135] 进度: 5.8s/60.0s (9.7%) | 速度: 1.80x | 用时: 2.1s
+2026-06-15 03:04:21.014 | DEBUG | ffmpeg_runner | [030415_86135] 进度: 13.2s/60.0s (22.0%) | 速度: 2.21x | 用时: 5.1s
+2026-06-15 03:04:24.019 | DEBUG | ffmpeg_runner | [030415_86135] 进度: 22.0s/60.0s (36.6%) | 速度: 2.54x | 用时: 8.2s
+2026-06-15 03:04:27.019 | DEBUG | ffmpeg_runner | [030415_86135] 进度: 28.9s/60.0s (48.1%) | 速度: 2.63x | 用时: 11.2s
+2026-06-15 03:04:30.025 | DEBUG | ffmpeg_runner | [030415_86135] 进度: 38.4s/60.0s (64.0%) | 速度: 2.69x | 用时: 14.2s
+2026-06-15 03:04:33.025 | DEBUG | ffmpeg_runner | [030415_86135] 进度: 45.7s/60.0s (76.2%) | 速度: 2.69x | 用时: 17.2s
+2026-06-15 03:04:36.030 | DEBUG | ffmpeg_runner | [030415_86135] 进度: 52.6s/60.0s (87.7%) | 速度: 2.69x | 用时: 20.2s
+2026-06-15 03:04:38.702 | INFO  | ffmpeg_runner | [030415_86135] 结束: 成功 (返回码 0) | 用时: 22.8s
+2026-06-15 03:04:38.702 | WARN  | ffmpeg_runner | [030415_86135] stderr 输出 (10 行):
+2026-06-15 03:04:38.702 | WARN  | ffmpeg_runner |   | frame= 1237 fps= 65 q=37.0 size=   15360KiB time=00:00:51.46 bitrate=2444.8kbits/s speed= 2.7x elapsed=0:00:19.08
+2026-06-15 03:04:38.702 | WARN  | ffmpeg_runner |   | frame= 1265 fps= 65 q=35.0 size=   15616KiB time=00:00:52.63 bitrate=2430.4kbits/s speed=2.69x elapsed=0:00:19.59
+2026-06-15 03:04:38.702 | WARN  | ffmpeg_runner |   | frame= 1292 fps= 64 q=31.0 size=   16640KiB time=00:00:53.76 bitrate=2535.5kbits/s speed=2.67x elapsed=0:00:20.12
+2026-06-15 03:04:38.702 | WARN  | ffmpeg_runner |   | frame= 1318 fps= 64 q=39.0 size=   16896KiB time=00:00:54.84 bitrate=2523.6kbits/s speed=2.66x elapsed=0:00:20.63
+2026-06-15 03:04:38.702 | WARN  | ffmpeg_runner |   | frame= 1345 fps= 64 q=35.0 size=   16896KiB time=00:00:55.97 bitrate=2472.9kbits/s speed=2.65x elapsed=0:00:21.14
+2026-06-15 03:04:38.702 | WARN  | ffmpeg_runner |   | frame= 1373 fps= 63 q=36.0 size=   17920KiB time=00:00:57.14 bitrate=2569.1kbits/s speed=2.64x elapsed=0:00:21.66
+2026-06-15 03:04:38.702 | WARN  | ffmpeg_runner |   | frame= 1400 fps= 63 q=29.0 size=   17920KiB time=00:00:58.26 bitrate=2519.5kbits/s speed=2.63x elapsed=0:00:22.18
+2026-06-15 03:04:38.702 | WARN  | ffmpeg_runner |   | [out#0/mp4 @ 0000015e34c57640] video:15882KiB audio:2855KiB subtitle:34KiB other streams:0KiB global headers:2KiB muxing overhead: 0.430336%
+2026-06-15 03:04:38.702 | WARN  | ffmpeg_runner |   | frame= 1439 fps= 64 q=37.0 Lsize=   18851KiB time=00:00:59.89 bitrate=2578.4kbits/s speed=2.66x elapsed=0:00:22.55
+2026-06-15 03:04:38.702 | WARN  | ffmpeg_runner |   | [aac @ 0000015e367ea040] Qavg: 1628.911
+2026-06-15 03:04:38.702 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [030415_86135] =====
+
