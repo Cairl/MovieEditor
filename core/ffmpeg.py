@@ -26,46 +26,94 @@ _PROGRESS_LOG_INTERVAL_MS = 3000
 _PROGRESS_LOG_TOLERANCE_MS = 60
 _FFPROBE_TIMEOUT = 30  # seconds: prevent hangs on damaged / network files
 
-# ---- Windows 进程优先级管理 ----
-_IDLE_PRIORITY_CLASS = 0x00000040    # PROCESS_IDLE_PRIORITY_CLASS
-_NORMAL_PRIORITY_CLASS = 0x00000020  # PROCESS_NORMAL_PRIORITY_CLASS
-_process_priority_lock = threading.Lock()
-_process_priority_paused = False
+# ---- Windows 进程暂停/恢复（挂起所有线程 → CPU = 0%） ----
+_TH32CS_SNAPTHREAD = 0x00000004
+_THREAD_SUSPEND_RESUME = 0x0002
+_THREAD_QUERY_INFORMATION = 0x0040
+_process_pause_lock = threading.Lock()
+_process_paused = False
 
 
-def _set_priority(process, priority_class):
-    """Set Windows process priority via ctypes (silent on failure)."""
+class _THREADENTRY32(ctypes.Structure):
+    _fields_ = [
+        ("dwSize", ctypes.c_ulong),
+        ("cntUsage", ctypes.c_ulong),
+        ("th32ThreadID", ctypes.c_ulong),
+        ("th32OwnerProcessID", ctypes.c_ulong),
+        ("tpBasePri", ctypes.c_long),
+        ("tpDeltaPri", ctypes.c_long),
+        ("dwFlags", ctypes.c_ulong),
+    ]
+
+
+def _suspend_process(process):
+    """挂起进程的所有线程 → CPU 利用率归零"""
     if os.name != 'nt' or process.poll() is not None:
         return
     try:
-        handle = ctypes.windll.kernel32.OpenProcess(0x0200, False, process.pid)  # PROCESS_SET_INFORMATION
-        if handle:
-            ctypes.windll.kernel32.SetPriorityClass(handle, priority_class)
-            ctypes.windll.kernel32.CloseHandle(handle)
+        snapshot = ctypes.windll.kernel32.CreateToolhelp32Snapshot(_TH32CS_SNAPTHREAD, 0)
+        if snapshot == -1:
+            return
+        te = _THREADENTRY32()
+        te.dwSize = ctypes.sizeof(_THREADENTRY32)
+        if ctypes.windll.kernel32.Thread32First(snapshot, ctypes.byref(te)):
+            while True:
+                if te.th32OwnerProcessID == process.pid:
+                    h = ctypes.windll.kernel32.OpenThread(_THREAD_SUSPEND_RESUME, False, te.th32ThreadID)
+                    if h:
+                        ctypes.windll.kernel32.SuspendThread(h)
+                        ctypes.windll.kernel32.CloseHandle(h)
+                if not ctypes.windll.kernel32.Thread32Next(snapshot, ctypes.byref(te)):
+                    break
+        ctypes.windll.kernel32.CloseHandle(snapshot)
     except (OSError, AttributeError):
         pass
 
 
-def _reset_ffmpeg_priority(process):
-    """Restore ffmpeg process to normal priority if it was paused."""
-    global _process_priority_paused
-    with _process_priority_lock:
-        if _process_priority_paused:
-            _set_priority(process, _NORMAL_PRIORITY_CLASS)
-            _process_priority_paused = False
+def _resume_process(process):
+    """恢复进程的所有线程"""
+    if os.name != 'nt' or process.poll() is not None:
+        return
+    try:
+        snapshot = ctypes.windll.kernel32.CreateToolhelp32Snapshot(_TH32CS_SNAPTHREAD, 0)
+        if snapshot == -1:
+            return
+        te = _THREADENTRY32()
+        te.dwSize = ctypes.sizeof(_THREADENTRY32)
+        if ctypes.windll.kernel32.Thread32First(snapshot, ctypes.byref(te)):
+            while True:
+                if te.th32OwnerProcessID == process.pid:
+                    h = ctypes.windll.kernel32.OpenThread(_THREAD_SUSPEND_RESUME, False, te.th32ThreadID)
+                    if h:
+                        ctypes.windll.kernel32.ResumeThread(h)
+                        ctypes.windll.kernel32.CloseHandle(h)
+                if not ctypes.windll.kernel32.Thread32Next(snapshot, ctypes.byref(te)):
+                    break
+        ctypes.windll.kernel32.CloseHandle(snapshot)
+    except (OSError, AttributeError):
+        pass
+
+
+def _reset_ffmpeg_pause(process):
+    """恢复 ffmpeg 进程（如果已暂停）"""
+    global _process_paused
+    with _process_pause_lock:
+        if _process_paused:
+            _resume_process(process)
+            _process_paused = False
 
 
 def _toggle_ffmpeg_pause(process):
-    """Toggle ffmpeg pause: lower priority to IDLE, or restore to NORMAL."""
-    global _process_priority_paused
-    with _process_priority_lock:
-        if _process_priority_paused:
-            _set_priority(process, _NORMAL_PRIORITY_CLASS)
-            _process_priority_paused = False
+    """切换 ffmpeg 暂停：挂起/恢复所有线程"""
+    global _process_paused
+    with _process_pause_lock:
+        if _process_paused:
+            _resume_process(process)
+            _process_paused = False
         else:
-            _set_priority(process, _IDLE_PRIORITY_CLASS)
-            _process_priority_paused = True
-    return _process_priority_paused
+            _suspend_process(process)
+            _process_paused = True
+    return _process_paused
 
 
 def _terminate_ffmpeg_via_stdin(process, stdin_lock):
@@ -346,6 +394,10 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
             elif k == b'q':
                 if not ffmpeg_state['terminated']:
                     ffmpeg_state['terminated'] = True
+                    # 挂起状态下必须先恢复线程，否则无法读取 stdin
+                    if ffmpeg_state['paused']:
+                        _reset_ffmpeg_pause(process)
+                        ffmpeg_state['paused'] = False
                     _terminate_ffmpeg_via_stdin(process, stdin_lock)
 
     def draw_full_interface(progress_text, title, is_finished, pct=0, ffmpeg_state=None):
@@ -380,7 +432,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
         
         # Status / pause indicator
         if ffmpeg_state and ffmpeg_state.get('paused') and not is_finished:
-            status_text = '⏸ 已暂停 — FFmpeg 进程优先级已降至最低'
+            status_text = '⏸ 已暂停 — 进程已挂起，CPU 利用率为零'
             status_display = f"\033[38;2;249;226;175m{status_text}\033[0m"
             status_plain_len = get_display_width(status_text)
             status_pad = ' ' * max(0, width - 4 - status_plain_len)
@@ -480,7 +532,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
                 line_str = _build_progress_line(plain_text, width, False)
                 print(f'\033[{PROGRESS_ROW_IDX};1H{line_str}\033[K', end='', flush=True)
                 if is_paused_now:
-                    status_text = '⏸ 已暂停 — FFmpeg 进程优先级已降至最低'
+                    status_text = '⏸ 已暂停 — 进程已挂起，CPU 利用率为零'
                     status_display = f"\033[38;2;249;226;175m{status_text}\033[0m"
                     status_plain_len = get_display_width(status_text)
                     status_pad = ' ' * max(0, width - 4 - status_plain_len)
@@ -499,7 +551,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
                 state['done'] = True
 
         if _shutdown_requested.is_set():
-            _reset_ffmpeg_priority(process)
+            _reset_ffmpeg_pause(process)
             elapsed_final = time.time() - start_time
             log_ffmpeg_end(run_id, -1, elapsed_final, list(stderr_tail))
             _terminate_ffmpeg_via_stdin(process, stdin_lock)
@@ -521,7 +573,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
         t_err.join(timeout=1.0)
         
         if process.returncode != 0:
-            _reset_ffmpeg_priority(process)
+            _reset_ffmpeg_pause(process)
             elapsed_final = time.time() - start_time
             stderr_list = list(stderr_tail)
             log_ffmpeg_end(run_id, process.returncode, elapsed_final, stderr_list)
@@ -544,7 +596,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
         log_ffmpeg_end(run_id, process.returncode, elapsed_final, list(stderr_tail))
 
     except KeyboardInterrupt:
-        _reset_ffmpeg_priority(process)
+        _reset_ffmpeg_pause(process)
         # Ensure FFmpeg subprocess is terminated on Ctrl+C before unregister
         _terminate_ffmpeg_via_stdin(process, stdin_lock)
         try:
@@ -561,7 +613,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
         show_cursor()
         raise
     finally:
-        _reset_ffmpeg_priority(process)
+        _reset_ffmpeg_pause(process)
         show_cursor()
         unregister_child_process(process)
 

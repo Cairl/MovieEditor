@@ -6,7 +6,7 @@
 
 **入口**: `main.py` → `ui/app.py:process_files()`
 **运行**: `python main.py <file_or_dir> [<file_or_dir>...]`
-**总量**: 13 个模块，2519 行
+**总量**: 13 个模块，2571 行
 
 ---
 
@@ -20,7 +20,7 @@
 │  ┌─────────────────┐  ┌─────────────────┐  ┌───────────────────────┐  │
 │  │  ui/console.py   │  │  ui/display.py   │  │  core/ffmpeg.py       │  │
 │  │  键盘读取 (msvcrt)│  │  TUI 渲染层      │  │  FFmpeg 探针 + 执行    │  │
-│  │  光标/ANSI 控制   │  │  菜单 + 预览框    │  │  进程优先级管理        │  │
+│  │  光标/ANSI 控制   │  │  菜单 + 预览框    │  │  进程挂起/恢复        │  │
 │  │  子进程注册管理    │  │  增量 diff render │  │  暂停/终止控制         │  │
 │  └────────┬─────────┘  └────────┬─────────┘  └──────────┬────────────┘  │
 │           │                     │                        │              │
@@ -41,7 +41,7 @@
 | `main.py` | 9 | 入口，光标隐藏/恢复 |
 | `ui/app.py` | 478 | `process_files()` 主流程：菜单循环、命令组装、批量处理 |
 | `ui/display.py` | 445 | TUI 渲染：`render_menu_box`、`render_preview_box`、`run_menu_loop` |
-| `core/ffmpeg.py` | 567 | FFmpeg 探针（分辨率/时长/流信息）、命令预览、`run_ffmpeg_with_progress`、暂停/终止控制 |
+| `core/ffmpeg.py` | 619 | FFmpeg 探针、命令预览、`run_ffmpeg_with_progress`、线程挂起/恢复暂停、终止控制 |
 | `ui/console.py` | 132 | 底层：`msvcrt` 键盘读取、光标控制、ANSI 常量、子进程注册/终止 |
 | `ui/subtitle.py` | 156 | 字幕设置菜单：流选择、burn_in 切换、排序 |
 | `core/progress.py` | 151 | `ProgressManager` 进度状态管理 |
@@ -78,11 +78,12 @@
 - `-ss`/`-to` 放在输出文件前作为输出选项
 
 ### FFmpeg 运行时控制
-- **暂停（P 键）**: FFmpeg 无原生暂停。通过 `ctypes.windll.kernel32.SetPriorityClass` 将进程优先级设为 `IDLE_PRIORITY_CLASS`（0x40），FFmpeg 仍在运行但几乎不占 CPU；再按恢复为 `NORMAL_PRIORITY_CLASS`（0x20）
-- **终止（Q 键）**: 向 FFmpeg 的 stdin 写入 `q`（FFmpeg 原生优雅退出信号），完成当前帧写入后退出。比 `process.terminate()` 更安全
+- **暂停（P 键）**: FFmpeg 无原生暂停。通过 `SuspendThread` 挂起 ffmpeg.exe 的所有线程，进程存在但 CPU 利用率为零；再按 `ResumeThread` 恢复
+- **终止（Q 键）**: 向 FFmpeg 的 stdin 写入 `q`（FFmpeg 原生优雅退出信号），完成当前帧写入后退出。挂起状态下先恢复线程再发送
 - **subprocess**: `run_ffmpeg_with_progress` 使用 `stdin=subprocess.PIPE`，stdin 由 `stdin_lock`（threading.Lock）保护写入安全
+- **线程枚举**: `CreateToolhelp32Snapshot` + `Thread32First/Next` 遍历进程线程，逐个 `OpenThread` → `SuspendThread/ResumeThread`
 - **UI 反馈**: 暂停时标题栏显示 `⏸ 已暂停`，进度条替换为黄色暂停提示，底部显示 `[P] 恢复   [Q] 终止`
-- **优先级重置**: 所有退出路径（正常完成、shutdown 信号、RuntimeError、Ctrl+C、finally）均调用 `_reset_ffmpeg_priority` 恢复优先级
+- **安全退出**: 所有退出路径（正常完成、shutdown 信号、RuntimeError、Ctrl+C、finally）均调用 `_reset_ffmpeg_pause` 恢复线程
 
 ## 依赖
 
@@ -91,7 +92,7 @@
 | Python 3.10+ | 使用 `tuple[...]` 类型注解 |
 | ffmpeg/ffprobe | 必须在 PATH 中 |
 | msvcrt | Windows only |
-| ctypes | Windows API (SetConsoleMode, GetKeyState, SetPriorityClass) |
+| ctypes | Windows API (SetConsoleMode, GetKeyState, SuspendThread, CreateToolhelp32Snapshot) |
 | tkinter | 文件选择对话框 (仅 `filedialog`) |
 
 ## 运行方式
