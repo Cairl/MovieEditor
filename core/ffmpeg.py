@@ -18,7 +18,7 @@ from ui.console import (
     unregister_child_process, _shutdown_requested, UI_COLORS,
     _console_has_input, _console_read_key,
 )
-from ui.display import get_display_width, trim_to_display_width
+from ui.display import get_display_width, trim_to_display_width, build_top_border
 from core.helpers import format_hms
 from core.logger import log_ffmpeg_start, log_ffmpeg_progress, log_ffmpeg_end, log_ffmpeg_error
 import ui.live as live
@@ -166,6 +166,21 @@ def _terminate_ffmpeg_via_stdin(process, stdin_lock):
                 pass
 
 
+def _force_terminate(process, wait_timeout=3, term_timeout=2):
+    """Wait for process to exit; escalate to terminate then kill."""
+    try:
+        process.wait(timeout=wait_timeout)
+    except subprocess.TimeoutExpired:
+        try:
+            process.terminate()
+            process.wait(timeout=term_timeout)
+        except (OSError, subprocess.TimeoutExpired):
+            try:
+                process.kill()
+            except OSError:
+                pass
+
+
 # ---- 探测函数 ----
 def get_video_resolution(file_path: str) -> tuple[int, int]:
     try:
@@ -280,6 +295,8 @@ def format_preview_lines(command: list[str]) -> list[str]:
                 i += 1
             lines.append(line)
         else:
+            if any(c.isspace() for c in token):
+                token = f'"{token}"'
             lines.append(f'    {token}')
         i += 1
 
@@ -382,6 +399,75 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
     }
     stdin_lock = threading.Lock()
 
+    # Cache for pre-wrapped command lines (static text, only changes with terminal width)
+    wrap_cache = {'inner_w': -1, 'wrapped': []}
+
+    def _update_wrap_cache(term_w: int, inner_w: int, code_indent: str):
+        if inner_w != wrap_cache['inner_w']:
+            avail_w = inner_w - len(code_indent) - 2
+
+            def _max_split(text, max_w):
+                """Binary-search for the longest prefix fitting max_w display-width."""
+                lo, hi = 1, len(text)
+                while lo < hi:
+                    mid = (lo + hi + 1) // 2
+                    if get_display_width(text[:mid]) <= max_w:
+                        lo = mid
+                    else:
+                        hi = mid - 1
+                return lo
+
+            wrapped = []
+            for raw in cmd_lines_raw:
+                plain = ANSI_ESCAPE.sub('', raw)
+                # Calculate continuation indent for -flag arg lines
+                stripped = plain.lstrip()
+                base_indent = len(plain) - len(stripped)
+                cont_indent = base_indent
+                if stripped.startswith('-'):
+                    parts = stripped.split(None, 1)
+                    if len(parts) > 1:
+                        # -flag arg: align continuation with arg start
+                        cont_indent = base_indent + len(parts[0]) + 1
+                        # Skip opening quote if present
+                        arg = parts[1]
+                        if arg and arg[0] in ('"', "'"):
+                            cont_indent += 1
+
+                if get_display_width(plain) <= avail_w:
+                    wrapped.append(plain)
+                else:
+                    # First line: fill available width
+                    text = plain
+                    split = _max_split(text, avail_w)
+                    wrapped.append(text[:split])
+                    text = text[split:]
+                    # Continuation lines with indent prefix
+                    prefix = ' ' * cont_indent
+                    prefix_w = cont_indent
+                    cont_avail = avail_w - prefix_w
+                    if cont_avail < 10:
+                        # Not enough room for continuation indent, use base indent
+                        prefix = ' ' * base_indent
+                        prefix_w = base_indent
+                        cont_avail = avail_w - prefix_w
+                    if cont_avail < 1:
+                        prefix = ''
+                        prefix_w = 0
+                        cont_avail = avail_w
+                    while text and get_display_width(text) > cont_avail:
+                        split = _max_split(text, cont_avail)
+                        if split == 0:
+                            break
+                        wrapped.append(prefix + text[:split])
+                        text = text[split:]
+                    if text:
+                        wrapped.append(prefix + text)
+
+            wrap_cache['inner_w'] = inner_w
+            wrap_cache['wrapped'] = wrapped
+        return wrap_cache['wrapped']
+
     def _check_key_input():
         """Non-blocking keyboard check for button navigation (LEFT/RIGHT/UP/DOWN/ENTER)."""
         while _console_has_input():
@@ -403,7 +489,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
                         has_btns = not ffmpeg_state.get('terminated', False)
                         fixed = 10 if has_btns else 9
                         max_visible = max(3, term_h - fixed)
-                        max_scroll = max(0, len(cmd_lines_raw) - max_visible)
+                        max_scroll = max(0, len(wrap_cache['wrapped']) - max_visible)
                         ffmpeg_state['cmd_scroll'] = min(max_scroll, ffmpeg_state['cmd_scroll'] + 1)
                 continue
             if key in (b'\r', b'\n'):  # ENTER
@@ -420,7 +506,13 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
                             ffmpeg_state['paused'] = False
                         _terminate_ffmpeg_via_stdin(process, stdin_lock)
                 elif btn == 2:  # Copy command to clipboard
-                    cmd_str = ' '.join(str(a) for a in command).replace('\n', ' ').replace('\r', ' ')
+                    parts = []
+                    for a in command:
+                        s = str(a)
+                        if any(c.isspace() for c in s):
+                            s = f'"{s}"'
+                        parts.append(s)
+                    cmd_str = ' '.join(parts)
                     _copy_text_to_clipboard(cmd_str)
                     ffmpeg_state['copy_flash'] = time.time()
                 continue
@@ -430,25 +522,14 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
         term_w, term_h = shutil.get_terminal_size((120, 30))
         width = max(70, min(140, term_w - 2))
         inner_w = width - 2
-        indent = '   '
-        code_indent = ' '
+        text_indent = '    '   # 4 spaces: progress text & buttons
+        bar_indent = '  '      # 2 spaces: progress bar
+        code_indent = '  '     # 2 spaces: separator & command lines
         muted = UI_COLORS['muted']
         reset = UI_COLORS['reset']
 
         def _pad(content_vis):
             return ' ' * max(0, inner_w - content_vis)
-
-        def _box_top(title_text):
-            clean = f' {title_text} '
-            plain_len = get_display_width(clean)
-            remain = max(0, inner_w - plain_len)
-            left = 2
-            right = max(0, remain - left)
-            return (
-                f"  ╭{'─' * left}"
-                f"{UI_COLORS['title']}\033[1m{clean}{reset}"
-                f"{'─' * right}╮"
-            )
 
         def _box_bottom():
             return f"  ╰{'─' * inner_w}╯"
@@ -462,45 +543,24 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
             return f"  │{code_indent}{muted}{seg}{reset}{' ' * 2}│"
 
         def _text_line(display, plain_len):
-            return f"  │{indent}{display}{' ' * max(0, inner_w - len(indent) - plain_len)}│"
-
-        def _wrap(text, max_w):
-            """Split text into segments that each fit max_w display-width."""
-            if get_display_width(text) <= max_w:
-                return [text]
-            parts = []
-            while get_display_width(text) > max_w:
-                lo, hi = 1, len(text)
-                while lo < hi:
-                    mid = (lo + hi + 1) // 2
-                    if get_display_width(text[:mid]) <= max_w:
-                        lo = mid
-                    else:
-                        hi = mid - 1
-                parts.append(text[:lo])
-                text = text[lo:]
-            if text:
-                parts.append(text)
-            return parts
+            return f"  │{text_indent}{display}{' ' * max(0, inner_w - len(text_indent) - plain_len)}│"
 
         # === Build ===
         lines = []
         has_buttons = ffmpeg_state and not is_finished
 
         # 1. Title
-        lines.append(_box_top(title))
+        lines.append(build_top_border(inner_w, title))
         # 2. Empty
         lines.append(_empty())
         # 3. Progress text
-        if is_finished:
-            p_disp = f"\033[38;2;205;214;244m\033[1m{progress_text}\033[0m"
-        else:
-            p_disp = f"\033[38;2;205;214;244m{progress_text}\033[0m"
+        bold = "\033[1m" if is_finished else ""
+        p_disp = f"\033[38;2;205;214;244m{bold}{progress_text}\033[0m"
         lines.append(_text_line(p_disp, get_display_width(progress_text)))
 
-        # 4. Progress bar — small box, muted borders, left-aligned at indent
+        # 4. Progress bar — small box, muted borders, left-aligned at bar_indent
         bar_pct = pct if not is_finished else 100
-        bar_inner = inner_w - len(indent) - 6  # indent + bar_box(╭content╮) + right_pad(2)
+        bar_inner = inner_w - len(bar_indent) - 6  # bar_indent + bar_box(╭content╮) + right_pad(2)
         bar_inner = max(1, bar_inner)
         filled = int(bar_inner * min(bar_pct, 100) / 100)
         empty = bar_inner - filled
@@ -509,11 +569,11 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
         # Top:  ╭──────────╮
         top_w = bar_plain + 2  # +2 for inner spaces
         bar_full = top_w + 2  # including ╭ and ╮
-        lines.append(f"  │{indent}{muted}╭{'─' * top_w}╮{reset}{' ' * max(0, inner_w - len(indent) - bar_full)}│")
+        lines.append(f"  │{bar_indent}{muted}╭{'─' * top_w}╮{reset}{' ' * max(0, inner_w - len(bar_indent) - bar_full)}│")
         # Bar:  │ ░░░░░░░░ │
-        lines.append(f"  │{indent}{muted}│{reset} {bar_str} {muted}│{reset}{' ' * max(0, inner_w - len(indent) - bar_full)}│")
+        lines.append(f"  │{bar_indent}{muted}│{reset} {bar_str} {muted}│{reset}{' ' * max(0, inner_w - len(bar_indent) - bar_full)}│")
         # Bottom:  ╰──────────╯
-        lines.append(f"  │{indent}{muted}╰{'─' * top_w}╯{reset}{' ' * max(0, inner_w - len(indent) - bar_full)}│")
+        lines.append(f"  │{bar_indent}{muted}╰{'─' * top_w}╯{reset}{' ' * max(0, inner_w - len(bar_indent) - bar_full)}│")
 
         # 6. Buttons ([ ] style)
         if has_buttons:
@@ -523,39 +583,28 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
 
             YELLOW = "\033[38;2;249;226;175m"
             RED = "\033[38;2;243;139;168m"
+            CYAN = "\033[38;2;137;180;250m"
             SEL_BG = "\033[48;2;69;71;90m"
+
+            def _btn(label, color, selected, disabled=False):
+                if disabled:
+                    return f"{muted}[{label}]{reset}"
+                if selected:
+                    return f"{SEL_BG}{color}\033[1m[{label}]{reset}"
+                return f"{color}[{label}]{reset}"
 
             p_label = '恢复任务' if is_paused else '暂停任务'
             t_label = '终止任务'
 
-            # Pause/Resume: yellow, highlighted bg when selected
-            if sel == 0:
-                btn_p = f"{SEL_BG}{YELLOW}\033[1m[{p_label}]{reset}"
-            else:
-                btn_p = f"{YELLOW}[{p_label}]{reset}"
-
-            # Terminate: red, highlighted bg when selected, muted after pressed
-            if is_terminated:
-                btn_t = f"{muted}[{t_label}]{reset}"
-            elif sel == 1:
-                btn_t = f"{SEL_BG}{RED}\033[1m[{t_label}]{reset}"
-            else:
-                btn_t = f"{RED}[{t_label}]{reset}"
-
-            # Copy command: blue, highlighted bg when selected, flash '已复制!' after copy
-            CYAN = "\033[38;2;137;180;250m"
             copy_flash = ffmpeg_state.get('copy_flash', 0)
-            if copy_flash and time.time() - copy_flash < 1.5:
-                c_label = '复制成功'
-            else:
-                c_label = '复制命令'
-            if sel == 2:
-                btn_c = f"{SEL_BG}{CYAN}\033[1m[{c_label}]{reset}"
-            else:
-                btn_c = f"{CYAN}[{c_label}]{reset}"
+            c_label = '复制成功' if copy_flash and time.time() - copy_flash < 1.5 else '复制命令'
+
+            btn_p = _btn(p_label, YELLOW, sel == 0)
+            btn_t = _btn(t_label, RED, sel == 1, disabled=is_terminated)
+            btn_c = _btn(c_label, CYAN, sel == 2)
 
             btn_vis = get_display_width(p_label) + get_display_width(t_label) + get_display_width(c_label) + 10
-            lines.append(f"  │{indent}{btn_p}  {btn_t}  {btn_c}{' ' * max(0, inner_w - len(indent) - btn_vis)}│")
+            lines.append(f"  │{text_indent}{btn_p}  {btn_t}  {btn_c}{' ' * max(0, inner_w - len(text_indent) - btn_vis)}│")
             lines.append(_empty())
 
         # 7. Separator
@@ -563,35 +612,29 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
         # 8. Empty
         lines.append(_empty())
 
-        # 9. Command lines (wrapped, -2 safety margin for CJK edge cases)
+        # 9. Command lines (cached wrapping — static text only re-wrapped when terminal width changes)
         fixed = 7 + (1 if has_buttons else 0)
         max_visible = max(3, term_h - fixed)
-        avail_w = inner_w - len(code_indent) - 2  # -2 safety for right border
+
+        wrapped = _update_wrap_cache(term_w, inner_w, code_indent)
 
         cmd_scroll = 0
         if ffmpeg_state:
             cmd_scroll = ffmpeg_state.get('cmd_scroll', 0)
 
-        wrapped = []
-        for raw in cmd_lines_raw:
-            plain = ANSI_ESCAPE.sub('', raw)
-            for seg in _wrap(plain, avail_w):
-                wrapped.append(seg)
-
         max_scroll = max(0, len(wrapped) - max_visible)
         cmd_scroll = min(cmd_scroll, max_scroll)
 
+        ellipsis_line = f"  │{code_indent}{muted}···{_pad(len(code_indent) + 3)}{reset}│"
         if cmd_scroll > 0:
-            ind = '···'
-            lines.append(f"  │{code_indent}{muted}{ind}{_pad(len(code_indent) + get_display_width(ind))}{reset}│")
+            lines.append(ellipsis_line)
 
         for seg in wrapped[cmd_scroll : cmd_scroll + max_visible]:
             sv = get_display_width(seg)
             lines.append(f"  │{code_indent}{muted}{seg}{reset}{_pad(len(code_indent) + sv)}│")
 
         if cmd_scroll + max_visible < len(wrapped):
-            ind = '···'
-            lines.append(f"  │{code_indent}{muted}{ind}{_pad(len(code_indent) + get_display_width(ind))}{reset}│")
+            lines.append(ellipsis_line)
 
         # 10. Bottom
         lines.append(_empty())
@@ -651,30 +694,10 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
             elapsed_final = time.time() - start_time
             log_ffmpeg_end(run_id, -1, elapsed_final, list(stderr_tail))
             _terminate_ffmpeg_via_stdin(process, stdin_lock)
-            try:
-                process.wait(timeout=3)
-            except subprocess.TimeoutExpired:
-                try:
-                    process.terminate()
-                    process.wait(timeout=2)
-                except (OSError, subprocess.TimeoutExpired):
-                    try:
-                        process.kill()
-                    except (OSError, subprocess.TimeoutExpired):
-                        pass
+            _force_terminate(process)
             raise KeyboardInterrupt("处理已取消")
 
-        try:
-            process.wait(timeout=10)
-        except subprocess.TimeoutExpired:
-            try:
-                process.terminate()
-                process.wait(timeout=3)
-            except (OSError, subprocess.TimeoutExpired):
-                try:
-                    process.kill()
-                except (OSError, subprocess.TimeoutExpired):
-                    pass
+        _force_terminate(process, wait_timeout=10, term_timeout=3)
         t_read.join(timeout=1.0)
         t_err.join(timeout=1.0)
 
@@ -711,17 +734,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
         _reset_ffmpeg_pause(process)
         # Ensure FFmpeg subprocess is terminated on Ctrl+C before unregister
         _terminate_ffmpeg_via_stdin(process, stdin_lock)
-        try:
-            process.wait(timeout=3)
-        except subprocess.TimeoutExpired:
-            try:
-                process.terminate()
-                process.wait(timeout=2)
-            except (OSError, subprocess.TimeoutExpired):
-                try:
-                    process.kill()
-                except OSError:
-                    pass
+        _force_terminate(process)
         raise
     finally:
         _reset_ffmpeg_pause(process)

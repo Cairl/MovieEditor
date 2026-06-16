@@ -15,30 +15,45 @@ from rich.console import Group
 from rich.text import Text
 
 from ui.console import ANSI_ESCAPE, UI_COLORS, UI_ICONS, MENU_LABEL_WIDTH, TITLE_MARKER, CONTEXT_MARKER, _is_separator, _shutdown_requested
-from core.helpers import truncate_name
+from core.helpers import truncate_name  # re-exported for ui.app
 from ui.navigation import get_selectable_indices, get_next_selectable, normalize_selected_index, read_navigation_key
 import ui.live as live
 
-# 选中行背景色（对应原 \033[48;2;69;71;90m）
-SELECTED_BG = "\033[48;2;69;71;90m"
+# 选中行前景色（背景色复用 UI_COLORS['selected_row']）
 SELECTED_FG = "\033[38;2;205;214;244m\033[1m"
+
+# 提取行首 ANSI 转义序列（预编译）
+_ANSI_PREFIX_RE = re.compile(r'(\x1b\[[0-9;]*m)+')
+
+# Title left-padding in top border (╭─── Title ───╮)
+TITLE_LEFT_PAD = 3
 
 
 def get_display_width(text: str) -> int:
-    # Strip ANSI escape sequences before calculating width
-    clean_text = ANSI_ESCAPE.sub('', str(text))
-    width = 0
-    for ch in clean_text:
-        width += 2 if unicodedata.east_asian_width(ch) in ('W', 'F') else 1
-    return width
+    """Calculate display width, stripping ANSI escapes first."""
+    return _display_width(ANSI_ESCAPE.sub('', str(text)))
+
+
+def _display_width(clean_text: str) -> int:
+    """Calculate display width of already-clean text (no ANSI escapes)."""
+    return sum(_char_width(ch) for ch in clean_text)
+
+
+def _char_width(ch: str) -> int:
+    """Display width of a single character (2 for wide/fullwidth, 1 otherwise)."""
+    return 2 if unicodedata.east_asian_width(ch) in ('W', 'F') else 1
+
+
+def _sanitize_title(title) -> str:
+    """Normalize a title: cast to str, replace newlines, strip."""
+    return str(title).replace('\n', ' ').strip()
 
 
 MENU_SEPARATOR = "─" * 52
 
 
 def menu_section(title: str) -> str:
-    clean = str(title).replace('\n', ' ').strip()
-    return f"{TITLE_MARKER}{clean}"
+    return f"{TITLE_MARKER}{_sanitize_title(title)}"
 
 
 HINT_SEP = '\x1f'
@@ -83,43 +98,33 @@ def trim_to_display_width(text: str, max_width: int) -> str:
     suffix_w = get_display_width(suffix)
     if max_width <= suffix_w:
         return suffix[:max_width]
-    out = ''
+    out = []
     width = 0
     for ch in text:
-        ch_w = 2 if unicodedata.east_asian_width(ch) in ('W', 'F') else 1
+        ch_w = _char_width(ch)
         if width + ch_w > max_width - suffix_w:
             break
-        out += ch
+        out.append(ch)
         width += ch_w
-    return out + suffix
+    return ''.join(out) + suffix
 
 
 def _render_title_segment(title: Optional[str], width: int) -> str:
     """Render a horizontal line segment with an optional centered title."""
     if not title:
         return '─' * width
-    clean = str(title).replace('\n', ' ').strip()
-    padded = f' {clean} '
-    tw = get_display_width(padded)
-    if tw >= width - 2:
-        return '─' * width
-    remain = width - tw
-    l_len = min(2, remain)
-    r_len = remain - l_len
-    return f"{'─' * l_len}{UI_COLORS['title']}\033[1m{padded}{UI_COLORS['reset']}{'─' * r_len}"
+    padded = trim_to_display_width(f' {_sanitize_title(title)} ', width - 4)
+    tw = _display_width(padded)
+    left = min(TITLE_LEFT_PAD, max(0, width - tw))
+    right = max(0, width - tw) - left
+    return f"{'─' * left}{UI_COLORS['title']}\033[1m{padded}{UI_COLORS['reset']}{'─' * right}"
 
 
 def build_top_border(inner_width: int, title_text: Optional[str] = None, divider_pos: Optional[int] = None, right_title: Optional[str] = None) -> str:
     if divider_pos is None:
-        max_title_width = max(1, inner_width - 2)
         if title_text:
-            clean_title = str(title_text).replace('\n', ' ').strip()
-            title_plain = trim_to_display_width(f' {clean_title} ', max_title_width)
-            title_w = get_display_width(title_plain)
-            remain = max(0, inner_width - title_w)
-            left = min(2, remain)
-            right = remain - left
-            return f"  ╭{'─' * left}{UI_COLORS['title']}\033[1m{title_plain}{UI_COLORS['reset']}{'─' * right}╮"
+            seg = _render_title_segment(title_text, inner_width)
+            return f"  ╭{seg}╮"
         return f"  ╭{'─' * inner_width}╮"
     left_str = _render_title_segment(title_text, divider_pos)
     right_avail = inner_width - divider_pos - 1
@@ -159,15 +164,15 @@ def build_menu_renderable(lines: list[str], selected_index: Optional[int] = None
             left_plain = ANSI_ESCAPE.sub('', left_part)
             right_plain = ANSI_ESCAPE.sub('', right_part)
             if not is_sep and not is_empty:
-                max_left_w = max(max_left_w, get_display_width(left_plain))
-                max_right_w = max(max_right_w, get_display_width(right_plain))
+                max_left_w = max(max_left_w, _display_width(left_plain))
+                max_right_w = max(max_right_w, _display_width(right_plain))
             parsed_lines.append({'type': 'item', 'left': left_part, 'right': right_part, 'left_plain': left_plain, 'right_plain': right_plain})
         else:
             left_plain = plain
             # Strip context marker for width calculation
             measure_plain = left_plain[len(CONTEXT_MARKER):] if left_plain.startswith(CONTEXT_MARKER) else left_plain
             if not is_sep and not is_empty:
-                max_left_w = max(max_left_w, get_display_width(measure_plain))
+                max_left_w = max(max_left_w, _display_width(measure_plain))
             parsed_lines.append({'type': 'item', 'left': line, 'right': None, 'left_plain': left_plain, 'right_plain': ''})
 
     term_w, term_h = shutil.get_terminal_size((120, 30))
@@ -175,17 +180,17 @@ def build_menu_renderable(lines: list[str], selected_index: Optional[int] = None
     # Layout calculation
     divider_pos = None
     if has_any_hint:
-        divider_pos = max_left_w + 6
+        divider_pos = max_left_w + 4
         # Ensure right title ' 参数 ' fits
-        min_right_w = get_display_width(' 参数 ') + 4
+        min_right_w = _display_width(' 参数 ') + 4
         current_right_w = max(max_right_w, min_right_w)
         inner_width = divider_pos + current_right_w + 5
     else:
         # Standard adaptive width for single-column menus
-        inner_width = max_left_w + 6
+        inner_width = max_left_w + 4
 
     if border_title:
-        inner_width = max(inner_width, get_display_width(f' {border_title} ') + 6)
+        inner_width = max(inner_width, _display_width(f' {border_title} ') + 6)
 
     inner_width = min(inner_width, term_w - 6)
     if divider_pos and divider_pos > inner_width - 15:
@@ -195,20 +200,16 @@ def build_menu_renderable(lines: list[str], selected_index: Optional[int] = None
     content_lines = [p for p in parsed_lines if p['type'] != 'header']
     max_rows = term_h - (6 if border_title else 4)
     start_row = 0
+    headers_before_selected = 0
     if selected_index is not None:
-        header_count = sum(1 for p in parsed_lines[:selected_index] if p['type'] == 'header')
-        rel_idx = selected_index - header_count
+        headers_before_selected = sum(1 for p in parsed_lines[:selected_index] if p['type'] == 'header')
+        rel_idx = selected_index - headers_before_selected
         if len(content_lines) > max_rows:
             start_row = max(0, rel_idx - max_rows // 2)
             if start_row + max_rows > len(content_lines):
                 start_row = max(0, len(content_lines) - max_rows)
 
     visible_content = content_lines[start_row : start_row + max_rows]
-
-    # Pre-compute headers_before for selected_index (O(n) instead of O(n²))
-    headers_before_selected = 0
-    if selected_index is not None:
-        headers_before_selected = sum(1 for p in parsed_lines[:selected_index] if p['type'] == 'header')
 
     # Build top border with '参数' on the right if applicable
     out = [build_top_border(inner_width, border_title, divider_pos, right_title="参数" if divider_pos else None)]
@@ -217,6 +218,25 @@ def build_menu_renderable(lines: list[str], selected_index: Optional[int] = None
             out.append(f"  │{' ' * divider_pos}│{' ' * (inner_width - divider_pos - 1)}│")
         else:
             out.append(f"  │{' ' * inner_width}│")
+
+    # Column geometry constants
+    l_avail = (divider_pos - 4) if divider_pos else (inner_width - 4)
+    l_col_w = divider_pos or inner_width  # left column outer width
+    r_col_w = (inner_width - divider_pos - 1) if divider_pos else 0  # right column inner width
+
+    def _empty_row() -> str:
+        if divider_pos:
+            return f"  │{' ' * divider_pos}│{' ' * r_col_w}│"
+        return f"  │{' ' * inner_width}│"
+
+    def _sep_row() -> str:
+        muted = UI_COLORS['muted']
+        reset = UI_COLORS['reset']
+        if divider_pos:
+            l_sep = '─' * max(0, divider_pos - 4)
+            r_sep = '─' * max(0, r_col_w - 4)
+            return f"  │  {muted}{l_sep}{reset}  │  {muted}{r_sep}{reset}  │"
+        return f"  │  {muted}{'─' * max(0, inner_width - 4)}{reset}  │"
 
     for idx, item in enumerate(visible_content):
         i = start_row + idx
@@ -229,77 +249,48 @@ def build_menu_renderable(lines: list[str], selected_index: Optional[int] = None
         is_context = left_plain.startswith(CONTEXT_MARKER)
 
         if is_separator:
-            if divider_pos:
-                # Left side: space + line + space | Divider | Right side: space + line + space
-                l_sep = '─' * max(0, divider_pos - 2)
-                r_sep = '─' * max(0, inner_width - divider_pos - 3)
-                out.append(f"  │ {UI_COLORS['muted']}{l_sep}{UI_COLORS['reset']} │ {UI_COLORS['muted']}{r_sep}{UI_COLORS['reset']} │")
-            else:
-                # Single column: space + line + space
-                sep = '─' * max(0, inner_width - 2)
-                out.append(f"  │ {UI_COLORS['muted']}{sep}{UI_COLORS['reset']} │")
+            out.append(_sep_row())
             continue
 
         if is_context:
             ctx_text = left_plain[len(CONTEXT_MARKER):]
             ctx_display = f"  {ctx_text}"
-            l_avail = divider_pos - 2 if divider_pos else inner_width - 2
-            ctx_trunc = trim_to_display_width(ctx_display, l_avail)
-            ctx_pad = ' ' * max(0, l_avail - get_display_width(ctx_trunc))
-            right_pad = f"│{' ' * (inner_width - divider_pos - 1)}│" if divider_pos else "│"
+            ctx_avail = (divider_pos - 2) if divider_pos else (inner_width - 2)
+            ctx_trunc = trim_to_display_width(ctx_display, ctx_avail)
+            ctx_pad = ' ' * max(2, l_col_w - _display_width(ctx_trunc))
+            right_pad = f"│{' ' * r_col_w}│" if divider_pos else "│"
             out.append(f"  │{UI_COLORS['muted']}{ctx_trunc}{ctx_pad}{UI_COLORS['reset']}{right_pad}")
             continue
 
         if is_empty:
-            if divider_pos:
-                out.append(f"  │{' ' * divider_pos}│{' ' * (inner_width - divider_pos - 1)}│")
-            else:
-                out.append(f"  │{' ' * inner_width}│")
+            out.append(_empty_row())
             continue
 
-        # Draw columns
-        r_content = item['right']
-
         # Left column
-        l_avail = divider_pos - 6 if divider_pos else inner_width - 6
         l_trunc = trim_to_display_width(left_plain, l_avail)
-        l_marker = f" {UI_ICONS['focus']} " if is_selected else "   "
+        l_marker = "› " if is_selected else "  "
         l_text = f"{l_marker}{l_trunc}"
         # Extract embedded ANSI colors from raw item (e.g. green/yellow + bold)
-        raw = item.get('left', '')
-        ansi_prefix = ''
-        pos = 0
-        while pos < len(raw):
-            m = re.match(r'(\x1b\[[0-9;]*m)', raw[pos:])
-            if m:
-                ansi_prefix += m.group(1)
-                pos += len(m.group(1))
-            else:
-                break
+        m = _ANSI_PREFIX_RE.match(item.get('left', ''))
+        ansi_prefix = m.group(0) if m else ''
         if is_selected:
-            # Keep original foreground color, add background highlight + bold
-            if ansi_prefix:
-                l_color = SELECTED_BG + ansi_prefix
-            else:
-                l_color = SELECTED_BG + SELECTED_FG
+            l_color = UI_COLORS['selected_row'] + (ansi_prefix or SELECTED_FG)
         else:
             l_color = ansi_prefix
-        l_pad = ' ' * max(0, (divider_pos if divider_pos else inner_width) - get_display_width(l_text))
+        l_pad = ' ' * max(0, l_col_w - get_display_width(l_text))
 
         if divider_pos:
             # Right column
-            r_avail = inner_width - divider_pos - 5
-            r_trunc = trim_to_display_width(r_content or "", r_avail)
-            # Bold the right column text as well if selected
+            r_trunc = trim_to_display_width(item['right'] or "", r_col_w - 4)
             r_style = UI_COLORS['muted'] + (SELECTED_FG if is_selected else "")
-            r_text = f" {r_style}{r_trunc}{UI_COLORS['reset']}" if r_content else ""
-            r_pad = ' ' * max(0, (inner_width - divider_pos - 1) - get_display_width(r_text))
+            r_text = f"  {r_style}{r_trunc}{UI_COLORS['reset']}" if item['right'] else ""
+            r_pad = ' ' * max(2, r_col_w - get_display_width(r_text))
             out.append(f"  │{l_color}{l_text}{l_pad}{UI_COLORS['reset']}│{r_text}{r_pad}│")
         else:
             out.append(f"  │{l_color}{l_text}{l_pad}{UI_COLORS['reset']}│")
 
     if divider_pos:
-        out.append(f"  ╰{'─' * divider_pos}┴{'─' * (inner_width - divider_pos - 1)}╯")
+        out.append(f"  ╰{'─' * divider_pos}┴{'─' * r_col_w}╯")
     else:
         out.append(f"  ╰{'─' * inner_width}╯")
 
@@ -310,9 +301,7 @@ def build_menu_renderable(lines: list[str], selected_index: Optional[int] = None
 
 def render_screen_menu(screen_title: str, context_lines: list[str], menu_lines: list[str], selected_index: Optional[int] = None, footer_hint: Optional[str] = None):
     """Compose full screen (title + context + menu + footer) and push to Live."""
-    composed = [menu_section(screen_title)]
-    for line in context_lines:
-        composed.append(line)
+    composed = [menu_section(screen_title)] + list(context_lines)
     if context_lines and footer_hint:
         composed.append(MENU_SEPARATOR)
     menu_offset = len(composed)
@@ -377,26 +366,18 @@ def run_menu_loop(
         key = read_navigation_key()
 
         if allow_episode_nav and key in ('LEFT', 'RIGHT'):
-            should_nav = True
             if no_nav_indices:
                 sel = get_selectable_indices(menu)
                 if idx in sel and sel.index(idx) in no_nav_indices:
-                    should_nav = False
-            if should_nav:
-                if update_current_episode and current_file_idx_ref is not None:
-                    new_idx = current_file_idx_ref[0] + (-1 if key == 'LEFT' else 1)
-                    update_current_episode(new_idx)
-                    current_file_idx_ref[0] = new_idx
-                    needs_rebuild = True
-                continue
-        if key == 'UP':
-            new_idx = get_next_selectable(menu, idx, -1)
-            if new_idx != idx:
-                idx = new_idx
-                needs_render = True
+                    continue
+            if update_current_episode and current_file_idx_ref is not None:
+                new_idx = current_file_idx_ref[0] + (-1 if key == 'LEFT' else 1)
+                update_current_episode(new_idx)
+                current_file_idx_ref[0] = new_idx
+                needs_rebuild = True
             continue
-        if key == 'DOWN':
-            new_idx = get_next_selectable(menu, idx, 1)
+        if key in ('UP', 'DOWN'):
+            new_idx = get_next_selectable(menu, idx, -1 if key == 'UP' else 1)
             if new_idx != idx:
                 idx = new_idx
                 needs_render = True
@@ -410,7 +391,6 @@ def run_menu_loop(
         if idx not in sel:
             continue
         selected_item = ANSI_ESCAPE.sub('', menu[idx]).strip()
-        needs_rebuild = True
         result = action_handler(key, selected_item, sel.index(idx))
         if result is None or result == Action.CONTINUE:
             menu = build_menu()

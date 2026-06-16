@@ -157,3 +157,1001 @@
 2026-06-17 01:08:49.675 | WARN  | ffmpeg_runner |   | [q] command received. Exiting.
 2026-06-17 01:08:49.675 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [010821_86860] =====
 
+2026-06-17 02:50:04.063 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [025004_06338] =====
+2026-06-17 02:50:04.063 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-17 02:50:04.063 | INFO  | ffmpeg_runner | 输入: U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-17 02:50:04.063 | INFO  | ffmpeg_runner | 输出: U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260617024957)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-17 02:50:04.063 | INFO  | ffmpeg_runner | 预计时长: 3501.73s
+2026-06-17 02:50:04.063 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v -map 0:a -map 0:s -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260617024957)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-17 02:50:04.064 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-17 02:50:04.064 | DEBUG | ffmpeg_runner |   | [  5] U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-17 02:50:04.064 | DEBUG | ffmpeg_runner |   | [  6] -map
+2026-06-17 02:50:04.064 | DEBUG | ffmpeg_runner |   | [  7] 0:v
+2026-06-17 02:50:04.064 | DEBUG | ffmpeg_runner |   | [  8] -map
+2026-06-17 02:50:04.064 | DEBUG | ffmpeg_runner |   | [  9] 0:a
+2026-06-17 02:50:04.064 | DEBUG | ffmpeg_runner |   | [ 10] -map
+2026-06-17 02:50:04.064 | DEBUG | ffmpeg_runner |   | [ 11] 0:s
+2026-06-17 02:50:04.064 | DEBUG | ffmpeg_runner |   | [ 12] -c:v
+2026-06-17 02:50:04.064 | DEBUG | ffmpeg_runner |   | [ 13] hevc
+2026-06-17 02:50:04.064 | DEBUG | ffmpeg_runner |   | [ 14] -crf
+2026-06-17 02:50:04.064 | DEBUG | ffmpeg_runner |   | [ 15] 23
+2026-06-17 02:50:04.064 | DEBUG | ffmpeg_runner |   | [ 16] -c:s
+2026-06-17 02:50:04.064 | DEBUG | ffmpeg_runner |   | [ 17] mov_text
+2026-06-17 02:50:04.064 | DEBUG | ffmpeg_runner |   | [ 18] -map_metadata
+2026-06-17 02:50:04.064 | DEBUG | ffmpeg_runner |   | [ 19] 0
+2026-06-17 02:50:04.064 | DEBUG | ffmpeg_runner |   | [ 20] -map_chapters
+2026-06-17 02:50:04.064 | DEBUG | ffmpeg_runner |   | [ 21] 0
+2026-06-17 02:50:04.064 | DEBUG | ffmpeg_runner |   | [ 22] -metadata
+2026-06-17 02:50:04.064 | DEBUG | ffmpeg_runner |   | [ 23] handler_name=@Cairl
+2026-06-17 02:50:04.064 | DEBUG | ffmpeg_runner |   | [ 24] U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260617024957)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-17 03:43:06.912 | INFO  | ffmpeg_runner | [025004_06338] 结束: 成功 (返回码 0) | 用时: 3182.8s
+2026-06-17 03:43:06.913 | WARN  | ffmpeg_runner | [025004_06338] stderr 输出 (10 行):
+2026-06-17 03:43:06.913 | WARN  | ffmpeg_runner |   | frame=  261 fps=0.1 q=28.5 size=    1792KiB time=N/A bitrate=N/A speed=N/A elapsed=0:52:55.21
+2026-06-17 03:43:06.913 | WARN  | ffmpeg_runner |   | [q] command received. Exiting.
+2026-06-17 03:43:06.913 | WARN  | ffmpeg_runner |   | [out#0/mp4 @ 00000201187e46c0] video:29115KiB audio:625KiB subtitle:0KiB other streams:0KiB global headers:4KiB muxing overhead: 0.103563%
+2026-06-17 03:43:06.913 | WARN  | ffmpeg_runner |   | frame=  324 fps=0.1 q=24.0 Lsize=   29771KiB time=N/A bitrate=N/A speed=N/A elapsed=0:53:02.52
+2026-06-17 03:43:06.913 | WARN  | ffmpeg_runner |   | x265 [info]: frame I:      4, Avg QP:23.17  kb/s: 61311.92
+2026-06-17 03:43:06.913 | WARN  | ffmpeg_runner |   | x265 [info]: frame P:     87, Avg QP:22.59  kb/s: 37476.17
+2026-06-17 03:43:06.913 | WARN  | ffmpeg_runner |   | x265 [info]: frame B:    233, Avg QP:27.77  kb/s: 9496.42
+2026-06-17 03:43:06.913 | WARN  | ffmpeg_runner |   | x265 [info]: Weighted P-Frames: Y:18.4% UV:16.1%
+2026-06-17 03:43:06.913 | WARN  | ffmpeg_runner |   | encoded 324 frames in 3182.39s (0.10 fps), 17649.20 kb/s, Avg QP:26.32
+2026-06-17 03:43:06.913 | WARN  | ffmpeg_runner |   | [aac @ 00000201190e6040] Qavg: 6573.502
+2026-06-17 03:43:06.913 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [025004_06338] =====
+
+2026-06-17 03:54:39.917 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [035439_91717] =====
+2026-06-17 03:54:39.917 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-17 03:54:39.917 | INFO  | ffmpeg_runner | 输入: U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-17 03:54:39.917 | INFO  | ffmpeg_runner | 输出: U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260617035418)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-17 03:54:39.917 | INFO  | ffmpeg_runner | 预计时长: 3501.73s
+2026-06-17 03:54:39.917 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v -map 0:a -map 0:s -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260617035418)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-17 03:54:39.917 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-17 03:54:39.917 | DEBUG | ffmpeg_runner |   | [  5] U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-17 03:54:39.917 | DEBUG | ffmpeg_runner |   | [  6] -map
+2026-06-17 03:54:39.917 | DEBUG | ffmpeg_runner |   | [  7] 0:v
+2026-06-17 03:54:39.917 | DEBUG | ffmpeg_runner |   | [  8] -map
+2026-06-17 03:54:39.917 | DEBUG | ffmpeg_runner |   | [  9] 0:a
+2026-06-17 03:54:39.917 | DEBUG | ffmpeg_runner |   | [ 10] -map
+2026-06-17 03:54:39.917 | DEBUG | ffmpeg_runner |   | [ 11] 0:s
+2026-06-17 03:54:39.917 | DEBUG | ffmpeg_runner |   | [ 12] -c:v
+2026-06-17 03:54:39.917 | DEBUG | ffmpeg_runner |   | [ 13] hevc
+2026-06-17 03:54:39.917 | DEBUG | ffmpeg_runner |   | [ 14] -crf
+2026-06-17 03:54:39.917 | DEBUG | ffmpeg_runner |   | [ 15] 23
+2026-06-17 03:54:39.917 | DEBUG | ffmpeg_runner |   | [ 16] -c:s
+2026-06-17 03:54:39.917 | DEBUG | ffmpeg_runner |   | [ 17] mov_text
+2026-06-17 03:54:39.917 | DEBUG | ffmpeg_runner |   | [ 18] -map_metadata
+2026-06-17 03:54:39.917 | DEBUG | ffmpeg_runner |   | [ 19] 0
+2026-06-17 03:54:39.917 | DEBUG | ffmpeg_runner |   | [ 20] -map_chapters
+2026-06-17 03:54:39.917 | DEBUG | ffmpeg_runner |   | [ 21] 0
+2026-06-17 03:54:39.917 | DEBUG | ffmpeg_runner |   | [ 22] -metadata
+2026-06-17 03:54:39.917 | DEBUG | ffmpeg_runner |   | [ 23] handler_name=@Cairl
+2026-06-17 03:54:39.917 | DEBUG | ffmpeg_runner |   | [ 24] U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260617035418)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-17 03:58:46.187 | INFO  | ffmpeg_runner | [035439_91717] 结束: 失败 (返回码 1) | 用时: 246.3s
+2026-06-17 03:58:46.188 | WARN  | ffmpeg_runner | [035439_91717] stderr 输出 (10 行):
+2026-06-17 03:58:46.188 | WARN  | ffmpeg_runner |   | frame= 1501 fps=6.5 q=28.7 size=  177920KiB time=N/A bitrate=N/A speed=N/A elapsed=0:03:51.54
+2026-06-17 03:58:46.188 | WARN  | ffmpeg_runner |   | frame= 1504 fps=6.5 q=28.6 size=  177920KiB time=N/A bitrate=N/A speed=N/A elapsed=0:03:52.07
+2026-06-17 03:58:46.188 | WARN  | ffmpeg_runner |   | frame= 1505 fps=6.5 q=28.5 size=  177920KiB time=N/A bitrate=N/A speed=N/A elapsed=0:03:52.57
+2026-06-17 03:58:46.188 | WARN  | ffmpeg_runner |   | frame= 1509 fps=6.5 q=28.6 size=  178176KiB time=N/A bitrate=N/A speed=N/A elapsed=0:03:53.09
+2026-06-17 03:58:46.188 | WARN  | ffmpeg_runner |   | frame= 1513 fps=6.5 q=28.5 size=  178432KiB time=N/A bitrate=N/A speed=N/A elapsed=0:03:53.61
+2026-06-17 03:58:46.188 | WARN  | ffmpeg_runner |   | frame= 1517 fps=6.5 q=28.4 size=  178688KiB time=N/A bitrate=N/A speed=N/A elapsed=0:03:54.12
+2026-06-17 03:58:46.188 | WARN  | ffmpeg_runner |   | frame= 1519 fps=6.5 q=25.6 size=  178688KiB time=N/A bitrate=N/A speed=N/A elapsed=0:03:54.64
+2026-06-17 03:58:46.188 | WARN  | ffmpeg_runner |   | frame= 1520 fps=6.5 q=28.6 size=  178688KiB time=N/A bitrate=N/A speed=N/A elapsed=0:03:55.15
+2026-06-17 03:58:46.188 | WARN  | ffmpeg_runner |   | frame= 1525 fps=6.5 q=28.4 size=  179200KiB time=N/A bitrate=N/A speed=N/A elapsed=0:03:55.67
+2026-06-17 03:58:46.188 | WARN  | ffmpeg_runner |   | [q] command received. Exiting.
+2026-06-17 03:58:46.188 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [035439_91717] =====
+
+2026-06-17 04:08:51.398 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [040851_39883] =====
+2026-06-17 04:08:51.398 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-17 04:08:51.398 | INFO  | ffmpeg_runner | 输入: U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-17 04:08:51.398 | INFO  | ffmpeg_runner | 输出: U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260617040741)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-17 04:08:51.398 | INFO  | ffmpeg_runner | 预计时长: 3501.73s
+2026-06-17 04:08:51.399 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v -map 0:a -map 0:s:2 -map 0:s:3 -map 0:s:4 -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260617040741)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-17 04:08:51.399 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-17 04:08:51.399 | DEBUG | ffmpeg_runner |   | [  9] 0:a
+2026-06-17 04:08:51.399 | DEBUG | ffmpeg_runner |   | [ 10] -map
+2026-06-17 04:08:51.399 | DEBUG | ffmpeg_runner |   | [ 11] 0:s:2
+2026-06-17 04:08:51.399 | DEBUG | ffmpeg_runner |   | [ 12] -map
+2026-06-17 04:08:51.399 | DEBUG | ffmpeg_runner |   | [ 13] 0:s:3
+2026-06-17 04:08:51.399 | DEBUG | ffmpeg_runner |   | [ 14] -map
+2026-06-17 04:08:51.399 | DEBUG | ffmpeg_runner |   | [ 15] 0:s:4
+2026-06-17 04:08:51.399 | DEBUG | ffmpeg_runner |   | [ 16] -c:v
+2026-06-17 04:08:51.399 | DEBUG | ffmpeg_runner |   | [ 17] hevc
+2026-06-17 04:08:51.399 | DEBUG | ffmpeg_runner |   | [ 18] -crf
+2026-06-17 04:08:51.399 | DEBUG | ffmpeg_runner |   | [ 19] 23
+2026-06-17 04:08:51.399 | DEBUG | ffmpeg_runner |   | [ 20] -c:s
+2026-06-17 04:08:51.399 | DEBUG | ffmpeg_runner |   | [ 21] mov_text
+2026-06-17 04:08:51.399 | DEBUG | ffmpeg_runner |   | [ 22] -map_metadata
+2026-06-17 04:08:51.399 | DEBUG | ffmpeg_runner |   | [ 23] 0
+2026-06-17 04:08:51.399 | DEBUG | ffmpeg_runner |   | [ 24] -map_chapters
+2026-06-17 04:08:51.399 | DEBUG | ffmpeg_runner |   | [ 25] 0
+2026-06-17 04:08:51.399 | DEBUG | ffmpeg_runner |   | [ 26] -metadata
+2026-06-17 04:08:51.399 | DEBUG | ffmpeg_runner |   | [ 27] handler_name=@Cairl
+2026-06-17 04:08:51.399 | DEBUG | ffmpeg_runner |   | [ 28] U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260617040741)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-17 04:12:51.046 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 65.6s/3501.7s (1.9%) | 速度: 0.28x | 用时: 239.6s
+2026-06-17 04:12:54.003 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 66.2s/3501.7s (1.9%) | 速度: 0.27x | 用时: 242.6s
+2026-06-17 04:12:54.055 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 66.2s/3501.7s (1.9%) | 速度: 0.27x | 用时: 242.6s
+2026-06-17 04:12:57.038 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 67.2s/3501.7s (1.9%) | 速度: 0.27x | 用时: 245.6s
+2026-06-17 04:13:00.008 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 68.2s/3501.7s (1.9%) | 速度: 0.27x | 用时: 248.6s
+2026-06-17 04:13:03.052 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 69.2s/3501.7s (2.0%) | 速度: 0.27x | 用时: 251.6s
+2026-06-17 04:13:06.034 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 70.0s/3501.7s (2.0%) | 速度: 0.27x | 用时: 254.6s
+2026-06-17 04:13:09.031 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 71.2s/3501.7s (2.0%) | 速度: 0.28x | 用时: 257.6s
+2026-06-17 04:13:12.011 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 71.7s/3501.7s (2.0%) | 速度: 0.28x | 用时: 260.6s
+2026-06-17 04:13:15.053 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 73.2s/3501.7s (2.1%) | 速度: 0.28x | 用时: 263.6s
+2026-06-17 04:13:18.028 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 74.2s/3501.7s (2.1%) | 速度: 0.28x | 用时: 266.6s
+2026-06-17 04:13:21.022 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 75.0s/3501.7s (2.1%) | 速度: 0.28x | 用时: 269.6s
+2026-06-17 04:13:24.013 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 76.0s/3501.7s (2.2%) | 速度: 0.28x | 用时: 272.6s
+2026-06-17 04:13:27.004 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 76.7s/3501.7s (2.2%) | 速度: 0.28x | 用时: 275.6s
+2026-06-17 04:13:27.056 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 76.7s/3501.7s (2.2%) | 速度: 0.28x | 用时: 275.7s
+2026-06-17 04:13:30.002 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 76.7s/3501.7s (2.2%) | 速度: 0.28x | 用时: 278.6s
+2026-06-17 04:13:30.055 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 76.7s/3501.7s (2.2%) | 速度: 0.28x | 用时: 278.6s
+2026-06-17 04:13:33.046 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 76.7s/3501.7s (2.2%) | 速度: 0.28x | 用时: 281.6s
+2026-06-17 04:13:36.034 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 76.7s/3501.7s (2.2%) | 速度: 0.27x | 用时: 284.6s
+2026-06-17 04:13:39.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 76.7s/3501.7s (2.2%) | 速度: 0.27x | 用时: 287.6s
+2026-06-17 04:13:42.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 81.7s/3501.7s (2.3%) | 速度: 0.27x | 用时: 290.6s
+2026-06-17 04:13:45.032 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 82.7s/3501.7s (2.4%) | 速度: 0.28x | 用时: 293.6s
+2026-06-17 04:13:48.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 83.5s/3501.7s (2.4%) | 速度: 0.28x | 用时: 296.6s
+2026-06-17 04:13:51.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 84.5s/3501.7s (2.4%) | 速度: 0.28x | 用时: 299.6s
+2026-06-17 04:13:54.005 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 85.0s/3501.7s (2.4%) | 速度: 0.28x | 用时: 302.6s
+2026-06-17 04:13:54.057 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 85.0s/3501.7s (2.4%) | 速度: 0.28x | 用时: 302.7s
+2026-06-17 04:13:57.035 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 85.9s/3501.7s (2.5%) | 速度: 0.28x | 用时: 305.6s
+2026-06-17 04:14:00.020 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 86.9s/3501.7s (2.5%) | 速度: 0.28x | 用时: 308.6s
+2026-06-17 04:14:03.004 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 87.9s/3501.7s (2.5%) | 速度: 0.28x | 用时: 311.6s
+2026-06-17 04:14:03.057 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 87.9s/3501.7s (2.5%) | 速度: 0.28x | 用时: 311.7s
+2026-06-17 04:14:06.032 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 89.0s/3501.7s (2.5%) | 速度: 0.28x | 用时: 314.6s
+2026-06-17 04:14:09.014 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 89.3s/3501.7s (2.5%) | 速度: 0.28x | 用时: 317.6s
+2026-06-17 04:14:12.039 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 90.9s/3501.7s (2.6%) | 速度: 0.28x | 用时: 320.6s
+2026-06-17 04:14:15.017 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 91.7s/3501.7s (2.6%) | 速度: 0.28x | 用时: 323.6s
+2026-06-17 04:14:18.003 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 92.6s/3501.7s (2.6%) | 速度: 0.28x | 用时: 326.6s
+2026-06-17 04:14:18.056 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 92.6s/3501.7s (2.6%) | 速度: 0.28x | 用时: 326.6s
+2026-06-17 04:14:21.040 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 93.4s/3501.7s (2.7%) | 速度: 0.28x | 用时: 329.6s
+2026-06-17 04:14:24.013 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.1s/3501.7s (2.7%) | 速度: 0.28x | 用时: 332.6s
+2026-06-17 04:14:27.039 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.28x | 用时: 335.6s
+2026-06-17 04:14:30.018 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.28x | 用时: 338.6s
+2026-06-17 04:14:33.008 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.28x | 用时: 341.6s
+2026-06-17 04:14:33.060 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.28x | 用时: 341.7s
+2026-06-17 04:14:36.040 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.28x | 用时: 344.6s
+2026-06-17 04:14:39.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.28x | 用时: 347.6s
+2026-06-17 04:14:42.045 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.27x | 用时: 350.6s
+2026-06-17 04:14:45.030 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.27x | 用时: 353.6s
+2026-06-17 04:14:48.005 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.27x | 用时: 356.6s
+2026-06-17 04:14:48.060 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.27x | 用时: 356.7s
+2026-06-17 04:14:51.036 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.27x | 用时: 359.6s
+2026-06-17 04:14:54.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.26x | 用时: 362.6s
+2026-06-17 04:14:57.002 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.26x | 用时: 365.6s
+2026-06-17 04:14:57.054 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.26x | 用时: 365.6s
+2026-06-17 04:15:00.029 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.26x | 用时: 368.6s
+2026-06-17 04:15:03.002 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.26x | 用时: 371.6s
+2026-06-17 04:15:03.053 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.26x | 用时: 371.6s
+2026-06-17 04:15:06.028 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.26x | 用时: 374.6s
+2026-06-17 04:15:09.009 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.25x | 用时: 377.6s
+2026-06-17 04:15:12.037 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.25x | 用时: 380.6s
+2026-06-17 04:15:15.013 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.25x | 用时: 383.6s
+2026-06-17 04:15:18.044 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.25x | 用时: 386.6s
+2026-06-17 04:15:21.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.25x | 用时: 389.6s
+2026-06-17 04:15:24.040 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.24x | 用时: 392.6s
+2026-06-17 04:15:27.020 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.24x | 用时: 395.6s
+2026-06-17 04:15:30.002 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.24x | 用时: 398.6s
+2026-06-17 04:15:30.055 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.24x | 用时: 398.6s
+2026-06-17 04:15:33.027 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.24x | 用时: 401.6s
+2026-06-17 04:15:36.003 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.24x | 用时: 404.6s
+2026-06-17 04:15:36.056 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.24x | 用时: 404.6s
+2026-06-17 04:15:39.032 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.23x | 用时: 407.6s
+2026-06-17 04:15:42.010 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.23x | 用时: 410.6s
+2026-06-17 04:15:45.003 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.23x | 用时: 413.6s
+2026-06-17 04:15:45.055 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.23x | 用时: 413.6s
+2026-06-17 04:15:48.040 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.23x | 用时: 416.6s
+2026-06-17 04:15:51.027 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 94.4s/3501.7s (2.7%) | 速度: 0.23x | 用时: 419.6s
+2026-06-17 04:15:54.050 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 121.6s/3501.7s (3.5%) | 速度: 0.25x | 用时: 422.6s
+2026-06-17 04:15:57.020 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 122.2s/3501.7s (3.5%) | 速度: 0.27x | 用时: 425.6s
+2026-06-17 04:16:00.048 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 123.1s/3501.7s (3.5%) | 速度: 0.28x | 用时: 428.6s
+2026-06-17 04:16:03.031 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 123.9s/3501.7s (3.5%) | 速度: 0.28x | 用时: 431.6s
+2026-06-17 04:16:06.017 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 124.6s/3501.7s (3.6%) | 速度: 0.28x | 用时: 434.6s
+2026-06-17 04:16:09.001 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 125.6s/3501.7s (3.6%) | 速度: 0.29x | 用时: 437.6s
+2026-06-17 04:16:09.054 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 125.6s/3501.7s (3.6%) | 速度: 0.29x | 用时: 437.6s
+2026-06-17 04:16:12.038 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 126.4s/3501.7s (3.6%) | 速度: 0.29x | 用时: 440.6s
+2026-06-17 04:16:15.018 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 127.2s/3501.7s (3.6%) | 速度: 0.29x | 用时: 443.6s
+2026-06-17 04:16:18.052 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 128.0s/3501.7s (3.7%) | 速度: 0.29x | 用时: 446.6s
+2026-06-17 04:16:21.034 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 128.2s/3501.7s (3.7%) | 速度: 0.29x | 用时: 449.6s
+2026-06-17 04:16:24.009 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 128.2s/3501.7s (3.7%) | 速度: 0.29x | 用时: 452.6s
+2026-06-17 04:16:27.050 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 130.8s/3501.7s (3.7%) | 速度: 0.28x | 用时: 455.6s
+2026-06-17 04:16:30.037 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 131.5s/3501.7s (3.8%) | 速度: 0.29x | 用时: 458.6s
+2026-06-17 04:16:33.014 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 132.1s/3501.7s (3.8%) | 速度: 0.29x | 用时: 461.6s
+2026-06-17 04:16:36.012 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 132.9s/3501.7s (3.8%) | 速度: 0.29x | 用时: 464.6s
+2026-06-17 04:16:39.002 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 133.8s/3501.7s (3.8%) | 速度: 0.29x | 用时: 467.6s
+2026-06-17 04:16:39.055 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 133.8s/3501.7s (3.8%) | 速度: 0.29x | 用时: 467.6s
+2026-06-17 04:16:42.041 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 134.5s/3501.7s (3.8%) | 速度: 0.29x | 用时: 470.6s
+2026-06-17 04:16:45.019 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 135.3s/3501.7s (3.9%) | 速度: 0.29x | 用时: 473.6s
+2026-06-17 04:16:48.044 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 136.3s/3501.7s (3.9%) | 速度: 0.29x | 用时: 476.6s
+2026-06-17 04:16:51.025 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 136.9s/3501.7s (3.9%) | 速度: 0.29x | 用时: 479.6s
+2026-06-17 04:16:54.004 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 137.9s/3501.7s (3.9%) | 速度: 0.29x | 用时: 482.6s
+2026-06-17 04:16:54.058 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 137.9s/3501.7s (3.9%) | 速度: 0.29x | 用时: 482.7s
+2026-06-17 04:16:57.040 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 138.9s/3501.7s (4.0%) | 速度: 0.29x | 用时: 485.6s
+2026-06-17 04:17:00.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 139.9s/3501.7s (4.0%) | 速度: 0.29x | 用时: 488.6s
+2026-06-17 04:17:03.043 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 141.1s/3501.7s (4.0%) | 速度: 0.29x | 用时: 491.6s
+2026-06-17 04:17:06.031 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 141.6s/3501.7s (4.0%) | 速度: 0.29x | 用时: 494.6s
+2026-06-17 04:17:09.022 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 142.4s/3501.7s (4.1%) | 速度: 0.29x | 用时: 497.6s
+2026-06-17 04:17:12.004 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 143.1s/3501.7s (4.1%) | 速度: 0.29x | 用时: 500.6s
+2026-06-17 04:17:12.056 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 143.1s/3501.7s (4.1%) | 速度: 0.29x | 用时: 500.7s
+2026-06-17 04:17:15.043 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 143.8s/3501.7s (4.1%) | 速度: 0.29x | 用时: 503.6s
+2026-06-17 04:17:18.019 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 144.6s/3501.7s (4.1%) | 速度: 0.29x | 用时: 506.6s
+2026-06-17 04:17:21.004 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 145.2s/3501.7s (4.1%) | 速度: 0.29x | 用时: 509.6s
+2026-06-17 04:17:21.057 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 145.3s/3501.7s (4.1%) | 速度: 0.29x | 用时: 509.7s
+2026-06-17 04:17:24.032 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 145.9s/3501.7s (4.2%) | 速度: 0.29x | 用时: 512.6s
+2026-06-17 04:17:27.018 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 146.7s/3501.7s (4.2%) | 速度: 0.29x | 用时: 515.6s
+2026-06-17 04:17:30.042 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 146.9s/3501.7s (4.2%) | 速度: 0.28x | 用时: 518.6s
+2026-06-17 04:17:33.025 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 146.9s/3501.7s (4.2%) | 速度: 0.28x | 用时: 521.6s
+2026-06-17 04:17:36.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 146.9s/3501.7s (4.2%) | 速度: 0.28x | 用时: 524.6s
+2026-06-17 04:17:39.039 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 146.9s/3501.7s (4.2%) | 速度: 0.28x | 用时: 527.6s
+2026-06-17 04:17:42.019 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 146.9s/3501.7s (4.2%) | 速度: 0.28x | 用时: 530.6s
+2026-06-17 04:17:45.043 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 146.9s/3501.7s (4.2%) | 速度: 0.28x | 用时: 533.6s
+2026-06-17 04:17:48.028 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 146.9s/3501.7s (4.2%) | 速度: 0.28x | 用时: 536.6s
+2026-06-17 04:17:51.021 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 152.9s/3501.7s (4.4%) | 速度: 0.28x | 用时: 539.6s
+2026-06-17 04:17:54.004 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 153.5s/3501.7s (4.4%) | 速度: 0.28x | 用时: 542.6s
+2026-06-17 04:17:54.056 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 153.7s/3501.7s (4.4%) | 速度: 0.28x | 用时: 542.7s
+2026-06-17 04:17:57.045 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 154.3s/3501.7s (4.4%) | 速度: 0.28x | 用时: 545.6s
+2026-06-17 04:18:00.029 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 155.0s/3501.7s (4.4%) | 速度: 0.28x | 用时: 548.6s
+2026-06-17 04:18:03.008 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 155.9s/3501.7s (4.5%) | 速度: 0.28x | 用时: 551.6s
+2026-06-17 04:18:06.039 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 156.6s/3501.7s (4.5%) | 速度: 0.28x | 用时: 554.6s
+2026-06-17 04:18:09.026 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 157.4s/3501.7s (4.5%) | 速度: 0.28x | 用时: 557.6s
+2026-06-17 04:18:12.017 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 158.2s/3501.7s (4.5%) | 速度: 0.28x | 用时: 560.6s
+2026-06-17 04:18:15.048 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 159.0s/3501.7s (4.5%) | 速度: 0.28x | 用时: 563.6s
+2026-06-17 04:18:18.032 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 159.9s/3501.7s (4.6%) | 速度: 0.28x | 用时: 566.6s
+2026-06-17 04:18:21.015 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 160.7s/3501.7s (4.6%) | 速度: 0.28x | 用时: 569.6s
+2026-06-17 04:18:24.008 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 161.5s/3501.7s (4.6%) | 速度: 0.28x | 用时: 572.6s
+2026-06-17 04:18:24.060 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 161.5s/3501.7s (4.6%) | 速度: 0.28x | 用时: 572.7s
+2026-06-17 04:18:27.038 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 162.2s/3501.7s (4.6%) | 速度: 0.28x | 用时: 575.6s
+2026-06-17 04:18:30.022 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 162.9s/3501.7s (4.7%) | 速度: 0.28x | 用时: 578.6s
+2026-06-17 04:18:33.008 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 163.7s/3501.7s (4.7%) | 速度: 0.28x | 用时: 581.6s
+2026-06-17 04:18:33.060 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 163.7s/3501.7s (4.7%) | 速度: 0.28x | 用时: 581.7s
+2026-06-17 04:18:36.034 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 164.2s/3501.7s (4.7%) | 速度: 0.28x | 用时: 584.6s
+2026-06-17 04:18:39.009 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 165.0s/3501.7s (4.7%) | 速度: 0.28x | 用时: 587.6s
+2026-06-17 04:18:42.041 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 165.8s/3501.7s (4.7%) | 速度: 0.28x | 用时: 590.6s
+2026-06-17 04:18:45.020 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 166.5s/3501.7s (4.8%) | 速度: 0.28x | 用时: 593.6s
+2026-06-17 04:18:48.007 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 167.3s/3501.7s (4.8%) | 速度: 0.28x | 用时: 596.6s
+2026-06-17 04:18:48.059 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 167.3s/3501.7s (4.8%) | 速度: 0.28x | 用时: 596.7s
+2026-06-17 04:18:51.052 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 168.0s/3501.7s (4.8%) | 速度: 0.28x | 用时: 599.6s
+2026-06-17 04:18:54.026 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 168.9s/3501.7s (4.8%) | 速度: 0.28x | 用时: 602.6s
+2026-06-17 04:18:57.008 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 169.7s/3501.7s (4.8%) | 速度: 0.28x | 用时: 605.6s
+2026-06-17 04:18:57.061 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 169.7s/3501.7s (4.8%) | 速度: 0.28x | 用时: 605.7s
+2026-06-17 04:19:00.003 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 170.4s/3501.7s (4.9%) | 速度: 0.28x | 用时: 608.6s
+2026-06-17 04:19:00.055 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 170.4s/3501.7s (4.9%) | 速度: 0.28x | 用时: 608.6s
+2026-06-17 04:19:03.034 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 171.3s/3501.7s (4.9%) | 速度: 0.28x | 用时: 611.6s
+2026-06-17 04:19:06.025 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 172.0s/3501.7s (4.9%) | 速度: 0.28x | 用时: 614.6s
+2026-06-17 04:19:09.013 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 172.8s/3501.7s (4.9%) | 速度: 0.28x | 用时: 617.6s
+2026-06-17 04:19:12.050 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 173.6s/3501.7s (5.0%) | 速度: 0.28x | 用时: 620.6s
+2026-06-17 04:19:15.028 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 174.3s/3501.7s (5.0%) | 速度: 0.28x | 用时: 623.6s
+2026-06-17 04:19:18.004 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 175.1s/3501.7s (5.0%) | 速度: 0.28x | 用时: 626.6s
+2026-06-17 04:19:18.060 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 175.1s/3501.7s (5.0%) | 速度: 0.28x | 用时: 626.7s
+2026-06-17 04:19:21.045 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 175.9s/3501.7s (5.0%) | 速度: 0.28x | 用时: 629.6s
+2026-06-17 04:19:24.022 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 176.7s/3501.7s (5.0%) | 速度: 0.28x | 用时: 632.6s
+2026-06-17 04:19:27.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 177.2s/3501.7s (5.1%) | 速度: 0.28x | 用时: 635.6s
+2026-06-17 04:19:30.042 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 178.1s/3501.7s (5.1%) | 速度: 0.28x | 用时: 638.6s
+2026-06-17 04:19:33.026 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 178.8s/3501.7s (5.1%) | 速度: 0.28x | 用时: 641.6s
+2026-06-17 04:19:36.017 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 179.7s/3501.7s (5.1%) | 速度: 0.28x | 用时: 644.6s
+2026-06-17 04:19:39.004 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 180.5s/3501.7s (5.2%) | 速度: 0.28x | 用时: 647.6s
+2026-06-17 04:19:39.057 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 180.5s/3501.7s (5.2%) | 速度: 0.28x | 用时: 647.7s
+2026-06-17 04:19:42.035 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 181.3s/3501.7s (5.2%) | 速度: 0.28x | 用时: 650.6s
+2026-06-17 04:19:45.012 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 182.0s/3501.7s (5.2%) | 速度: 0.28x | 用时: 653.6s
+2026-06-17 04:19:48.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 182.7s/3501.7s (5.2%) | 速度: 0.28x | 用时: 656.6s
+2026-06-17 04:19:51.041 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 183.6s/3501.7s (5.2%) | 速度: 0.28x | 用时: 659.6s
+2026-06-17 04:19:54.027 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 184.3s/3501.7s (5.3%) | 速度: 0.28x | 用时: 662.6s
+2026-06-17 04:19:57.002 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 184.3s/3501.7s (5.3%) | 速度: 0.28x | 用时: 665.6s
+2026-06-17 04:19:57.054 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 184.3s/3501.7s (5.3%) | 速度: 0.28x | 用时: 665.6s
+2026-06-17 04:20:00.039 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 184.3s/3501.7s (5.3%) | 速度: 0.28x | 用时: 668.6s
+2026-06-17 04:20:03.022 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 184.3s/3501.7s (5.3%) | 速度: 0.28x | 用时: 671.6s
+2026-06-17 04:20:06.053 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 184.3s/3501.7s (5.3%) | 速度: 0.28x | 用时: 674.6s
+2026-06-17 04:20:09.039 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 184.3s/3501.7s (5.3%) | 速度: 0.27x | 用时: 677.6s
+2026-06-17 04:20:12.015 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 188.8s/3501.7s (5.4%) | 速度: 0.27x | 用时: 680.6s
+2026-06-17 04:20:15.042 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 189.6s/3501.7s (5.4%) | 速度: 0.28x | 用时: 683.6s
+2026-06-17 04:20:18.032 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 190.5s/3501.7s (5.4%) | 速度: 0.28x | 用时: 686.6s
+2026-06-17 04:20:21.011 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 191.2s/3501.7s (5.5%) | 速度: 0.28x | 用时: 689.6s
+2026-06-17 04:20:24.048 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.0s/3501.7s (5.5%) | 速度: 0.28x | 用时: 692.6s
+2026-06-17 04:20:27.033 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.28x | 用时: 695.6s
+2026-06-17 04:20:30.023 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.28x | 用时: 698.6s
+2026-06-17 04:20:33.013 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.28x | 用时: 701.6s
+2026-06-17 04:20:36.042 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.27x | 用时: 704.6s
+2026-06-17 04:20:39.040 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.27x | 用时: 707.6s
+2026-06-17 04:20:42.030 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.27x | 用时: 710.6s
+2026-06-17 04:20:45.006 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.27x | 用时: 713.6s
+2026-06-17 04:20:45.059 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.27x | 用时: 713.7s
+2026-06-17 04:20:48.048 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.27x | 用时: 716.6s
+2026-06-17 04:20:50.800 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [042050_80057] =====
+2026-06-17 04:20:50.800 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-17 04:20:50.800 | INFO  | ffmpeg_runner | 输入: U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-17 04:20:50.801 | INFO  | ffmpeg_runner | 输出: U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260617042043)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-17 04:20:50.801 | INFO  | ffmpeg_runner | 预计时长: 3501.73s
+2026-06-17 04:20:50.801 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v -map 0:a -map 0:s -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260617042043)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-17 04:20:50.801 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-17 04:20:50.801 | DEBUG | ffmpeg_runner |   | [  5] U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-17 04:20:50.801 | DEBUG | ffmpeg_runner |   | [  6] -map
+2026-06-17 04:20:50.801 | DEBUG | ffmpeg_runner |   | [  7] 0:v
+2026-06-17 04:20:50.801 | DEBUG | ffmpeg_runner |   | [  8] -map
+2026-06-17 04:20:50.801 | DEBUG | ffmpeg_runner |   | [  9] 0:a
+2026-06-17 04:20:50.801 | DEBUG | ffmpeg_runner |   | [ 10] -map
+2026-06-17 04:20:50.801 | DEBUG | ffmpeg_runner |   | [ 11] 0:s
+2026-06-17 04:20:50.801 | DEBUG | ffmpeg_runner |   | [ 12] -c:v
+2026-06-17 04:20:50.801 | DEBUG | ffmpeg_runner |   | [ 13] hevc
+2026-06-17 04:20:50.801 | DEBUG | ffmpeg_runner |   | [ 14] -crf
+2026-06-17 04:20:50.801 | DEBUG | ffmpeg_runner |   | [ 15] 23
+2026-06-17 04:20:50.801 | DEBUG | ffmpeg_runner |   | [ 16] -c:s
+2026-06-17 04:20:50.801 | DEBUG | ffmpeg_runner |   | [ 17] mov_text
+2026-06-17 04:20:50.801 | DEBUG | ffmpeg_runner |   | [ 18] -map_metadata
+2026-06-17 04:20:50.801 | DEBUG | ffmpeg_runner |   | [ 19] 0
+2026-06-17 04:20:50.801 | DEBUG | ffmpeg_runner |   | [ 20] -map_chapters
+2026-06-17 04:20:50.801 | DEBUG | ffmpeg_runner |   | [ 21] 0
+2026-06-17 04:20:50.801 | DEBUG | ffmpeg_runner |   | [ 22] -metadata
+2026-06-17 04:20:50.801 | DEBUG | ffmpeg_runner |   | [ 23] handler_name=@Cairl
+2026-06-17 04:20:50.801 | DEBUG | ffmpeg_runner |   | [ 24] U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260617042043)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-17 04:20:51.021 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.27x | 用时: 719.6s
+2026-06-17 04:20:54.003 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.27x | 用时: 722.6s
+2026-06-17 04:20:54.055 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.27x | 用时: 722.6s
+2026-06-17 04:20:57.051 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.27x | 用时: 725.6s
+2026-06-17 04:21:00.023 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.27x | 用时: 728.6s
+2026-06-17 04:21:03.006 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.26x | 用时: 731.6s
+2026-06-17 04:21:03.058 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.26x | 用时: 731.7s
+2026-06-17 04:21:05.921 | INFO  | ffmpeg_runner | [042050_80057] 结束: 失败 (返回码 1) | 用时: 15.1s
+2026-06-17 04:21:05.921 | WARN  | ffmpeg_runner | [042050_80057] stderr 输出 (10 行):
+2026-06-17 04:21:05.921 | WARN  | ffmpeg_runner |   | _STATISTICS_TAGS: BPS DURATION NUMBER_OF_FRAMES NUMBER_OF_BYTES
+2026-06-17 04:21:05.921 | WARN  | ffmpeg_runner |   | frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:00.50
+2026-06-17 04:21:05.921 | WARN  | ffmpeg_runner |   | frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:01.02
+2026-06-17 04:21:05.921 | WARN  | ffmpeg_runner |   | frame=    6 fps=3.9 q=31.0 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:01.54
+2026-06-17 04:21:05.921 | WARN  | ffmpeg_runner |   | frame=   15 fps=7.3 q=31.0 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:02.06
+2026-06-17 04:21:05.921 | WARN  | ffmpeg_runner |   | frame=   20 fps=7.8 q=31.0 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:02.57
+2026-06-17 04:21:05.921 | WARN  | ffmpeg_runner |   | frame=   27 fps=8.7 q=31.0 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:03.09
+2026-06-17 04:21:05.921 | WARN  | ffmpeg_runner |   | frame=   32 fps=8.9 q=25.4 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:03.59
+2026-06-17 04:21:05.921 | WARN  | ffmpeg_runner |   | frame=   37 fps=9.0 q=30.0 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:04.11
+2026-06-17 04:21:05.921 | WARN  | ffmpeg_runner |   | [q] command received. Exiting.
+2026-06-17 04:21:05.921 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [042050_80057] =====
+
+2026-06-17 04:21:06.006 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.26x | 用时: 734.6s
+2026-06-17 04:21:06.061 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.26x | 用时: 734.7s
+2026-06-17 04:21:09.037 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.26x | 用时: 737.6s
+2026-06-17 04:21:12.022 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.26x | 用时: 740.6s
+2026-06-17 04:21:15.001 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.26x | 用时: 743.6s
+2026-06-17 04:21:15.054 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.26x | 用时: 743.6s
+2026-06-17 04:21:18.028 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.26x | 用时: 746.6s
+2026-06-17 04:21:21.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.26x | 用时: 749.6s
+2026-06-17 04:21:24.051 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.26x | 用时: 752.6s
+2026-06-17 04:21:27.035 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.26x | 用时: 755.6s
+2026-06-17 04:21:30.025 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.26x | 用时: 758.6s
+2026-06-17 04:21:33.053 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.25x | 用时: 761.6s
+2026-06-17 04:21:36.027 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.25x | 用时: 764.6s
+2026-06-17 04:21:39.006 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.25x | 用时: 767.6s
+2026-06-17 04:21:39.058 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.25x | 用时: 767.7s
+2026-06-17 04:21:42.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.25x | 用时: 770.6s
+2026-06-17 04:21:45.021 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.25x | 用时: 773.6s
+2026-06-17 04:21:48.050 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.25x | 用时: 776.6s
+2026-06-17 04:21:51.048 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.25x | 用时: 779.6s
+2026-06-17 04:21:54.030 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.25x | 用时: 782.6s
+2026-06-17 04:21:57.018 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.25x | 用时: 785.6s
+2026-06-17 04:22:00.043 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.25x | 用时: 788.6s
+2026-06-17 04:22:03.008 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.24x | 用时: 791.6s
+2026-06-17 04:22:03.060 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.24x | 用时: 791.7s
+2026-06-17 04:22:06.042 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.24x | 用时: 794.6s
+2026-06-17 04:22:09.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.24x | 用时: 797.6s
+2026-06-17 04:22:12.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.24x | 用时: 800.6s
+2026-06-17 04:22:15.021 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.24x | 用时: 803.6s
+2026-06-17 04:22:18.048 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.24x | 用时: 806.6s
+2026-06-17 04:22:21.033 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.24x | 用时: 809.6s
+2026-06-17 04:22:24.005 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.24x | 用时: 812.6s
+2026-06-17 04:22:24.058 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.24x | 用时: 812.7s
+2026-06-17 04:22:27.037 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.24x | 用时: 815.6s
+2026-06-17 04:22:30.017 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.24x | 用时: 818.6s
+2026-06-17 04:22:33.005 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.24x | 用时: 821.6s
+2026-06-17 04:22:33.057 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.24x | 用时: 821.7s
+2026-06-17 04:22:36.033 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.23x | 用时: 824.6s
+2026-06-17 04:22:39.014 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.23x | 用时: 827.6s
+2026-06-17 04:22:42.045 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.23x | 用时: 830.6s
+2026-06-17 04:22:45.020 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.23x | 用时: 833.6s
+2026-06-17 04:22:48.009 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.23x | 用时: 836.6s
+2026-06-17 04:22:51.036 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.23x | 用时: 839.6s
+2026-06-17 04:22:54.033 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.23x | 用时: 842.6s
+2026-06-17 04:22:57.010 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.23x | 用时: 845.6s
+2026-06-17 04:23:00.033 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.23x | 用时: 848.6s
+2026-06-17 04:23:03.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.23x | 用时: 851.6s
+2026-06-17 04:23:06.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.23x | 用时: 854.6s
+2026-06-17 04:23:09.027 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.23x | 用时: 857.6s
+2026-06-17 04:23:12.019 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.22x | 用时: 860.6s
+2026-06-17 04:23:15.019 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.22x | 用时: 863.6s
+2026-06-17 04:23:18.051 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.22x | 用时: 866.6s
+2026-06-17 04:23:21.026 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.22x | 用时: 869.6s
+2026-06-17 04:23:24.045 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 192.4s/3501.7s (5.5%) | 速度: 0.22x | 用时: 872.6s
+2026-06-17 04:23:27.020 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.22x | 用时: 875.6s
+2026-06-17 04:23:30.043 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.22x | 用时: 878.6s
+2026-06-17 04:23:33.039 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.22x | 用时: 881.6s
+2026-06-17 04:23:36.011 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.22x | 用时: 884.6s
+2026-06-17 04:23:39.041 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.22x | 用时: 887.6s
+2026-06-17 04:23:42.023 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.22x | 用时: 890.6s
+2026-06-17 04:23:45.045 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.22x | 用时: 893.6s
+2026-06-17 04:23:48.015 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.22x | 用时: 896.6s
+2026-06-17 04:23:51.039 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.22x | 用时: 899.6s
+2026-06-17 04:23:54.015 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.22x | 用时: 902.6s
+2026-06-17 04:23:57.047 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.21x | 用时: 905.6s
+2026-06-17 04:24:00.020 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.21x | 用时: 908.6s
+2026-06-17 04:24:03.040 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.21x | 用时: 911.6s
+2026-06-17 04:24:06.023 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.21x | 用时: 914.6s
+2026-06-17 04:24:09.007 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.21x | 用时: 917.6s
+2026-06-17 04:24:09.059 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.21x | 用时: 917.7s
+2026-06-17 04:24:12.007 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.21x | 用时: 920.6s
+2026-06-17 04:24:12.060 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.21x | 用时: 920.7s
+2026-06-17 04:24:15.036 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.21x | 用时: 923.6s
+2026-06-17 04:24:18.032 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.21x | 用时: 926.6s
+2026-06-17 04:24:21.031 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.21x | 用时: 929.6s
+2026-06-17 04:24:24.019 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.21x | 用时: 932.6s
+2026-06-17 04:24:27.014 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.21x | 用时: 935.6s
+2026-06-17 04:24:30.024 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.21x | 用时: 938.6s
+2026-06-17 04:24:33.018 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.21x | 用时: 941.6s
+2026-06-17 04:24:36.008 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.21x | 用时: 944.6s
+2026-06-17 04:24:39.007 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.20x | 用时: 947.6s
+2026-06-17 04:24:39.061 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.20x | 用时: 947.7s
+2026-06-17 04:24:42.052 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.20x | 用时: 950.6s
+2026-06-17 04:24:45.036 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.20x | 用时: 953.6s
+2026-06-17 04:24:48.028 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.20x | 用时: 956.6s
+2026-06-17 04:24:51.017 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.20x | 用时: 959.6s
+2026-06-17 04:24:54.053 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.20x | 用时: 962.6s
+2026-06-17 04:24:57.040 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.20x | 用时: 965.6s
+2026-06-17 04:25:00.030 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.20x | 用时: 968.6s
+2026-06-17 04:25:03.005 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.20x | 用时: 971.6s
+2026-06-17 04:25:03.057 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.20x | 用时: 971.7s
+2026-06-17 04:25:06.044 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.20x | 用时: 974.6s
+2026-06-17 04:25:09.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.20x | 用时: 977.6s
+2026-06-17 04:25:12.035 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.20x | 用时: 980.6s
+2026-06-17 04:25:15.015 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.20x | 用时: 983.6s
+2026-06-17 04:25:18.010 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.20x | 用时: 986.6s
+2026-06-17 04:25:21.006 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.20x | 用时: 989.6s
+2026-06-17 04:25:21.058 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.20x | 用时: 989.7s
+2026-06-17 04:25:24.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.20x | 用时: 992.6s
+2026-06-17 04:25:27.037 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.19x | 用时: 995.6s
+2026-06-17 04:25:30.030 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.19x | 用时: 998.6s
+2026-06-17 04:25:33.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.19x | 用时: 1001.6s
+2026-06-17 04:25:36.001 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.19x | 用时: 1004.6s
+2026-06-17 04:25:36.053 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.19x | 用时: 1004.6s
+2026-06-17 04:25:39.042 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.19x | 用时: 1007.6s
+2026-06-17 04:25:42.027 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.19x | 用时: 1010.6s
+2026-06-17 04:25:45.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.19x | 用时: 1013.6s
+2026-06-17 04:25:48.004 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.19x | 用时: 1016.6s
+2026-06-17 04:25:48.057 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.19x | 用时: 1016.7s
+2026-06-17 04:25:51.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.19x | 用时: 1019.6s
+2026-06-17 04:25:54.050 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.19x | 用时: 1022.6s
+2026-06-17 04:25:57.044 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.19x | 用时: 1025.6s
+2026-06-17 04:26:00.030 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.19x | 用时: 1028.6s
+2026-06-17 04:26:03.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.19x | 用时: 1031.6s
+2026-06-17 04:26:06.047 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.19x | 用时: 1034.6s
+2026-06-17 04:26:09.031 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.19x | 用时: 1037.6s
+2026-06-17 04:26:12.007 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.19x | 用时: 1040.6s
+2026-06-17 04:26:12.059 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.19x | 用时: 1040.7s
+2026-06-17 04:26:15.041 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.19x | 用时: 1043.6s
+2026-06-17 04:26:18.036 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.19x | 用时: 1046.6s
+2026-06-17 04:26:21.023 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.18x | 用时: 1049.6s
+2026-06-17 04:26:24.014 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.18x | 用时: 1052.6s
+2026-06-17 04:26:27.009 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.18x | 用时: 1055.6s
+2026-06-17 04:26:30.041 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 193.0s/3501.7s (5.5%) | 速度: 0.18x | 用时: 1058.6s
+2026-06-17 04:26:33.018 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 311.1s/3501.7s (8.9%) | 速度: 0.23x | 用时: 1061.6s
+2026-06-17 04:26:36.004 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 312.1s/3501.7s (8.9%) | 速度: 0.26x | 用时: 1064.6s
+2026-06-17 04:26:36.057 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 312.1s/3501.7s (8.9%) | 速度: 0.26x | 用时: 1064.7s
+2026-06-17 04:26:39.006 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 312.9s/3501.7s (8.9%) | 速度: 0.28x | 用时: 1067.6s
+2026-06-17 04:26:39.059 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 312.9s/3501.7s (8.9%) | 速度: 0.28x | 用时: 1067.7s
+2026-06-17 04:26:42.041 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 313.9s/3501.7s (9.0%) | 速度: 0.28x | 用时: 1070.6s
+2026-06-17 04:26:45.033 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 314.8s/3501.7s (9.0%) | 速度: 0.29x | 用时: 1073.6s
+2026-06-17 04:26:48.013 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 315.5s/3501.7s (9.0%) | 速度: 0.29x | 用时: 1076.6s
+2026-06-17 04:26:51.007 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 316.5s/3501.7s (9.0%) | 速度: 0.29x | 用时: 1079.6s
+2026-06-17 04:26:51.060 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 316.5s/3501.7s (9.0%) | 速度: 0.29x | 用时: 1079.7s
+2026-06-17 04:26:54.053 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 317.2s/3501.7s (9.1%) | 速度: 0.29x | 用时: 1082.6s
+2026-06-17 04:26:57.048 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 318.2s/3501.7s (9.1%) | 速度: 0.29x | 用时: 1085.6s
+2026-06-17 04:27:00.043 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 319.1s/3501.7s (9.1%) | 速度: 0.29x | 用时: 1088.6s
+2026-06-17 04:27:03.025 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 319.8s/3501.7s (9.1%) | 速度: 0.29x | 用时: 1091.6s
+2026-06-17 04:27:06.006 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 320.6s/3501.7s (9.2%) | 速度: 0.29x | 用时: 1094.6s
+2026-06-17 04:27:06.059 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 320.6s/3501.7s (9.2%) | 速度: 0.29x | 用时: 1094.7s
+2026-06-17 04:27:09.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 321.5s/3501.7s (9.2%) | 速度: 0.29x | 用时: 1097.6s
+2026-06-17 04:27:12.037 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 322.3s/3501.7s (9.2%) | 速度: 0.29x | 用时: 1100.6s
+2026-06-17 04:27:15.031 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 323.3s/3501.7s (9.2%) | 速度: 0.29x | 用时: 1103.6s
+2026-06-17 04:27:18.019 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 323.9s/3501.7s (9.2%) | 速度: 0.29x | 用时: 1106.6s
+2026-06-17 04:27:21.005 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 324.6s/3501.7s (9.3%) | 速度: 0.29x | 用时: 1109.6s
+2026-06-17 04:27:21.059 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 324.6s/3501.7s (9.3%) | 速度: 0.29x | 用时: 1109.7s
+2026-06-17 04:27:24.040 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 325.6s/3501.7s (9.3%) | 速度: 0.29x | 用时: 1112.6s
+2026-06-17 04:27:27.019 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 326.5s/3501.7s (9.3%) | 速度: 0.29x | 用时: 1115.6s
+2026-06-17 04:27:30.007 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 327.5s/3501.7s (9.4%) | 速度: 0.29x | 用时: 1118.6s
+2026-06-17 04:27:30.060 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 327.5s/3501.7s (9.4%) | 速度: 0.29x | 用时: 1118.7s
+2026-06-17 04:27:33.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 328.3s/3501.7s (9.4%) | 速度: 0.29x | 用时: 1121.6s
+2026-06-17 04:27:36.031 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 329.1s/3501.7s (9.4%) | 速度: 0.29x | 用时: 1124.6s
+2026-06-17 04:27:39.011 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 330.1s/3501.7s (9.4%) | 速度: 0.29x | 用时: 1127.6s
+2026-06-17 04:27:42.056 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 331.0s/3501.7s (9.5%) | 速度: 0.29x | 用时: 1130.6s
+2026-06-17 04:27:45.045 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 331.9s/3501.7s (9.5%) | 速度: 0.29x | 用时: 1133.6s
+2026-06-17 04:27:48.032 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 332.8s/3501.7s (9.5%) | 速度: 0.29x | 用时: 1136.6s
+2026-06-17 04:27:51.012 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 333.6s/3501.7s (9.5%) | 速度: 0.29x | 用时: 1139.6s
+2026-06-17 04:27:54.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 334.6s/3501.7s (9.6%) | 速度: 0.29x | 用时: 1142.6s
+2026-06-17 04:27:57.041 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 335.6s/3501.7s (9.6%) | 速度: 0.29x | 用时: 1145.6s
+2026-06-17 04:28:00.043 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 336.6s/3501.7s (9.6%) | 速度: 0.29x | 用时: 1148.6s
+2026-06-17 04:28:03.041 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 337.6s/3501.7s (9.6%) | 速度: 0.29x | 用时: 1151.6s
+2026-06-17 04:28:06.025 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 338.6s/3501.7s (9.7%) | 速度: 0.29x | 用时: 1154.6s
+2026-06-17 04:28:09.012 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 339.4s/3501.7s (9.7%) | 速度: 0.29x | 用时: 1157.6s
+2026-06-17 04:28:12.051 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 340.3s/3501.7s (9.7%) | 速度: 0.29x | 用时: 1160.6s
+2026-06-17 04:28:15.043 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 341.3s/3501.7s (9.7%) | 速度: 0.29x | 用时: 1163.6s
+2026-06-17 04:28:18.012 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 341.9s/3501.7s (9.8%) | 速度: 0.29x | 用时: 1166.6s
+2026-06-17 04:28:21.009 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 342.7s/3501.7s (9.8%) | 速度: 0.29x | 用时: 1169.6s
+2026-06-17 04:28:24.043 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 343.5s/3501.7s (9.8%) | 速度: 0.29x | 用时: 1172.6s
+2026-06-17 04:28:27.038 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 344.5s/3501.7s (9.8%) | 速度: 0.29x | 用时: 1175.6s
+2026-06-17 04:28:30.020 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 345.2s/3501.7s (9.9%) | 速度: 0.29x | 用时: 1178.6s
+2026-06-17 04:28:33.003 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 346.1s/3501.7s (9.9%) | 速度: 0.29x | 用时: 1181.6s
+2026-06-17 04:28:33.056 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 346.1s/3501.7s (9.9%) | 速度: 0.29x | 用时: 1181.7s
+2026-06-17 04:28:36.007 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 347.0s/3501.7s (9.9%) | 速度: 0.29x | 用时: 1184.6s
+2026-06-17 04:28:39.040 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 348.1s/3501.7s (9.9%) | 速度: 0.29x | 用时: 1187.6s
+2026-06-17 04:28:42.037 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 348.8s/3501.7s (10.0%) | 速度: 0.29x | 用时: 1190.6s
+2026-06-17 04:28:45.034 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 349.8s/3501.7s (10.0%) | 速度: 0.29x | 用时: 1193.6s
+2026-06-17 04:28:48.031 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 350.7s/3501.7s (10.0%) | 速度: 0.29x | 用时: 1196.6s
+2026-06-17 04:28:51.041 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 351.7s/3501.7s (10.0%) | 速度: 0.29x | 用时: 1199.6s
+2026-06-17 04:28:54.023 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 352.6s/3501.7s (10.1%) | 速度: 0.29x | 用时: 1202.6s
+2026-06-17 04:28:57.007 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 353.5s/3501.7s (10.1%) | 速度: 0.29x | 用时: 1205.6s
+2026-06-17 04:28:57.059 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 353.5s/3501.7s (10.1%) | 速度: 0.29x | 用时: 1205.7s
+2026-06-17 04:29:00.038 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 354.4s/3501.7s (10.1%) | 速度: 0.29x | 用时: 1208.6s
+2026-06-17 04:29:03.019 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 355.3s/3501.7s (10.1%) | 速度: 0.29x | 用时: 1211.6s
+2026-06-17 04:29:06.009 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 356.1s/3501.7s (10.2%) | 速度: 0.29x | 用时: 1214.6s
+2026-06-17 04:29:09.051 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 357.0s/3501.7s (10.2%) | 速度: 0.29x | 用时: 1217.6s
+2026-06-17 04:29:12.035 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 357.9s/3501.7s (10.2%) | 速度: 0.29x | 用时: 1220.6s
+2026-06-17 04:29:15.025 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 358.6s/3501.7s (10.2%) | 速度: 0.29x | 用时: 1223.6s
+2026-06-17 04:29:18.014 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 359.7s/3501.7s (10.3%) | 速度: 0.29x | 用时: 1226.6s
+2026-06-17 04:29:21.043 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 360.7s/3501.7s (10.3%) | 速度: 0.29x | 用时: 1229.6s
+2026-06-17 04:29:24.020 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 361.5s/3501.7s (10.3%) | 速度: 0.29x | 用时: 1232.6s
+2026-06-17 04:29:27.009 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 362.5s/3501.7s (10.4%) | 速度: 0.29x | 用时: 1235.6s
+2026-06-17 04:29:27.060 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 362.5s/3501.7s (10.4%) | 速度: 0.29x | 用时: 1235.7s
+2026-06-17 04:29:30.050 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 363.4s/3501.7s (10.4%) | 速度: 0.29x | 用时: 1238.6s
+2026-06-17 04:29:33.040 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 364.2s/3501.7s (10.4%) | 速度: 0.29x | 用时: 1241.6s
+2026-06-17 04:29:36.034 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 365.1s/3501.7s (10.4%) | 速度: 0.29x | 用时: 1244.6s
+2026-06-17 04:29:39.020 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 366.0s/3501.7s (10.5%) | 速度: 0.29x | 用时: 1247.6s
+2026-06-17 04:29:42.015 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 367.2s/3501.7s (10.5%) | 速度: 0.29x | 用时: 1250.6s
+2026-06-17 04:29:45.002 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 368.0s/3501.7s (10.5%) | 速度: 0.29x | 用时: 1253.6s
+2026-06-17 04:29:45.054 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 368.1s/3501.7s (10.5%) | 速度: 0.29x | 用时: 1253.6s
+2026-06-17 04:29:48.036 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 368.8s/3501.7s (10.5%) | 速度: 0.29x | 用时: 1256.6s
+2026-06-17 04:29:51.045 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 369.8s/3501.7s (10.6%) | 速度: 0.29x | 用时: 1259.6s
+2026-06-17 04:29:54.029 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 370.8s/3501.7s (10.6%) | 速度: 0.29x | 用时: 1262.6s
+2026-06-17 04:29:57.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 371.8s/3501.7s (10.6%) | 速度: 0.29x | 用时: 1265.6s
+2026-06-17 04:30:00.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 372.7s/3501.7s (10.6%) | 速度: 0.29x | 用时: 1268.6s
+2026-06-17 04:30:03.003 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 373.3s/3501.7s (10.7%) | 速度: 0.29x | 用时: 1271.6s
+2026-06-17 04:30:03.055 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 373.3s/3501.7s (10.7%) | 速度: 0.29x | 用时: 1271.6s
+2026-06-17 04:30:06.054 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 374.2s/3501.7s (10.7%) | 速度: 0.29x | 用时: 1274.6s
+2026-06-17 04:30:09.045 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 375.2s/3501.7s (10.7%) | 速度: 0.29x | 用时: 1277.6s
+2026-06-17 04:30:12.045 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 376.1s/3501.7s (10.7%) | 速度: 0.29x | 用时: 1280.6s
+2026-06-17 04:30:15.029 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 377.0s/3501.7s (10.8%) | 速度: 0.29x | 用时: 1283.6s
+2026-06-17 04:30:18.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 377.8s/3501.7s (10.8%) | 速度: 0.29x | 用时: 1286.6s
+2026-06-17 04:30:21.007 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 378.7s/3501.7s (10.8%) | 速度: 0.29x | 用时: 1289.6s
+2026-06-17 04:30:21.059 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 378.7s/3501.7s (10.8%) | 速度: 0.29x | 用时: 1289.7s
+2026-06-17 04:30:24.037 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 379.7s/3501.7s (10.8%) | 速度: 0.29x | 用时: 1292.6s
+2026-06-17 04:30:27.023 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 380.5s/3501.7s (10.9%) | 速度: 0.29x | 用时: 1295.6s
+2026-06-17 04:30:30.014 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 381.7s/3501.7s (10.9%) | 速度: 0.29x | 用时: 1298.6s
+2026-06-17 04:30:33.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 382.5s/3501.7s (10.9%) | 速度: 0.29x | 用时: 1301.6s
+2026-06-17 04:30:36.029 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 383.4s/3501.7s (10.9%) | 速度: 0.29x | 用时: 1304.6s
+2026-06-17 04:30:39.017 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 384.3s/3501.7s (11.0%) | 速度: 0.29x | 用时: 1307.6s
+2026-06-17 04:30:42.013 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 385.4s/3501.7s (11.0%) | 速度: 0.29x | 用时: 1310.6s
+2026-06-17 04:30:45.015 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 386.4s/3501.7s (11.0%) | 速度: 0.29x | 用时: 1313.6s
+2026-06-17 04:30:48.009 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 387.5s/3501.7s (11.1%) | 速度: 0.29x | 用时: 1316.6s
+2026-06-17 04:30:51.005 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 388.2s/3501.7s (11.1%) | 速度: 0.29x | 用时: 1319.6s
+2026-06-17 04:30:51.057 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 388.2s/3501.7s (11.1%) | 速度: 0.29x | 用时: 1319.7s
+2026-06-17 04:30:54.009 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 389.2s/3501.7s (11.1%) | 速度: 0.29x | 用时: 1322.6s
+2026-06-17 04:30:57.001 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 390.2s/3501.7s (11.1%) | 速度: 0.29x | 用时: 1325.6s
+2026-06-17 04:30:57.054 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 390.2s/3501.7s (11.1%) | 速度: 0.29x | 用时: 1325.6s
+2026-06-17 04:31:00.044 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 391.2s/3501.7s (11.2%) | 速度: 0.29x | 用时: 1328.6s
+2026-06-17 04:31:03.030 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 392.2s/3501.7s (11.2%) | 速度: 0.29x | 用时: 1331.6s
+2026-06-17 04:31:06.005 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 393.0s/3501.7s (11.2%) | 速度: 0.29x | 用时: 1334.6s
+2026-06-17 04:31:06.058 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 393.2s/3501.7s (11.2%) | 速度: 0.29x | 用时: 1334.7s
+2026-06-17 04:31:09.048 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 393.9s/3501.7s (11.2%) | 速度: 0.29x | 用时: 1337.6s
+2026-06-17 04:31:12.030 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 393.9s/3501.7s (11.2%) | 速度: 0.29x | 用时: 1340.6s
+2026-06-17 04:31:15.004 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 393.9s/3501.7s (11.2%) | 速度: 0.29x | 用时: 1343.6s
+2026-06-17 04:31:15.056 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 393.9s/3501.7s (11.2%) | 速度: 0.29x | 用时: 1343.7s
+2026-06-17 04:31:18.035 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 393.9s/3501.7s (11.2%) | 速度: 0.29x | 用时: 1346.6s
+2026-06-17 04:31:21.024 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 397.8s/3501.7s (11.4%) | 速度: 0.29x | 用时: 1349.6s
+2026-06-17 04:31:24.003 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 398.5s/3501.7s (11.4%) | 速度: 0.29x | 用时: 1352.6s
+2026-06-17 04:31:24.055 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 398.5s/3501.7s (11.4%) | 速度: 0.29x | 用时: 1352.6s
+2026-06-17 04:31:27.048 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 399.4s/3501.7s (11.4%) | 速度: 0.29x | 用时: 1355.6s
+2026-06-17 04:31:30.034 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 400.2s/3501.7s (11.4%) | 速度: 0.29x | 用时: 1358.6s
+2026-06-17 04:31:33.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 401.2s/3501.7s (11.5%) | 速度: 0.29x | 用时: 1361.6s
+2026-06-17 04:31:36.045 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 402.1s/3501.7s (11.5%) | 速度: 0.29x | 用时: 1364.6s
+2026-06-17 04:31:39.038 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 402.9s/3501.7s (11.5%) | 速度: 0.29x | 用时: 1367.6s
+2026-06-17 04:31:42.017 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 403.7s/3501.7s (11.5%) | 速度: 0.29x | 用时: 1370.6s
+2026-06-17 04:31:45.048 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 404.7s/3501.7s (11.6%) | 速度: 0.29x | 用时: 1373.6s
+2026-06-17 04:31:48.028 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 405.5s/3501.7s (11.6%) | 速度: 0.29x | 用时: 1376.6s
+2026-06-17 04:31:51.030 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 406.5s/3501.7s (11.6%) | 速度: 0.29x | 用时: 1379.6s
+2026-06-17 04:31:54.034 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 407.5s/3501.7s (11.6%) | 速度: 0.29x | 用时: 1382.6s
+2026-06-17 04:31:57.038 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 408.2s/3501.7s (11.7%) | 速度: 0.29x | 用时: 1385.6s
+2026-06-17 04:32:00.038 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 408.8s/3501.7s (11.7%) | 速度: 0.29x | 用时: 1388.6s
+2026-06-17 04:32:03.015 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 408.8s/3501.7s (11.7%) | 速度: 0.29x | 用时: 1391.6s
+2026-06-17 04:32:06.017 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 408.8s/3501.7s (11.7%) | 速度: 0.29x | 用时: 1394.6s
+2026-06-17 04:32:09.031 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 408.8s/3501.7s (11.7%) | 速度: 0.29x | 用时: 1397.6s
+2026-06-17 04:32:12.039 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 408.8s/3501.7s (11.7%) | 速度: 0.29x | 用时: 1400.6s
+2026-06-17 04:32:15.045 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 408.8s/3501.7s (11.7%) | 速度: 0.29x | 用时: 1403.6s
+2026-06-17 04:32:18.039 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 408.8s/3501.7s (11.7%) | 速度: 0.29x | 用时: 1406.6s
+2026-06-17 04:32:21.027 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 408.8s/3501.7s (11.7%) | 速度: 0.29x | 用时: 1409.6s
+2026-06-17 04:32:24.019 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 408.8s/3501.7s (11.7%) | 速度: 0.29x | 用时: 1412.6s
+2026-06-17 04:32:27.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 408.8s/3501.7s (11.7%) | 速度: 0.29x | 用时: 1415.6s
+2026-06-17 04:32:30.013 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 408.8s/3501.7s (11.7%) | 速度: 0.29x | 用时: 1418.6s
+2026-06-17 04:32:33.001 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 408.8s/3501.7s (11.7%) | 速度: 0.29x | 用时: 1421.6s
+2026-06-17 04:32:33.054 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 408.8s/3501.7s (11.7%) | 速度: 0.29x | 用时: 1421.6s
+2026-06-17 04:32:36.040 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 408.8s/3501.7s (11.7%) | 速度: 0.29x | 用时: 1424.6s
+2026-06-17 04:32:39.046 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 408.8s/3501.7s (11.7%) | 速度: 0.29x | 用时: 1427.6s
+2026-06-17 04:32:42.043 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 408.8s/3501.7s (11.7%) | 速度: 0.29x | 用时: 1430.6s
+2026-06-17 04:32:45.011 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 408.8s/3501.7s (11.7%) | 速度: 0.29x | 用时: 1433.6s
+2026-06-17 04:32:48.013 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 408.8s/3501.7s (11.7%) | 速度: 0.29x | 用时: 1436.6s
+2026-06-17 04:32:51.020 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 408.8s/3501.7s (11.7%) | 速度: 0.28x | 用时: 1439.6s
+2026-06-17 04:32:54.039 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 408.8s/3501.7s (11.7%) | 速度: 0.28x | 用时: 1442.6s
+2026-06-17 04:32:57.040 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 408.8s/3501.7s (11.7%) | 速度: 0.28x | 用时: 1445.6s
+2026-06-17 04:33:00.040 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 408.8s/3501.7s (11.7%) | 速度: 0.28x | 用时: 1448.6s
+2026-06-17 04:33:03.041 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 425.4s/3501.7s (12.1%) | 速度: 0.28x | 用时: 1451.6s
+2026-06-17 04:33:06.024 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 426.1s/3501.7s (12.2%) | 速度: 0.29x | 用时: 1454.6s
+2026-06-17 04:33:09.022 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 426.8s/3501.7s (12.2%) | 速度: 0.29x | 用时: 1457.6s
+2026-06-17 04:33:12.007 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 427.7s/3501.7s (12.2%) | 速度: 0.29x | 用时: 1460.6s
+2026-06-17 04:33:12.060 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 427.7s/3501.7s (12.2%) | 速度: 0.29x | 用时: 1460.7s
+2026-06-17 04:33:15.040 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 428.6s/3501.7s (12.2%) | 速度: 0.29x | 用时: 1463.6s
+2026-06-17 04:33:18.027 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 429.4s/3501.7s (12.3%) | 速度: 0.29x | 用时: 1466.6s
+2026-06-17 04:33:21.013 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 430.3s/3501.7s (12.3%) | 速度: 0.29x | 用时: 1469.6s
+2026-06-17 04:33:24.003 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 431.2s/3501.7s (12.3%) | 速度: 0.29x | 用时: 1472.6s
+2026-06-17 04:33:24.056 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 431.2s/3501.7s (12.3%) | 速度: 0.29x | 用时: 1472.6s
+2026-06-17 04:33:27.024 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 432.2s/3501.7s (12.3%) | 速度: 0.29x | 用时: 1475.6s
+2026-06-17 04:33:30.015 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 432.5s/3501.7s (12.4%) | 速度: 0.29x | 用时: 1478.6s
+2026-06-17 04:33:33.043 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 432.5s/3501.7s (12.4%) | 速度: 0.29x | 用时: 1481.6s
+2026-06-17 04:33:36.023 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 434.6s/3501.7s (12.4%) | 速度: 0.29x | 用时: 1484.6s
+2026-06-17 04:33:39.052 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 435.4s/3501.7s (12.4%) | 速度: 0.29x | 用时: 1487.6s
+2026-06-17 04:33:42.047 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 436.2s/3501.7s (12.5%) | 速度: 0.29x | 用时: 1490.6s
+2026-06-17 04:33:45.026 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 437.2s/3501.7s (12.5%) | 速度: 0.29x | 用时: 1493.6s
+2026-06-17 04:33:48.012 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 438.1s/3501.7s (12.5%) | 速度: 0.29x | 用时: 1496.6s
+2026-06-17 04:33:51.053 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 439.1s/3501.7s (12.5%) | 速度: 0.29x | 用时: 1499.6s
+2026-06-17 04:33:54.037 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 440.2s/3501.7s (12.6%) | 速度: 0.29x | 用时: 1502.6s
+2026-06-17 04:33:57.032 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 441.1s/3501.7s (12.6%) | 速度: 0.29x | 用时: 1505.6s
+2026-06-17 04:34:00.029 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 442.1s/3501.7s (12.6%) | 速度: 0.29x | 用时: 1508.6s
+2026-06-17 04:34:03.009 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 443.1s/3501.7s (12.7%) | 速度: 0.29x | 用时: 1511.6s
+2026-06-17 04:34:06.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 443.7s/3501.7s (12.7%) | 速度: 0.29x | 用时: 1514.6s
+2026-06-17 04:34:09.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 444.7s/3501.7s (12.7%) | 速度: 0.29x | 用时: 1517.6s
+2026-06-17 04:34:12.014 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 445.6s/3501.7s (12.7%) | 速度: 0.29x | 用时: 1520.6s
+2026-06-17 04:34:15.005 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 446.4s/3501.7s (12.7%) | 速度: 0.29x | 用时: 1523.6s
+2026-06-17 04:34:15.058 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 446.4s/3501.7s (12.7%) | 速度: 0.29x | 用时: 1523.7s
+2026-06-17 04:34:18.044 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 447.4s/3501.7s (12.8%) | 速度: 0.29x | 用时: 1526.6s
+2026-06-17 04:34:21.034 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 448.4s/3501.7s (12.8%) | 速度: 0.29x | 用时: 1529.6s
+2026-06-17 04:34:24.022 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 449.2s/3501.7s (12.8%) | 速度: 0.29x | 用时: 1532.6s
+2026-06-17 04:34:27.010 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 450.2s/3501.7s (12.9%) | 速度: 0.29x | 用时: 1535.6s
+2026-06-17 04:34:30.047 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 451.2s/3501.7s (12.9%) | 速度: 0.29x | 用时: 1538.6s
+2026-06-17 04:34:33.034 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 452.3s/3501.7s (12.9%) | 速度: 0.29x | 用时: 1541.6s
+2026-06-17 04:34:36.015 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 453.4s/3501.7s (12.9%) | 速度: 0.29x | 用时: 1544.6s
+2026-06-17 04:34:39.003 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 454.2s/3501.7s (13.0%) | 速度: 0.29x | 用时: 1547.6s
+2026-06-17 04:34:39.055 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 454.2s/3501.7s (13.0%) | 速度: 0.29x | 用时: 1547.6s
+2026-06-17 04:34:42.031 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 455.1s/3501.7s (13.0%) | 速度: 0.29x | 用时: 1550.6s
+2026-06-17 04:34:45.039 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 456.0s/3501.7s (13.0%) | 速度: 0.29x | 用时: 1553.6s
+2026-06-17 04:34:48.020 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 456.9s/3501.7s (13.0%) | 速度: 0.29x | 用时: 1556.6s
+2026-06-17 04:34:51.011 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 457.7s/3501.7s (13.1%) | 速度: 0.29x | 用时: 1559.6s
+2026-06-17 04:34:54.001 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 458.5s/3501.7s (13.1%) | 速度: 0.29x | 用时: 1562.6s
+2026-06-17 04:34:54.052 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 458.6s/3501.7s (13.1%) | 速度: 0.29x | 用时: 1562.6s
+2026-06-17 04:34:57.036 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 459.4s/3501.7s (13.1%) | 速度: 0.29x | 用时: 1565.6s
+2026-06-17 04:35:00.026 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 460.3s/3501.7s (13.1%) | 速度: 0.29x | 用时: 1568.6s
+2026-06-17 04:35:03.013 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 461.1s/3501.7s (13.2%) | 速度: 0.29x | 用时: 1571.6s
+2026-06-17 04:35:06.007 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 462.1s/3501.7s (13.2%) | 速度: 0.29x | 用时: 1574.6s
+2026-06-17 04:35:06.060 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 462.1s/3501.7s (13.2%) | 速度: 0.29x | 用时: 1574.7s
+2026-06-17 04:35:09.006 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 462.9s/3501.7s (13.2%) | 速度: 0.29x | 用时: 1577.6s
+2026-06-17 04:35:09.058 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 462.9s/3501.7s (13.2%) | 速度: 0.29x | 用时: 1577.7s
+2026-06-17 04:35:12.038 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 463.8s/3501.7s (13.2%) | 速度: 0.29x | 用时: 1580.6s
+2026-06-17 04:35:15.025 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 464.6s/3501.7s (13.3%) | 速度: 0.29x | 用时: 1583.6s
+2026-06-17 04:35:18.015 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 465.5s/3501.7s (13.3%) | 速度: 0.29x | 用时: 1586.6s
+2026-06-17 04:35:21.036 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 466.0s/3501.7s (13.3%) | 速度: 0.29x | 用时: 1589.6s
+2026-06-17 04:35:24.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 466.8s/3501.7s (13.3%) | 速度: 0.29x | 用时: 1592.6s
+2026-06-17 04:35:27.050 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 467.8s/3501.7s (13.4%) | 速度: 0.29x | 用时: 1595.6s
+2026-06-17 04:35:30.031 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 468.4s/3501.7s (13.4%) | 速度: 0.29x | 用时: 1598.6s
+2026-06-17 04:35:33.011 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 469.4s/3501.7s (13.4%) | 速度: 0.29x | 用时: 1601.6s
+2026-06-17 04:35:36.048 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 470.3s/3501.7s (13.4%) | 速度: 0.29x | 用时: 1604.6s
+2026-06-17 04:35:39.028 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 471.3s/3501.7s (13.5%) | 速度: 0.29x | 用时: 1607.6s
+2026-06-17 04:35:42.011 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 472.1s/3501.7s (13.5%) | 速度: 0.29x | 用时: 1610.6s
+2026-06-17 04:35:45.046 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 472.9s/3501.7s (13.5%) | 速度: 0.29x | 用时: 1613.6s
+2026-06-17 04:35:48.034 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 473.8s/3501.7s (13.5%) | 速度: 0.29x | 用时: 1616.6s
+2026-06-17 04:35:51.034 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 474.8s/3501.7s (13.6%) | 速度: 0.29x | 用时: 1619.6s
+2026-06-17 04:35:54.015 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 475.6s/3501.7s (13.6%) | 速度: 0.29x | 用时: 1622.6s
+2026-06-17 04:35:57.045 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 476.4s/3501.7s (13.6%) | 速度: 0.29x | 用时: 1625.6s
+2026-06-17 04:36:00.020 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 477.1s/3501.7s (13.6%) | 速度: 0.29x | 用时: 1628.6s
+2026-06-17 04:36:03.012 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 478.1s/3501.7s (13.7%) | 速度: 0.29x | 用时: 1631.6s
+2026-06-17 04:36:06.051 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 479.0s/3501.7s (13.7%) | 速度: 0.29x | 用时: 1634.6s
+2026-06-17 04:36:09.042 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 480.0s/3501.7s (13.7%) | 速度: 0.29x | 用时: 1637.6s
+2026-06-17 04:36:12.027 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 480.9s/3501.7s (13.7%) | 速度: 0.29x | 用时: 1640.6s
+2026-06-17 04:36:15.052 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 481.9s/3501.7s (13.8%) | 速度: 0.29x | 用时: 1643.6s
+2026-06-17 04:36:18.034 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 482.6s/3501.7s (13.8%) | 速度: 0.29x | 用时: 1646.6s
+2026-06-17 04:36:21.020 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 483.4s/3501.7s (13.8%) | 速度: 0.29x | 用时: 1649.6s
+2026-06-17 04:36:24.047 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 484.4s/3501.7s (13.8%) | 速度: 0.29x | 用时: 1652.6s
+2026-06-17 04:36:27.024 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 485.4s/3501.7s (13.9%) | 速度: 0.29x | 用时: 1655.6s
+2026-06-17 04:36:30.001 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 486.3s/3501.7s (13.9%) | 速度: 0.29x | 用时: 1658.6s
+2026-06-17 04:36:30.054 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 486.3s/3501.7s (13.9%) | 速度: 0.29x | 用时: 1658.6s
+2026-06-17 04:36:33.040 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 487.1s/3501.7s (13.9%) | 速度: 0.29x | 用时: 1661.6s
+2026-06-17 04:36:36.021 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 487.9s/3501.7s (13.9%) | 速度: 0.29x | 用时: 1664.6s
+2026-06-17 04:36:39.007 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 488.8s/3501.7s (14.0%) | 速度: 0.29x | 用时: 1667.6s
+2026-06-17 04:36:39.060 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 488.8s/3501.7s (14.0%) | 速度: 0.29x | 用时: 1667.7s
+2026-06-17 04:36:42.047 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 489.6s/3501.7s (14.0%) | 速度: 0.29x | 用时: 1670.6s
+2026-06-17 04:36:45.014 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 490.2s/3501.7s (14.0%) | 速度: 0.29x | 用时: 1673.6s
+2026-06-17 04:36:48.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 491.1s/3501.7s (14.0%) | 速度: 0.29x | 用时: 1676.6s
+2026-06-17 04:36:51.032 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 491.8s/3501.7s (14.0%) | 速度: 0.29x | 用时: 1679.6s
+2026-06-17 04:36:54.013 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 492.5s/3501.7s (14.1%) | 速度: 0.29x | 用时: 1682.6s
+2026-06-17 04:36:57.047 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 493.3s/3501.7s (14.1%) | 速度: 0.29x | 用时: 1685.6s
+2026-06-17 04:37:00.033 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 494.1s/3501.7s (14.1%) | 速度: 0.29x | 用时: 1688.6s
+2026-06-17 04:37:03.025 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 495.0s/3501.7s (14.1%) | 速度: 0.29x | 用时: 1691.6s
+2026-06-17 04:37:06.015 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 495.6s/3501.7s (14.2%) | 速度: 0.29x | 用时: 1694.6s
+2026-06-17 04:37:09.006 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 496.3s/3501.7s (14.2%) | 速度: 0.29x | 用时: 1697.6s
+2026-06-17 04:37:09.059 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 496.3s/3501.7s (14.2%) | 速度: 0.29x | 用时: 1697.7s
+2026-06-17 04:37:12.022 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 497.0s/3501.7s (14.2%) | 速度: 0.29x | 用时: 1700.6s
+2026-06-17 04:37:15.011 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 497.7s/3501.7s (14.2%) | 速度: 0.29x | 用时: 1703.6s
+2026-06-17 04:37:18.053 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 498.5s/3501.7s (14.2%) | 速度: 0.29x | 用时: 1706.6s
+2026-06-17 04:37:21.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 499.3s/3501.7s (14.3%) | 速度: 0.29x | 用时: 1709.6s
+2026-06-17 04:37:24.035 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 499.9s/3501.7s (14.3%) | 速度: 0.29x | 用时: 1712.6s
+2026-06-17 04:37:27.034 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 500.6s/3501.7s (14.3%) | 速度: 0.29x | 用时: 1715.6s
+2026-06-17 04:37:30.026 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 501.5s/3501.7s (14.3%) | 速度: 0.29x | 用时: 1718.6s
+2026-06-17 04:37:33.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 502.3s/3501.7s (14.3%) | 速度: 0.29x | 用时: 1721.6s
+2026-06-17 04:37:36.005 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 503.0s/3501.7s (14.4%) | 速度: 0.29x | 用时: 1724.6s
+2026-06-17 04:37:36.059 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 503.0s/3501.7s (14.4%) | 速度: 0.29x | 用时: 1724.7s
+2026-06-17 04:37:39.006 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 503.2s/3501.7s (14.4%) | 速度: 0.29x | 用时: 1727.6s
+2026-06-17 04:37:39.059 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 503.2s/3501.7s (14.4%) | 速度: 0.29x | 用时: 1727.7s
+2026-06-17 04:37:42.031 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 503.2s/3501.7s (14.4%) | 速度: 0.29x | 用时: 1730.6s
+2026-06-17 04:37:45.014 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 503.2s/3501.7s (14.4%) | 速度: 0.29x | 用时: 1733.6s
+2026-06-17 04:37:48.013 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 503.2s/3501.7s (14.4%) | 速度: 0.29x | 用时: 1736.6s
+2026-06-17 04:37:51.012 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 503.2s/3501.7s (14.4%) | 速度: 0.29x | 用时: 1739.6s
+2026-06-17 04:37:54.050 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 507.3s/3501.7s (14.5%) | 速度: 0.29x | 用时: 1742.6s
+2026-06-17 04:37:57.042 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 507.8s/3501.7s (14.5%) | 速度: 0.29x | 用时: 1745.6s
+2026-06-17 04:38:00.031 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 508.6s/3501.7s (14.5%) | 速度: 0.29x | 用时: 1748.6s
+2026-06-17 04:38:03.023 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 509.5s/3501.7s (14.5%) | 速度: 0.29x | 用时: 1751.6s
+2026-06-17 04:38:06.008 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 510.4s/3501.7s (14.6%) | 速度: 0.29x | 用时: 1754.6s
+2026-06-17 04:38:06.059 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 510.4s/3501.7s (14.6%) | 速度: 0.29x | 用时: 1754.7s
+2026-06-17 04:38:09.047 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 511.1s/3501.7s (14.6%) | 速度: 0.29x | 用时: 1757.6s
+2026-06-17 04:38:12.035 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 512.0s/3501.7s (14.6%) | 速度: 0.29x | 用时: 1760.6s
+2026-06-17 04:38:15.022 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 512.8s/3501.7s (14.6%) | 速度: 0.29x | 用时: 1763.6s
+2026-06-17 04:38:18.025 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 513.6s/3501.7s (14.7%) | 速度: 0.29x | 用时: 1766.6s
+2026-06-17 04:38:21.010 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 514.5s/3501.7s (14.7%) | 速度: 0.29x | 用时: 1769.6s
+2026-06-17 04:38:24.004 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 515.4s/3501.7s (14.7%) | 速度: 0.29x | 用时: 1772.6s
+2026-06-17 04:38:24.056 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 515.4s/3501.7s (14.7%) | 速度: 0.29x | 用时: 1772.7s
+2026-06-17 04:38:27.034 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 516.1s/3501.7s (14.7%) | 速度: 0.29x | 用时: 1775.6s
+2026-06-17 04:38:30.025 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 517.0s/3501.7s (14.8%) | 速度: 0.29x | 用时: 1778.6s
+2026-06-17 04:38:33.004 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 517.8s/3501.7s (14.8%) | 速度: 0.29x | 用时: 1781.6s
+2026-06-17 04:38:33.055 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 517.8s/3501.7s (14.8%) | 速度: 0.29x | 用时: 1781.7s
+2026-06-17 04:38:36.043 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 518.5s/3501.7s (14.8%) | 速度: 0.29x | 用时: 1784.6s
+2026-06-17 04:38:39.046 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 519.5s/3501.7s (14.8%) | 速度: 0.29x | 用时: 1787.6s
+2026-06-17 04:38:42.036 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 520.1s/3501.7s (14.9%) | 速度: 0.29x | 用时: 1790.6s
+2026-06-17 04:38:45.022 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 520.1s/3501.7s (14.9%) | 速度: 0.29x | 用时: 1793.6s
+2026-06-17 04:38:48.014 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 520.1s/3501.7s (14.9%) | 速度: 0.29x | 用时: 1796.6s
+2026-06-17 04:38:51.030 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 520.1s/3501.7s (14.9%) | 速度: 0.29x | 用时: 1799.6s
+2026-06-17 04:38:54.027 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 520.1s/3501.7s (14.9%) | 速度: 0.29x | 用时: 1802.6s
+2026-06-17 04:38:57.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 520.1s/3501.7s (14.9%) | 速度: 0.29x | 用时: 1805.6s
+2026-06-17 04:39:00.004 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 520.1s/3501.7s (14.9%) | 速度: 0.29x | 用时: 1808.6s
+2026-06-17 04:39:00.056 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 520.1s/3501.7s (14.9%) | 速度: 0.29x | 用时: 1808.7s
+2026-06-17 04:39:03.041 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 520.1s/3501.7s (14.9%) | 速度: 0.29x | 用时: 1811.6s
+2026-06-17 04:39:06.039 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 520.1s/3501.7s (14.9%) | 速度: 0.29x | 用时: 1814.6s
+2026-06-17 04:39:09.041 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 527.7s/3501.7s (15.1%) | 速度: 0.29x | 用时: 1817.6s
+2026-06-17 04:39:12.033 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 528.7s/3501.7s (15.1%) | 速度: 0.29x | 用时: 1820.6s
+2026-06-17 04:39:15.028 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 529.4s/3501.7s (15.1%) | 速度: 0.29x | 用时: 1823.6s
+2026-06-17 04:39:18.017 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 530.3s/3501.7s (15.1%) | 速度: 0.29x | 用时: 1826.6s
+2026-06-17 04:39:21.009 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 531.4s/3501.7s (15.2%) | 速度: 0.29x | 用时: 1829.6s
+2026-06-17 04:39:24.050 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 532.2s/3501.7s (15.2%) | 速度: 0.29x | 用时: 1832.6s
+2026-06-17 04:39:27.032 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 533.0s/3501.7s (15.2%) | 速度: 0.29x | 用时: 1835.6s
+2026-06-17 04:39:30.013 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 534.0s/3501.7s (15.2%) | 速度: 0.29x | 用时: 1838.6s
+2026-06-17 04:39:33.037 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 534.8s/3501.7s (15.3%) | 速度: 0.29x | 用时: 1841.6s
+2026-06-17 04:39:36.012 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 535.7s/3501.7s (15.3%) | 速度: 0.29x | 用时: 1844.6s
+2026-06-17 04:39:39.046 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 536.5s/3501.7s (15.3%) | 速度: 0.29x | 用时: 1847.6s
+2026-06-17 04:39:42.043 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 536.5s/3501.7s (15.3%) | 速度: 0.29x | 用时: 1850.6s
+2026-06-17 04:39:45.052 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 536.5s/3501.7s (15.3%) | 速度: 0.29x | 用时: 1853.6s
+2026-06-17 04:39:48.033 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 536.5s/3501.7s (15.3%) | 速度: 0.29x | 用时: 1856.6s
+2026-06-17 04:39:51.019 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 536.5s/3501.7s (15.3%) | 速度: 0.29x | 用时: 1859.6s
+2026-06-17 04:39:54.020 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 536.5s/3501.7s (15.3%) | 速度: 0.29x | 用时: 1862.6s
+2026-06-17 04:39:57.013 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 536.5s/3501.7s (15.3%) | 速度: 0.29x | 用时: 1865.6s
+2026-06-17 04:40:00.043 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 536.5s/3501.7s (15.3%) | 速度: 0.29x | 用时: 1868.6s
+2026-06-17 04:40:03.020 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 536.5s/3501.7s (15.3%) | 速度: 0.29x | 用时: 1871.6s
+2026-06-17 04:40:06.046 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 536.5s/3501.7s (15.3%) | 速度: 0.29x | 用时: 1874.6s
+2026-06-17 04:40:09.025 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 536.5s/3501.7s (15.3%) | 速度: 0.29x | 用时: 1877.6s
+2026-06-17 04:40:12.008 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 547.3s/3501.7s (15.6%) | 速度: 0.29x | 用时: 1880.6s
+2026-06-17 04:40:12.060 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 547.3s/3501.7s (15.6%) | 速度: 0.29x | 用时: 1880.7s
+2026-06-17 04:40:15.024 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 548.4s/3501.7s (15.7%) | 速度: 0.29x | 用时: 1883.6s
+2026-06-17 04:40:18.048 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 549.4s/3501.7s (15.7%) | 速度: 0.29x | 用时: 1886.6s
+2026-06-17 04:40:21.030 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 550.3s/3501.7s (15.7%) | 速度: 0.29x | 用时: 1889.6s
+2026-06-17 04:40:24.051 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 551.2s/3501.7s (15.7%) | 速度: 0.29x | 用时: 1892.6s
+2026-06-17 04:40:27.021 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 552.2s/3501.7s (15.8%) | 速度: 0.29x | 用时: 1895.6s
+2026-06-17 04:40:30.003 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 553.2s/3501.7s (15.8%) | 速度: 0.29x | 用时: 1898.6s
+2026-06-17 04:40:30.056 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 553.2s/3501.7s (15.8%) | 速度: 0.29x | 用时: 1898.6s
+2026-06-17 04:40:33.035 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 554.2s/3501.7s (15.8%) | 速度: 0.29x | 用时: 1901.6s
+2026-06-17 04:40:36.015 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 555.0s/3501.7s (15.8%) | 速度: 0.29x | 用时: 1904.6s
+2026-06-17 04:40:39.038 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 556.0s/3501.7s (15.9%) | 速度: 0.29x | 用时: 1907.6s
+2026-06-17 04:40:42.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 557.0s/3501.7s (15.9%) | 速度: 0.29x | 用时: 1910.6s
+2026-06-17 04:40:45.047 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 557.2s/3501.7s (15.9%) | 速度: 0.29x | 用时: 1913.6s
+2026-06-17 04:40:48.026 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 557.2s/3501.7s (15.9%) | 速度: 0.29x | 用时: 1916.6s
+2026-06-17 04:40:51.008 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 557.2s/3501.7s (15.9%) | 速度: 0.29x | 用时: 1919.6s
+2026-06-17 04:40:51.060 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 557.2s/3501.7s (15.9%) | 速度: 0.29x | 用时: 1919.7s
+2026-06-17 04:40:54.046 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 557.2s/3501.7s (15.9%) | 速度: 0.29x | 用时: 1922.6s
+2026-06-17 04:40:57.024 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 557.2s/3501.7s (15.9%) | 速度: 0.29x | 用时: 1925.6s
+2026-06-17 04:41:00.051 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 557.2s/3501.7s (15.9%) | 速度: 0.29x | 用时: 1928.6s
+2026-06-17 04:41:03.027 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 557.2s/3501.7s (15.9%) | 速度: 0.29x | 用时: 1931.6s
+2026-06-17 04:41:06.015 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 557.2s/3501.7s (15.9%) | 速度: 0.29x | 用时: 1934.6s
+2026-06-17 04:41:09.040 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 557.2s/3501.7s (15.9%) | 速度: 0.29x | 用时: 1937.6s
+2026-06-17 04:41:12.023 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 557.2s/3501.7s (15.9%) | 速度: 0.29x | 用时: 1940.6s
+2026-06-17 04:41:15.005 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 566.0s/3501.7s (16.2%) | 速度: 0.29x | 用时: 1943.6s
+2026-06-17 04:41:15.058 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 566.0s/3501.7s (16.2%) | 速度: 0.29x | 用时: 1943.7s
+2026-06-17 04:41:18.052 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 566.9s/3501.7s (16.2%) | 速度: 0.29x | 用时: 1946.6s
+2026-06-17 04:41:21.038 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 567.9s/3501.7s (16.2%) | 速度: 0.29x | 用时: 1949.6s
+2026-06-17 04:41:24.017 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 568.7s/3501.7s (16.2%) | 速度: 0.29x | 用时: 1952.6s
+2026-06-17 04:41:27.006 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 569.5s/3501.7s (16.3%) | 速度: 0.29x | 用时: 1955.6s
+2026-06-17 04:41:27.057 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 569.5s/3501.7s (16.3%) | 速度: 0.29x | 用时: 1955.7s
+2026-06-17 04:41:30.031 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 570.1s/3501.7s (16.3%) | 速度: 0.29x | 用时: 1958.6s
+2026-06-17 04:41:33.017 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 570.9s/3501.7s (16.3%) | 速度: 0.29x | 用时: 1961.6s
+2026-06-17 04:41:36.005 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 571.7s/3501.7s (16.3%) | 速度: 0.29x | 用时: 1964.6s
+2026-06-17 04:41:36.058 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 571.7s/3501.7s (16.3%) | 速度: 0.29x | 用时: 1964.7s
+2026-06-17 04:41:39.032 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 572.5s/3501.7s (16.3%) | 速度: 0.29x | 用时: 1967.6s
+2026-06-17 04:41:42.032 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 573.4s/3501.7s (16.4%) | 速度: 0.29x | 用时: 1970.6s
+2026-06-17 04:41:45.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 574.2s/3501.7s (16.4%) | 速度: 0.29x | 用时: 1973.6s
+2026-06-17 04:41:48.051 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 575.2s/3501.7s (16.4%) | 速度: 0.29x | 用时: 1976.6s
+2026-06-17 04:41:51.030 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 576.3s/3501.7s (16.5%) | 速度: 0.29x | 用时: 1979.6s
+2026-06-17 04:41:54.011 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 577.4s/3501.7s (16.5%) | 速度: 0.29x | 用时: 1982.6s
+2026-06-17 04:41:57.038 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 578.1s/3501.7s (16.5%) | 速度: 0.29x | 用时: 1985.6s
+2026-06-17 04:42:00.021 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 579.0s/3501.7s (16.5%) | 速度: 0.29x | 用时: 1988.6s
+2026-06-17 04:42:03.053 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 580.0s/3501.7s (16.6%) | 速度: 0.29x | 用时: 1991.6s
+2026-06-17 04:42:06.048 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 581.2s/3501.7s (16.6%) | 速度: 0.29x | 用时: 1994.6s
+2026-06-17 04:42:09.027 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 582.4s/3501.7s (16.6%) | 速度: 0.29x | 用时: 1997.6s
+2026-06-17 04:42:12.007 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 583.4s/3501.7s (16.7%) | 速度: 0.29x | 用时: 2000.6s
+2026-06-17 04:42:12.058 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 583.4s/3501.7s (16.7%) | 速度: 0.29x | 用时: 2000.7s
+2026-06-17 04:42:15.037 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 584.3s/3501.7s (16.7%) | 速度: 0.29x | 用时: 2003.6s
+2026-06-17 04:42:18.013 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 585.3s/3501.7s (16.7%) | 速度: 0.29x | 用时: 2006.6s
+2026-06-17 04:42:21.048 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 586.2s/3501.7s (16.7%) | 速度: 0.29x | 用时: 2009.6s
+2026-06-17 04:42:24.042 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 587.0s/3501.7s (16.8%) | 速度: 0.29x | 用时: 2012.6s
+2026-06-17 04:42:27.023 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 587.3s/3501.7s (16.8%) | 速度: 0.29x | 用时: 2015.6s
+2026-06-17 04:42:30.005 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 587.3s/3501.7s (16.8%) | 速度: 0.29x | 用时: 2018.6s
+2026-06-17 04:42:30.057 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 587.3s/3501.7s (16.8%) | 速度: 0.29x | 用时: 2018.7s
+2026-06-17 04:42:33.042 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 587.3s/3501.7s (16.8%) | 速度: 0.29x | 用时: 2021.6s
+2026-06-17 04:42:36.029 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 587.3s/3501.7s (16.8%) | 速度: 0.29x | 用时: 2024.6s
+2026-06-17 04:42:39.032 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 587.3s/3501.7s (16.8%) | 速度: 0.29x | 用时: 2027.6s
+2026-06-17 04:42:42.019 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 587.3s/3501.7s (16.8%) | 速度: 0.29x | 用时: 2030.6s
+2026-06-17 04:42:45.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 587.3s/3501.7s (16.8%) | 速度: 0.29x | 用时: 2033.6s
+2026-06-17 04:42:48.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 587.3s/3501.7s (16.8%) | 速度: 0.29x | 用时: 2036.6s
+2026-06-17 04:42:51.038 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 587.3s/3501.7s (16.8%) | 速度: 0.29x | 用时: 2039.6s
+2026-06-17 04:42:54.024 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 587.3s/3501.7s (16.8%) | 速度: 0.29x | 用时: 2042.6s
+2026-06-17 04:42:57.008 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 587.3s/3501.7s (16.8%) | 速度: 0.29x | 用时: 2045.6s
+2026-06-17 04:42:57.060 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 587.3s/3501.7s (16.8%) | 速度: 0.29x | 用时: 2045.7s
+2026-06-17 04:43:00.052 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 587.3s/3501.7s (16.8%) | 速度: 0.29x | 用时: 2048.6s
+2026-06-17 04:43:03.030 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 587.3s/3501.7s (16.8%) | 速度: 0.29x | 用时: 2051.6s
+2026-06-17 04:43:06.037 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 587.3s/3501.7s (16.8%) | 速度: 0.29x | 用时: 2054.6s
+2026-06-17 04:43:09.022 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 587.3s/3501.7s (16.8%) | 速度: 0.29x | 用时: 2057.6s
+2026-06-17 04:43:12.012 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 587.3s/3501.7s (16.8%) | 速度: 0.29x | 用时: 2060.6s
+2026-06-17 04:43:15.050 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 587.3s/3501.7s (16.8%) | 速度: 0.29x | 用时: 2063.6s
+2026-06-17 04:43:18.032 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 587.3s/3501.7s (16.8%) | 速度: 0.28x | 用时: 2066.6s
+2026-06-17 04:43:21.021 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 587.3s/3501.7s (16.8%) | 速度: 0.28x | 用时: 2069.6s
+2026-06-17 04:43:24.023 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 605.9s/3501.7s (17.3%) | 速度: 0.29x | 用时: 2072.6s
+2026-06-17 04:43:27.013 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 606.9s/3501.7s (17.3%) | 速度: 0.29x | 用时: 2075.6s
+2026-06-17 04:43:30.006 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 607.9s/3501.7s (17.4%) | 速度: 0.29x | 用时: 2078.6s
+2026-06-17 04:43:30.059 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 607.9s/3501.7s (17.4%) | 速度: 0.29x | 用时: 2078.7s
+2026-06-17 04:43:33.048 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 609.1s/3501.7s (17.4%) | 速度: 0.29x | 用时: 2081.6s
+2026-06-17 04:43:36.040 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 610.0s/3501.7s (17.4%) | 速度: 0.29x | 用时: 2084.6s
+2026-06-17 04:43:39.050 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 610.9s/3501.7s (17.4%) | 速度: 0.29x | 用时: 2087.6s
+2026-06-17 04:43:42.030 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 611.7s/3501.7s (17.5%) | 速度: 0.29x | 用时: 2090.6s
+2026-06-17 04:43:45.013 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 612.6s/3501.7s (17.5%) | 速度: 0.29x | 用时: 2093.6s
+2026-06-17 04:43:48.006 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 613.4s/3501.7s (17.5%) | 速度: 0.29x | 用时: 2096.6s
+2026-06-17 04:43:48.058 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 613.4s/3501.7s (17.5%) | 速度: 0.29x | 用时: 2096.7s
+2026-06-17 04:43:51.045 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 614.1s/3501.7s (17.5%) | 速度: 0.29x | 用时: 2099.6s
+2026-06-17 04:43:54.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 614.9s/3501.7s (17.6%) | 速度: 0.29x | 用时: 2102.6s
+2026-06-17 04:43:57.039 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 615.7s/3501.7s (17.6%) | 速度: 0.29x | 用时: 2105.6s
+2026-06-17 04:44:00.031 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 616.7s/3501.7s (17.6%) | 速度: 0.29x | 用时: 2108.6s
+2026-06-17 04:44:03.040 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 617.7s/3501.7s (17.6%) | 速度: 0.29x | 用时: 2111.6s
+2026-06-17 04:44:06.034 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 618.6s/3501.7s (17.7%) | 速度: 0.29x | 用时: 2114.6s
+2026-06-17 04:44:09.038 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 619.6s/3501.7s (17.7%) | 速度: 0.29x | 用时: 2117.6s
+2026-06-17 04:44:12.053 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 620.4s/3501.7s (17.7%) | 速度: 0.29x | 用时: 2120.6s
+2026-06-17 04:44:15.051 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 621.1s/3501.7s (17.7%) | 速度: 0.29x | 用时: 2123.6s
+2026-06-17 04:44:18.008 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 621.1s/3501.7s (17.7%) | 速度: 0.29x | 用时: 2126.6s
+2026-06-17 04:44:21.047 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 621.1s/3501.7s (17.7%) | 速度: 0.29x | 用时: 2129.6s
+2026-06-17 04:44:24.044 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 621.1s/3501.7s (17.7%) | 速度: 0.29x | 用时: 2132.6s
+2026-06-17 04:44:27.019 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 621.1s/3501.7s (17.7%) | 速度: 0.29x | 用时: 2135.6s
+2026-06-17 04:44:30.004 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 621.1s/3501.7s (17.7%) | 速度: 0.29x | 用时: 2138.6s
+2026-06-17 04:44:30.057 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 621.1s/3501.7s (17.7%) | 速度: 0.29x | 用时: 2138.7s
+2026-06-17 04:44:33.041 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 621.1s/3501.7s (17.7%) | 速度: 0.29x | 用时: 2141.6s
+2026-06-17 04:44:36.024 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 621.1s/3501.7s (17.7%) | 速度: 0.29x | 用时: 2144.6s
+2026-06-17 04:44:39.008 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 621.1s/3501.7s (17.7%) | 速度: 0.29x | 用时: 2147.6s
+2026-06-17 04:44:39.060 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 621.1s/3501.7s (17.7%) | 速度: 0.29x | 用时: 2147.7s
+2026-06-17 04:44:42.046 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 621.1s/3501.7s (17.7%) | 速度: 0.29x | 用时: 2150.6s
+2026-06-17 04:44:45.021 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 621.1s/3501.7s (17.7%) | 速度: 0.29x | 用时: 2153.6s
+2026-06-17 04:44:48.010 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 621.1s/3501.7s (17.7%) | 速度: 0.29x | 用时: 2156.6s
+2026-06-17 04:44:51.043 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 621.1s/3501.7s (17.7%) | 速度: 0.29x | 用时: 2159.6s
+2026-06-17 04:44:54.021 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 621.1s/3501.7s (17.7%) | 速度: 0.29x | 用时: 2162.6s
+2026-06-17 04:44:57.052 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 621.1s/3501.7s (17.7%) | 速度: 0.29x | 用时: 2165.6s
+2026-06-17 04:45:00.029 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 621.1s/3501.7s (17.7%) | 速度: 0.29x | 用时: 2168.6s
+2026-06-17 04:45:03.015 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 621.1s/3501.7s (17.7%) | 速度: 0.29x | 用时: 2171.6s
+2026-06-17 04:45:06.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 621.1s/3501.7s (17.7%) | 速度: 0.29x | 用时: 2174.6s
+2026-06-17 04:45:09.036 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 638.6s/3501.7s (18.2%) | 速度: 0.29x | 用时: 2177.6s
+2026-06-17 04:45:12.026 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 639.4s/3501.7s (18.3%) | 速度: 0.29x | 用时: 2180.6s
+2026-06-17 04:45:15.010 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 640.3s/3501.7s (18.3%) | 速度: 0.29x | 用时: 2183.6s
+2026-06-17 04:45:18.048 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 640.9s/3501.7s (18.3%) | 速度: 0.29x | 用时: 2186.6s
+2026-06-17 04:45:21.042 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 641.6s/3501.7s (18.3%) | 速度: 0.29x | 用时: 2189.6s
+2026-06-17 04:45:24.019 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 642.4s/3501.7s (18.3%) | 速度: 0.29x | 用时: 2192.6s
+2026-06-17 04:45:27.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 643.2s/3501.7s (18.4%) | 速度: 0.29x | 用时: 2195.6s
+2026-06-17 04:45:30.032 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 644.1s/3501.7s (18.4%) | 速度: 0.29x | 用时: 2198.6s
+2026-06-17 04:45:33.032 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 645.0s/3501.7s (18.4%) | 速度: 0.29x | 用时: 2201.6s
+2026-06-17 04:45:36.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 645.9s/3501.7s (18.4%) | 速度: 0.29x | 用时: 2204.6s
+2026-06-17 04:45:39.043 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 646.6s/3501.7s (18.5%) | 速度: 0.29x | 用时: 2207.6s
+2026-06-17 04:45:42.025 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 647.3s/3501.7s (18.5%) | 速度: 0.29x | 用时: 2210.6s
+2026-06-17 04:45:45.008 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 648.1s/3501.7s (18.5%) | 速度: 0.29x | 用时: 2213.6s
+2026-06-17 04:45:45.060 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 648.1s/3501.7s (18.5%) | 速度: 0.29x | 用时: 2213.7s
+2026-06-17 04:45:48.040 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 648.8s/3501.7s (18.5%) | 速度: 0.29x | 用时: 2216.6s
+2026-06-17 04:45:51.037 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 649.6s/3501.7s (18.6%) | 速度: 0.29x | 用时: 2219.6s
+2026-06-17 04:45:54.022 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 650.6s/3501.7s (18.6%) | 速度: 0.29x | 用时: 2222.6s
+2026-06-17 04:45:57.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 651.4s/3501.7s (18.6%) | 速度: 0.29x | 用时: 2225.6s
+2026-06-17 04:46:00.006 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 652.1s/3501.7s (18.6%) | 速度: 0.29x | 用时: 2228.6s
+2026-06-17 04:46:00.058 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 652.1s/3501.7s (18.6%) | 速度: 0.29x | 用时: 2228.7s
+2026-06-17 04:46:03.044 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 653.1s/3501.7s (18.7%) | 速度: 0.29x | 用时: 2231.6s
+2026-06-17 04:46:06.017 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 653.9s/3501.7s (18.7%) | 速度: 0.29x | 用时: 2234.6s
+2026-06-17 04:46:09.002 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 654.9s/3501.7s (18.7%) | 速度: 0.29x | 用时: 2237.6s
+2026-06-17 04:46:09.055 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 654.9s/3501.7s (18.7%) | 速度: 0.29x | 用时: 2237.6s
+2026-06-17 04:46:12.040 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 655.8s/3501.7s (18.7%) | 速度: 0.29x | 用时: 2240.6s
+2026-06-17 04:46:15.030 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 656.4s/3501.7s (18.7%) | 速度: 0.29x | 用时: 2243.6s
+2026-06-17 04:46:18.024 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 657.4s/3501.7s (18.8%) | 速度: 0.29x | 用时: 2246.6s
+2026-06-17 04:46:21.019 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 658.3s/3501.7s (18.8%) | 速度: 0.29x | 用时: 2249.6s
+2026-06-17 04:46:24.005 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 659.1s/3501.7s (18.8%) | 速度: 0.29x | 用时: 2252.6s
+2026-06-17 04:46:24.059 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 659.1s/3501.7s (18.8%) | 速度: 0.29x | 用时: 2252.7s
+2026-06-17 04:46:27.041 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 660.3s/3501.7s (18.9%) | 速度: 0.29x | 用时: 2255.6s
+2026-06-17 04:46:30.021 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 661.3s/3501.7s (18.9%) | 速度: 0.29x | 用时: 2258.6s
+2026-06-17 04:46:33.009 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 662.1s/3501.7s (18.9%) | 速度: 0.29x | 用时: 2261.6s
+2026-06-17 04:46:36.043 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 662.5s/3501.7s (18.9%) | 速度: 0.29x | 用时: 2264.6s
+2026-06-17 04:46:39.039 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 663.6s/3501.7s (19.0%) | 速度: 0.29x | 用时: 2267.6s
+2026-06-17 04:46:42.028 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 664.6s/3501.7s (19.0%) | 速度: 0.29x | 用时: 2270.6s
+2026-06-17 04:46:45.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 665.5s/3501.7s (19.0%) | 速度: 0.29x | 用时: 2273.6s
+2026-06-17 04:46:48.005 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 666.1s/3501.7s (19.0%) | 速度: 0.29x | 用时: 2276.6s
+2026-06-17 04:46:48.058 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 666.3s/3501.7s (19.0%) | 速度: 0.29x | 用时: 2276.7s
+2026-06-17 04:46:51.048 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 667.0s/3501.7s (19.0%) | 速度: 0.29x | 用时: 2279.6s
+2026-06-17 04:46:54.035 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 667.8s/3501.7s (19.1%) | 速度: 0.29x | 用时: 2282.6s
+2026-06-17 04:46:57.022 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 668.6s/3501.7s (19.1%) | 速度: 0.29x | 用时: 2285.6s
+2026-06-17 04:47:00.015 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 669.5s/3501.7s (19.1%) | 速度: 0.29x | 用时: 2288.6s
+2026-06-17 04:47:03.049 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 670.6s/3501.7s (19.2%) | 速度: 0.29x | 用时: 2291.6s
+2026-06-17 04:47:06.029 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 671.8s/3501.7s (19.2%) | 速度: 0.29x | 用时: 2294.6s
+2026-06-17 04:47:09.017 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 672.6s/3501.7s (19.2%) | 速度: 0.29x | 用时: 2297.6s
+2026-06-17 04:47:12.050 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 673.6s/3501.7s (19.2%) | 速度: 0.29x | 用时: 2300.6s
+2026-06-17 04:47:15.027 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 674.6s/3501.7s (19.3%) | 速度: 0.29x | 用时: 2303.6s
+2026-06-17 04:47:18.033 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 675.8s/3501.7s (19.3%) | 速度: 0.29x | 用时: 2306.6s
+2026-06-17 04:47:21.018 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 676.8s/3501.7s (19.3%) | 速度: 0.29x | 用时: 2309.6s
+2026-06-17 04:47:24.050 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 677.8s/3501.7s (19.4%) | 速度: 0.29x | 用时: 2312.6s
+2026-06-17 04:47:27.030 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 678.8s/3501.7s (19.4%) | 速度: 0.29x | 用时: 2315.6s
+2026-06-17 04:47:30.027 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 680.0s/3501.7s (19.4%) | 速度: 0.29x | 用时: 2318.6s
+2026-06-17 04:47:33.025 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 681.1s/3501.7s (19.5%) | 速度: 0.29x | 用时: 2321.6s
+2026-06-17 04:47:36.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 682.1s/3501.7s (19.5%) | 速度: 0.29x | 用时: 2324.6s
+2026-06-17 04:47:39.047 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 683.3s/3501.7s (19.5%) | 速度: 0.29x | 用时: 2327.6s
+2026-06-17 04:47:42.039 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 684.1s/3501.7s (19.5%) | 速度: 0.29x | 用时: 2330.6s
+2026-06-17 04:47:45.020 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 685.1s/3501.7s (19.6%) | 速度: 0.29x | 用时: 2333.6s
+2026-06-17 04:47:48.004 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 686.3s/3501.7s (19.6%) | 速度: 0.29x | 用时: 2336.6s
+2026-06-17 04:47:48.056 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 686.3s/3501.7s (19.6%) | 速度: 0.29x | 用时: 2336.7s
+2026-06-17 04:47:51.038 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 687.5s/3501.7s (19.6%) | 速度: 0.29x | 用时: 2339.6s
+2026-06-17 04:47:54.029 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 688.4s/3501.7s (19.7%) | 速度: 0.29x | 用时: 2342.6s
+2026-06-17 04:47:54.140 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [044754_14008] =====
+2026-06-17 04:47:54.140 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-17 04:47:54.140 | INFO  | ffmpeg_runner | 输入: U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-17 04:47:54.140 | INFO  | ffmpeg_runner | 输出: U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260617044003)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-17 04:47:54.140 | INFO  | ffmpeg_runner | 预计时长: 3501.73s
+2026-06-17 04:47:54.140 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v -map 0:a -map 0:s:1 -map 0:s:2 -map 0:s:3 -map 0:s:4 -map 0:s:5 -map 0:s:6 -map 0:s:7 -map 0:s:8 -map 0:s:9 -map 0:s:10 -map 0:s:11 -map 0:s:12 -map 0:s:13 -map 0:s:14 -map 0:s:15 -map 0:s:16 -map 0:s:17 -map 0:s:18 -map 0:s:19 -map 0:s:20 -map 0:s:21 -map 0:s:22 -map 0:s:23 -map 0:s:24 -map 0:s:25 -map 0:s:26 -map 0:s:27 -map 0:s:28 -map 0:s:29 -map 0:s:30 -map 0:s:31 -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260617044003)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-17 04:47:54.140 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-17 04:47:54.140 | DEBUG | ffmpeg_runner |   | [ 65] 0:s:28
+2026-06-17 04:47:54.140 | DEBUG | ffmpeg_runner |   | [ 66] -map
+2026-06-17 04:47:54.140 | DEBUG | ffmpeg_runner |   | [ 67] 0:s:29
+2026-06-17 04:47:54.140 | DEBUG | ffmpeg_runner |   | [ 68] -map
+2026-06-17 04:47:54.140 | DEBUG | ffmpeg_runner |   | [ 69] 0:s:30
+2026-06-17 04:47:54.140 | DEBUG | ffmpeg_runner |   | [ 70] -map
+2026-06-17 04:47:54.140 | DEBUG | ffmpeg_runner |   | [ 71] 0:s:31
+2026-06-17 04:47:54.140 | DEBUG | ffmpeg_runner |   | [ 72] -c:v
+2026-06-17 04:47:54.140 | DEBUG | ffmpeg_runner |   | [ 73] hevc
+2026-06-17 04:47:54.140 | DEBUG | ffmpeg_runner |   | [ 74] -crf
+2026-06-17 04:47:54.140 | DEBUG | ffmpeg_runner |   | [ 75] 23
+2026-06-17 04:47:54.141 | DEBUG | ffmpeg_runner |   | [ 76] -c:s
+2026-06-17 04:47:54.141 | DEBUG | ffmpeg_runner |   | [ 77] mov_text
+2026-06-17 04:47:54.141 | DEBUG | ffmpeg_runner |   | [ 78] -map_metadata
+2026-06-17 04:47:54.141 | DEBUG | ffmpeg_runner |   | [ 79] 0
+2026-06-17 04:47:54.141 | DEBUG | ffmpeg_runner |   | [ 80] -map_chapters
+2026-06-17 04:47:54.141 | DEBUG | ffmpeg_runner |   | [ 81] 0
+2026-06-17 04:47:54.141 | DEBUG | ffmpeg_runner |   | [ 82] -metadata
+2026-06-17 04:47:54.141 | DEBUG | ffmpeg_runner |   | [ 83] handler_name=@Cairl
+2026-06-17 04:47:54.141 | DEBUG | ffmpeg_runner |   | [ 84] U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260617044003)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-17 04:47:57.035 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 688.8s/3501.7s (19.7%) | 速度: 0.29x | 用时: 2345.6s
+2026-06-17 04:48:00.052 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 689.3s/3501.7s (19.7%) | 速度: 0.29x | 用时: 2348.6s
+2026-06-17 04:48:03.006 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 689.8s/3501.7s (19.7%) | 速度: 0.29x | 用时: 2351.6s
+2026-06-17 04:48:03.059 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 689.8s/3501.7s (19.7%) | 速度: 0.29x | 用时: 2351.7s
+2026-06-17 04:48:06.014 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 690.3s/3501.7s (19.7%) | 速度: 0.29x | 用时: 2354.6s
+2026-06-17 04:48:09.016 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 690.8s/3501.7s (19.7%) | 速度: 0.29x | 用时: 2357.6s
+2026-06-17 04:48:12.008 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 691.1s/3501.7s (19.7%) | 速度: 0.29x | 用时: 2360.6s
+2026-06-17 04:48:12.059 | DEBUG | ffmpeg_runner | [040851_39883] 进度: 691.1s/3501.7s (19.7%) | 速度: 0.29x | 用时: 2360.7s
+2026-06-17 04:48:14.612 | INFO  | ffmpeg_runner | [044754_14008] 结束: 失败 (返回码 1) | 用时: 20.5s
+2026-06-17 04:48:14.612 | WARN  | ffmpeg_runner | [044754_14008] stderr 输出 (10 行):
+2026-06-17 04:48:14.612 | WARN  | ffmpeg_runner |   | frame=   49 fps=8.6 q=29.2 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:05.72
+2026-06-17 04:48:14.613 | WARN  | ffmpeg_runner |   | frame=   51 fps=8.2 q=24.9 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:06.22
+2026-06-17 04:48:14.613 | WARN  | ffmpeg_runner |   | frame=   53 fps=7.9 q=28.5 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:06.74
+2026-06-17 04:48:14.613 | WARN  | ffmpeg_runner |   | frame=   56 fps=7.7 q=21.1 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:07.26
+2026-06-17 04:48:14.613 | WARN  | ffmpeg_runner |   | frame=   59 fps=7.6 q=20.8 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:07.78
+2026-06-17 04:48:14.613 | WARN  | ffmpeg_runner |   | frame=   63 fps=7.6 q=28.0 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:08.28
+2026-06-17 04:48:14.613 | WARN  | ffmpeg_runner |   | frame=   67 fps=7.6 q=27.9 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:08.80
+2026-06-17 04:48:14.613 | WARN  | ffmpeg_runner |   | frame=   67 fps=7.2 q=27.9 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:09.32
+2026-06-17 04:48:14.613 | WARN  | ffmpeg_runner |   | frame=   71 fps=7.2 q=28.0 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:09.83
+2026-06-17 04:48:14.613 | WARN  | ffmpeg_runner |   | [q] command received. Exiting.
+2026-06-17 04:48:14.613 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [044754_14008] =====
+
