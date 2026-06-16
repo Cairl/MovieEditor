@@ -279,14 +279,14 @@ def get_subtitle_streams(file_path: str) -> list[dict]:
 
 
 def format_preview_lines(command: list[str]) -> list[str]:
-    lines = [f'  {command[0]}']
+    lines = [f'{command[0]}']
     i = 1
 
     while i < len(command):
         token = str(command[i])
 
         if token.startswith('-'):
-            line = f'    {token}'
+            line = f'  {token}'
             if i + 1 < len(command) and not str(command[i + 1]).startswith('-'):
                 arg = str(command[i + 1])
                 if any(c.isspace() for c in arg):
@@ -297,7 +297,7 @@ def format_preview_lines(command: list[str]) -> list[str]:
         else:
             if any(c.isspace() for c in token):
                 token = f'"{token}"'
-            lines.append(f'    {token}')
+            lines.append(f'  {token}')
         i += 1
 
     return lines
@@ -487,8 +487,8 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
                     elif arrow == b'P':  # DOWN
                         term_h = shutil.get_terminal_size((120, 30)).lines
                         has_btns = not ffmpeg_state.get('terminated', False)
-                        fixed = 10 if has_btns else 9
-                        max_visible = max(3, term_h - fixed)
+                        _fixed = 7 + (1 if has_btns else 0)
+                        max_visible = max(3, term_h - _fixed - 6)
                         max_scroll = max(0, len(wrap_cache['wrapped']) - max_visible)
                         ffmpeg_state['cmd_scroll'] = min(max_scroll, ffmpeg_state['cmd_scroll'] + 1)
                 continue
@@ -586,25 +586,46 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
             CYAN = "\033[38;2;137;180;250m"
             SEL_BG = "\033[48;2;69;71;90m"
 
-            def _btn(label, color, selected, disabled=False):
-                if disabled:
-                    return f"{muted}[{label}]{reset}"
-                if selected:
-                    return f"{SEL_BG}{color}\033[1m[{label}]{reset}"
-                return f"{color}[{label}]{reset}"
-
             p_label = '恢复任务' if is_paused else '暂停任务'
             t_label = '终止任务'
 
             copy_flash = ffmpeg_state.get('copy_flash', 0)
             c_label = '复制成功' if copy_flash and time.time() - copy_flash < 1.5 else '复制命令'
 
-            btn_p = _btn(p_label, YELLOW, sel == 0)
-            btn_t = _btn(t_label, RED, sel == 1, disabled=is_terminated)
-            btn_c = _btn(c_label, CYAN, sel == 2)
+            t_color = muted if is_terminated else RED
+            pad38 = ' ' * max(0, inner_w - 38)
+            pad39 = ' ' * max(0, inner_w - 39)
 
-            btn_vis = get_display_width(p_label) + get_display_width(t_label) + get_display_width(c_label) + 10
-            lines.append(f"  │{text_indent}{btn_p}  {btn_t}  {btn_c}{' ' * max(0, inner_w - len(text_indent) - btn_vis)}│")
+            if sel == 0:
+                lines.append(
+                    f"  │   {SEL_BG} {reset}{SEL_BG}{YELLOW}\033[1m[{p_label}]{reset}"
+                    f"{SEL_BG} {reset} "
+                    f"{t_color}[{t_label}]{reset}"
+                    f"  {CYAN}[{c_label}]{reset}{pad38}│"
+                )
+            elif sel == 1:
+                lines.append(
+                    f"  │    "
+                    f"{YELLOW}[{p_label}]{reset} "
+                    f"{SEL_BG} {reset}{SEL_BG}{RED}\033[1m[{t_label}]{reset}"
+                    f"{SEL_BG} {reset} "
+                    f"{CYAN}[{c_label}]{reset}{pad38}│"
+                )
+            elif sel == 2:
+                lines.append(
+                    f"  │    "
+                    f"{YELLOW}[{p_label}]{reset}"
+                    f"  {t_color}[{t_label}]{reset} "
+                    f"{SEL_BG} {reset}{SEL_BG}{CYAN}\033[1m[{c_label}]{reset}"
+                    f"{SEL_BG} {reset}{pad39}│"
+                )
+            else:
+                lines.append(
+                    f"  │    "
+                    f"{YELLOW}[{p_label}]{reset}"
+                    f"  {t_color}[{t_label}]{reset}"
+                    f"  {CYAN}[{c_label}]{reset}{pad38}│"
+                )
             lines.append(_empty())
 
         # 7. Separator
@@ -614,7 +635,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
 
         # 9. Command lines (cached wrapping — static text only re-wrapped when terminal width changes)
         fixed = 7 + (1 if has_buttons else 0)
-        max_visible = max(3, term_h - fixed)
+        max_visible = max(3, term_h - fixed - 6)
 
         wrapped = _update_wrap_cache(term_w, inner_w, code_indent)
 

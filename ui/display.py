@@ -56,6 +56,14 @@ def menu_section(title: str) -> str:
     return f"{TITLE_MARKER}{_sanitize_title(title)}"
 
 
+_RIGHT_ALIGN = '\x1e'
+
+
+def menu_return_item(label: str = '返回菜单') -> str:
+    """Right-aligned return/back menu item; renderer places › before label."""
+    return f"{_RIGHT_ALIGN}{UI_COLORS['muted']}{label}{UI_COLORS['reset']}"
+
+
 HINT_SEP = '\x1f'
 
 
@@ -233,10 +241,10 @@ def build_menu_renderable(lines: list[str], selected_index: Optional[int] = None
         muted = UI_COLORS['muted']
         reset = UI_COLORS['reset']
         if divider_pos:
-            l_sep = '─' * max(0, divider_pos - 4)
-            r_sep = '─' * max(0, r_col_w - 4)
-            return f"  │  {muted}{l_sep}{reset}  │  {muted}{r_sep}{reset}  │"
-        return f"  │  {muted}{'─' * max(0, inner_width - 4)}{reset}  │"
+            l_sep = '─' * max(0, divider_pos - 2)
+            r_sep = '─' * max(0, r_col_w - 2)
+            return f"  │ {muted}{l_sep}{reset} │ {muted}{r_sep}{reset} │"
+        return f"  │ {muted}{'─' * max(0, inner_width - 2)}{reset} │"
 
     for idx, item in enumerate(visible_content):
         i = start_row + idx
@@ -266,6 +274,33 @@ def build_menu_renderable(lines: list[str], selected_index: Optional[int] = None
             out.append(_empty_row())
             continue
 
+        # Right-aligned item (return/back button)
+        if left_plain.startswith(_RIGHT_ALIGN):
+            raw_content = item.get('left', '')[len(_RIGHT_ALIGN):]
+            plain_label = left_plain[len(_RIGHT_ALIGN):]
+            label_w = _display_width(plain_label)
+            m_ra = _ANSI_PREFIX_RE.match(raw_content)
+            ra_ansi = m_ra.group(0) if m_ra else ''
+            content_w = l_col_w - 4  # 2 left + 2 right margin
+            cursor_w = 2 if is_selected else 0
+            max_label_w = content_w - cursor_w
+            if label_w > max_label_w:
+                plain_label = trim_to_display_width(plain_label, max_label_w)
+                label_w = _display_width(plain_label)
+            pad_n = max(0, content_w - label_w - cursor_w)
+            if is_selected:
+                l_text = '  ' + ' ' * pad_n + '› ' + plain_label + '  '
+                l_color = UI_COLORS['selected_row'] + SELECTED_FG
+            else:
+                l_text = '  ' + ' ' * pad_n + plain_label + '  '
+                l_color = ra_ansi
+            l_pad = ' ' * max(0, l_col_w - _display_width(l_text))
+            if divider_pos:
+                out.append(f"  │{l_color}{l_text}{l_pad}{UI_COLORS['reset']}│{' ' * r_col_w}│")
+            else:
+                out.append(f"  │{l_color}{l_text}{l_pad}{UI_COLORS['reset']}│")
+            continue
+
         # Left column
         l_trunc = trim_to_display_width(left_plain, l_avail)
         l_marker = "› " if is_selected else "  "
@@ -274,7 +309,7 @@ def build_menu_renderable(lines: list[str], selected_index: Optional[int] = None
         m = _ANSI_PREFIX_RE.match(item.get('left', ''))
         ansi_prefix = m.group(0) if m else ''
         if is_selected:
-            l_color = UI_COLORS['selected_row'] + (ansi_prefix or SELECTED_FG)
+            l_color = UI_COLORS['selected_row'] + SELECTED_FG
         else:
             l_color = ansi_prefix
         l_pad = ' ' * max(0, l_col_w - get_display_width(l_text))

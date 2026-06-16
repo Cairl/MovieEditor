@@ -1,6 +1,6 @@
 # 视频设置菜单
 from ui.console import UI_COLORS
-from ui.display import MENU_SEPARATOR, menu_item, with_ffmpeg_hint, Action, run_menu_loop
+from ui.display import MENU_SEPARATOR, menu_item, with_ffmpeg_hint, menu_return_item, Action, run_menu_loop
 from core.helpers import format_on_off, adjust_time_setting
 
 TIME_ADJUST_STEP = 1   # seconds per LEFT/RIGHT press
@@ -51,7 +51,7 @@ def handle_video_settings_menu(ctx: dict, context_lines: list, allow_episode_nav
             with_ffmpeg_hint(menu_item('裁剪上下黑边', f"{settings['video']['crop_top']}px" if settings['video']['crop_top'] > 0 else '不裁剪'), crop_hint, settings['video']['crop_top'] > 0),
             with_ffmpeg_hint(menu_item('裁剪左右黑边', f"{settings['video']['crop_left']}px" if settings['video']['crop_left'] > 0 else '不裁剪'), crop_hint, settings['video']['crop_left'] > 0),
             MENU_SEPARATOR,
-            f"{UI_COLORS['muted']}{return_label} \u00ab{UI_COLORS['reset']}",
+            menu_return_item(return_label),
             '',
         ]
 

@@ -6,7 +6,7 @@
 
 **入口**: `main.py` → `ui/app.py:process_files()`
 **运行**: `python main.py <file_or_dir> [<file_or_dir>...]`
-**总量**: 13 个模块，2744 行
+**总量**: 14 个模块，2782 行
 
 ---
 
@@ -14,23 +14,27 @@
 
 ```
 ┌───────────────────────────────────────────────────────────────────────┐
-│  main.py (9 行入口)                                                    │
+│  main.py (10 行入口)                                                   │
 │    └─► ui/app.py:process_files()                                      │
 │                                                                        │
 │  ┌─────────────────┐  ┌─────────────────┐  ┌───────────────────────┐  │
 │  │  ui/console.py   │  │  ui/display.py   │  │  core/ffmpeg.py       │  │
 │  │  键盘读取 (msvcrt)│  │  TUI 渲染层      │  │  FFmpeg 探针 + 执行    │  │
-│  │  光标/ANSI 控制   │  │  菜单 + 预览框    │  │  进程挂起/恢复        │  │
-│  │  子进程注册管理    │  │  增量 diff render │  │  交互按钮暂停/终止/复制│  │
-│  └────────┬─────────┘  └────────┬─────────┘  └──────────┬────────────┘  │
-│           │                     │                        │              │
-│  ┌────────┴─────────┐  ┌───────┴──────────┐  ┌─────────┴────────────┐  │
-│  │  ui/navigation.py │  │  ui/video.py     │  │  core/helpers.py      │  │
-│  │  方向键 + 选择逻辑 │  │  ui/audio.py     │  │  格式化/转义/解析工具   │  │
-│  │                   │  │  ui/subtitle.py   │  │  core/logger.py       │  │
-│  │  ui/dialogs.py    │  │  设置子菜单 ×3    │  │  core/progress.py     │  │
-│  │  文件/目录选择     │  │                  │  │  进度管理              │  │
-│  └───────────────────┘  └──────────────────┘  └──────────────────────┘  │
+│  │  光标/ANSI 控制   │  │  菜单布局 + 渲染  │  │  进度框 + 交互按钮    │  │
+│  │  子进程注册管理    │  │  run_menu_loop   │  │  命令换行缓存         │  │
+│  └────────┬─────────┘  └───────┬──────────┘  └──────────┬────────────┘  │
+│           │            ┌──────┴──────┐                   │              │
+│           │            │ ui/live.py  │                   │              │
+│           │            │ rich.Live   │                   │              │
+│           │            │ 备用屏幕缓冲 │                   │              │
+│           │            └──────┬──────┘                   │              │
+│  ┌────────┴─────────┐  ┌─────┴─────────┐  ┌─────────────┴──────────┐  │
+│  │  ui/navigation.py │  │  ui/video.py  │  │  core/helpers.py       │  │
+│  │  方向键 + 选择逻辑 │  │  ui/audio.py  │  │  格式化/转义/解析工具    │  │
+│  │                   │  │  ui/subtitle.py│  │  core/logger.py        │  │
+│  │  ui/dialogs.py    │  │  设置子菜单 ×3 │  │  core/progress.py      │  │
+│  │  文件/目录选择     │  │               │  │  进度管理               │  │
+│  └───────────────────┘  └───────────────┘  └────────────────────────┘  │
 └───────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -38,27 +42,29 @@
 
 | 模块 | 行数 | 职责 |
 |------|------|------|
-| `main.py` | 9 | 入口，光标隐藏/恢复 |
-| `ui/app.py` | 484 | `process_files()` 主流程：菜单循环、命令组装、批量处理 |
-| `ui/display.py` | 445 | TUI 渲染：`render_menu_box`、`render_preview_box`、`run_menu_loop` |
-| `core/ffmpeg.py` | 727 | FFmpeg 探针、命令预览、`run_ffmpeg_with_progress`、线程挂起/恢复暂停、交互按钮暂停/终止/复制命令、`FFmpegUserTerminated` 队列中断 |
-| `ui/console.py` | 132 | 底层：`msvcrt` 键盘读取、光标控制、ANSI 常量、子进程注册/终止 |
+| `main.py` | 10 | 入口，光标隐藏/恢复 |
+| `ui/app.py` | 510 | `process_files()` 主流程：菜单循环、命令组装、批量处理 |
+| `ui/display.py` | 435 | TUI 渲染：`build_menu_renderable`、`run_menu_loop`、`menu_return_item` |
+| `core/ffmpeg.py` | 762 | FFmpeg 探针、命令预览、`run_ffmpeg_with_progress`、交互按钮暂停/终止/复制命令 |
+| `ui/console.py` | 125 | 底层：`msvcrt` 键盘读取、光标控制、ANSI 常量、子进程注册/终止 |
 | `ui/subtitle.py` | 156 | 字幕设置菜单：流选择、burn_in 切换、排序 |
 | `core/progress.py` | 151 | `ProgressManager` 进度状态管理 |
 | `core/logger.py` | 144 | FFmpeg 运行日志记录（启动/进度/完成/错误） |
 | `core/helpers.py` | 163 | 工具函数：`format_hms`、`format_on_off`、`escape_ffmpeg_filter_path`、`parse_time_to_seconds` |
 | `ui/video.py` | 88 | 视频设置菜单 |
 | `ui/audio.py` | 61 | 音频设置菜单 |
+| `ui/live.py` | 52 | `rich.Live` 全局生命周期封装（备用屏幕缓冲 + 增量 diff） |
 | `ui/navigation.py` | 92 | 导航逻辑：`read_navigation_key`、`get_selectable_indices`、`get_next_selectable` |
 | `ui/dialogs.py` | 33 | tkinter 文件/目录选择对话框 |
 
 ## 关键技术细节
 
 ### TUI 渲染
-- **增量渲染**: `render_menu_box` 使用 `LAST_MENU_LINES` 全局变量做行级 diff，仅更新变化行
-- **Shimmer 进度条**: `run_ffmpeg_with_progress` 使用正弦波式颜色渐变动画
-- **ANSI 定位**: `\033[H` 光标归位 + `\033[{row};1H` 行定位
-- **首次清屏问题**: 首次 `render_menu_box` 清屏后 `LAST_MENU_LINES` 未重置，后续菜单切换可能出现残留行
+- **rich Live 渲染**: `ui/live.py` 封装 `rich.Live`，`screen=True` 备用屏幕缓冲，`update()` 增量 diff
+- **菜单布局**: `build_menu_renderable` 统一 2 格左边距、`› ` 光标、1 格分隔线边距、`╭───` 标题 3 格
+- **右对齐项**: `_RIGHT_ALIGN` 前缀标记返回菜单等右对齐项，渲染器自动放置 `›` 于标签前方
+- **ffmpeg 进度框**: 独立缩进体系（文字 4 格、进度条 2 格、命令 2 格），高度上限对齐菜单
+- **命令换行缓存**: `_update_wrap_cache` 按终端宽度缓存，续行自动对齐参数值
 
 ### 键盘处理
 - 使用 `msvcrt.kbhit()` + `msvcrt.getch()` 实现非阻塞键盘读取

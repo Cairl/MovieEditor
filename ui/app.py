@@ -10,7 +10,7 @@ from ui.console import (
 )
 from ui.display import (
     MENU_SEPARATOR, menu_item, truncate_name,
-    with_ffmpeg_hint, render_screen_menu, run_menu_loop, Action,
+    with_ffmpeg_hint, menu_return_item, render_screen_menu, run_menu_loop, Action,
 )
 import ui.live as live
 from core.helpers import (
@@ -340,7 +340,7 @@ def process_files() -> None:
                         menu_item('音频设置'),
                         menu_item('字幕设置'),
                         MENU_SEPARATOR,
-                        menu_item('返回菜单'),
+                        menu_return_item(),
                         '',
                     ]
 
@@ -413,7 +413,7 @@ def process_files() -> None:
             allow_ep_nav = is_series_mode and series_edit_mode == 'per_episode'
             run_menu_loop(
                 '预览 FFmpeg 命令', build_preview_context,
-                lambda: [MENU_SEPARATOR, menu_item('返回菜单'), ''],
+                lambda: [MENU_SEPARATOR, menu_return_item(), ''],
                 lambda k, s, i: Action.BREAK if '返回菜单' in s and k == 'ENTER' else None,
                 allow_episode_nav=allow_ep_nav,
                 update_current_episode=update_current_episode,
