@@ -10,18 +10,46 @@ import ctypes
 import subprocess
 from collections import deque
 
+from rich.console import Group
+from rich.text import Text
+
 from ui.console import (
-    ANSI_ESCAPE, hide_cursor, show_cursor, register_child_process,
+    ANSI_ESCAPE, register_child_process,
     unregister_child_process, _shutdown_requested, UI_COLORS,
     _console_has_input, _console_read_key,
 )
-from ui.display import get_display_width, trim_to_display_width, reset_menu_cache
+from ui.display import get_display_width, trim_to_display_width
 from core.helpers import format_hms
 from core.logger import log_ffmpeg_start, log_ffmpeg_progress, log_ffmpeg_end, log_ffmpeg_error
+import ui.live as live
+
 
 class FFmpegUserTerminated(Exception):
     """Raised when the user explicitly terminates ffmpeg via the UI terminate button."""
     pass
+
+
+def _copy_text_to_clipboard(text: str) -> None:
+    """Copy text to Windows clipboard via PowerShell Set-Clipboard (best-effort)."""
+    if not text:
+        return
+    try:
+        # PowerShell handles Unicode correctly via base64 round-trip
+        import base64
+        encoded = base64.b64encode(text.encode('utf-16-le')).decode('ascii')
+        ps_cmd = (
+            'Set-Clipboard -Value '
+            f'([System.Text.Encoding]::Unicode.GetString('
+            f'[System.Convert]::FromBase64String("{encoded}")))'
+        )
+        subprocess.run(
+            ['powershell', '-NoProfile', '-NonInteractive', '-Command', ps_cmd],
+            capture_output=True,
+            creationflags=subprocess.CREATE_NO_WINDOW,
+            timeout=10,
+        )
+    except Exception:
+        pass  # clipboard is best-effort
 
 
 # ---- 进度 UI helpers ----
@@ -176,7 +204,7 @@ def _probe_streams_json(file_path: str, selector: str, entries: str) -> list[dic
             data = json.loads(stdout_text or '{}')
             return data.get('streams', [])
         except FileNotFoundError:
-            print(f"\033[31m错误: ffprobe 未找到，请确保 FFmpeg 已安装并在 PATH 中\033[0m", file=sys.stderr)
+            print(f"[31m错误: ffprobe 未找到，请确保 FFmpeg 已安装并在 PATH 中[0m", file=sys.stderr)
             return []
         except (subprocess.SubprocessError, json.JSONDecodeError, UnicodeDecodeError):
             continue
@@ -187,10 +215,10 @@ def get_audio_streams(file_path: str) -> list[dict]:
     streams = []
     for i, s in enumerate(_probe_streams_json(file_path, 'a', 'stream=index,codec_name,channels:stream_tags=language')):
         streams.append({
-            'index': s.get('index'), 
+            'index': s.get('index'),
             'rel_index': i,
-            'codec': s.get('codec_name', 'unknown'), 
-            'channels': s.get('channels', 2), 
+            'codec': s.get('codec_name', 'unknown'),
+            'channels': s.get('channels', 2),
             'language': s.get('tags', {}).get('language', 'und')
         })
     return streams
@@ -203,14 +231,14 @@ def get_subtitle_streams(file_path: str) -> list[dict]:
     for i, s in enumerate(streams_data):
         tags = s.get('tags', {})
         streams.append({
-            'index': s.get('index'), 
+            'index': s.get('index'),
             'rel_index': i,
-            'codec': s.get('codec_name', 'unknown'), 
+            'codec': s.get('codec_name', 'unknown'),
             'language': tags.get('language', 'und'),
             'title': tags.get('title', ''),
             'raw_display_name': None
         })
-    
+
     if not streams:
         return []
 
@@ -219,7 +247,7 @@ def get_subtitle_streams(file_path: str) -> list[dict]:
         cmd = ['ffprobe', '-hide_banner', '-i', file_path]
         result = subprocess.run(cmd, capture_output=True, timeout=_FFPROBE_TIMEOUT)
         stderr_content = result.stderr.decode('utf-8', errors='replace')
-        
+
         for s in streams:
             # Improved regex to handle language tags like Stream #0:2(eng)
             pattern = rf"Stream #\d+:{s['index']}.*?Subtitle: [^(]+?\((\w+)\)"
@@ -231,17 +259,17 @@ def get_subtitle_streams(file_path: str) -> list[dict]:
     except (subprocess.SubprocessError, subprocess.TimeoutExpired, UnicodeDecodeError):
         for s in streams:
             s['raw_display_name'] = s['codec']
-            
+
     return streams
 
 
 def format_preview_lines(command: list[str]) -> list[str]:
     lines = [f'  {command[0]}']
     i = 1
-    
+
     while i < len(command):
         token = str(command[i])
-        
+
         if token.startswith('-'):
             line = f'    {token}'
             if i + 1 < len(command) and not str(command[i + 1]).startswith('-'):
@@ -254,38 +282,9 @@ def format_preview_lines(command: list[str]) -> list[str]:
         else:
             lines.append(f'    {token}')
         i += 1
-    
+
     return lines
 
-
-
-def _build_progress_line(text, width, is_finished):
-    """Build a single progress text line with proper padding."""
-    indent = '  '
-    inner_w = width - 2
-    if is_finished:
-        p_display = f"\033[38;2;205;214;244m\033[1m{text}\033[0m"
-        plain_len = get_display_width(text)
-    else:
-        p_display = f"\033[38;2;205;214;244m{text}\033[0m"
-        plain_len = get_display_width(text)
-    pad_len = max(0, inner_w - len(indent) - plain_len)
-    return f"  │{indent}{p_display}{' ' * pad_len}│"
-
-
-_BAR_WIDTH = 20
-
-
-def _build_progress_bar(pct, width):
-    """Build a visual progress bar line. pct is 0-100."""
-    indent = '  '
-    inner_w = width - 2
-    filled = int(_BAR_WIDTH * min(pct, 100) / 100)
-    empty = _BAR_WIDTH - filled
-    bar = f"\033[38;2;137;180;250m{'█' * filled}\033[38;2;108;112;134m{'░' * empty}\033[0m"
-    bar_vis = 2 + _BAR_WIDTH  # │ + bar + │
-    pad = ' ' * max(0, inner_w - len(indent) - bar_vis)
-    return f"  │{indent}│{bar}│{pad}│"
 
 
 # ---- 进度 UI ----
@@ -293,7 +292,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
     output_file = command[-1]
     # Prepare command for execution
     exec_command = command[:-1] + ['-progress', 'pipe:1', output_file]
-    
+
     # Extract input/output for pretty display
     input_file = None
     try:
@@ -313,7 +312,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
     creationflags = subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0
     process = subprocess.Popen(exec_command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, encoding='utf-8', errors='replace', creationflags=creationflags)
     register_child_process(process)
-    
+
     start_time = time.time()
     stderr_tail = deque(maxlen=10)
 
@@ -372,26 +371,19 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
     t_read = threading.Thread(target=reader, daemon=True)
     t_read.start()
 
-    hide_cursor()
     last_plain_text = '正在初始化进程...'
-    
-    # State for UI rendering
-    last_term_size = (0, 0)
-
-    # Layout constants
-    PROGRESS_ROW_IDX = 3  # 1-based ANSI line number
-    STATUS_ROW_IDX = 4
-    BAR_ROW_IDX = 5
 
     ffmpeg_state = {
         'paused': False,
         'terminated': False,
-        'selected_button': 0,  # 0=pause/resume, 1=terminate
+        'selected_button': 0,  # 0=pause/resume, 1=terminate, 2=copy
+        'copy_flash': 0,
+        'cmd_scroll': 0,
     }
     stdin_lock = threading.Lock()
 
     def _check_key_input():
-        """Non-blocking keyboard check for button navigation (LEFT/RIGHT/ENTER)."""
+        """Non-blocking keyboard check for button navigation (LEFT/RIGHT/UP/DOWN/ENTER)."""
         while _console_has_input():
             key, _ = _console_read_key()
             if key is None:
@@ -403,7 +395,16 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
                     if arrow == b'K':  # LEFT
                         ffmpeg_state['selected_button'] = max(0, ffmpeg_state['selected_button'] - 1)
                     elif arrow == b'M':  # RIGHT
-                        ffmpeg_state['selected_button'] = min(1, ffmpeg_state['selected_button'] + 1)
+                        ffmpeg_state['selected_button'] = min(2, ffmpeg_state['selected_button'] + 1)
+                    elif arrow == b'H':  # UP
+                        ffmpeg_state['cmd_scroll'] = max(0, ffmpeg_state['cmd_scroll'] - 1)
+                    elif arrow == b'P':  # DOWN
+                        term_h = shutil.get_terminal_size((120, 30)).lines
+                        has_btns = not ffmpeg_state.get('terminated', False)
+                        fixed = 10 if has_btns else 9
+                        max_visible = max(3, term_h - fixed)
+                        max_scroll = max(0, len(cmd_lines_raw) - max_visible)
+                        ffmpeg_state['cmd_scroll'] = min(max_scroll, ffmpeg_state['cmd_scroll'] + 1)
                 continue
             if key in (b'\r', b'\n'):  # ENTER
                 btn = ffmpeg_state['selected_button']
@@ -413,108 +414,202 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
                 elif btn == 1:  # Terminate
                     if not ffmpeg_state['terminated']:
                         ffmpeg_state['terminated'] = True
+                        state['done'] = True
                         if ffmpeg_state['paused']:
                             _reset_ffmpeg_pause(process)
                             ffmpeg_state['paused'] = False
                         _terminate_ffmpeg_via_stdin(process, stdin_lock)
+                elif btn == 2:  # Copy command to clipboard
+                    cmd_str = ' '.join(str(a) for a in command).replace('\n', ' ').replace('\r', ' ')
+                    _copy_text_to_clipboard(cmd_str)
+                    ffmpeg_state['copy_flash'] = time.time()
                 continue
 
-    def draw_full_interface(progress_text, title, is_finished, pct=0, ffmpeg_state=None):
+    def build_interface_lines(progress_text, title, is_finished, pct=0, ffmpeg_state=None):
+        """Build the interface as a single box for live.update()."""
         term_w, term_h = shutil.get_terminal_size((120, 30))
-        width = max(70, min(120, term_w - 2))
-        inner_width = width - 4
-        
-        # Truncate command lines if they are too many for the current terminal height
-        display_cmd = cmd_lines_raw
-        max_cmd_lines = max(3, term_h - 13)
-        if len(display_cmd) > max_cmd_lines:
-            display_cmd = display_cmd[:max_cmd_lines-1] + ["    ... (更多参数已在下方省略)"]
+        width = max(70, min(140, term_w - 2))
+        inner_w = width - 2
+        indent = '   '
+        code_indent = ' '
+        muted = UI_COLORS['muted']
+        reset = UI_COLORS['reset']
 
-        # Title
-        clean_title = f' {title} '
-        title_plain_len = get_display_width(clean_title)
-        remain_w = max(0, width - 2 - title_plain_len)
-        left_line_len = 2
-        right_line_len = max(0, remain_w - left_line_len)
-        
-        top_bar = (
-            f"  ╭{'─' * left_line_len}"
-            f"{UI_COLORS['title']}\033[1m{clean_title}{UI_COLORS['reset']}"
-            f"{'─' * right_line_len}╮"
-        )
-        
-        # Build lines
+        def _pad(content_vis):
+            return ' ' * max(0, inner_w - content_vis)
+
+        def _box_top(title_text):
+            clean = f' {title_text} '
+            plain_len = get_display_width(clean)
+            remain = max(0, inner_w - plain_len)
+            left = 2
+            right = max(0, remain - left)
+            return (
+                f"  ╭{'─' * left}"
+                f"{UI_COLORS['title']}\033[1m{clean}{reset}"
+                f"{'─' * right}╮"
+            )
+
+        def _box_bottom():
+            return f"  ╰{'─' * inner_w}╯"
+
+        def _empty():
+            return f"  │{' ' * inner_w}│"
+
+        def _separator():
+            seg_w = inner_w - len(code_indent) - 2  # indent on left, 2-space pad on right
+            seg = '─' * max(1, seg_w)
+            return f"  │{code_indent}{muted}{seg}{reset}{' ' * 2}│"
+
+        def _text_line(display, plain_len):
+            return f"  │{indent}{display}{' ' * max(0, inner_w - len(indent) - plain_len)}│"
+
+        def _wrap(text, max_w):
+            """Split text into segments that each fit max_w display-width."""
+            if get_display_width(text) <= max_w:
+                return [text]
+            parts = []
+            while get_display_width(text) > max_w:
+                lo, hi = 1, len(text)
+                while lo < hi:
+                    mid = (lo + hi + 1) // 2
+                    if get_display_width(text[:mid]) <= max_w:
+                        lo = mid
+                    else:
+                        hi = mid - 1
+                parts.append(text[:lo])
+                text = text[lo:]
+            if text:
+                parts.append(text)
+            return parts
+
+        # === Build ===
         lines = []
-        lines.append(top_bar)
-        lines.append(f"  │{' ' * (width - 2)}│") # Padding
-        lines.append(_build_progress_line(progress_text, width, is_finished))
-        
-        # Status / pause indicator
-        if ffmpeg_state and ffmpeg_state.get('paused') and not is_finished:
-            status_text = '⏸ 已暂停 — 进程已挂起，CPU 利用率为零'
-            status_display = f"\033[38;2;249;226;175m{status_text}\033[0m"
-            status_plain_len = get_display_width(status_text)
-            status_pad = ' ' * max(0, width - 4 - status_plain_len)
-            lines.append(f"  │  {status_display}{status_pad}│")
+        has_buttons = ffmpeg_state and not is_finished
+
+        # 1. Title
+        lines.append(_box_top(title))
+        # 2. Empty
+        lines.append(_empty())
+        # 3. Progress text
+        if is_finished:
+            p_disp = f"\033[38;2;205;214;244m\033[1m{progress_text}\033[0m"
         else:
-            lines.append(_build_progress_bar(pct if not is_finished else 100, width))
+            p_disp = f"\033[38;2;205;214;244m{progress_text}\033[0m"
+        lines.append(_text_line(p_disp, get_display_width(progress_text)))
 
-        lines.append(f"  │{' ' * (width - 2)}│") # Padding
+        # 4. Progress bar — small box, muted borders, left-aligned at indent
+        bar_pct = pct if not is_finished else 100
+        bar_inner = inner_w - len(indent) - 6  # indent + bar_box(╭content╮) + right_pad(2)
+        bar_inner = max(1, bar_inner)
+        filled = int(bar_inner * min(bar_pct, 100) / 100)
+        empty = bar_inner - filled
+        bar_str = f"\033[38;2;137;180;250m{'█' * filled}\033[38;2;108;112;134m{'░' * empty}\033[0m"
+        bar_plain = filled + empty
+        # Top:  ╭──────────╮
+        top_w = bar_plain + 2  # +2 for inner spaces
+        bar_full = top_w + 2  # including ╭ and ╮
+        lines.append(f"  │{indent}{muted}╭{'─' * top_w}╮{reset}{' ' * max(0, inner_w - len(indent) - bar_full)}│")
+        # Bar:  │ ░░░░░░░░ │
+        lines.append(f"  │{indent}{muted}│{reset} {bar_str} {muted}│{reset}{' ' * max(0, inner_w - len(indent) - bar_full)}│")
+        # Bottom:  ╰──────────╯
+        lines.append(f"  │{indent}{muted}╰{'─' * top_w}╯{reset}{' ' * max(0, inner_w - len(indent) - bar_full)}│")
 
-        # Command Lines
-        for line in display_cmd:
-            plain = ANSI_ESCAPE.sub('', line)
-            trunc = trim_to_display_width(plain, inner_width - 2)
-            colored = f"{UI_COLORS['muted']}{trunc}{UI_COLORS['reset']}"
-            pad = ' ' * max(0, width - 2 - get_display_width(trunc))
-            lines.append(f"  │{colored}{pad}│")
-
-        lines.append(f"  │{' ' * (width - 2)}│") # Bottom padding
-
-        # Control buttons row
-        if ffmpeg_state and not is_finished:
+        # 6. Buttons ([ ] style)
+        if has_buttons:
             is_paused = ffmpeg_state.get('paused', False)
-            selected_btn = ffmpeg_state.get('selected_button', 0)
+            is_terminated = ffmpeg_state.get('terminated', False)
+            sel = ffmpeg_state.get('selected_button', 0)
 
-            pause_label = '恢复' if is_paused else '暂停'
-            terminate_label = '终止'
+            YELLOW = "\033[38;2;249;226;175m"
+            RED = "\033[38;2;243;139;168m"
+            SEL_BG = "\033[48;2;69;71;90m"
 
-            def _style_btn(label, is_sel):
-                if is_sel:
-                    return f"\033[48;2;69;71;90m\033[38;2;137;180;250m {label} \033[0m"
-                return f"{UI_COLORS['muted']} {label} {UI_COLORS['reset']}"
+            p_label = '恢复任务' if is_paused else '暂停任务'
+            t_label = '终止任务'
 
-            btn_pause = _style_btn(pause_label, selected_btn == 0)
-            btn_terminate = _style_btn(terminate_label, selected_btn == 1)
+            # Pause/Resume: yellow, highlighted bg when selected
+            if sel == 0:
+                btn_p = f"{SEL_BG}{YELLOW}\033[1m[{p_label}]{reset}"
+            else:
+                btn_p = f"{YELLOW}[{p_label}]{reset}"
 
-            # Padding: leading 2 spaces + " label " + 4 gap + " label "
-            fixed_vis = 2 + get_display_width(pause_label) + 2 + 4 + get_display_width(terminate_label) + 2
-            btn_pad = ' ' * max(0, (width - 2) - fixed_vis)
-            lines.append(f"  │  {btn_pause}    {btn_terminate}{btn_pad}│")
-            lines.append(f"  │{' ' * (width - 2)}│")
+            # Terminate: red, highlighted bg when selected, muted after pressed
+            if is_terminated:
+                btn_t = f"{muted}[{t_label}]{reset}"
+            elif sel == 1:
+                btn_t = f"{SEL_BG}{RED}\033[1m[{t_label}]{reset}"
+            else:
+                btn_t = f"{RED}[{t_label}]{reset}"
 
-        lines.append(f"  ╰{'─' * (width - 2)}╯")
+            # Copy command: blue, highlighted bg when selected, flash '已复制!' after copy
+            CYAN = "\033[38;2;137;180;250m"
+            copy_flash = ffmpeg_state.get('copy_flash', 0)
+            if copy_flash and time.time() - copy_flash < 1.5:
+                c_label = '复制成功'
+            else:
+                c_label = '复制命令'
+            if sel == 2:
+                btn_c = f"{SEL_BG}{CYAN}\033[1m[{c_label}]{reset}"
+            else:
+                btn_c = f"{CYAN}[{c_label}]{reset}"
 
-        sys.stdout.write('\033[2J\033[H')
-        reset_menu_cache()
-        sys.stdout.write('\n'.join(lines) + '\n')
-        sys.stdout.flush()
+            btn_vis = get_display_width(p_label) + get_display_width(t_label) + get_display_width(c_label) + 10
+            lines.append(f"  │{indent}{btn_p}  {btn_t}  {btn_c}{' ' * max(0, inner_w - len(indent) - btn_vis)}│")
+            lines.append(_empty())
 
-        return (term_w, term_h)
+        # 7. Separator
+        lines.append(_separator())
+        # 8. Empty
+        lines.append(_empty())
+
+        # 9. Command lines (wrapped, -2 safety margin for CJK edge cases)
+        fixed = 7 + (1 if has_buttons else 0)
+        max_visible = max(3, term_h - fixed)
+        avail_w = inner_w - len(code_indent) - 2  # -2 safety for right border
+
+        cmd_scroll = 0
+        if ffmpeg_state:
+            cmd_scroll = ffmpeg_state.get('cmd_scroll', 0)
+
+        wrapped = []
+        for raw in cmd_lines_raw:
+            plain = ANSI_ESCAPE.sub('', raw)
+            for seg in _wrap(plain, avail_w):
+                wrapped.append(seg)
+
+        max_scroll = max(0, len(wrapped) - max_visible)
+        cmd_scroll = min(cmd_scroll, max_scroll)
+
+        if cmd_scroll > 0:
+            ind = '···'
+            lines.append(f"  │{code_indent}{muted}{ind}{_pad(len(code_indent) + get_display_width(ind))}{reset}│")
+
+        for seg in wrapped[cmd_scroll : cmd_scroll + max_visible]:
+            sv = get_display_width(seg)
+            lines.append(f"  │{code_indent}{muted}{seg}{reset}{_pad(len(code_indent) + sv)}│")
+
+        if cmd_scroll + max_visible < len(wrapped):
+            ind = '···'
+            lines.append(f"  │{code_indent}{muted}{ind}{_pad(len(code_indent) + get_display_width(ind))}{reset}│")
+
+        # 10. Bottom
+        lines.append(_empty())
+        lines.append(_box_bottom())
+
+        return Group(*[Text.from_ansi(line) for line in lines])
+
 
     try:
+
         progress_tag = f' ({episode_progress})' if episode_progress else ''
         display_title = f"正在运行{progress_tag}: {title_prefix}" if title_prefix else f"正在运行{progress_tag}"
-        last_term_size = draw_full_interface(last_plain_text, display_title, False, 0, ffmpeg_state)
-        last_width = max(70, min(120, last_term_size[0] - 2)) if isinstance(last_term_size, tuple) else 118
+        live.update(build_interface_lines(last_plain_text, display_title, False, 0, ffmpeg_state))
         cur_pct = 0.0
-        last_selected_button = ffmpeg_state.get('selected_button', 0)
-        
+
         while not state['done']:
-            # 非阻塞键盘检测
             _check_key_input()
 
-            # 检查退出信号
             if _shutdown_requested.is_set():
                 state['done'] = True
                 break
@@ -542,39 +637,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
 
             last_plain_text = plain_text
 
-            # 暂停时更新标题
-            is_paused_now = ffmpeg_state['paused']
-            if is_paused_now:
-                display_title_eff = f"⏸ 已暂停{progress_tag}: {title_prefix}" if title_prefix else f"⏸ 已暂停{progress_tag}"
-            else:
-                display_title_eff = display_title
-
-            cur_selected = ffmpeg_state.get('selected_button', 0)
-            button_changed = cur_selected != last_selected_button
-            last_selected_button = cur_selected
-
-            current_term_size = shutil.get_terminal_size((120, 30))
-            content_height = len(cmd_lines_raw) + 10
-            is_too_tall = content_height > current_term_size.lines
-
-            width = max(70, min(120, current_term_size.columns - 2))
-            if current_term_size != last_term_size or is_too_tall or width != last_width or button_changed:
-                last_term_size = draw_full_interface(plain_text, display_title_eff, False, cur_pct, ffmpeg_state)
-                last_width = max(70, min(120, current_term_size.columns - 2))
-            else:
-                line_str = _build_progress_line(plain_text, width, False)
-                print(f'\033[{PROGRESS_ROW_IDX};1H{line_str}\033[K', end='', flush=True)
-                if is_paused_now:
-                    status_text = '⏸ 已暂停 — 进程已挂起，CPU 利用率为零'
-                    status_display = f"\033[38;2;249;226;175m{status_text}\033[0m"
-                    status_plain_len = get_display_width(status_text)
-                    status_pad = ' ' * max(0, width - 4 - status_plain_len)
-                    status_line = f"  │  {status_display}{status_pad}│"
-                    print(f'\033[{STATUS_ROW_IDX};1H{status_line}\033[K', end='', flush=True)
-                else:
-                    bar_str = _build_progress_bar(cur_pct, width)
-                    print(f'\033[{STATUS_ROW_IDX};1H\033[K', end='', flush=True)
-                    print(f'\033[{BAR_ROW_IDX};1H{bar_str}\033[K', end='', flush=True)
+            live.update(build_interface_lines(plain_text, display_title, False, cur_pct, ffmpeg_state))
 
             # 日志：每 3 秒记录一次进度
             if int(now * 1000) % _PROGRESS_LOG_INTERVAL_MS < _PROGRESS_LOG_TOLERANCE_MS and has_started:
@@ -601,7 +664,17 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
                         pass
             raise KeyboardInterrupt("处理已取消")
 
-        process.wait()
+        try:
+            process.wait(timeout=10)
+        except subprocess.TimeoutExpired:
+            try:
+                process.terminate()
+                process.wait(timeout=3)
+            except (OSError, subprocess.TimeoutExpired):
+                try:
+                    process.kill()
+                except (OSError, subprocess.TimeoutExpired):
+                    pass
         t_read.join(timeout=1.0)
         t_err.join(timeout=1.0)
 
@@ -620,7 +693,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
             if stderr_list:
                 msg += '\n' + '\n'.join(f'  | {line}' for line in stderr_list[-5:])
             raise RuntimeError(msg)
-            
+
         # Final Render: Completed state
         if finish_title:
             final_title = finish_title
@@ -628,7 +701,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
             final_title = "渲染完成"
         else:
             final_title = f"{title_prefix} - 已完成" if title_prefix else "已完成"
-        draw_full_interface(last_plain_text, final_title, True, 100, ffmpeg_state)
+        live.update(build_interface_lines(last_plain_text, final_title, True, 100, ffmpeg_state))
 
         # 日志：记录成功完成
         elapsed_final = time.time() - start_time
@@ -649,10 +722,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
                     process.kill()
                 except OSError:
                     pass
-        show_cursor()
         raise
     finally:
         _reset_ffmpeg_pause(process)
-        show_cursor()
         unregister_child_process(process)
-

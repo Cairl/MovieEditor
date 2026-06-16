@@ -1,0 +1,1299 @@
+2026-06-16 02:27:34.400 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [022734_40083] =====
+2026-06-16 02:27:34.400 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-16 02:27:34.401 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 02:27:34.401 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616022716)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 02:27:34.401 | INFO  | ffmpeg_runner | 预计时长: 60.00s
+2026-06-16 02:27:34.401 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v:0 -map 0:a:0 -map 0:s:0 -map 0:s:1 -map 0:s:2 -map 0:s:3 -map 0:s:4 -map 0:s:5 -map 0:s:6 -map 0:s:7 -map 0:s:8 -map 0:s:9 -map 0:s:10 -map 0:s:11 -map 0:s:12 -map 0:s:13 -map 0:s:14 -map 0:s:15 -map 0:s:16 -map 0:s:17 -map 0:s:18 -map 0:s:19 -map 0:s:20 -map 0:s:21 -map 0:s:22 -map 0:s:23 -map 0:s:24 -map 0:s:25 -map 0:s:26 -map 0:s:27 -map 0:s:28 -map 0:s:29 -map 0:s:30 -map 0:s:31 -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl -to 00:01:00 U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616022716)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 02:27:34.401 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-16 02:27:34.401 | DEBUG | ffmpeg_runner |   | [ 69] 0:s:29
+2026-06-16 02:27:34.401 | DEBUG | ffmpeg_runner |   | [ 70] -map
+2026-06-16 02:27:34.401 | DEBUG | ffmpeg_runner |   | [ 71] 0:s:30
+2026-06-16 02:27:34.401 | DEBUG | ffmpeg_runner |   | [ 72] -map
+2026-06-16 02:27:34.401 | DEBUG | ffmpeg_runner |   | [ 73] 0:s:31
+2026-06-16 02:27:34.401 | DEBUG | ffmpeg_runner |   | [ 74] -c:v
+2026-06-16 02:27:34.401 | DEBUG | ffmpeg_runner |   | [ 75] hevc
+2026-06-16 02:27:34.401 | DEBUG | ffmpeg_runner |   | [ 76] -crf
+2026-06-16 02:27:34.401 | DEBUG | ffmpeg_runner |   | [ 77] 23
+2026-06-16 02:27:34.401 | DEBUG | ffmpeg_runner |   | [ 78] -c:s
+2026-06-16 02:27:34.401 | DEBUG | ffmpeg_runner |   | [ 79] mov_text
+2026-06-16 02:27:34.401 | DEBUG | ffmpeg_runner |   | [ 80] -map_metadata
+2026-06-16 02:27:34.401 | DEBUG | ffmpeg_runner |   | [ 81] 0
+2026-06-16 02:27:34.401 | DEBUG | ffmpeg_runner |   | [ 82] -map_chapters
+2026-06-16 02:27:34.401 | DEBUG | ffmpeg_runner |   | [ 83] 0
+2026-06-16 02:27:34.401 | DEBUG | ffmpeg_runner |   | [ 84] -metadata
+2026-06-16 02:27:34.401 | DEBUG | ffmpeg_runner |   | [ 85] handler_name=@Cairl
+2026-06-16 02:27:34.401 | DEBUG | ffmpeg_runner |   | [ 86] -to
+2026-06-16 02:27:34.401 | DEBUG | ffmpeg_runner |   | [ 87] 00:01:00
+2026-06-16 02:27:34.401 | DEBUG | ffmpeg_runner |   | [ 88] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616022716)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 04:25:44.891 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [042544_89108] =====
+2026-06-16 04:25:44.892 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-16 04:25:44.892 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 04:25:44.892 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616042525)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 04:25:44.892 | INFO  | ffmpeg_runner | 预计时长: 3441.73s
+2026-06-16 04:25:44.892 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v:0 -map 0:a:0 -map 0:s:0 -map 0:s:1 -map 0:s:2 -map 0:s:3 -map 0:s:4 -map 0:s:5 -map 0:s:6 -map 0:s:7 -map 0:s:8 -map 0:s:9 -map 0:s:10 -map 0:s:11 -map 0:s:12 -map 0:s:13 -map 0:s:14 -map 0:s:15 -map 0:s:16 -map 0:s:17 -map 0:s:18 -map 0:s:19 -map 0:s:20 -map 0:s:21 -map 0:s:22 -map 0:s:23 -map 0:s:24 -map 0:s:25 -map 0:s:26 -map 0:s:27 -map 0:s:28 -map 0:s:29 -map 0:s:30 -map 0:s:31 -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl -ss 00:01:00 U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616042525)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 04:25:44.892 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-16 04:25:44.892 | DEBUG | ffmpeg_runner |   | [ 69] 0:s:29
+2026-06-16 04:25:44.892 | DEBUG | ffmpeg_runner |   | [ 70] -map
+2026-06-16 04:25:44.892 | DEBUG | ffmpeg_runner |   | [ 71] 0:s:30
+2026-06-16 04:25:44.892 | DEBUG | ffmpeg_runner |   | [ 72] -map
+2026-06-16 04:25:44.892 | DEBUG | ffmpeg_runner |   | [ 73] 0:s:31
+2026-06-16 04:25:44.892 | DEBUG | ffmpeg_runner |   | [ 74] -c:v
+2026-06-16 04:25:44.892 | DEBUG | ffmpeg_runner |   | [ 75] hevc
+2026-06-16 04:25:44.892 | DEBUG | ffmpeg_runner |   | [ 76] -crf
+2026-06-16 04:25:44.892 | DEBUG | ffmpeg_runner |   | [ 77] 23
+2026-06-16 04:25:44.892 | DEBUG | ffmpeg_runner |   | [ 78] -c:s
+2026-06-16 04:25:44.892 | DEBUG | ffmpeg_runner |   | [ 79] mov_text
+2026-06-16 04:25:44.892 | DEBUG | ffmpeg_runner |   | [ 80] -map_metadata
+2026-06-16 04:25:44.892 | DEBUG | ffmpeg_runner |   | [ 81] 0
+2026-06-16 04:25:44.892 | DEBUG | ffmpeg_runner |   | [ 82] -map_chapters
+2026-06-16 04:25:44.892 | DEBUG | ffmpeg_runner |   | [ 83] 0
+2026-06-16 04:25:44.892 | DEBUG | ffmpeg_runner |   | [ 84] -metadata
+2026-06-16 04:25:44.892 | DEBUG | ffmpeg_runner |   | [ 85] handler_name=@Cairl
+2026-06-16 04:25:44.892 | DEBUG | ffmpeg_runner |   | [ 86] -ss
+2026-06-16 04:25:44.892 | DEBUG | ffmpeg_runner |   | [ 87] 00:01:00
+2026-06-16 04:25:44.892 | DEBUG | ffmpeg_runner |   | [ 88] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616042525)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 04:31:56.323 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [043156_32336] =====
+2026-06-16 04:31:56.323 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-16 04:31:56.323 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 04:31:56.323 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616043150)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 04:31:56.323 | INFO  | ffmpeg_runner | 预计时长: 3501.73s
+2026-06-16 04:31:56.323 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v:0 -map 0:a:0 -map 0:s:0 -map 0:s:1 -map 0:s:2 -map 0:s:3 -map 0:s:4 -map 0:s:5 -map 0:s:6 -map 0:s:7 -map 0:s:8 -map 0:s:9 -map 0:s:10 -map 0:s:11 -map 0:s:12 -map 0:s:13 -map 0:s:14 -map 0:s:15 -map 0:s:16 -map 0:s:17 -map 0:s:18 -map 0:s:19 -map 0:s:20 -map 0:s:21 -map 0:s:22 -map 0:s:23 -map 0:s:24 -map 0:s:25 -map 0:s:26 -map 0:s:27 -map 0:s:28 -map 0:s:29 -map 0:s:30 -map 0:s:31 -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616043150)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 04:31:56.323 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-16 04:31:56.323 | DEBUG | ffmpeg_runner |   | [ 67] 0:s:28
+2026-06-16 04:31:56.323 | DEBUG | ffmpeg_runner |   | [ 68] -map
+2026-06-16 04:31:56.323 | DEBUG | ffmpeg_runner |   | [ 69] 0:s:29
+2026-06-16 04:31:56.323 | DEBUG | ffmpeg_runner |   | [ 70] -map
+2026-06-16 04:31:56.323 | DEBUG | ffmpeg_runner |   | [ 71] 0:s:30
+2026-06-16 04:31:56.323 | DEBUG | ffmpeg_runner |   | [ 72] -map
+2026-06-16 04:31:56.323 | DEBUG | ffmpeg_runner |   | [ 73] 0:s:31
+2026-06-16 04:31:56.323 | DEBUG | ffmpeg_runner |   | [ 74] -c:v
+2026-06-16 04:31:56.323 | DEBUG | ffmpeg_runner |   | [ 75] hevc
+2026-06-16 04:31:56.323 | DEBUG | ffmpeg_runner |   | [ 76] -crf
+2026-06-16 04:31:56.323 | DEBUG | ffmpeg_runner |   | [ 77] 23
+2026-06-16 04:31:56.323 | DEBUG | ffmpeg_runner |   | [ 78] -c:s
+2026-06-16 04:31:56.323 | DEBUG | ffmpeg_runner |   | [ 79] mov_text
+2026-06-16 04:31:56.323 | DEBUG | ffmpeg_runner |   | [ 80] -map_metadata
+2026-06-16 04:31:56.323 | DEBUG | ffmpeg_runner |   | [ 81] 0
+2026-06-16 04:31:56.323 | DEBUG | ffmpeg_runner |   | [ 82] -map_chapters
+2026-06-16 04:31:56.323 | DEBUG | ffmpeg_runner |   | [ 83] 0
+2026-06-16 04:31:56.323 | DEBUG | ffmpeg_runner |   | [ 84] -metadata
+2026-06-16 04:31:56.323 | DEBUG | ffmpeg_runner |   | [ 85] handler_name=@Cairl
+2026-06-16 04:31:56.323 | DEBUG | ffmpeg_runner |   | [ 86] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616043150)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 06:28:55.294 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [062855_29468] =====
+2026-06-16 06:28:55.299 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-16 06:28:55.299 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 06:28:55.299 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616062849)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 06:28:55.299 | INFO  | ffmpeg_runner | 预计时长: 3501.73s
+2026-06-16 06:28:55.299 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v:0 -map 0:a:0 -map 0:s:0 -map 0:s:1 -map 0:s:2 -map 0:s:3 -map 0:s:4 -map 0:s:5 -map 0:s:6 -map 0:s:7 -map 0:s:8 -map 0:s:9 -map 0:s:10 -map 0:s:11 -map 0:s:12 -map 0:s:13 -map 0:s:14 -map 0:s:15 -map 0:s:16 -map 0:s:17 -map 0:s:18 -map 0:s:19 -map 0:s:20 -map 0:s:21 -map 0:s:22 -map 0:s:23 -map 0:s:24 -map 0:s:25 -map 0:s:26 -map 0:s:27 -map 0:s:28 -map 0:s:29 -map 0:s:30 -map 0:s:31 -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616062849)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 06:28:55.299 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-16 06:28:55.299 | DEBUG | ffmpeg_runner |   | [ 67] 0:s:28
+2026-06-16 06:28:55.299 | DEBUG | ffmpeg_runner |   | [ 68] -map
+2026-06-16 06:28:55.299 | DEBUG | ffmpeg_runner |   | [ 69] 0:s:29
+2026-06-16 06:28:55.299 | DEBUG | ffmpeg_runner |   | [ 70] -map
+2026-06-16 06:28:55.299 | DEBUG | ffmpeg_runner |   | [ 71] 0:s:30
+2026-06-16 06:28:55.299 | DEBUG | ffmpeg_runner |   | [ 72] -map
+2026-06-16 06:28:55.299 | DEBUG | ffmpeg_runner |   | [ 73] 0:s:31
+2026-06-16 06:28:55.299 | DEBUG | ffmpeg_runner |   | [ 74] -c:v
+2026-06-16 06:28:55.299 | DEBUG | ffmpeg_runner |   | [ 75] hevc
+2026-06-16 06:28:55.299 | DEBUG | ffmpeg_runner |   | [ 76] -crf
+2026-06-16 06:28:55.299 | DEBUG | ffmpeg_runner |   | [ 77] 23
+2026-06-16 06:28:55.299 | DEBUG | ffmpeg_runner |   | [ 78] -c:s
+2026-06-16 06:28:55.299 | DEBUG | ffmpeg_runner |   | [ 79] mov_text
+2026-06-16 06:28:55.299 | DEBUG | ffmpeg_runner |   | [ 80] -map_metadata
+2026-06-16 06:28:55.299 | DEBUG | ffmpeg_runner |   | [ 81] 0
+2026-06-16 06:28:55.299 | DEBUG | ffmpeg_runner |   | [ 82] -map_chapters
+2026-06-16 06:28:55.299 | DEBUG | ffmpeg_runner |   | [ 83] 0
+2026-06-16 06:28:55.299 | DEBUG | ffmpeg_runner |   | [ 84] -metadata
+2026-06-16 06:28:55.299 | DEBUG | ffmpeg_runner |   | [ 85] handler_name=@Cairl
+2026-06-16 06:28:55.299 | DEBUG | ffmpeg_runner |   | [ 86] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616062849)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 11:29:19.908 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [112919_90822] =====
+2026-06-16 11:29:19.909 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-16 11:29:19.909 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 11:29:19.909 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616112916)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 11:29:19.909 | INFO  | ffmpeg_runner | 预计时长: 3501.73s
+2026-06-16 11:29:19.909 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v:0 -map 0:a:0 -map 0:s:0 -map 0:s:1 -map 0:s:2 -map 0:s:3 -map 0:s:4 -map 0:s:5 -map 0:s:6 -map 0:s:7 -map 0:s:8 -map 0:s:9 -map 0:s:10 -map 0:s:11 -map 0:s:12 -map 0:s:13 -map 0:s:14 -map 0:s:15 -map 0:s:16 -map 0:s:17 -map 0:s:18 -map 0:s:19 -map 0:s:20 -map 0:s:21 -map 0:s:22 -map 0:s:23 -map 0:s:24 -map 0:s:25 -map 0:s:26 -map 0:s:27 -map 0:s:28 -map 0:s:29 -map 0:s:30 -map 0:s:31 -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616112916)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 11:29:19.909 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-16 11:29:19.909 | DEBUG | ffmpeg_runner |   | [ 67] 0:s:28
+2026-06-16 11:29:19.909 | DEBUG | ffmpeg_runner |   | [ 68] -map
+2026-06-16 11:29:19.909 | DEBUG | ffmpeg_runner |   | [ 69] 0:s:29
+2026-06-16 11:29:19.909 | DEBUG | ffmpeg_runner |   | [ 70] -map
+2026-06-16 11:29:19.909 | DEBUG | ffmpeg_runner |   | [ 71] 0:s:30
+2026-06-16 11:29:19.909 | DEBUG | ffmpeg_runner |   | [ 72] -map
+2026-06-16 11:29:19.909 | DEBUG | ffmpeg_runner |   | [ 73] 0:s:31
+2026-06-16 11:29:19.909 | DEBUG | ffmpeg_runner |   | [ 74] -c:v
+2026-06-16 11:29:19.909 | DEBUG | ffmpeg_runner |   | [ 75] hevc
+2026-06-16 11:29:19.909 | DEBUG | ffmpeg_runner |   | [ 76] -crf
+2026-06-16 11:29:19.909 | DEBUG | ffmpeg_runner |   | [ 77] 23
+2026-06-16 11:29:19.909 | DEBUG | ffmpeg_runner |   | [ 78] -c:s
+2026-06-16 11:29:19.909 | DEBUG | ffmpeg_runner |   | [ 79] mov_text
+2026-06-16 11:29:19.909 | DEBUG | ffmpeg_runner |   | [ 80] -map_metadata
+2026-06-16 11:29:19.909 | DEBUG | ffmpeg_runner |   | [ 81] 0
+2026-06-16 11:29:19.909 | DEBUG | ffmpeg_runner |   | [ 82] -map_chapters
+2026-06-16 11:29:19.909 | DEBUG | ffmpeg_runner |   | [ 83] 0
+2026-06-16 11:29:19.909 | DEBUG | ffmpeg_runner |   | [ 84] -metadata
+2026-06-16 11:29:19.909 | DEBUG | ffmpeg_runner |   | [ 85] handler_name=@Cairl
+2026-06-16 11:29:19.909 | DEBUG | ffmpeg_runner |   | [ 86] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616112916)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 11:29:37.011 | INFO  | ffmpeg_runner | [112919_90822] 结束: 成功 (返回码 0) | 用时: 17.1s
+2026-06-16 11:29:37.011 | WARN  | ffmpeg_runner | [112919_90822] stderr 输出 (10 行):
+2026-06-16 11:29:37.011 | WARN  | ffmpeg_runner |   | frame=   89 fps= 10 q=28.5 size=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:08.75
+2026-06-16 11:29:37.011 | WARN  | ffmpeg_runner |   | [q] command received. Exiting.
+2026-06-16 11:29:37.011 | WARN  | ffmpeg_runner |   | [out#0/mp4 @ 000001d4efb76d40] video:10991KiB audio:286KiB subtitle:0KiB other streams:0KiB global headers:4KiB muxing overhead: 0.228402%
+2026-06-16 11:29:37.011 | WARN  | ffmpeg_runner |   | frame=  157 fps=9.5 q=28.3 Lsize=   11303KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:16.60
+2026-06-16 11:29:37.011 | WARN  | ffmpeg_runner |   | x265 [info]: frame I:      2, Avg QP:24.27  kb/s: 36440.39
+2026-06-16 11:29:37.011 | WARN  | ffmpeg_runner |   | x265 [info]: frame P:     44, Avg QP:23.51  kb/s: 29663.82
+2026-06-16 11:29:37.011 | WARN  | ffmpeg_runner |   | x265 [info]: frame B:    111, Avg QP:28.16  kb/s: 7032.11
+2026-06-16 11:29:37.011 | WARN  | ffmpeg_runner |   | x265 [info]: Weighted P-Frames: Y:36.4% UV:31.8%
+2026-06-16 11:29:37.011 | WARN  | ffmpeg_runner |   | encoded 157 frames in 16.47s (9.53 fps), 13749.38 kb/s, Avg QP:26.81
+2026-06-16 11:29:37.011 | WARN  | ffmpeg_runner |   | [aac @ 000001d4f01a4f40] Qavg: 12007.896
+2026-06-16 11:29:37.011 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [112919_90822] =====
+
+2026-06-16 20:30:29.243 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [203029_24379] =====
+2026-06-16 20:30:29.244 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-16 20:30:29.244 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 20:30:29.244 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616202954)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 20:30:29.244 | INFO  | ffmpeg_runner | 预计时长: 3501.73s
+2026-06-16 20:30:29.244 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v:0 -map 0:a:0 -map 0:s:0 -map 0:s:1 -map 0:s:2 -map 0:s:3 -map 0:s:4 -map 0:s:5 -map 0:s:6 -map 0:s:7 -map 0:s:8 -map 0:s:9 -map 0:s:10 -map 0:s:11 -map 0:s:12 -map 0:s:13 -map 0:s:14 -map 0:s:15 -map 0:s:16 -map 0:s:17 -map 0:s:18 -map 0:s:19 -map 0:s:20 -map 0:s:21 -map 0:s:22 -map 0:s:23 -map 0:s:24 -map 0:s:25 -map 0:s:26 -map 0:s:27 -map 0:s:28 -map 0:s:29 -map 0:s:30 -map 0:s:31 -c:v hevc_nvenc -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616202954)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 20:30:29.244 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-16 20:30:29.244 | DEBUG | ffmpeg_runner |   | [ 65] 0:s:27
+2026-06-16 20:30:29.244 | DEBUG | ffmpeg_runner |   | [ 66] -map
+2026-06-16 20:30:29.244 | DEBUG | ffmpeg_runner |   | [ 67] 0:s:28
+2026-06-16 20:30:29.244 | DEBUG | ffmpeg_runner |   | [ 68] -map
+2026-06-16 20:30:29.244 | DEBUG | ffmpeg_runner |   | [ 69] 0:s:29
+2026-06-16 20:30:29.244 | DEBUG | ffmpeg_runner |   | [ 70] -map
+2026-06-16 20:30:29.244 | DEBUG | ffmpeg_runner |   | [ 71] 0:s:30
+2026-06-16 20:30:29.244 | DEBUG | ffmpeg_runner |   | [ 72] -map
+2026-06-16 20:30:29.244 | DEBUG | ffmpeg_runner |   | [ 73] 0:s:31
+2026-06-16 20:30:29.244 | DEBUG | ffmpeg_runner |   | [ 74] -c:v
+2026-06-16 20:30:29.244 | DEBUG | ffmpeg_runner |   | [ 75] hevc_nvenc
+2026-06-16 20:30:29.244 | DEBUG | ffmpeg_runner |   | [ 76] -c:s
+2026-06-16 20:30:29.244 | DEBUG | ffmpeg_runner |   | [ 77] mov_text
+2026-06-16 20:30:29.244 | DEBUG | ffmpeg_runner |   | [ 78] -map_metadata
+2026-06-16 20:30:29.244 | DEBUG | ffmpeg_runner |   | [ 79] 0
+2026-06-16 20:30:29.244 | DEBUG | ffmpeg_runner |   | [ 80] -map_chapters
+2026-06-16 20:30:29.244 | DEBUG | ffmpeg_runner |   | [ 81] 0
+2026-06-16 20:30:29.245 | DEBUG | ffmpeg_runner |   | [ 82] -metadata
+2026-06-16 20:30:29.245 | DEBUG | ffmpeg_runner |   | [ 83] handler_name=@Cairl
+2026-06-16 20:30:29.245 | DEBUG | ffmpeg_runner |   | [ 84] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616202954)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 20:31:09.021 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 132.1s/3501.7s (3.8%) | 速度: 3.37x | 用时: 39.6s
+2026-06-16 20:31:12.038 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 142.3s/3501.7s (4.1%) | 速度: 3.36x | 用时: 42.6s
+2026-06-16 20:31:15.024 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 146.9s/3501.7s (4.2%) | 速度: 3.35x | 用时: 45.6s
+2026-06-16 20:31:18.016 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 162.5s/3501.7s (4.6%) | 速度: 3.35x | 用时: 48.6s
+2026-06-16 20:31:21.022 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 174.3s/3501.7s (5.0%) | 速度: 3.38x | 用时: 51.6s
+2026-06-16 20:31:24.047 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 184.3s/3501.7s (5.3%) | 速度: 3.40x | 用时: 54.6s
+2026-06-16 20:31:27.008 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 192.2s/3501.7s (5.5%) | 速度: 3.39x | 用时: 57.6s
+2026-06-16 20:31:27.060 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 192.2s/3501.7s (5.5%) | 速度: 3.39x | 用时: 57.6s
+2026-06-16 20:31:30.053 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 192.2s/3501.7s (5.5%) | 速度: 3.34x | 用时: 60.6s
+2026-06-16 20:31:33.006 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 192.2s/3501.7s (5.5%) | 速度: 3.23x | 用时: 63.6s
+2026-06-16 20:31:33.059 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 192.2s/3501.7s (5.5%) | 速度: 3.23x | 用时: 63.6s
+2026-06-16 20:31:36.013 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 192.2s/3501.7s (5.5%) | 速度: 3.10x | 用时: 66.6s
+2026-06-16 20:31:39.017 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 192.2s/3501.7s (5.5%) | 速度: 2.97x | 用时: 69.6s
+2026-06-16 20:31:42.036 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 192.2s/3501.7s (5.5%) | 速度: 2.85x | 用时: 72.6s
+2026-06-16 20:31:45.033 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 193.0s/3501.7s (5.5%) | 速度: 2.75x | 用时: 75.6s
+2026-06-16 20:31:48.037 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 193.0s/3501.7s (5.5%) | 速度: 2.64x | 用时: 78.6s
+2026-06-16 20:31:51.030 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 193.0s/3501.7s (5.5%) | 速度: 2.54x | 用时: 81.6s
+2026-06-16 20:31:54.033 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 193.0s/3501.7s (5.5%) | 速度: 2.44x | 用时: 84.6s
+2026-06-16 20:31:57.043 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 193.0s/3501.7s (5.5%) | 速度: 2.35x | 用时: 87.6s
+2026-06-16 20:32:00.046 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 251.6s/3501.7s (7.2%) | 速度: 2.33x | 用时: 90.6s
+2026-06-16 20:32:03.047 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 319.5s/3501.7s (9.1%) | 速度: 2.74x | 用时: 93.6s
+2026-06-16 20:32:06.059 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 330.0s/3501.7s (9.4%) | 速度: 3.07x | 用时: 96.6s
+2026-06-16 20:32:09.050 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 337.7s/3501.7s (9.6%) | 速度: 3.24x | 用时: 99.6s
+2026-06-16 20:32:12.051 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 350.7s/3501.7s (10.0%) | 速度: 3.33x | 用时: 102.6s
+2026-06-16 20:32:15.048 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 361.5s/3501.7s (10.3%) | 速度: 3.38x | 用时: 105.6s
+2026-06-16 20:32:18.017 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 371.0s/3501.7s (10.6%) | 速度: 3.40x | 用时: 108.6s
+2026-06-16 20:32:21.011 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 381.5s/3501.7s (10.9%) | 速度: 3.42x | 用时: 111.6s
+2026-06-16 20:32:24.024 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 392.9s/3501.7s (11.2%) | 速度: 3.43x | 用时: 114.6s
+2026-06-16 20:32:27.022 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 404.7s/3501.7s (11.6%) | 速度: 3.44x | 用时: 117.6s
+2026-06-16 20:32:30.022 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 408.7s/3501.7s (11.7%) | 速度: 3.44x | 用时: 120.6s
+2026-06-16 20:32:33.008 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 408.7s/3501.7s (11.7%) | 速度: 3.40x | 用时: 123.6s
+2026-06-16 20:32:36.010 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 434.9s/3501.7s (12.4%) | 速度: 3.42x | 用时: 126.6s
+2026-06-16 20:32:39.011 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 445.4s/3501.7s (12.7%) | 速度: 3.44x | 用时: 129.6s
+2026-06-16 20:32:42.009 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 456.4s/3501.7s (13.0%) | 速度: 3.45x | 用时: 132.6s
+2026-06-16 20:32:45.003 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 466.2s/3501.7s (13.3%) | 速度: 3.45x | 用时: 135.6s
+2026-06-16 20:32:45.055 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 466.2s/3501.7s (13.3%) | 速度: 3.45x | 用时: 135.6s
+2026-06-16 20:32:48.048 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 476.5s/3501.7s (13.6%) | 速度: 3.45x | 用时: 138.6s
+2026-06-16 20:32:51.028 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 485.0s/3501.7s (13.8%) | 速度: 3.45x | 用时: 141.6s
+2026-06-16 20:32:54.027 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 495.0s/3501.7s (14.1%) | 速度: 3.44x | 用时: 144.6s
+2026-06-16 20:32:57.018 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 503.2s/3501.7s (14.4%) | 速度: 3.44x | 用时: 147.6s
+2026-06-16 20:33:00.016 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 514.2s/3501.7s (14.7%) | 速度: 3.43x | 用时: 150.6s
+2026-06-16 20:33:03.008 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 519.4s/3501.7s (14.8%) | 速度: 3.42x | 用时: 153.6s
+2026-06-16 20:33:06.016 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 536.4s/3501.7s (15.3%) | 速度: 3.43x | 用时: 156.6s
+2026-06-16 20:33:09.028 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 547.1s/3501.7s (15.6%) | 速度: 3.42x | 用时: 159.6s
+2026-06-16 20:33:12.028 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 556.7s/3501.7s (15.9%) | 速度: 3.43x | 用时: 162.6s
+2026-06-16 20:33:15.023 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 567.5s/3501.7s (16.2%) | 速度: 3.42x | 用时: 165.6s
+2026-06-16 20:33:18.019 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 578.8s/3501.7s (16.5%) | 速度: 3.43x | 用时: 168.6s
+2026-06-16 20:33:21.019 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 587.0s/3501.7s (16.8%) | 速度: 3.43x | 用时: 171.6s
+2026-06-16 20:33:24.032 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 587.0s/3501.7s (16.8%) | 速度: 3.42x | 用时: 174.6s
+2026-06-16 20:33:27.040 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 611.1s/3501.7s (17.5%) | 速度: 3.42x | 用时: 177.6s
+2026-06-16 20:33:30.051 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 620.5s/3501.7s (17.7%) | 速度: 3.43x | 用时: 180.6s
+2026-06-16 20:33:33.007 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 620.5s/3501.7s (17.7%) | 速度: 3.42x | 用时: 183.6s
+2026-06-16 20:33:33.059 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 620.5s/3501.7s (17.7%) | 速度: 3.42x | 用时: 183.6s
+2026-06-16 20:33:36.044 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 643.1s/3501.7s (18.4%) | 速度: 3.42x | 用时: 186.6s
+2026-06-16 20:33:39.043 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 650.9s/3501.7s (18.6%) | 速度: 3.43x | 用时: 189.6s
+2026-06-16 20:33:42.002 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 661.5s/3501.7s (18.9%) | 速度: 3.44x | 用时: 192.6s
+2026-06-16 20:33:42.055 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 661.5s/3501.7s (18.9%) | 速度: 3.44x | 用时: 192.6s
+2026-06-16 20:33:45.049 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 671.8s/3501.7s (19.2%) | 速度: 3.44x | 用时: 195.6s
+2026-06-16 20:33:48.050 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 683.3s/3501.7s (19.5%) | 速度: 3.45x | 用时: 198.6s
+2026-06-16 20:33:51.044 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 694.3s/3501.7s (19.8%) | 速度: 3.45x | 用时: 201.6s
+2026-06-16 20:33:54.045 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 703.2s/3501.7s (20.1%) | 速度: 3.45x | 用时: 204.6s
+2026-06-16 20:33:57.013 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 711.8s/3501.7s (20.3%) | 速度: 3.44x | 用时: 207.6s
+2026-06-16 20:34:00.020 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 722.7s/3501.7s (20.6%) | 速度: 3.44x | 用时: 210.6s
+2026-06-16 20:34:03.017 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 732.9s/3501.7s (20.9%) | 速度: 3.44x | 用时: 213.6s
+2026-06-16 20:34:06.021 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 743.6s/3501.7s (21.2%) | 速度: 3.44x | 用时: 216.6s
+2026-06-16 20:34:09.015 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 754.5s/3501.7s (21.5%) | 速度: 3.44x | 用时: 219.6s
+2026-06-16 20:34:12.046 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 763.7s/3501.7s (21.8%) | 速度: 3.44x | 用时: 222.6s
+2026-06-16 20:34:15.006 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 774.6s/3501.7s (22.1%) | 速度: 3.44x | 用时: 225.6s
+2026-06-16 20:34:15.060 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 774.6s/3501.7s (22.1%) | 速度: 3.44x | 用时: 225.6s
+2026-06-16 20:34:18.025 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 785.6s/3501.7s (22.4%) | 速度: 3.44x | 用时: 228.6s
+2026-06-16 20:34:21.024 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 795.9s/3501.7s (22.7%) | 速度: 3.44x | 用时: 231.6s
+2026-06-16 20:34:24.035 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 807.1s/3501.7s (23.0%) | 速度: 3.44x | 用时: 234.6s
+2026-06-16 20:34:27.041 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 808.7s/3501.7s (23.1%) | 速度: 3.44x | 用时: 237.6s
+2026-06-16 20:34:30.038 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 823.7s/3501.7s (23.5%) | 速度: 3.44x | 用时: 240.6s
+2026-06-16 20:34:33.045 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 834.2s/3501.7s (23.8%) | 速度: 3.44x | 用时: 243.6s
+2026-06-16 20:34:36.042 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 849.6s/3501.7s (24.3%) | 速度: 3.45x | 用时: 246.6s
+2026-06-16 20:34:39.046 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 860.7s/3501.7s (24.6%) | 速度: 3.45x | 用时: 249.6s
+2026-06-16 20:34:42.006 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 869.5s/3501.7s (24.8%) | 速度: 3.45x | 用时: 252.6s
+2026-06-16 20:34:42.060 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 871.3s/3501.7s (24.9%) | 速度: 3.45x | 用时: 252.6s
+2026-06-16 20:34:45.015 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 879.8s/3501.7s (25.1%) | 速度: 3.45x | 用时: 255.6s
+2026-06-16 20:34:48.022 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 891.6s/3501.7s (25.5%) | 速度: 3.45x | 用时: 258.6s
+2026-06-16 20:34:51.015 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 901.4s/3501.7s (25.7%) | 速度: 3.45x | 用时: 261.6s
+2026-06-16 20:34:54.036 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 916.2s/3501.7s (26.2%) | 速度: 3.46x | 用时: 264.6s
+2026-06-16 20:34:57.040 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 928.8s/3501.7s (26.5%) | 速度: 3.47x | 用时: 267.6s
+2026-06-16 20:35:00.027 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 939.4s/3501.7s (26.8%) | 速度: 3.47x | 用时: 270.6s
+2026-06-16 20:35:03.020 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 951.9s/3501.7s (27.2%) | 速度: 3.48x | 用时: 273.6s
+2026-06-16 20:35:06.026 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 961.2s/3501.7s (27.4%) | 速度: 3.48x | 用时: 276.6s
+2026-06-16 20:35:09.009 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 961.2s/3501.7s (27.4%) | 速度: 3.47x | 用时: 279.6s
+2026-06-16 20:35:12.041 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 961.2s/3501.7s (27.4%) | 速度: 3.45x | 用时: 282.6s
+2026-06-16 20:35:15.022 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 961.2s/3501.7s (27.4%) | 速度: 3.42x | 用时: 285.6s
+2026-06-16 20:35:18.047 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1012.1s/3501.7s (28.9%) | 速度: 3.41x | 用时: 288.6s
+2026-06-16 20:35:21.036 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1025.4s/3501.7s (29.3%) | 速度: 3.46x | 用时: 291.6s
+2026-06-16 20:35:24.016 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1037.4s/3501.7s (29.6%) | 速度: 3.49x | 用时: 294.6s
+2026-06-16 20:35:27.030 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1045.1s/3501.7s (29.8%) | 速度: 3.51x | 用时: 297.6s
+2026-06-16 20:35:30.027 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1061.9s/3501.7s (30.3%) | 速度: 3.52x | 用时: 300.6s
+2026-06-16 20:35:33.013 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1069.0s/3501.7s (30.5%) | 速度: 3.53x | 用时: 303.6s
+2026-06-16 20:35:36.040 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1069.0s/3501.7s (30.5%) | 速度: 3.52x | 用时: 306.6s
+2026-06-16 20:35:39.026 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1069.0s/3501.7s (30.5%) | 速度: 3.50x | 用时: 309.6s
+2026-06-16 20:35:42.027 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1109.8s/3501.7s (31.7%) | 速度: 3.49x | 用时: 312.6s
+2026-06-16 20:35:45.003 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1122.4s/3501.7s (32.1%) | 速度: 3.52x | 用时: 315.6s
+2026-06-16 20:35:45.055 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1122.4s/3501.7s (32.1%) | 速度: 3.52x | 用时: 315.6s
+2026-06-16 20:35:48.032 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1132.8s/3501.7s (32.3%) | 速度: 3.54x | 用时: 318.6s
+2026-06-16 20:35:51.039 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1145.9s/3501.7s (32.7%) | 速度: 3.55x | 用时: 321.6s
+2026-06-16 20:35:54.045 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1149.4s/3501.7s (32.8%) | 速度: 3.56x | 用时: 324.6s
+2026-06-16 20:35:57.011 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1167.3s/3501.7s (33.3%) | 速度: 3.56x | 用时: 327.6s
+2026-06-16 20:36:00.015 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1176.9s/3501.7s (33.6%) | 速度: 3.56x | 用时: 330.6s
+2026-06-16 20:36:03.024 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1187.4s/3501.7s (33.9%) | 速度: 3.56x | 用时: 333.6s
+2026-06-16 20:36:06.024 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1191.6s/3501.7s (34.0%) | 速度: 3.56x | 用时: 336.6s
+2026-06-16 20:36:09.013 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1205.8s/3501.7s (34.4%) | 速度: 3.56x | 用时: 339.6s
+2026-06-16 20:36:12.015 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1216.1s/3501.7s (34.7%) | 速度: 3.56x | 用时: 342.6s
+2026-06-16 20:36:15.025 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1220.0s/3501.7s (34.8%) | 速度: 3.55x | 用时: 345.6s
+2026-06-16 20:36:18.030 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1220.0s/3501.7s (34.8%) | 速度: 3.53x | 用时: 348.6s
+2026-06-16 20:36:21.023 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1220.0s/3501.7s (34.8%) | 速度: 3.51x | 用时: 351.6s
+2026-06-16 20:36:24.024 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1254.4s/3501.7s (35.8%) | 速度: 3.51x | 用时: 354.6s
+2026-06-16 20:36:27.014 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1264.2s/3501.7s (36.1%) | 速度: 3.53x | 用时: 357.6s
+2026-06-16 20:36:30.018 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1272.7s/3501.7s (36.3%) | 速度: 3.53x | 用时: 360.6s
+2026-06-16 20:36:33.025 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1278.6s/3501.7s (36.5%) | 速度: 3.53x | 用时: 363.6s
+2026-06-16 20:36:36.023 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1278.6s/3501.7s (36.5%) | 速度: 3.52x | 用时: 366.6s
+2026-06-16 20:36:39.012 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1278.6s/3501.7s (36.5%) | 速度: 3.50x | 用时: 369.6s
+2026-06-16 20:36:42.021 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1278.6s/3501.7s (36.5%) | 速度: 3.48x | 用时: 372.6s
+2026-06-16 20:36:45.020 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1278.6s/3501.7s (36.5%) | 速度: 3.45x | 用时: 375.6s
+2026-06-16 20:36:48.031 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1278.6s/3501.7s (36.5%) | 速度: 3.42x | 用时: 378.6s
+2026-06-16 20:36:51.026 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1344.2s/3501.7s (38.4%) | 速度: 3.45x | 用时: 381.6s
+2026-06-16 20:36:54.024 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1353.3s/3501.7s (38.6%) | 速度: 3.48x | 用时: 384.6s
+2026-06-16 20:36:57.038 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1363.4s/3501.7s (38.9%) | 速度: 3.50x | 用时: 387.6s
+2026-06-16 20:37:00.002 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1373.6s/3501.7s (39.2%) | 速度: 3.51x | 用时: 390.6s
+2026-06-16 20:37:00.055 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1373.6s/3501.7s (39.2%) | 速度: 3.51x | 用时: 390.6s
+2026-06-16 20:37:03.014 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1383.4s/3501.7s (39.5%) | 速度: 3.51x | 用时: 393.6s
+2026-06-16 20:37:06.035 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1394.0s/3501.7s (39.8%) | 速度: 3.52x | 用时: 396.6s
+2026-06-16 20:37:09.047 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1405.4s/3501.7s (40.1%) | 速度: 3.52x | 用时: 399.6s
+2026-06-16 20:37:12.049 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1412.0s/3501.7s (40.3%) | 速度: 3.52x | 用时: 402.6s
+2026-06-16 20:37:15.051 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1423.7s/3501.7s (40.7%) | 速度: 3.52x | 用时: 405.6s
+2026-06-16 20:37:18.003 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1434.6s/3501.7s (41.0%) | 速度: 3.52x | 用时: 408.6s
+2026-06-16 20:37:18.056 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1434.6s/3501.7s (41.0%) | 速度: 3.52x | 用时: 408.6s
+2026-06-16 20:37:21.054 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1434.6s/3501.7s (41.0%) | 速度: 3.51x | 用时: 411.6s
+2026-06-16 20:37:24.048 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1458.3s/3501.7s (41.6%) | 速度: 3.51x | 用时: 414.6s
+2026-06-16 20:37:27.053 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1462.8s/3501.7s (41.8%) | 速度: 3.51x | 用时: 417.6s
+2026-06-16 20:37:30.014 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1462.8s/3501.7s (41.8%) | 速度: 3.50x | 用时: 420.6s
+2026-06-16 20:37:33.045 | DEBUG | ffmpeg_runner | [203029_24379] 进度: 1462.8s/3501.7s (41.8%) | 速度: 3.49x | 用时: 423.6s
+2026-06-16 20:37:35.211 | INFO  | ffmpeg_runner | [203029_24379] 结束: 成功 (返回码 0) | 用时: 425.8s
+2026-06-16 20:37:35.211 | WARN  | ffmpeg_runner | [203029_24379] stderr 输出 (10 行):
+2026-06-16 20:37:35.211 | WARN  | ffmpeg_runner |   | frame=35592 fps= 84 q=41.0 size=  488192KiB time=00:24:22.82 bitrate=2733.9kbits/s speed=3.47x elapsed=0:07:01.97
+2026-06-16 20:37:35.211 | WARN  | ffmpeg_runner |   | frame=35642 fps= 84 q=33.0 size=  488704KiB time=00:24:22.82 bitrate=2736.8kbits/s speed=3.46x elapsed=0:07:02.49
+2026-06-16 20:37:35.211 | WARN  | ffmpeg_runner |   | frame=35691 fps= 84 q=36.0 size=  489472KiB time=00:24:22.82 bitrate=2741.1kbits/s speed=3.46x elapsed=0:07:03.01
+2026-06-16 20:37:35.212 | WARN  | ffmpeg_runner |   | frame=35736 fps= 84 q=41.0 size=  490240KiB time=00:24:22.82 bitrate=2745.4kbits/s speed=3.45x elapsed=0:07:03.52
+2026-06-16 20:37:35.212 | WARN  | ffmpeg_runner |   | frame=35798 fps= 84 q=40.0 size=  491264KiB time=00:24:22.82 bitrate=2751.1kbits/s speed=3.45x elapsed=0:07:04.03
+2026-06-16 20:37:35.212 | WARN  | ffmpeg_runner |   | frame=35852 fps= 84 q=34.0 size=  491776KiB time=00:24:22.82 bitrate=2754.0kbits/s speed=3.45x elapsed=0:07:04.55
+2026-06-16 20:37:35.212 | WARN  | ffmpeg_runner |   | [q] command received. Exiting.
+2026-06-16 20:37:35.212 | WARN  | ffmpeg_runner |   | [out#0/mp4 @ 0000017db3cd6cc0] video:423318KiB audio:72168KiB subtitle:327KiB other streams:0KiB global headers:2KiB muxing overhead: 0.271724%
+2026-06-16 20:37:35.212 | WARN  | ffmpeg_runner |   | frame=35946 fps= 85 q=39.0 Lsize=  497160KiB time=00:24:22.82 bitrate=2784.2kbits/s speed=3.44x elapsed=0:07:05.36
+2026-06-16 20:37:35.212 | WARN  | ffmpeg_runner |   | [aac @ 0000017db4317e00] Qavg: 507.944
+2026-06-16 20:37:35.212 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [203029_24379] =====
+
+2026-06-16 20:43:08.024 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [204308_02448] =====
+2026-06-16 20:43:08.025 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-16 20:43:08.025 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 20:43:08.025 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616204300)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 20:43:08.025 | INFO  | ffmpeg_runner | 预计时长: 3501.73s
+2026-06-16 20:43:08.025 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v:0 -map 0:a:0 -map 0:s:0 -map 0:s:1 -map 0:s:2 -map 0:s:3 -map 0:s:4 -map 0:s:5 -map 0:s:6 -map 0:s:7 -map 0:s:8 -map 0:s:9 -map 0:s:10 -map 0:s:11 -map 0:s:12 -map 0:s:13 -map 0:s:14 -map 0:s:15 -map 0:s:16 -map 0:s:17 -map 0:s:18 -map 0:s:19 -map 0:s:20 -map 0:s:21 -map 0:s:22 -map 0:s:23 -map 0:s:24 -map 0:s:25 -map 0:s:26 -map 0:s:27 -map 0:s:28 -map 0:s:29 -map 0:s:30 -map 0:s:31 -c:v hevc_nvenc -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616204300)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 20:43:08.025 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-16 20:43:08.025 | DEBUG | ffmpeg_runner |   | [ 65] 0:s:27
+2026-06-16 20:43:08.025 | DEBUG | ffmpeg_runner |   | [ 66] -map
+2026-06-16 20:43:08.025 | DEBUG | ffmpeg_runner |   | [ 67] 0:s:28
+2026-06-16 20:43:08.025 | DEBUG | ffmpeg_runner |   | [ 68] -map
+2026-06-16 20:43:08.025 | DEBUG | ffmpeg_runner |   | [ 69] 0:s:29
+2026-06-16 20:43:08.025 | DEBUG | ffmpeg_runner |   | [ 70] -map
+2026-06-16 20:43:08.025 | DEBUG | ffmpeg_runner |   | [ 71] 0:s:30
+2026-06-16 20:43:08.025 | DEBUG | ffmpeg_runner |   | [ 72] -map
+2026-06-16 20:43:08.025 | DEBUG | ffmpeg_runner |   | [ 73] 0:s:31
+2026-06-16 20:43:08.025 | DEBUG | ffmpeg_runner |   | [ 74] -c:v
+2026-06-16 20:43:08.025 | DEBUG | ffmpeg_runner |   | [ 75] hevc_nvenc
+2026-06-16 20:43:08.025 | DEBUG | ffmpeg_runner |   | [ 76] -c:s
+2026-06-16 20:43:08.025 | DEBUG | ffmpeg_runner |   | [ 77] mov_text
+2026-06-16 20:43:08.025 | DEBUG | ffmpeg_runner |   | [ 78] -map_metadata
+2026-06-16 20:43:08.025 | DEBUG | ffmpeg_runner |   | [ 79] 0
+2026-06-16 20:43:08.025 | DEBUG | ffmpeg_runner |   | [ 80] -map_chapters
+2026-06-16 20:43:08.025 | DEBUG | ffmpeg_runner |   | [ 81] 0
+2026-06-16 20:43:08.025 | DEBUG | ffmpeg_runner |   | [ 82] -metadata
+2026-06-16 20:43:08.025 | DEBUG | ffmpeg_runner |   | [ 83] handler_name=@Cairl
+2026-06-16 20:43:08.025 | DEBUG | ffmpeg_runner |   | [ 84] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616204300)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 20:43:45.042 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 143.4s/3501.7s (4.1%) | 速度: 3.90x | 用时: 37.0s
+2026-06-16 20:43:48.037 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 156.7s/3501.7s (4.5%) | 速度: 3.90x | 用时: 40.0s
+2026-06-16 20:43:51.032 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 170.9s/3501.7s (4.9%) | 速度: 3.93x | 用时: 43.0s
+2026-06-16 20:43:54.020 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 182.8s/3501.7s (5.2%) | 速度: 3.97x | 用时: 46.0s
+2026-06-16 20:43:57.001 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 192.2s/3501.7s (5.5%) | 速度: 3.99x | 用时: 49.0s
+2026-06-16 20:43:57.051 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 192.2s/3501.7s (5.5%) | 速度: 3.99x | 用时: 49.0s
+2026-06-16 20:44:00.036 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 192.2s/3501.7s (5.5%) | 速度: 3.90x | 用时: 52.0s
+2026-06-16 20:44:03.017 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 192.2s/3501.7s (5.5%) | 速度: 3.76x | 用时: 55.0s
+2026-06-16 20:44:06.052 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 192.2s/3501.7s (5.5%) | 速度: 3.59x | 用时: 58.0s
+2026-06-16 20:44:09.045 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 193.0s/3501.7s (5.5%) | 速度: 3.42x | 用时: 61.0s
+2026-06-16 20:44:12.030 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 193.0s/3501.7s (5.5%) | 速度: 3.28x | 用时: 64.0s
+2026-06-16 20:44:15.017 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 193.0s/3501.7s (5.5%) | 速度: 3.13x | 用时: 67.0s
+2026-06-16 20:44:18.051 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 193.0s/3501.7s (5.5%) | 速度: 2.98x | 用时: 70.0s
+2026-06-16 20:44:21.042 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 193.0s/3501.7s (5.5%) | 速度: 2.85x | 用时: 73.0s
+2026-06-16 20:44:24.001 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 251.6s/3501.7s (7.2%) | 速度: 2.87x | 用时: 76.0s
+2026-06-16 20:44:24.053 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 251.6s/3501.7s (7.2%) | 速度: 2.87x | 用时: 76.0s
+2026-06-16 20:44:27.046 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 325.7s/3501.7s (9.3%) | 速度: 3.46x | 用时: 79.0s
+2026-06-16 20:44:30.034 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 336.5s/3501.7s (9.6%) | 速度: 3.73x | 用时: 82.0s
+2026-06-16 20:44:33.012 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 349.1s/3501.7s (10.0%) | 速度: 3.92x | 用时: 85.0s
+2026-06-16 20:44:36.013 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 362.2s/3501.7s (10.3%) | 速度: 4.02x | 用时: 88.0s
+2026-06-16 20:44:39.008 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 375.0s/3501.7s (10.7%) | 速度: 4.07x | 用时: 91.0s
+2026-06-16 20:44:39.059 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 375.0s/3501.7s (10.7%) | 速度: 4.07x | 用时: 91.0s
+2026-06-16 20:44:42.038 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 388.2s/3501.7s (11.1%) | 速度: 4.10x | 用时: 94.0s
+2026-06-16 20:44:45.032 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 399.4s/3501.7s (11.4%) | 速度: 4.11x | 用时: 97.0s
+2026-06-16 20:44:48.015 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 408.7s/3501.7s (11.7%) | 速度: 4.12x | 用时: 100.0s
+2026-06-16 20:44:51.001 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 408.7s/3501.7s (11.7%) | 速度: 4.08x | 用时: 103.0s
+2026-06-16 20:44:51.052 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 408.7s/3501.7s (11.7%) | 速度: 4.08x | 用时: 103.0s
+2026-06-16 20:44:54.035 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 438.1s/3501.7s (12.5%) | 速度: 4.11x | 用时: 106.0s
+2026-06-16 20:44:57.019 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 451.0s/3501.7s (12.9%) | 速度: 4.12x | 用时: 109.0s
+2026-06-16 20:45:00.015 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 461.0s/3501.7s (13.2%) | 速度: 4.13x | 用时: 112.0s
+2026-06-16 20:45:03.044 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 473.3s/3501.7s (13.5%) | 速度: 4.13x | 用时: 115.0s
+2026-06-16 20:45:06.019 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 485.5s/3501.7s (13.9%) | 速度: 4.13x | 用时: 118.0s
+2026-06-16 20:45:09.004 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 497.4s/3501.7s (14.2%) | 速度: 4.13x | 用时: 121.0s
+2026-06-16 20:45:09.056 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 497.4s/3501.7s (14.2%) | 速度: 4.13x | 用时: 121.0s
+2026-06-16 20:45:12.034 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 509.3s/3501.7s (14.5%) | 速度: 4.12x | 用时: 124.0s
+2026-06-16 20:45:15.017 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 519.4s/3501.7s (14.8%) | 速度: 4.11x | 用时: 127.0s
+2026-06-16 20:45:18.014 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 533.4s/3501.7s (15.2%) | 速度: 4.11x | 用时: 130.0s
+2026-06-16 20:45:21.047 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 547.1s/3501.7s (15.6%) | 速度: 4.10x | 用时: 133.0s
+2026-06-16 20:45:24.022 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 556.9s/3501.7s (15.9%) | 速度: 4.11x | 用时: 136.0s
+2026-06-16 20:45:27.000 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 572.2s/3501.7s (16.3%) | 速度: 4.11x | 用时: 139.0s
+2026-06-16 20:45:27.052 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 572.2s/3501.7s (16.3%) | 速度: 4.11x | 用时: 139.0s
+2026-06-16 20:45:30.041 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 585.7s/3501.7s (16.7%) | 速度: 4.11x | 用时: 142.0s
+2026-06-16 20:45:33.030 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 587.0s/3501.7s (16.8%) | 速度: 4.10x | 用时: 145.0s
+2026-06-16 20:45:36.016 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 610.4s/3501.7s (17.4%) | 速度: 4.09x | 用时: 148.0s
+2026-06-16 20:45:39.044 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 620.5s/3501.7s (17.7%) | 速度: 4.11x | 用时: 151.0s
+2026-06-16 20:45:42.033 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 620.5s/3501.7s (17.7%) | 速度: 4.09x | 用时: 154.0s
+2026-06-16 20:45:45.022 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 648.5s/3501.7s (18.5%) | 速度: 4.10x | 用时: 157.0s
+2026-06-16 20:45:48.005 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 661.0s/3501.7s (18.9%) | 速度: 4.12x | 用时: 160.0s
+2026-06-16 20:45:48.055 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 661.0s/3501.7s (18.9%) | 速度: 4.12x | 用时: 160.0s
+2026-06-16 20:45:51.033 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 671.3s/3501.7s (19.2%) | 速度: 4.12x | 用时: 163.0s
+2026-06-16 20:45:54.030 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 684.8s/3501.7s (19.6%) | 速度: 4.13x | 用时: 166.0s
+2026-06-16 20:45:57.006 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 697.1s/3501.7s (19.9%) | 速度: 4.13x | 用时: 169.0s
+2026-06-16 20:45:57.057 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 697.1s/3501.7s (19.9%) | 速度: 4.13x | 用时: 169.0s
+2026-06-16 20:46:00.037 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 709.0s/3501.7s (20.2%) | 速度: 4.13x | 用时: 172.0s
+2026-06-16 20:46:03.025 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 721.4s/3501.7s (20.6%) | 速度: 4.13x | 用时: 175.0s
+2026-06-16 20:46:06.051 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 732.9s/3501.7s (20.9%) | 速度: 4.13x | 用时: 178.0s
+2026-06-16 20:46:09.037 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 744.4s/3501.7s (21.3%) | 速度: 4.13x | 用时: 181.0s
+2026-06-16 20:46:12.020 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 757.4s/3501.7s (21.6%) | 速度: 4.13x | 用时: 184.0s
+2026-06-16 20:46:15.013 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 771.6s/3501.7s (22.0%) | 速度: 4.13x | 用时: 187.0s
+2026-06-16 20:46:18.046 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 785.1s/3501.7s (22.4%) | 速度: 4.13x | 用时: 190.0s
+2026-06-16 20:46:21.039 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 797.8s/3501.7s (22.8%) | 速度: 4.14x | 用时: 193.0s
+2026-06-16 20:46:24.040 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 808.5s/3501.7s (23.1%) | 速度: 4.14x | 用时: 196.0s
+2026-06-16 20:46:27.037 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 822.8s/3501.7s (23.5%) | 速度: 4.13x | 用时: 199.0s
+2026-06-16 20:46:30.019 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 834.2s/3501.7s (23.8%) | 速度: 4.14x | 用时: 202.0s
+2026-06-16 20:46:33.023 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 849.0s/3501.7s (24.2%) | 速度: 4.14x | 用时: 205.0s
+2026-06-16 20:46:36.019 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 859.8s/3501.7s (24.6%) | 速度: 4.14x | 用时: 208.0s
+2026-06-16 20:46:39.007 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 869.2s/3501.7s (24.8%) | 速度: 4.14x | 用时: 211.0s
+2026-06-16 20:46:39.059 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 869.2s/3501.7s (24.8%) | 速度: 4.14x | 用时: 211.0s
+2026-06-16 20:46:42.001 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 879.7s/3501.7s (25.1%) | 速度: 4.13x | 用时: 214.0s
+2026-06-16 20:46:42.053 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 879.7s/3501.7s (25.1%) | 速度: 4.13x | 用时: 214.0s
+2026-06-16 20:46:45.002 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 891.0s/3501.7s (25.4%) | 速度: 4.12x | 用时: 217.0s
+2026-06-16 20:46:45.053 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 891.0s/3501.7s (25.4%) | 速度: 4.12x | 用时: 217.0s
+2026-06-16 20:46:48.039 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 901.3s/3501.7s (25.7%) | 速度: 4.12x | 用时: 220.0s
+2026-06-16 20:46:51.031 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 912.9s/3501.7s (26.1%) | 速度: 4.11x | 用时: 223.0s
+2026-06-16 20:46:54.028 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 921.6s/3501.7s (26.3%) | 速度: 4.10x | 用时: 226.0s
+2026-06-16 20:46:57.028 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 932.8s/3501.7s (26.6%) | 速度: 4.09x | 用时: 229.0s
+2026-06-16 20:47:00.012 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 943.8s/3501.7s (27.0%) | 速度: 4.09x | 用时: 232.0s
+2026-06-16 20:47:03.051 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 952.0s/3501.7s (27.2%) | 速度: 4.08x | 用时: 235.0s
+2026-06-16 20:47:06.043 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 961.2s/3501.7s (27.4%) | 速度: 4.07x | 用时: 238.0s
+2026-06-16 20:47:09.034 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 961.2s/3501.7s (27.4%) | 速度: 4.04x | 用时: 241.0s
+2026-06-16 20:47:12.020 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 961.2s/3501.7s (27.4%) | 速度: 4.01x | 用时: 244.0s
+2026-06-16 20:47:15.006 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 961.2s/3501.7s (27.4%) | 速度: 3.97x | 用时: 247.0s
+2026-06-16 20:47:15.059 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 961.2s/3501.7s (27.4%) | 速度: 3.97x | 用时: 247.0s
+2026-06-16 20:47:18.012 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 961.2s/3501.7s (27.4%) | 速度: 3.92x | 用时: 250.0s
+2026-06-16 20:47:21.053 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1017.9s/3501.7s (29.1%) | 速度: 3.95x | 用时: 253.0s
+2026-06-16 20:47:24.050 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1029.2s/3501.7s (29.4%) | 速度: 3.98x | 用时: 256.0s
+2026-06-16 20:47:27.045 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1037.5s/3501.7s (29.6%) | 速度: 4.00x | 用时: 259.0s
+2026-06-16 20:47:30.036 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1045.1s/3501.7s (29.8%) | 速度: 4.00x | 用时: 262.0s
+2026-06-16 20:47:33.034 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1057.8s/3501.7s (30.2%) | 速度: 4.00x | 用时: 265.0s
+2026-06-16 20:47:36.022 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1068.8s/3501.7s (30.5%) | 速度: 4.00x | 用时: 268.0s
+2026-06-16 20:47:39.007 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1069.0s/3501.7s (30.5%) | 速度: 3.98x | 用时: 271.0s
+2026-06-16 20:47:39.057 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1069.0s/3501.7s (30.5%) | 速度: 3.98x | 用时: 271.0s
+2026-06-16 20:47:42.049 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1069.0s/3501.7s (30.5%) | 速度: 3.95x | 用时: 274.0s
+2026-06-16 20:47:45.045 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1069.0s/3501.7s (30.5%) | 速度: 3.92x | 用时: 277.0s
+2026-06-16 20:47:48.053 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1109.7s/3501.7s (31.7%) | 速度: 3.91x | 用时: 280.0s
+2026-06-16 20:47:51.004 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1120.2s/3501.7s (32.0%) | 速度: 3.94x | 用时: 283.0s
+2026-06-16 20:47:51.056 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1120.2s/3501.7s (32.0%) | 速度: 3.94x | 用时: 283.0s
+2026-06-16 20:47:54.002 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1130.8s/3501.7s (32.3%) | 速度: 3.95x | 用时: 286.0s
+2026-06-16 20:47:54.055 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1130.8s/3501.7s (32.3%) | 速度: 3.95x | 用时: 286.0s
+2026-06-16 20:47:57.006 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1140.1s/3501.7s (32.6%) | 速度: 3.95x | 用时: 289.0s
+2026-06-16 20:47:57.059 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1142.0s/3501.7s (32.6%) | 速度: 3.95x | 用时: 289.0s
+2026-06-16 20:48:00.001 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1149.4s/3501.7s (32.8%) | 速度: 3.95x | 用时: 292.0s
+2026-06-16 20:48:00.052 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1149.4s/3501.7s (32.8%) | 速度: 3.95x | 用时: 292.0s
+2026-06-16 20:48:03.052 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1161.6s/3501.7s (33.2%) | 速度: 3.94x | 用时: 295.0s
+2026-06-16 20:48:06.049 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1171.7s/3501.7s (33.5%) | 速度: 3.94x | 用时: 298.0s
+2026-06-16 20:48:09.040 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1177.1s/3501.7s (33.6%) | 速度: 3.93x | 用时: 301.0s
+2026-06-16 20:48:12.030 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1191.6s/3501.7s (34.0%) | 速度: 3.93x | 用时: 304.0s
+2026-06-16 20:48:15.033 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1200.3s/3501.7s (34.3%) | 速度: 3.92x | 用时: 307.0s
+2026-06-16 20:48:18.038 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1209.4s/3501.7s (34.5%) | 速度: 3.92x | 用时: 310.0s
+2026-06-16 20:48:21.036 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1220.0s/3501.7s (34.8%) | 速度: 3.91x | 用时: 313.0s
+2026-06-16 20:48:24.024 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1220.0s/3501.7s (34.8%) | 速度: 3.90x | 用时: 316.0s
+2026-06-16 20:48:27.011 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1220.0s/3501.7s (34.8%) | 速度: 3.87x | 用时: 319.0s
+2026-06-16 20:48:30.006 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1250.4s/3501.7s (35.7%) | 速度: 3.85x | 用时: 322.0s
+2026-06-16 20:48:30.057 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1250.4s/3501.7s (35.7%) | 速度: 3.85x | 用时: 322.0s
+2026-06-16 20:48:33.046 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1259.3s/3501.7s (36.0%) | 速度: 3.86x | 用时: 325.0s
+2026-06-16 20:48:36.032 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1269.1s/3501.7s (36.2%) | 速度: 3.87x | 用时: 328.0s
+2026-06-16 20:48:39.020 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1278.6s/3501.7s (36.5%) | 速度: 3.87x | 用时: 331.0s
+2026-06-16 20:48:42.027 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1278.6s/3501.7s (36.5%) | 速度: 3.86x | 用时: 334.0s
+2026-06-16 20:48:45.039 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1278.6s/3501.7s (36.5%) | 速度: 3.84x | 用时: 337.0s
+2026-06-16 20:48:48.031 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1278.6s/3501.7s (36.5%) | 速度: 3.81x | 用时: 340.0s
+2026-06-16 20:48:51.028 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1278.6s/3501.7s (36.5%) | 速度: 3.78x | 用时: 343.0s
+2026-06-16 20:48:54.023 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1278.6s/3501.7s (36.5%) | 速度: 3.75x | 用时: 346.0s
+2026-06-16 20:48:57.015 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1278.9s/3501.7s (36.5%) | 速度: 3.72x | 用时: 349.0s
+2026-06-16 20:49:00.011 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1349.3s/3501.7s (38.5%) | 速度: 3.77x | 用时: 352.0s
+2026-06-16 20:49:03.001 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1357.8s/3501.7s (38.8%) | 速度: 3.80x | 用时: 355.0s
+2026-06-16 20:49:03.054 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1359.9s/3501.7s (38.8%) | 速度: 3.80x | 用时: 355.0s
+2026-06-16 20:49:06.047 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1368.4s/3501.7s (39.1%) | 速度: 3.81x | 用时: 358.0s
+2026-06-16 20:49:09.045 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1378.3s/3501.7s (39.4%) | 速度: 3.82x | 用时: 361.0s
+2026-06-16 20:49:12.047 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1388.8s/3501.7s (39.7%) | 速度: 3.82x | 用时: 364.0s
+2026-06-16 20:49:15.033 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1399.4s/3501.7s (40.0%) | 速度: 3.82x | 用时: 367.0s
+2026-06-16 20:49:18.031 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1411.4s/3501.7s (40.3%) | 速度: 3.82x | 用时: 370.0s
+2026-06-16 20:49:21.022 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1412.0s/3501.7s (40.3%) | 速度: 3.81x | 用时: 373.0s
+2026-06-16 20:49:24.035 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1424.3s/3501.7s (40.7%) | 速度: 3.81x | 用时: 376.0s
+2026-06-16 20:49:27.030 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1434.6s/3501.7s (41.0%) | 速度: 3.80x | 用时: 379.0s
+2026-06-16 20:49:30.019 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1453.2s/3501.7s (41.5%) | 速度: 3.80x | 用时: 382.0s
+2026-06-16 20:49:33.018 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1462.8s/3501.7s (41.8%) | 速度: 3.80x | 用时: 385.0s
+2026-06-16 20:49:36.020 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1462.8s/3501.7s (41.8%) | 速度: 3.79x | 用时: 388.0s
+2026-06-16 20:49:39.009 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1462.8s/3501.7s (41.8%) | 速度: 3.78x | 用时: 391.0s
+2026-06-16 20:49:42.048 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1462.8s/3501.7s (41.8%) | 速度: 3.75x | 用时: 394.0s
+2026-06-16 20:49:45.007 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1462.8s/3501.7s (41.8%) | 速度: 3.73x | 用时: 397.0s
+2026-06-16 20:49:45.059 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1462.8s/3501.7s (41.8%) | 速度: 3.73x | 用时: 397.0s
+2026-06-16 20:49:48.000 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1514.3s/3501.7s (43.2%) | 速度: 3.73x | 用时: 400.0s
+2026-06-16 20:49:48.051 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1514.3s/3501.7s (43.2%) | 速度: 3.73x | 用时: 400.0s
+2026-06-16 20:49:51.044 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1524.5s/3501.7s (43.5%) | 速度: 3.76x | 用时: 403.0s
+2026-06-16 20:49:54.030 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1533.3s/3501.7s (43.8%) | 速度: 3.77x | 用时: 406.0s
+2026-06-16 20:49:57.028 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1540.8s/3501.7s (44.0%) | 速度: 3.77x | 用时: 409.0s
+2026-06-16 20:50:00.022 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1552.0s/3501.7s (44.3%) | 速度: 3.78x | 用时: 412.0s
+2026-06-16 20:50:03.018 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1552.0s/3501.7s (44.3%) | 速度: 3.76x | 用时: 415.0s
+2026-06-16 20:50:06.019 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1552.0s/3501.7s (44.3%) | 速度: 3.75x | 用时: 418.0s
+2026-06-16 20:50:09.013 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1552.0s/3501.7s (44.3%) | 速度: 3.73x | 用时: 421.0s
+2026-06-16 20:50:12.018 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1593.6s/3501.7s (45.5%) | 速度: 3.72x | 用时: 424.0s
+2026-06-16 20:50:15.020 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1596.6s/3501.7s (45.6%) | 速度: 3.74x | 用时: 427.0s
+2026-06-16 20:50:18.018 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1596.6s/3501.7s (45.6%) | 速度: 3.73x | 用时: 430.0s
+2026-06-16 20:50:21.024 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1596.6s/3501.7s (45.6%) | 速度: 3.72x | 用时: 433.0s
+2026-06-16 20:50:24.011 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1596.6s/3501.7s (45.6%) | 速度: 3.70x | 用时: 436.0s
+2026-06-16 20:50:27.028 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1596.6s/3501.7s (45.6%) | 速度: 3.68x | 用时: 439.0s
+2026-06-16 20:50:30.027 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1654.7s/3501.7s (47.3%) | 速度: 3.68x | 用时: 442.0s
+2026-06-16 20:50:33.032 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1664.8s/3501.7s (47.5%) | 速度: 3.71x | 用时: 445.0s
+2026-06-16 20:50:36.027 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1675.2s/3501.7s (47.8%) | 速度: 3.72x | 用时: 448.0s
+2026-06-16 20:50:39.027 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1685.8s/3501.7s (48.1%) | 速度: 3.73x | 用时: 451.0s
+2026-06-16 20:50:42.020 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1694.0s/3501.7s (48.4%) | 速度: 3.73x | 用时: 454.0s
+2026-06-16 20:50:45.013 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1704.3s/3501.7s (48.7%) | 速度: 3.74x | 用时: 457.0s
+2026-06-16 20:50:48.002 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1714.5s/3501.7s (49.0%) | 速度: 3.73x | 用时: 460.0s
+2026-06-16 20:50:48.054 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1714.5s/3501.7s (49.0%) | 速度: 3.73x | 用时: 460.0s
+2026-06-16 20:50:51.004 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1726.0s/3501.7s (49.3%) | 速度: 3.73x | 用时: 463.0s
+2026-06-16 20:50:51.057 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1726.0s/3501.7s (49.3%) | 速度: 3.73x | 用时: 463.0s
+2026-06-16 20:50:54.013 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1737.5s/3501.7s (49.6%) | 速度: 3.73x | 用时: 466.0s
+2026-06-16 20:50:57.007 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1746.8s/3501.7s (49.9%) | 速度: 3.73x | 用时: 469.0s
+2026-06-16 20:50:57.060 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1748.4s/3501.7s (49.9%) | 速度: 3.73x | 用时: 469.0s
+2026-06-16 20:51:00.010 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1757.9s/3501.7s (50.2%) | 速度: 3.73x | 用时: 472.0s
+2026-06-16 20:51:03.015 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1768.1s/3501.7s (50.5%) | 速度: 3.73x | 用时: 475.0s
+2026-06-16 20:51:06.008 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1769.3s/3501.7s (50.5%) | 速度: 3.72x | 用时: 478.0s
+2026-06-16 20:51:09.009 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1791.4s/3501.7s (51.2%) | 速度: 3.72x | 用时: 481.0s
+2026-06-16 20:51:12.004 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1798.6s/3501.7s (51.4%) | 速度: 3.72x | 用时: 484.0s
+2026-06-16 20:51:12.055 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1798.6s/3501.7s (51.4%) | 速度: 3.72x | 用时: 484.0s
+2026-06-16 20:51:15.049 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1811.5s/3501.7s (51.7%) | 速度: 3.72x | 用时: 487.0s
+2026-06-16 20:51:18.047 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1821.8s/3501.7s (52.0%) | 速度: 3.72x | 用时: 490.0s
+2026-06-16 20:51:21.038 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1831.6s/3501.7s (52.3%) | 速度: 3.72x | 用时: 493.0s
+2026-06-16 20:51:24.022 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1841.0s/3501.7s (52.6%) | 速度: 3.72x | 用时: 496.0s
+2026-06-16 20:51:27.016 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1851.3s/3501.7s (52.9%) | 速度: 3.71x | 用时: 499.0s
+2026-06-16 20:51:30.010 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1859.6s/3501.7s (53.1%) | 速度: 3.71x | 用时: 502.0s
+2026-06-16 20:51:33.016 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1869.5s/3501.7s (53.4%) | 速度: 3.71x | 用时: 505.0s
+2026-06-16 20:51:36.018 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1879.1s/3501.7s (53.7%) | 速度: 3.71x | 用时: 508.0s
+2026-06-16 20:51:39.018 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1889.3s/3501.7s (54.0%) | 速度: 3.70x | 用时: 511.0s
+2026-06-16 20:51:42.018 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1898.9s/3501.7s (54.2%) | 速度: 3.70x | 用时: 514.0s
+2026-06-16 20:51:45.014 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1899.9s/3501.7s (54.3%) | 速度: 3.69x | 用时: 517.0s
+2026-06-16 20:51:48.006 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1899.9s/3501.7s (54.3%) | 速度: 3.68x | 用时: 520.0s
+2026-06-16 20:51:48.058 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1899.9s/3501.7s (54.3%) | 速度: 3.68x | 用时: 520.0s
+2026-06-16 20:51:51.050 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1899.9s/3501.7s (54.3%) | 速度: 3.66x | 用时: 523.0s
+2026-06-16 20:51:54.003 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1899.9s/3501.7s (54.3%) | 速度: 3.64x | 用时: 526.0s
+2026-06-16 20:51:54.054 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1899.9s/3501.7s (54.3%) | 速度: 3.64x | 用时: 526.0s
+2026-06-16 20:51:57.002 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1943.7s/3501.7s (55.5%) | 速度: 3.66x | 用时: 529.0s
+2026-06-16 20:51:57.054 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1943.7s/3501.7s (55.5%) | 速度: 3.66x | 用时: 529.0s
+2026-06-16 20:52:00.049 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1960.5s/3501.7s (56.0%) | 速度: 3.68x | 用时: 532.0s
+2026-06-16 20:52:03.041 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1970.5s/3501.7s (56.3%) | 速度: 3.68x | 用时: 535.0s
+2026-06-16 20:52:06.037 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1979.0s/3501.7s (56.5%) | 速度: 3.68x | 用时: 538.0s
+2026-06-16 20:52:09.033 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1989.6s/3501.7s (56.8%) | 速度: 3.68x | 用时: 541.0s
+2026-06-16 20:52:12.023 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 1999.4s/3501.7s (57.1%) | 速度: 3.68x | 用时: 544.0s
+2026-06-16 20:52:15.023 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2010.6s/3501.7s (57.4%) | 速度: 3.68x | 用时: 547.0s
+2026-06-16 20:52:18.019 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2020.9s/3501.7s (57.7%) | 速度: 3.68x | 用时: 550.0s
+2026-06-16 20:52:21.032 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2029.7s/3501.7s (58.0%) | 速度: 3.68x | 用时: 553.0s
+2026-06-16 20:52:24.023 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2040.1s/3501.7s (58.3%) | 速度: 3.67x | 用时: 556.0s
+2026-06-16 20:52:27.036 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2050.0s/3501.7s (58.5%) | 速度: 3.67x | 用时: 559.0s
+2026-06-16 20:52:30.031 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2060.2s/3501.7s (58.8%) | 速度: 3.67x | 用时: 562.0s
+2026-06-16 20:52:33.024 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2070.2s/3501.7s (59.1%) | 速度: 3.67x | 用时: 565.0s
+2026-06-16 20:52:36.016 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2078.5s/3501.7s (59.4%) | 速度: 3.67x | 用时: 568.0s
+2026-06-16 20:52:39.019 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2088.7s/3501.7s (59.6%) | 速度: 3.66x | 用时: 571.0s
+2026-06-16 20:52:42.001 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2099.6s/3501.7s (60.0%) | 速度: 3.66x | 用时: 574.0s
+2026-06-16 20:52:42.053 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2099.6s/3501.7s (60.0%) | 速度: 3.66x | 用时: 574.0s
+2026-06-16 20:52:45.007 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2109.4s/3501.7s (60.2%) | 速度: 3.66x | 用时: 577.0s
+2026-06-16 20:52:45.059 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2109.4s/3501.7s (60.2%) | 速度: 3.66x | 用时: 577.0s
+2026-06-16 20:52:48.050 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2120.1s/3501.7s (60.5%) | 速度: 3.66x | 用时: 580.0s
+2026-06-16 20:52:51.001 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2120.5s/3501.7s (60.6%) | 速度: 3.65x | 用时: 583.0s
+2026-06-16 20:52:51.054 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2120.5s/3501.7s (60.6%) | 速度: 3.65x | 用时: 583.0s
+2026-06-16 20:52:54.038 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2120.5s/3501.7s (60.6%) | 速度: 3.64x | 用时: 586.0s
+2026-06-16 20:52:57.039 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2149.1s/3501.7s (61.4%) | 速度: 3.64x | 用时: 589.0s
+2026-06-16 20:53:00.034 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2159.3s/3501.7s (61.7%) | 速度: 3.64x | 用时: 592.0s
+2026-06-16 20:53:03.032 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2170.2s/3501.7s (62.0%) | 速度: 3.65x | 用时: 595.0s
+2026-06-16 20:53:06.032 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2181.1s/3501.7s (62.3%) | 速度: 3.65x | 用时: 598.0s
+2026-06-16 20:53:09.030 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2191.1s/3501.7s (62.6%) | 速度: 3.65x | 用时: 601.0s
+2026-06-16 20:53:12.038 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2202.7s/3501.7s (62.9%) | 速度: 3.65x | 用时: 604.0s
+2026-06-16 20:53:15.039 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2213.0s/3501.7s (63.2%) | 速度: 3.65x | 用时: 607.0s
+2026-06-16 20:53:18.038 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2224.7s/3501.7s (63.5%) | 速度: 3.65x | 用时: 610.0s
+2026-06-16 20:53:21.048 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2235.1s/3501.7s (63.8%) | 速度: 3.65x | 用时: 613.0s
+2026-06-16 20:53:24.044 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2245.8s/3501.7s (64.1%) | 速度: 3.65x | 用时: 616.0s
+2026-06-16 20:53:27.050 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2249.6s/3501.7s (64.2%) | 速度: 3.65x | 用时: 619.0s
+2026-06-16 20:53:30.048 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2250.6s/3501.7s (64.3%) | 速度: 3.64x | 用时: 622.0s
+2026-06-16 20:53:33.041 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2274.2s/3501.7s (64.9%) | 速度: 3.64x | 用时: 625.0s
+2026-06-16 20:53:36.043 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2283.9s/3501.7s (65.2%) | 速度: 3.64x | 用时: 628.0s
+2026-06-16 20:53:39.030 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2293.8s/3501.7s (65.5%) | 速度: 3.64x | 用时: 631.0s
+2026-06-16 20:53:42.031 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2302.6s/3501.7s (65.8%) | 速度: 3.64x | 用时: 634.0s
+2026-06-16 20:53:45.020 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2313.3s/3501.7s (66.1%) | 速度: 3.63x | 用时: 637.0s
+2026-06-16 20:53:48.014 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2323.5s/3501.7s (66.4%) | 速度: 3.63x | 用时: 640.0s
+2026-06-16 20:53:51.050 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2334.0s/3501.7s (66.7%) | 速度: 3.63x | 用时: 643.0s
+2026-06-16 20:53:54.040 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2344.0s/3501.7s (66.9%) | 速度: 3.63x | 用时: 646.0s
+2026-06-16 20:53:57.032 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2352.6s/3501.7s (67.2%) | 速度: 3.63x | 用时: 649.0s
+2026-06-16 20:54:00.029 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2363.0s/3501.7s (67.5%) | 速度: 3.63x | 用时: 652.0s
+2026-06-16 20:54:03.022 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2372.2s/3501.7s (67.7%) | 速度: 3.63x | 用时: 655.0s
+2026-06-16 20:54:06.019 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2372.2s/3501.7s (67.7%) | 速度: 3.62x | 用时: 658.0s
+2026-06-16 20:54:09.024 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2372.2s/3501.7s (67.7%) | 速度: 3.61x | 用时: 661.0s
+2026-06-16 20:54:12.031 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2372.2s/3501.7s (67.7%) | 速度: 3.60x | 用时: 664.0s
+2026-06-16 20:54:15.022 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2413.4s/3501.7s (68.9%) | 速度: 3.60x | 用时: 667.0s
+2026-06-16 20:54:18.020 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2424.1s/3501.7s (69.2%) | 速度: 3.61x | 用时: 670.0s
+2026-06-16 20:54:21.003 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2434.6s/3501.7s (69.5%) | 速度: 3.61x | 用时: 673.0s
+2026-06-16 20:54:21.055 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2434.6s/3501.7s (69.5%) | 速度: 3.61x | 用时: 673.0s
+2026-06-16 20:54:24.005 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2434.7s/3501.7s (69.5%) | 速度: 3.61x | 用时: 676.0s
+2026-06-16 20:54:24.057 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2434.7s/3501.7s (69.5%) | 速度: 3.61x | 用时: 676.0s
+2026-06-16 20:54:27.002 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2455.4s/3501.7s (70.1%) | 速度: 3.62x | 用时: 679.0s
+2026-06-16 20:54:27.054 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2455.4s/3501.7s (70.1%) | 速度: 3.62x | 用时: 679.0s
+2026-06-16 20:54:30.041 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2462.6s/3501.7s (70.3%) | 速度: 3.62x | 用时: 682.0s
+2026-06-16 20:54:33.032 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2473.2s/3501.7s (70.6%) | 速度: 3.61x | 用时: 685.0s
+2026-06-16 20:54:36.036 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2484.4s/3501.7s (70.9%) | 速度: 3.61x | 用时: 688.0s
+2026-06-16 20:54:39.048 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2494.9s/3501.7s (71.2%) | 速度: 3.61x | 用时: 691.0s
+2026-06-16 20:54:42.044 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2499.9s/3501.7s (71.4%) | 速度: 3.61x | 用时: 694.0s
+2026-06-16 20:54:45.048 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2499.9s/3501.7s (71.4%) | 速度: 3.60x | 用时: 697.0s
+2026-06-16 20:54:48.035 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2499.9s/3501.7s (71.4%) | 速度: 3.59x | 用时: 700.0s
+2026-06-16 20:54:51.038 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2499.9s/3501.7s (71.4%) | 速度: 3.58x | 用时: 703.0s
+2026-06-16 20:54:54.038 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2499.9s/3501.7s (71.4%) | 速度: 3.56x | 用时: 706.0s
+2026-06-16 20:54:57.004 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2499.9s/3501.7s (71.4%) | 速度: 3.55x | 用时: 709.0s
+2026-06-16 20:54:57.055 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2499.9s/3501.7s (71.4%) | 速度: 3.55x | 用时: 709.0s
+2026-06-16 20:55:00.004 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2565.1s/3501.7s (73.3%) | 速度: 3.55x | 用时: 712.0s
+2026-06-16 20:55:00.057 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2566.9s/3501.7s (73.3%) | 速度: 3.55x | 用时: 712.0s
+2026-06-16 20:55:03.010 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2575.2s/3501.7s (73.5%) | 速度: 3.57x | 用时: 715.0s
+2026-06-16 20:55:06.005 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2585.4s/3501.7s (73.8%) | 速度: 3.59x | 用时: 718.0s
+2026-06-16 20:55:06.057 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2585.4s/3501.7s (73.8%) | 速度: 3.59x | 用时: 718.0s
+2026-06-16 20:55:09.000 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2596.4s/3501.7s (74.1%) | 速度: 3.59x | 用时: 721.0s
+2026-06-16 20:55:09.052 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2596.4s/3501.7s (74.1%) | 速度: 3.59x | 用时: 721.0s
+2026-06-16 20:55:12.005 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2606.2s/3501.7s (74.4%) | 速度: 3.60x | 用时: 724.0s
+2026-06-16 20:55:12.056 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2606.2s/3501.7s (74.4%) | 速度: 3.60x | 用时: 724.0s
+2026-06-16 20:55:15.047 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2616.4s/3501.7s (74.7%) | 速度: 3.60x | 用时: 727.0s
+2026-06-16 20:55:18.043 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2625.1s/3501.7s (75.0%) | 速度: 3.60x | 用时: 730.0s
+2026-06-16 20:55:21.034 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2634.1s/3501.7s (75.2%) | 速度: 3.60x | 用时: 733.0s
+2026-06-16 20:55:24.025 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2644.6s/3501.7s (75.5%) | 速度: 3.60x | 用时: 736.0s
+2026-06-16 20:55:27.027 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2654.6s/3501.7s (75.8%) | 速度: 3.59x | 用时: 739.0s
+2026-06-16 20:55:30.027 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2664.5s/3501.7s (76.1%) | 速度: 3.59x | 用时: 742.0s
+2026-06-16 20:55:33.016 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2672.0s/3501.7s (76.3%) | 速度: 3.59x | 用时: 745.0s
+2026-06-16 20:55:36.024 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2681.5s/3501.7s (76.6%) | 速度: 3.59x | 用时: 748.0s
+2026-06-16 20:55:39.020 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2692.4s/3501.7s (76.9%) | 速度: 3.59x | 用时: 751.0s
+2026-06-16 20:55:42.021 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2701.9s/3501.7s (77.2%) | 速度: 3.59x | 用时: 754.0s
+2026-06-16 20:55:45.027 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2711.8s/3501.7s (77.4%) | 速度: 3.58x | 用时: 757.0s
+2026-06-16 20:55:48.025 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2722.7s/3501.7s (77.8%) | 速度: 3.58x | 用时: 760.0s
+2026-06-16 20:55:51.022 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2731.4s/3501.7s (78.0%) | 速度: 3.58x | 用时: 763.0s
+2026-06-16 20:55:54.019 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2741.3s/3501.7s (78.3%) | 速度: 3.58x | 用时: 766.0s
+2026-06-16 20:55:57.009 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2751.6s/3501.7s (78.6%) | 速度: 3.58x | 用时: 769.0s
+2026-06-16 20:56:00.045 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2761.8s/3501.7s (78.9%) | 速度: 3.58x | 用时: 772.0s
+2026-06-16 20:56:03.048 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2773.4s/3501.7s (79.2%) | 速度: 3.58x | 用时: 775.0s
+2026-06-16 20:56:06.001 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2776.5s/3501.7s (79.3%) | 速度: 3.58x | 用时: 778.0s
+2026-06-16 20:56:06.053 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2776.5s/3501.7s (79.3%) | 速度: 3.58x | 用时: 778.0s
+2026-06-16 20:56:09.051 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2776.5s/3501.7s (79.3%) | 速度: 3.57x | 用时: 781.0s
+2026-06-16 20:56:12.047 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2776.5s/3501.7s (79.3%) | 速度: 3.56x | 用时: 784.0s
+2026-06-16 20:56:15.033 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2812.3s/3501.7s (80.3%) | 速度: 3.57x | 用时: 787.0s
+2026-06-16 20:56:18.021 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2822.9s/3501.7s (80.6%) | 速度: 3.57x | 用时: 790.0s
+2026-06-16 20:56:21.018 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2824.1s/3501.7s (80.6%) | 速度: 3.57x | 用时: 793.0s
+2026-06-16 20:56:24.007 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2836.8s/3501.7s (81.0%) | 速度: 3.57x | 用时: 796.0s
+2026-06-16 20:56:24.059 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2836.8s/3501.7s (81.0%) | 速度: 3.57x | 用时: 796.0s
+2026-06-16 20:56:27.006 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2852.3s/3501.7s (81.5%) | 速度: 3.57x | 用时: 799.0s
+2026-06-16 20:56:27.058 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2852.3s/3501.7s (81.5%) | 速度: 3.57x | 用时: 799.0s
+2026-06-16 20:56:30.004 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2856.1s/3501.7s (81.6%) | 速度: 3.57x | 用时: 802.0s
+2026-06-16 20:56:30.055 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2856.1s/3501.7s (81.6%) | 速度: 3.57x | 用时: 802.0s
+2026-06-16 20:56:33.010 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2874.4s/3501.7s (82.1%) | 速度: 3.57x | 用时: 805.0s
+2026-06-16 20:56:36.048 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2885.0s/3501.7s (82.4%) | 速度: 3.57x | 用时: 808.0s
+2026-06-16 20:56:39.002 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2893.1s/3501.7s (82.6%) | 速度: 3.57x | 用时: 811.0s
+2026-06-16 20:56:39.055 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2893.1s/3501.7s (82.6%) | 速度: 3.57x | 用时: 811.0s
+2026-06-16 20:56:42.000 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2903.2s/3501.7s (82.9%) | 速度: 3.57x | 用时: 814.0s
+2026-06-16 20:56:42.051 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2903.2s/3501.7s (82.9%) | 速度: 3.57x | 用时: 814.0s
+2026-06-16 20:56:45.043 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2904.0s/3501.7s (82.9%) | 速度: 3.57x | 用时: 817.0s
+2026-06-16 20:56:48.030 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2904.0s/3501.7s (82.9%) | 速度: 3.56x | 用时: 820.0s
+2026-06-16 20:56:51.033 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2904.0s/3501.7s (82.9%) | 速度: 3.55x | 用时: 823.0s
+2026-06-16 20:56:54.018 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2941.4s/3501.7s (84.0%) | 速度: 3.55x | 用时: 826.0s
+2026-06-16 20:56:57.006 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2941.4s/3501.7s (84.0%) | 速度: 3.55x | 用时: 829.0s
+2026-06-16 20:56:57.059 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2941.4s/3501.7s (84.0%) | 速度: 3.55x | 用时: 829.0s
+2026-06-16 20:57:00.001 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2941.4s/3501.7s (84.0%) | 速度: 3.55x | 用时: 832.0s
+2026-06-16 20:57:00.058 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2941.4s/3501.7s (84.0%) | 速度: 3.55x | 用时: 832.0s
+2026-06-16 20:57:03.011 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2941.4s/3501.7s (84.0%) | 速度: 3.54x | 用时: 835.0s
+2026-06-16 20:57:06.002 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2985.6s/3501.7s (85.3%) | 速度: 3.54x | 用时: 838.0s
+2026-06-16 20:57:06.053 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2985.6s/3501.7s (85.3%) | 速度: 3.54x | 用时: 838.0s
+2026-06-16 20:57:09.041 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2988.9s/3501.7s (85.4%) | 速度: 3.55x | 用时: 841.0s
+2026-06-16 20:57:12.035 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2988.9s/3501.7s (85.4%) | 速度: 3.55x | 用时: 844.0s
+2026-06-16 20:57:15.029 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2988.9s/3501.7s (85.4%) | 速度: 3.54x | 用时: 847.0s
+2026-06-16 20:57:18.027 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2988.9s/3501.7s (85.4%) | 速度: 3.53x | 用时: 850.0s
+2026-06-16 20:57:21.008 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2988.9s/3501.7s (85.4%) | 速度: 3.52x | 用时: 853.0s
+2026-06-16 20:57:24.045 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2988.9s/3501.7s (85.4%) | 速度: 3.51x | 用时: 856.0s
+2026-06-16 20:57:27.057 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2988.9s/3501.7s (85.4%) | 速度: 3.50x | 用时: 859.0s
+2026-06-16 20:57:30.021 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2988.9s/3501.7s (85.4%) | 速度: 3.49x | 用时: 862.0s
+2026-06-16 20:57:33.023 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2988.9s/3501.7s (85.4%) | 速度: 3.48x | 用时: 865.0s
+2026-06-16 20:57:36.021 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2988.9s/3501.7s (85.4%) | 速度: 3.46x | 用时: 868.0s
+2026-06-16 20:57:39.015 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2988.9s/3501.7s (85.4%) | 速度: 3.45x | 用时: 871.0s
+2026-06-16 20:57:42.007 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2988.9s/3501.7s (85.4%) | 速度: 3.44x | 用时: 874.0s
+2026-06-16 20:57:42.058 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2988.9s/3501.7s (85.4%) | 速度: 3.44x | 用时: 874.0s
+2026-06-16 20:57:45.009 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2988.9s/3501.7s (85.4%) | 速度: 3.43x | 用时: 877.0s
+2026-06-16 20:57:48.028 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2988.9s/3501.7s (85.4%) | 速度: 3.42x | 用时: 880.0s
+2026-06-16 20:57:51.029 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2988.9s/3501.7s (85.4%) | 速度: 3.40x | 用时: 883.0s
+2026-06-16 20:57:54.020 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2992.4s/3501.7s (85.5%) | 速度: 3.39x | 用时: 886.0s
+2026-06-16 20:57:57.017 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2992.4s/3501.7s (85.5%) | 速度: 3.38x | 用时: 889.0s
+2026-06-16 20:58:00.006 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2992.4s/3501.7s (85.5%) | 速度: 3.37x | 用时: 892.0s
+2026-06-16 20:58:00.057 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2992.4s/3501.7s (85.5%) | 速度: 3.37x | 用时: 892.0s
+2026-06-16 20:58:03.002 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2992.4s/3501.7s (85.5%) | 速度: 3.36x | 用时: 895.0s
+2026-06-16 20:58:03.054 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2992.4s/3501.7s (85.5%) | 速度: 3.36x | 用时: 895.0s
+2026-06-16 20:58:06.046 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2992.4s/3501.7s (85.5%) | 速度: 3.35x | 用时: 898.0s
+2026-06-16 20:58:09.042 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2992.4s/3501.7s (85.5%) | 速度: 3.34x | 用时: 901.0s
+2026-06-16 20:58:12.050 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2992.4s/3501.7s (85.5%) | 速度: 3.33x | 用时: 904.0s
+2026-06-16 20:58:15.035 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2992.4s/3501.7s (85.5%) | 速度: 3.32x | 用时: 907.0s
+2026-06-16 20:58:18.036 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2992.4s/3501.7s (85.5%) | 速度: 3.31x | 用时: 910.0s
+2026-06-16 20:58:21.034 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 2992.4s/3501.7s (85.5%) | 速度: 3.30x | 用时: 913.0s
+2026-06-16 20:58:24.031 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3245.2s/3501.7s (92.7%) | 速度: 3.36x | 用时: 916.0s
+2026-06-16 20:58:27.035 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3256.8s/3501.7s (93.0%) | 速度: 3.44x | 用时: 919.0s
+2026-06-16 20:58:30.027 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3263.7s/3501.7s (93.2%) | 速度: 3.48x | 用时: 922.0s
+2026-06-16 20:58:33.019 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3263.7s/3501.7s (93.2%) | 速度: 3.51x | 用时: 925.0s
+2026-06-16 20:58:36.022 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3263.7s/3501.7s (93.2%) | 速度: 3.51x | 用时: 928.0s
+2026-06-16 20:58:39.044 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3295.5s/3501.7s (94.1%) | 速度: 3.53x | 用时: 931.0s
+2026-06-16 20:58:42.038 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3295.5s/3501.7s (94.1%) | 速度: 3.53x | 用时: 934.0s
+2026-06-16 20:58:45.005 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3295.5s/3501.7s (94.1%) | 速度: 3.53x | 用时: 937.0s
+2026-06-16 20:58:45.058 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3295.5s/3501.7s (94.1%) | 速度: 3.53x | 用时: 937.0s
+2026-06-16 20:58:48.041 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3295.5s/3501.7s (94.1%) | 速度: 3.52x | 用时: 940.0s
+2026-06-16 20:58:51.040 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3295.5s/3501.7s (94.1%) | 速度: 3.51x | 用时: 943.0s
+2026-06-16 20:58:54.040 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3344.8s/3501.7s (95.5%) | 速度: 3.51x | 用时: 946.0s
+2026-06-16 20:58:57.038 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3345.7s/3501.7s (95.5%) | 速度: 3.52x | 用时: 949.0s
+2026-06-16 20:59:00.041 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3365.7s/3501.7s (96.1%) | 速度: 3.53x | 用时: 952.0s
+2026-06-16 20:59:03.027 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3374.0s/3501.7s (96.4%) | 速度: 3.53x | 用时: 955.0s
+2026-06-16 20:59:06.019 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3375.2s/3501.7s (96.4%) | 速度: 3.53x | 用时: 958.0s
+2026-06-16 20:59:09.012 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3375.2s/3501.7s (96.4%) | 速度: 3.53x | 用时: 961.0s
+2026-06-16 20:59:12.053 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3375.2s/3501.7s (96.4%) | 速度: 3.52x | 用时: 964.0s
+2026-06-16 20:59:15.046 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3375.2s/3501.7s (96.4%) | 速度: 3.51x | 用时: 967.0s
+2026-06-16 20:59:18.030 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3375.9s/3501.7s (96.4%) | 速度: 3.50x | 用时: 970.0s
+2026-06-16 20:59:21.019 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3430.1s/3501.7s (98.0%) | 速度: 3.51x | 用时: 973.0s
+2026-06-16 20:59:24.032 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3430.1s/3501.7s (98.0%) | 速度: 3.51x | 用时: 976.0s
+2026-06-16 20:59:27.049 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3430.1s/3501.7s (98.0%) | 速度: 3.51x | 用时: 979.0s
+2026-06-16 20:59:30.006 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3430.1s/3501.7s (98.0%) | 速度: 3.50x | 用时: 982.0s
+2026-06-16 20:59:30.057 | DEBUG | ffmpeg_runner | [204308_02448] 进度: 3430.1s/3501.7s (98.0%) | 速度: 3.50x | 用时: 982.0s
+2026-06-16 20:59:31.882 | INFO  | ffmpeg_runner | [204308_02448] 结束: 成功 (返回码 0) | 用时: 983.9s
+2026-06-16 20:59:31.882 | WARN  | ffmpeg_runner | [204308_02448] stderr 输出 (10 行):
+2026-06-16 20:59:31.882 | WARN  | ffmpeg_runner |   | frame=83433 fps= 85 q=32.0 size= 1129472KiB time=00:57:10.09 bitrate=2697.5kbits/s speed= 3.5x elapsed=0:16:20.20
+2026-06-16 20:59:31.882 | WARN  | ffmpeg_runner |   | frame=83513 fps= 85 q=35.0 size= 1129984KiB time=00:57:10.09 bitrate=2698.7kbits/s speed= 3.5x elapsed=0:16:20.71
+2026-06-16 20:59:31.883 | WARN  | ffmpeg_runner |   | frame=83592 fps= 85 q=33.0 size= 1131008KiB time=00:57:10.09 bitrate=2701.2kbits/s speed= 3.5x elapsed=0:16:21.22
+2026-06-16 20:59:31.883 | WARN  | ffmpeg_runner |   | frame=83671 fps= 85 q=31.0 size= 1132032KiB time=00:57:10.09 bitrate=2703.6kbits/s speed=3.49x elapsed=0:16:21.74
+2026-06-16 20:59:31.883 | WARN  | ffmpeg_runner |   | frame=83750 fps= 85 q=17.0 size= 1132288KiB time=00:57:10.09 bitrate=2704.2kbits/s speed=3.49x elapsed=0:16:22.25
+2026-06-16 20:59:31.883 | WARN  | ffmpeg_runner |   | frame=83830 fps= 85 q=33.0 size= 1132544KiB time=00:57:10.09 bitrate=2704.8kbits/s speed=3.49x elapsed=0:16:22.77
+2026-06-16 20:59:31.883 | WARN  | ffmpeg_runner |   | frame=83909 fps= 85 q=31.0 size= 1132544KiB time=00:58:19.57 bitrate=2651.1kbits/s speed=3.56x elapsed=0:16:23.29
+2026-06-16 20:59:31.883 | WARN  | ffmpeg_runner |   | [out#0/mp4 @ 0000019faccf6980] video:964575KiB audio:168018KiB subtitle:696KiB other streams:0KiB global headers:2KiB muxing overhead: 0.268920%
+2026-06-16 20:59:31.883 | WARN  | ffmpeg_runner |   | frame=83955 fps= 85 q=33.0 Lsize= 1136337KiB time=00:57:10.09 bitrate=2713.9kbits/s speed=3.49x elapsed=0:16:23.62
+2026-06-16 20:59:31.883 | WARN  | ffmpeg_runner |   | [aac @ 0000019fad338cc0] Qavg: 847.090
+2026-06-16 20:59:31.883 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [204308_02448] =====
+
+2026-06-16 20:59:32.243 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [205932_24338] =====
+2026-06-16 20:59:32.243 | INFO  | ffmpeg_runner | 任务: S01E02 The Cats in the Bag
+2026-06-16 20:59:32.243 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E02.The.Cats.in.the.Bag.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 20:59:32.243 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616204300)\Breaking.Bad.S01E02.The.Cats.in.the.Bag.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 20:59:32.243 | INFO  | ffmpeg_runner | 预计时长: 2903.07s
+2026-06-16 20:59:32.243 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E02.The.Cats.in.the.Bag.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v:0 -map 0:a:0 -map 0:s:0 -map 0:s:1 -map 0:s:2 -map 0:s:3 -map 0:s:4 -map 0:s:5 -map 0:s:6 -map 0:s:7 -map 0:s:8 -map 0:s:9 -map 0:s:10 -map 0:s:11 -map 0:s:12 -map 0:s:13 -map 0:s:14 -map 0:s:15 -map 0:s:16 -map 0:s:17 -map 0:s:18 -map 0:s:19 -map 0:s:20 -map 0:s:21 -map 0:s:22 -map 0:s:23 -map 0:s:24 -map 0:s:25 -map 0:s:26 -map 0:s:27 -map 0:s:28 -map 0:s:29 -map 0:s:30 -map 0:s:31 -c:v hevc_nvenc -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616204300)\Breaking.Bad.S01E02.The.Cats.in.the.Bag.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 20:59:32.243 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-16 20:59:32.243 | DEBUG | ffmpeg_runner |   | [ 65] 0:s:27
+2026-06-16 20:59:32.243 | DEBUG | ffmpeg_runner |   | [ 66] -map
+2026-06-16 20:59:32.243 | DEBUG | ffmpeg_runner |   | [ 67] 0:s:28
+2026-06-16 20:59:32.243 | DEBUG | ffmpeg_runner |   | [ 68] -map
+2026-06-16 20:59:32.243 | DEBUG | ffmpeg_runner |   | [ 69] 0:s:29
+2026-06-16 20:59:32.243 | DEBUG | ffmpeg_runner |   | [ 70] -map
+2026-06-16 20:59:32.243 | DEBUG | ffmpeg_runner |   | [ 71] 0:s:30
+2026-06-16 20:59:32.243 | DEBUG | ffmpeg_runner |   | [ 72] -map
+2026-06-16 20:59:32.243 | DEBUG | ffmpeg_runner |   | [ 73] 0:s:31
+2026-06-16 20:59:32.243 | DEBUG | ffmpeg_runner |   | [ 74] -c:v
+2026-06-16 20:59:32.243 | DEBUG | ffmpeg_runner |   | [ 75] hevc_nvenc
+2026-06-16 20:59:32.243 | DEBUG | ffmpeg_runner |   | [ 76] -c:s
+2026-06-16 20:59:32.243 | DEBUG | ffmpeg_runner |   | [ 77] mov_text
+2026-06-16 20:59:32.243 | DEBUG | ffmpeg_runner |   | [ 78] -map_metadata
+2026-06-16 20:59:32.243 | DEBUG | ffmpeg_runner |   | [ 79] 0
+2026-06-16 20:59:32.243 | DEBUG | ffmpeg_runner |   | [ 80] -map_chapters
+2026-06-16 20:59:32.243 | DEBUG | ffmpeg_runner |   | [ 81] 0
+2026-06-16 20:59:32.243 | DEBUG | ffmpeg_runner |   | [ 82] -metadata
+2026-06-16 20:59:32.243 | DEBUG | ffmpeg_runner |   | [ 83] handler_name=@Cairl
+2026-06-16 20:59:32.243 | DEBUG | ffmpeg_runner |   | [ 84] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616204300)\Breaking.Bad.S01E02.The.Cats.in.the.Bag.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 20:59:39.036 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 18.9s/2903.1s (0.7%) | 速度: 3.05x | 用时: 6.8s
+2026-06-16 20:59:42.015 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 20.7s/2903.1s (0.7%) | 速度: 2.82x | 用时: 9.8s
+2026-06-16 20:59:45.004 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 20.7s/2903.1s (0.7%) | 速度: 2.36x | 用时: 12.8s
+2026-06-16 20:59:45.056 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 20.7s/2903.1s (0.7%) | 速度: 2.36x | 用时: 12.8s
+2026-06-16 20:59:48.035 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 20.7s/2903.1s (0.7%) | 速度: 1.93x | 用时: 15.8s
+2026-06-16 20:59:51.020 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 20.7s/2903.1s (0.7%) | 速度: 1.58x | 用时: 18.8s
+2026-06-16 20:59:54.006 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 20.7s/2903.1s (0.7%) | 速度: 1.35x | 用时: 21.8s
+2026-06-16 20:59:54.059 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 20.7s/2903.1s (0.7%) | 速度: 1.31x | 用时: 21.8s
+2026-06-16 20:59:57.042 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 20.7s/2903.1s (0.7%) | 速度: 1.14x | 用时: 24.8s
+2026-06-16 21:00:00.019 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 20.7s/2903.1s (0.7%) | 速度: 0.97x | 用时: 27.8s
+2026-06-16 21:00:03.046 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 22.0s/2903.1s (0.8%) | 速度: 0.87x | 用时: 30.8s
+2026-06-16 21:00:06.036 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 22.0s/2903.1s (0.8%) | 速度: 0.78x | 用时: 33.8s
+2026-06-16 21:00:09.023 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 22.0s/2903.1s (0.8%) | 速度: 0.70x | 用时: 36.8s
+2026-06-16 21:00:12.018 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 22.0s/2903.1s (0.8%) | 速度: 0.65x | 用时: 39.8s
+2026-06-16 21:00:15.016 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 22.0s/2903.1s (0.8%) | 速度: 0.60x | 用时: 42.8s
+2026-06-16 21:00:18.018 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 120.8s/2903.1s (4.2%) | 速度: 1.51x | 用时: 45.8s
+2026-06-16 21:00:21.001 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 129.1s/2903.1s (4.4%) | 速度: 2.05x | 用时: 48.8s
+2026-06-16 21:00:21.052 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 129.1s/2903.1s (4.4%) | 速度: 2.05x | 用时: 48.8s
+2026-06-16 21:00:24.029 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 138.3s/2903.1s (4.8%) | 速度: 2.34x | 用时: 51.8s
+2026-06-16 21:00:27.007 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 143.2s/2903.1s (4.9%) | 速度: 2.47x | 用时: 54.8s
+2026-06-16 21:00:27.058 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 143.2s/2903.1s (4.9%) | 速度: 2.47x | 用时: 54.8s
+2026-06-16 21:00:30.043 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 143.2s/2903.1s (4.9%) | 速度: 2.51x | 用时: 57.8s
+2026-06-16 21:00:33.019 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 143.2s/2903.1s (4.9%) | 速度: 2.47x | 用时: 60.8s
+2026-06-16 21:00:36.005 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 170.4s/2903.1s (5.9%) | 速度: 2.55x | 用时: 63.8s
+2026-06-16 21:00:36.056 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 170.4s/2903.1s (5.9%) | 速度: 2.55x | 用时: 63.8s
+2026-06-16 21:00:39.044 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 170.4s/2903.1s (5.9%) | 速度: 2.58x | 用时: 66.8s
+2026-06-16 21:00:42.034 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 190.6s/2903.1s (6.6%) | 速度: 2.64x | 用时: 69.8s
+2026-06-16 21:00:45.033 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 193.2s/2903.1s (6.7%) | 速度: 2.67x | 用时: 72.8s
+2026-06-16 21:00:48.015 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 207.0s/2903.1s (7.1%) | 速度: 2.71x | 用时: 75.8s
+2026-06-16 21:00:51.003 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 215.2s/2903.1s (7.4%) | 速度: 2.72x | 用时: 78.8s
+2026-06-16 21:00:51.056 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 215.2s/2903.1s (7.4%) | 速度: 2.72x | 用时: 78.8s
+2026-06-16 21:00:54.040 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 222.9s/2903.1s (7.7%) | 速度: 2.73x | 用时: 81.8s
+2026-06-16 21:00:57.023 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 232.1s/2903.1s (8.0%) | 速度: 2.74x | 用时: 84.8s
+2026-06-16 21:01:00.016 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 232.3s/2903.1s (8.0%) | 速度: 2.72x | 用时: 87.8s
+2026-06-16 21:01:03.050 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 247.2s/2903.1s (8.5%) | 速度: 2.72x | 用时: 90.8s
+2026-06-16 21:01:06.039 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 255.4s/2903.1s (8.8%) | 速度: 2.73x | 用时: 93.8s
+2026-06-16 21:01:09.039 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 263.7s/2903.1s (9.1%) | 速度: 2.73x | 用时: 96.8s
+2026-06-16 21:01:12.025 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 268.2s/2903.1s (9.2%) | 速度: 2.72x | 用时: 99.8s
+2026-06-16 21:01:15.017 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 275.4s/2903.1s (9.5%) | 速度: 2.72x | 用时: 102.8s
+2026-06-16 21:01:18.007 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 288.9s/2903.1s (10.0%) | 速度: 2.71x | 用时: 105.8s
+2026-06-16 21:01:18.059 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 288.9s/2903.1s (10.0%) | 速度: 2.71x | 用时: 105.8s
+2026-06-16 21:01:21.047 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 290.0s/2903.1s (10.0%) | 速度: 2.71x | 用时: 108.8s
+2026-06-16 21:01:24.030 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 290.0s/2903.1s (10.0%) | 速度: 2.67x | 用时: 111.8s
+2026-06-16 21:01:27.017 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 312.6s/2903.1s (10.8%) | 速度: 2.70x | 用时: 114.8s
+2026-06-16 21:01:30.005 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 312.6s/2903.1s (10.8%) | 速度: 2.69x | 用时: 117.8s
+2026-06-16 21:01:30.057 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 312.6s/2903.1s (10.8%) | 速度: 2.69x | 用时: 117.8s
+2026-06-16 21:01:33.043 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 312.6s/2903.1s (10.8%) | 速度: 2.66x | 用时: 120.8s
+2026-06-16 21:01:36.026 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 344.7s/2903.1s (11.9%) | 速度: 2.71x | 用时: 123.8s
+2026-06-16 21:01:39.010 | DEBUG | ffmpeg_runner | [205932_24338] 进度: 355.1s/2903.1s (12.2%) | 速度: 2.74x | 用时: 126.8s
+2026-06-16 21:01:40.892 | INFO  | ffmpeg_runner | [205932_24338] 结束: 成功 (返回码 0) | 用时: 128.6s
+2026-06-16 21:01:40.892 | WARN  | ffmpeg_runner | [205932_24338] stderr 输出 (10 行):
+2026-06-16 21:01:40.892 | WARN  | ffmpeg_runner |   | frame= 8373 fps= 67 q=36.0 size=  113664KiB time=00:05:45.59 bitrate=2694.3kbits/s speed=2.77x elapsed=0:02:04.83
+2026-06-16 21:01:40.892 | WARN  | ffmpeg_runner |   | frame= 8413 fps= 67 q=36.0 size=  113664KiB time=00:05:45.59 bitrate=2694.3kbits/s speed=2.76x elapsed=0:02:05.35
+2026-06-16 21:01:40.892 | WARN  | ffmpeg_runner |   | frame= 8467 fps= 67 q=38.0 size=  113664KiB time=00:05:45.59 bitrate=2694.3kbits/s speed=2.75x elapsed=0:02:05.86
+2026-06-16 21:01:40.892 | WARN  | ffmpeg_runner |   | frame= 8518 fps= 67 q=34.0 size=  117504KiB time=00:05:55.14 bitrate=2710.4kbits/s speed=2.81x elapsed=0:02:06.38
+2026-06-16 21:01:40.892 | WARN  | ffmpeg_runner |   | frame= 8573 fps= 68 q=38.0 size=  117504KiB time=00:05:56.62 bitrate=2699.2kbits/s speed=2.81x elapsed=0:02:06.89
+2026-06-16 21:01:40.892 | WARN  | ffmpeg_runner |   | frame= 8610 fps= 68 q=32.0 size=  117504KiB time=00:05:56.62 bitrate=2699.2kbits/s speed= 2.8x elapsed=0:02:07.41
+2026-06-16 21:01:40.892 | WARN  | ffmpeg_runner |   | [q] command received. Exiting.
+2026-06-16 21:01:40.892 | WARN  | ffmpeg_runner |   | [out#0/mp4 @ 00000142b96c09c0] video:102571KiB audio:17445KiB subtitle:54KiB other streams:0KiB global headers:2KiB muxing overhead: 0.266672%
+2026-06-16 21:01:40.892 | WARN  | ffmpeg_runner |   | frame= 8700 fps= 68 q=38.0 Lsize=  120390KiB time=00:05:56.62 bitrate=2765.5kbits/s speed=2.78x elapsed=0:02:08.39
+2026-06-16 21:01:40.892 | WARN  | ffmpeg_runner |   | [aac @ 00000142b9ae8600] Qavg: 684.514
+2026-06-16 21:01:40.892 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [205932_24338] =====
+
+2026-06-16 21:11:01.085 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [211101_08574] =====
+2026-06-16 21:11:01.085 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-16 21:11:01.085 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 21:11:01.085 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616211056)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 21:11:01.085 | INFO  | ffmpeg_runner | 预计时长: 3501.73s
+2026-06-16 21:11:01.085 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v:0 -map 0:a -map 0:s -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616211056)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 21:11:01.085 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-16 21:11:01.085 | DEBUG | ffmpeg_runner |   | [  5] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 21:11:01.085 | DEBUG | ffmpeg_runner |   | [  6] -map
+2026-06-16 21:11:01.085 | DEBUG | ffmpeg_runner |   | [  7] 0:v:0
+2026-06-16 21:11:01.085 | DEBUG | ffmpeg_runner |   | [  8] -map
+2026-06-16 21:11:01.086 | DEBUG | ffmpeg_runner |   | [  9] 0:a
+2026-06-16 21:11:01.086 | DEBUG | ffmpeg_runner |   | [ 10] -map
+2026-06-16 21:11:01.086 | DEBUG | ffmpeg_runner |   | [ 11] 0:s
+2026-06-16 21:11:01.086 | DEBUG | ffmpeg_runner |   | [ 12] -c:v
+2026-06-16 21:11:01.086 | DEBUG | ffmpeg_runner |   | [ 13] hevc
+2026-06-16 21:11:01.086 | DEBUG | ffmpeg_runner |   | [ 14] -crf
+2026-06-16 21:11:01.086 | DEBUG | ffmpeg_runner |   | [ 15] 23
+2026-06-16 21:11:01.086 | DEBUG | ffmpeg_runner |   | [ 16] -c:s
+2026-06-16 21:11:01.086 | DEBUG | ffmpeg_runner |   | [ 17] mov_text
+2026-06-16 21:11:01.086 | DEBUG | ffmpeg_runner |   | [ 18] -map_metadata
+2026-06-16 21:11:01.086 | DEBUG | ffmpeg_runner |   | [ 19] 0
+2026-06-16 21:11:01.086 | DEBUG | ffmpeg_runner |   | [ 20] -map_chapters
+2026-06-16 21:11:01.086 | DEBUG | ffmpeg_runner |   | [ 21] 0
+2026-06-16 21:11:01.086 | DEBUG | ffmpeg_runner |   | [ 22] -metadata
+2026-06-16 21:11:01.086 | DEBUG | ffmpeg_runner |   | [ 23] handler_name=@Cairl
+2026-06-16 21:11:01.086 | DEBUG | ffmpeg_runner |   | [ 24] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616211056)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 21:18:45.038 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 130.6s/3501.7s (3.7%) | 速度: 0.21x | 用时: 463.9s
+2026-06-16 21:18:48.029 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 131.4s/3501.7s (3.8%) | 速度: 0.24x | 用时: 466.9s
+2026-06-16 21:18:51.009 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 132.0s/3501.7s (3.8%) | 速度: 0.26x | 用时: 469.9s
+2026-06-16 21:18:54.035 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 132.8s/3501.7s (3.8%) | 速度: 0.27x | 用时: 472.9s
+2026-06-16 21:18:57.030 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 133.4s/3501.7s (3.8%) | 速度: 0.27x | 用时: 475.9s
+2026-06-16 21:19:00.007 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 134.3s/3501.7s (3.8%) | 速度: 0.28x | 用时: 478.9s
+2026-06-16 21:19:00.060 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 134.3s/3501.7s (3.8%) | 速度: 0.28x | 用时: 479.0s
+2026-06-16 21:19:03.015 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 134.9s/3501.7s (3.9%) | 速度: 0.28x | 用时: 481.9s
+2026-06-16 21:19:06.045 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 135.8s/3501.7s (3.9%) | 速度: 0.28x | 用时: 485.0s
+2026-06-16 21:19:09.023 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 136.7s/3501.7s (3.9%) | 速度: 0.28x | 用时: 487.9s
+2026-06-16 21:19:12.041 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 137.6s/3501.7s (3.9%) | 速度: 0.28x | 用时: 490.9s
+2026-06-16 21:19:15.009 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 138.6s/3501.7s (4.0%) | 速度: 0.28x | 用时: 493.9s
+2026-06-16 21:19:15.060 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 138.6s/3501.7s (4.0%) | 速度: 0.28x | 用时: 494.0s
+2026-06-16 21:19:18.045 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 139.6s/3501.7s (4.0%) | 速度: 0.28x | 用时: 497.0s
+2026-06-16 21:19:21.047 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 140.4s/3501.7s (4.0%) | 速度: 0.28x | 用时: 500.0s
+2026-06-16 21:19:24.043 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 141.4s/3501.7s (4.0%) | 速度: 0.28x | 用时: 503.0s
+2026-06-16 21:19:27.016 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 142.1s/3501.7s (4.1%) | 速度: 0.28x | 用时: 505.9s
+2026-06-16 21:19:30.005 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 142.9s/3501.7s (4.1%) | 速度: 0.28x | 用时: 508.9s
+2026-06-16 21:19:30.058 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 142.9s/3501.7s (4.1%) | 速度: 0.28x | 用时: 509.0s
+2026-06-16 21:19:33.044 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 143.5s/3501.7s (4.1%) | 速度: 0.28x | 用时: 512.0s
+2026-06-16 21:19:36.018 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 144.1s/3501.7s (4.1%) | 速度: 0.28x | 用时: 514.9s
+2026-06-16 21:19:39.001 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 144.8s/3501.7s (4.1%) | 速度: 0.28x | 用时: 517.9s
+2026-06-16 21:19:39.053 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 144.8s/3501.7s (4.1%) | 速度: 0.28x | 用时: 518.0s
+2026-06-16 21:19:42.047 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 145.5s/3501.7s (4.2%) | 速度: 0.28x | 用时: 521.0s
+2026-06-16 21:19:45.015 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 146.2s/3501.7s (4.2%) | 速度: 0.28x | 用时: 523.9s
+2026-06-16 21:19:48.045 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 146.9s/3501.7s (4.2%) | 速度: 0.28x | 用时: 527.0s
+2026-06-16 21:19:51.044 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 146.9s/3501.7s (4.2%) | 速度: 0.28x | 用时: 530.0s
+2026-06-16 21:19:54.034 | DEBUG | ffmpeg_runner | [211101_08574] 进度: 146.9s/3501.7s (4.2%) | 速度: 0.28x | 用时: 532.9s
+2026-06-16 21:20:05.935 | INFO  | ffmpeg_runner | [211101_08574] 结束: 失败 (返回码 1) | 用时: 544.8s
+2026-06-16 21:20:05.935 | WARN  | ffmpeg_runner | [211101_08574] stderr 输出 (10 行):
+2026-06-16 21:20:05.935 | WARN  | ffmpeg_runner |   | frame= 3541 fps=6.7 q=24.3 size=  460032KiB time=00:02:26.88 bitrate=25657.6kbits/s speed=0.277x elapsed=0:08:49.81
+2026-06-16 21:20:05.935 | WARN  | ffmpeg_runner |   | frame= 3543 fps=6.7 q=27.2 size=  460032KiB time=00:02:26.88 bitrate=25657.6kbits/s speed=0.277x elapsed=0:08:50.33
+2026-06-16 21:20:05.935 | WARN  | ffmpeg_runner |   | frame= 3545 fps=6.7 q=27.2 size=  460032KiB time=00:02:26.88 bitrate=25657.6kbits/s speed=0.277x elapsed=0:08:50.85
+2026-06-16 21:20:05.935 | WARN  | ffmpeg_runner |   | frame= 3549 fps=6.7 q=27.2 size=  460032KiB time=00:02:26.88 bitrate=25657.6kbits/s speed=0.276x elapsed=0:08:51.36
+2026-06-16 21:20:05.935 | WARN  | ffmpeg_runner |   | frame= 3551 fps=6.7 q=26.0 size=  460032KiB time=00:02:26.88 bitrate=25657.6kbits/s speed=0.276x elapsed=0:08:51.88
+2026-06-16 21:20:05.935 | WARN  | ffmpeg_runner |   | frame= 3555 fps=6.7 q=24.9 size=  460032KiB time=00:02:26.88 bitrate=25657.6kbits/s speed=0.276x elapsed=0:08:52.40
+2026-06-16 21:20:05.935 | WARN  | ffmpeg_runner |   | frame= 3556 fps=6.7 q=26.1 size=  460032KiB time=00:02:26.88 bitrate=25657.6kbits/s speed=0.276x elapsed=0:08:52.90
+2026-06-16 21:20:05.935 | WARN  | ffmpeg_runner |   | frame= 3559 fps=6.7 q=27.1 size=  460032KiB time=00:02:26.88 bitrate=25657.6kbits/s speed=0.275x elapsed=0:08:53.41
+2026-06-16 21:20:05.935 | WARN  | ffmpeg_runner |   | frame= 3561 fps=6.7 q=24.7 size=  460032KiB time=00:02:26.88 bitrate=25657.6kbits/s speed=0.275x elapsed=0:08:53.93
+2026-06-16 21:20:05.935 | WARN  | ffmpeg_runner |   | [q] command received. Exiting.
+2026-06-16 21:20:05.935 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [211101_08574] =====
+
+2026-06-16 21:28:45.842 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [212845_84272] =====
+2026-06-16 21:28:45.842 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-16 21:28:45.842 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 21:28:45.842 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616212828)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 21:28:45.842 | INFO  | ffmpeg_runner | 预计时长: 3501.73s
+2026-06-16 21:28:45.842 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v -map 0:a -map 0:s -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616212828)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 21:28:45.842 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-16 21:28:45.842 | DEBUG | ffmpeg_runner |   | [  5] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 21:28:45.842 | DEBUG | ffmpeg_runner |   | [  6] -map
+2026-06-16 21:28:45.842 | DEBUG | ffmpeg_runner |   | [  7] 0:v
+2026-06-16 21:28:45.842 | DEBUG | ffmpeg_runner |   | [  8] -map
+2026-06-16 21:28:45.843 | DEBUG | ffmpeg_runner |   | [  9] 0:a
+2026-06-16 21:28:45.843 | DEBUG | ffmpeg_runner |   | [ 10] -map
+2026-06-16 21:28:45.843 | DEBUG | ffmpeg_runner |   | [ 11] 0:s
+2026-06-16 21:28:45.843 | DEBUG | ffmpeg_runner |   | [ 12] -c:v
+2026-06-16 21:28:45.843 | DEBUG | ffmpeg_runner |   | [ 13] hevc
+2026-06-16 21:28:45.843 | DEBUG | ffmpeg_runner |   | [ 14] -crf
+2026-06-16 21:28:45.843 | DEBUG | ffmpeg_runner |   | [ 15] 23
+2026-06-16 21:28:45.843 | DEBUG | ffmpeg_runner |   | [ 16] -c:s
+2026-06-16 21:28:45.843 | DEBUG | ffmpeg_runner |   | [ 17] mov_text
+2026-06-16 21:28:45.843 | DEBUG | ffmpeg_runner |   | [ 18] -map_metadata
+2026-06-16 21:28:45.843 | DEBUG | ffmpeg_runner |   | [ 19] 0
+2026-06-16 21:28:45.843 | DEBUG | ffmpeg_runner |   | [ 20] -map_chapters
+2026-06-16 21:28:45.843 | DEBUG | ffmpeg_runner |   | [ 21] 0
+2026-06-16 21:28:45.843 | DEBUG | ffmpeg_runner |   | [ 22] -metadata
+2026-06-16 21:28:45.843 | DEBUG | ffmpeg_runner |   | [ 23] handler_name=@Cairl
+2026-06-16 21:28:45.843 | DEBUG | ffmpeg_runner |   | [ 24] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616212828)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 21:30:33.415 | INFO  | ffmpeg_runner | [212845_84272] 结束: 成功 (返回码 0) | 用时: 107.6s
+2026-06-16 21:30:33.415 | WARN  | ffmpeg_runner | [212845_84272] stderr 输出 (10 行):
+2026-06-16 21:30:33.415 | WARN  | ffmpeg_runner |   | frame=  724 fps=7.4 q=27.6 size=   72960KiB time=N/A bitrate=N/A speed=N/A elapsed=0:01:37.53
+2026-06-16 21:30:33.415 | WARN  | ffmpeg_runner |   | [q] command received. Exiting.
+2026-06-16 21:30:33.415 | WARN  | ffmpeg_runner |   | [out#0/mp4 @ 00000282fd984800] video:102099KiB audio:1564KiB subtitle:0KiB other streams:0KiB global headers:4KiB muxing overhead: 0.043030%
+2026-06-16 21:30:33.415 | WARN  | ffmpeg_runner |   | frame=  793 fps=7.4 q=28.1 Lsize=  103707KiB time=N/A bitrate=N/A speed=N/A elapsed=0:01:47.27
+2026-06-16 21:30:33.415 | WARN  | ffmpeg_runner |   | x265 [info]: frame I:     11, Avg QP:22.18  kb/s: 57759.95
+2026-06-16 21:30:33.415 | WARN  | ffmpeg_runner |   | x265 [info]: frame P:    213, Avg QP:23.27  kb/s: 49581.83
+2026-06-16 21:30:33.415 | WARN  | ffmpeg_runner |   | x265 [info]: frame B:    569, Avg QP:27.48  kb/s: 15564.97
+2026-06-16 21:30:33.415 | WARN  | ffmpeg_runner |   | x265 [info]: Weighted P-Frames: Y:8.5% UV:7.5%
+2026-06-16 21:30:33.415 | WARN  | ffmpeg_runner |   | encoded 793 frames in 107.15s (7.40 fps), 25287.21 kb/s, Avg QP:26.27
+2026-06-16 21:30:33.415 | WARN  | ffmpeg_runner |   | [aac @ 00000282ff4bba40] Qavg: 2995.300
+2026-06-16 21:30:33.415 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [212845_84272] =====
+
+2026-06-16 21:30:40.220 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [213040_22028] =====
+2026-06-16 21:30:40.220 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-16 21:30:40.220 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 21:30:40.220 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616213035)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 21:30:40.220 | INFO  | ffmpeg_runner | 预计时长: 3501.73s
+2026-06-16 21:30:40.220 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v -map 0:a -map 0:s -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616213035)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 21:30:40.220 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-16 21:30:40.220 | DEBUG | ffmpeg_runner |   | [  5] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 21:30:40.220 | DEBUG | ffmpeg_runner |   | [  6] -map
+2026-06-16 21:30:40.220 | DEBUG | ffmpeg_runner |   | [  7] 0:v
+2026-06-16 21:30:40.220 | DEBUG | ffmpeg_runner |   | [  8] -map
+2026-06-16 21:30:40.220 | DEBUG | ffmpeg_runner |   | [  9] 0:a
+2026-06-16 21:30:40.220 | DEBUG | ffmpeg_runner |   | [ 10] -map
+2026-06-16 21:30:40.220 | DEBUG | ffmpeg_runner |   | [ 11] 0:s
+2026-06-16 21:30:40.220 | DEBUG | ffmpeg_runner |   | [ 12] -c:v
+2026-06-16 21:30:40.220 | DEBUG | ffmpeg_runner |   | [ 13] hevc
+2026-06-16 21:30:40.220 | DEBUG | ffmpeg_runner |   | [ 14] -crf
+2026-06-16 21:30:40.220 | DEBUG | ffmpeg_runner |   | [ 15] 23
+2026-06-16 21:30:40.220 | DEBUG | ffmpeg_runner |   | [ 16] -c:s
+2026-06-16 21:30:40.220 | DEBUG | ffmpeg_runner |   | [ 17] mov_text
+2026-06-16 21:30:40.220 | DEBUG | ffmpeg_runner |   | [ 18] -map_metadata
+2026-06-16 21:30:40.220 | DEBUG | ffmpeg_runner |   | [ 19] 0
+2026-06-16 21:30:40.220 | DEBUG | ffmpeg_runner |   | [ 20] -map_chapters
+2026-06-16 21:30:40.220 | DEBUG | ffmpeg_runner |   | [ 21] 0
+2026-06-16 21:30:40.220 | DEBUG | ffmpeg_runner |   | [ 22] -metadata
+2026-06-16 21:30:40.220 | DEBUG | ffmpeg_runner |   | [ 23] handler_name=@Cairl
+2026-06-16 21:30:40.220 | DEBUG | ffmpeg_runner |   | [ 24] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616213035)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 21:33:16.119 | INFO  | ffmpeg_runner | [213040_22028] 结束: 失败 (返回码 1) | 用时: 155.9s
+2026-06-16 21:33:16.119 | WARN  | ffmpeg_runner | [213040_22028] stderr 输出 (10 行):
+2026-06-16 21:33:16.119 | WARN  | ffmpeg_runner |   | frame=  989 fps=7.0 q=27.2 size=  104192KiB time=N/A bitrate=N/A speed=N/A elapsed=0:02:21.34
+2026-06-16 21:33:16.119 | WARN  | ffmpeg_runner |   | frame=  993 fps=7.0 q=27.2 size=  104448KiB time=N/A bitrate=N/A speed=N/A elapsed=0:02:21.85
+2026-06-16 21:33:16.119 | WARN  | ffmpeg_runner |   | frame=  995 fps=7.0 q=25.4 size=  104704KiB time=N/A bitrate=N/A speed=N/A elapsed=0:02:22.37
+2026-06-16 21:33:16.119 | WARN  | ffmpeg_runner |   | frame=  999 fps=7.0 q=27.2 size=  104704KiB time=N/A bitrate=N/A speed=N/A elapsed=0:02:22.89
+2026-06-16 21:33:16.119 | WARN  | ffmpeg_runner |   | frame= 1000 fps=7.0 q=24.5 size=  104704KiB time=N/A bitrate=N/A speed=N/A elapsed=0:02:23.41
+2026-06-16 21:33:16.119 | WARN  | ffmpeg_runner |   | frame= 1004 fps=7.0 q=25.0 size=  105216KiB time=N/A bitrate=N/A speed=N/A elapsed=0:02:23.91
+2026-06-16 21:33:16.119 | WARN  | ffmpeg_runner |   | frame= 1004 fps=7.0 q=25.0 size=  105216KiB time=N/A bitrate=N/A speed=N/A elapsed=0:02:24.43
+2026-06-16 21:33:16.119 | WARN  | ffmpeg_runner |   | frame= 1009 fps=7.0 q=22.1 size=  105472KiB time=N/A bitrate=N/A speed=N/A elapsed=0:02:24.94
+2026-06-16 21:33:16.119 | WARN  | ffmpeg_runner |   | frame= 1010 fps=6.9 q=24.3 size=  105728KiB time=N/A bitrate=N/A speed=N/A elapsed=0:02:25.46
+2026-06-16 21:33:16.119 | WARN  | ffmpeg_runner |   | [q] command received. Exiting.
+2026-06-16 21:33:16.119 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [213040_22028] =====
+
+2026-06-16 21:36:23.818 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [213623_81894] =====
+2026-06-16 21:36:23.818 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-16 21:36:23.818 | INFO  | ffmpeg_runner | 输入: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 21:36:23.818 | INFO  | ffmpeg_runner | 输出: U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616213618)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 21:36:23.818 | INFO  | ffmpeg_runner | 预计时长: 3501.73s
+2026-06-16 21:36:23.818 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v -map 0:a -map 0:s -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616213618)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 21:36:23.818 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-16 21:36:23.819 | DEBUG | ffmpeg_runner |   | [  5] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 21:36:23.819 | DEBUG | ffmpeg_runner |   | [  6] -map
+2026-06-16 21:36:23.819 | DEBUG | ffmpeg_runner |   | [  7] 0:v
+2026-06-16 21:36:23.819 | DEBUG | ffmpeg_runner |   | [  8] -map
+2026-06-16 21:36:23.819 | DEBUG | ffmpeg_runner |   | [  9] 0:a
+2026-06-16 21:36:23.819 | DEBUG | ffmpeg_runner |   | [ 10] -map
+2026-06-16 21:36:23.819 | DEBUG | ffmpeg_runner |   | [ 11] 0:s
+2026-06-16 21:36:23.819 | DEBUG | ffmpeg_runner |   | [ 12] -c:v
+2026-06-16 21:36:23.819 | DEBUG | ffmpeg_runner |   | [ 13] hevc
+2026-06-16 21:36:23.819 | DEBUG | ffmpeg_runner |   | [ 14] -crf
+2026-06-16 21:36:23.819 | DEBUG | ffmpeg_runner |   | [ 15] 23
+2026-06-16 21:36:23.819 | DEBUG | ffmpeg_runner |   | [ 16] -c:s
+2026-06-16 21:36:23.819 | DEBUG | ffmpeg_runner |   | [ 17] mov_text
+2026-06-16 21:36:23.819 | DEBUG | ffmpeg_runner |   | [ 18] -map_metadata
+2026-06-16 21:36:23.819 | DEBUG | ffmpeg_runner |   | [ 19] 0
+2026-06-16 21:36:23.819 | DEBUG | ffmpeg_runner |   | [ 20] -map_chapters
+2026-06-16 21:36:23.819 | DEBUG | ffmpeg_runner |   | [ 21] 0
+2026-06-16 21:36:23.819 | DEBUG | ffmpeg_runner |   | [ 22] -metadata
+2026-06-16 21:36:23.819 | DEBUG | ffmpeg_runner |   | [ 23] handler_name=@Cairl
+2026-06-16 21:36:23.819 | DEBUG | ffmpeg_runner |   | [ 24] U:\【高清剧集网 www.BTHDTV.com】绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616213618)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 21:44:02.418 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [214402_41745] =====
+2026-06-16 21:44:02.418 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-16 21:44:02.418 | INFO  | ffmpeg_runner | 输入: U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 21:44:02.418 | INFO  | ffmpeg_runner | 输出: U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616214358)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 21:44:02.418 | INFO  | ffmpeg_runner | 预计时长: 3501.73s
+2026-06-16 21:44:02.418 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v -map 0:a -map 0:s -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616214358)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 21:44:02.418 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-16 21:44:02.418 | DEBUG | ffmpeg_runner |   | [  5] U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 21:44:02.418 | DEBUG | ffmpeg_runner |   | [  6] -map
+2026-06-16 21:44:02.418 | DEBUG | ffmpeg_runner |   | [  7] 0:v
+2026-06-16 21:44:02.418 | DEBUG | ffmpeg_runner |   | [  8] -map
+2026-06-16 21:44:02.418 | DEBUG | ffmpeg_runner |   | [  9] 0:a
+2026-06-16 21:44:02.418 | DEBUG | ffmpeg_runner |   | [ 10] -map
+2026-06-16 21:44:02.418 | DEBUG | ffmpeg_runner |   | [ 11] 0:s
+2026-06-16 21:44:02.418 | DEBUG | ffmpeg_runner |   | [ 12] -c:v
+2026-06-16 21:44:02.418 | DEBUG | ffmpeg_runner |   | [ 13] hevc
+2026-06-16 21:44:02.418 | DEBUG | ffmpeg_runner |   | [ 14] -crf
+2026-06-16 21:44:02.418 | DEBUG | ffmpeg_runner |   | [ 15] 23
+2026-06-16 21:44:02.418 | DEBUG | ffmpeg_runner |   | [ 16] -c:s
+2026-06-16 21:44:02.418 | DEBUG | ffmpeg_runner |   | [ 17] mov_text
+2026-06-16 21:44:02.418 | DEBUG | ffmpeg_runner |   | [ 18] -map_metadata
+2026-06-16 21:44:02.418 | DEBUG | ffmpeg_runner |   | [ 19] 0
+2026-06-16 21:44:02.418 | DEBUG | ffmpeg_runner |   | [ 20] -map_chapters
+2026-06-16 21:44:02.418 | DEBUG | ffmpeg_runner |   | [ 21] 0
+2026-06-16 21:44:02.418 | DEBUG | ffmpeg_runner |   | [ 22] -metadata
+2026-06-16 21:44:02.418 | DEBUG | ffmpeg_runner |   | [ 23] handler_name=@Cairl
+2026-06-16 21:44:02.418 | DEBUG | ffmpeg_runner |   | [ 24] U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616214358)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 21:45:44.601 | INFO  | ffmpeg_runner | [214402_41745] 结束: 成功 (返回码 0) | 用时: 102.2s
+2026-06-16 21:45:44.601 | WARN  | ffmpeg_runner | [214402_41745] stderr 输出 (10 行):
+2026-06-16 21:45:44.601 | WARN  | ffmpeg_runner |   | frame=  649 fps=7.1 q=23.8 size=   51200KiB time=N/A bitrate=N/A speed=N/A elapsed=0:01:30.81
+2026-06-16 21:45:44.601 | WARN  | ffmpeg_runner |   | [q] command received. Exiting.
+2026-06-16 21:45:44.601 | WARN  | ffmpeg_runner |   | [out#0/mp4 @ 00000148004547c0] video:95136KiB audio:1407KiB subtitle:0KiB other streams:0KiB global headers:4KiB muxing overhead: 0.043762%
+2026-06-16 21:45:44.601 | WARN  | ffmpeg_runner |   | frame=  712 fps=7.1 q=27.6 Lsize=   96586KiB time=N/A bitrate=N/A speed=N/A elapsed=0:01:40.54
+2026-06-16 21:45:44.601 | WARN  | ffmpeg_runner |   | x265 [info]: frame I:      9, Avg QP:22.07  kb/s: 61144.13
+2026-06-16 21:45:44.601 | WARN  | ffmpeg_runner |   | x265 [info]: frame P:    189, Avg QP:23.19  kb/s: 52830.73
+2026-06-16 21:45:44.601 | WARN  | ffmpeg_runner |   | x265 [info]: frame B:    514, Avg QP:27.52  kb/s: 15856.12
+2026-06-16 21:45:44.601 | WARN  | ffmpeg_runner |   | x265 [info]: Weighted P-Frames: Y:9.0% UV:7.9%
+2026-06-16 21:45:44.601 | WARN  | ffmpeg_runner |   | encoded 712 frames in 100.40s (7.09 fps), 26243.47 kb/s, Avg QP:26.30
+2026-06-16 21:45:44.601 | WARN  | ffmpeg_runner |   | [aac @ 00000148024737c0] Qavg: 3279.016
+2026-06-16 21:45:44.601 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [214402_41745] =====
+
+2026-06-16 23:05:04.581 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [230504_58193] =====
+2026-06-16 23:05:04.581 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-16 23:05:04.581 | INFO  | ffmpeg_runner | 输入: U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 23:05:04.581 | INFO  | ffmpeg_runner | 输出: U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616230452)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 23:05:04.581 | INFO  | ffmpeg_runner | 预计时长: 3501.73s
+2026-06-16 23:05:04.581 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v -map 0:a -map 0:s -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616230452)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 23:05:04.581 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-16 23:05:04.581 | DEBUG | ffmpeg_runner |   | [  5] U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 23:05:04.581 | DEBUG | ffmpeg_runner |   | [  6] -map
+2026-06-16 23:05:04.581 | DEBUG | ffmpeg_runner |   | [  7] 0:v
+2026-06-16 23:05:04.581 | DEBUG | ffmpeg_runner |   | [  8] -map
+2026-06-16 23:05:04.581 | DEBUG | ffmpeg_runner |   | [  9] 0:a
+2026-06-16 23:05:04.581 | DEBUG | ffmpeg_runner |   | [ 10] -map
+2026-06-16 23:05:04.581 | DEBUG | ffmpeg_runner |   | [ 11] 0:s
+2026-06-16 23:05:04.581 | DEBUG | ffmpeg_runner |   | [ 12] -c:v
+2026-06-16 23:05:04.581 | DEBUG | ffmpeg_runner |   | [ 13] hevc
+2026-06-16 23:05:04.581 | DEBUG | ffmpeg_runner |   | [ 14] -crf
+2026-06-16 23:05:04.581 | DEBUG | ffmpeg_runner |   | [ 15] 23
+2026-06-16 23:05:04.581 | DEBUG | ffmpeg_runner |   | [ 16] -c:s
+2026-06-16 23:05:04.581 | DEBUG | ffmpeg_runner |   | [ 17] mov_text
+2026-06-16 23:05:04.581 | DEBUG | ffmpeg_runner |   | [ 18] -map_metadata
+2026-06-16 23:05:04.581 | DEBUG | ffmpeg_runner |   | [ 19] 0
+2026-06-16 23:05:04.581 | DEBUG | ffmpeg_runner |   | [ 20] -map_chapters
+2026-06-16 23:05:04.581 | DEBUG | ffmpeg_runner |   | [ 21] 0
+2026-06-16 23:05:04.581 | DEBUG | ffmpeg_runner |   | [ 22] -metadata
+2026-06-16 23:05:04.581 | DEBUG | ffmpeg_runner |   | [ 23] handler_name=@Cairl
+2026-06-16 23:05:04.581 | DEBUG | ffmpeg_runner |   | [ 24] U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616230452)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 23:06:03.842 | INFO  | ffmpeg_runner | [230504_58193] 结束: 失败 (返回码 1) | 用时: 59.3s
+2026-06-16 23:06:03.842 | WARN  | ffmpeg_runner | [230504_58193] stderr 输出 (10 行):
+2026-06-16 23:06:03.842 | WARN  | ffmpeg_runner |   | frame=  369 fps=8.3 q=27.7 size=   14080KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:44.37
+2026-06-16 23:06:03.842 | WARN  | ffmpeg_runner |   | frame=  373 fps=8.3 q=27.7 size=   14336KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:44.88
+2026-06-16 23:06:03.842 | WARN  | ffmpeg_runner |   | frame=  377 fps=8.3 q=27.7 size=   14848KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:45.40
+2026-06-16 23:06:03.842 | WARN  | ffmpeg_runner |   | frame=  380 fps=8.3 q=27.7 size=   14848KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:45.90
+2026-06-16 23:06:03.842 | WARN  | ffmpeg_runner |   | frame=  384 fps=8.3 q=27.7 size=   16384KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:46.43
+2026-06-16 23:06:03.842 | WARN  | ffmpeg_runner |   | frame=  385 fps=8.2 q=21.2 size=   16384KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:46.95
+2026-06-16 23:06:03.842 | WARN  | ffmpeg_runner |   | frame=  389 fps=8.2 q=27.8 size=   16896KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:47.46
+2026-06-16 23:06:03.842 | WARN  | ffmpeg_runner |   | frame=  393 fps=8.2 q=27.8 size=   17152KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:47.97
+2026-06-16 23:06:03.842 | WARN  | ffmpeg_runner |   | frame=  397 fps=8.2 q=27.8 size=   17920KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:48.49
+2026-06-16 23:06:03.842 | WARN  | ffmpeg_runner |   | [q] command received. Exiting.
+2026-06-16 23:06:03.842 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [230504_58193] =====
+
+2026-06-16 23:10:16.024 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [231016_02490] =====
+2026-06-16 23:10:16.024 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-16 23:10:16.024 | INFO  | ffmpeg_runner | 输入: U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 23:10:16.024 | INFO  | ffmpeg_runner | 输出: U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616231012)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 23:10:16.024 | INFO  | ffmpeg_runner | 预计时长: 3501.73s
+2026-06-16 23:10:16.024 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v -map 0:a -map 0:s -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616231012)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 23:10:16.024 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-16 23:10:16.024 | DEBUG | ffmpeg_runner |   | [  5] U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 23:10:16.024 | DEBUG | ffmpeg_runner |   | [  6] -map
+2026-06-16 23:10:16.024 | DEBUG | ffmpeg_runner |   | [  7] 0:v
+2026-06-16 23:10:16.024 | DEBUG | ffmpeg_runner |   | [  8] -map
+2026-06-16 23:10:16.024 | DEBUG | ffmpeg_runner |   | [  9] 0:a
+2026-06-16 23:10:16.024 | DEBUG | ffmpeg_runner |   | [ 10] -map
+2026-06-16 23:10:16.024 | DEBUG | ffmpeg_runner |   | [ 11] 0:s
+2026-06-16 23:10:16.024 | DEBUG | ffmpeg_runner |   | [ 12] -c:v
+2026-06-16 23:10:16.026 | DEBUG | ffmpeg_runner |   | [ 13] hevc
+2026-06-16 23:10:16.026 | DEBUG | ffmpeg_runner |   | [ 14] -crf
+2026-06-16 23:10:16.026 | DEBUG | ffmpeg_runner |   | [ 15] 23
+2026-06-16 23:10:16.026 | DEBUG | ffmpeg_runner |   | [ 16] -c:s
+2026-06-16 23:10:16.026 | DEBUG | ffmpeg_runner |   | [ 17] mov_text
+2026-06-16 23:10:16.026 | DEBUG | ffmpeg_runner |   | [ 18] -map_metadata
+2026-06-16 23:10:16.026 | DEBUG | ffmpeg_runner |   | [ 19] 0
+2026-06-16 23:10:16.026 | DEBUG | ffmpeg_runner |   | [ 20] -map_chapters
+2026-06-16 23:10:16.026 | DEBUG | ffmpeg_runner |   | [ 21] 0
+2026-06-16 23:10:16.026 | DEBUG | ffmpeg_runner |   | [ 22] -metadata
+2026-06-16 23:10:16.026 | DEBUG | ffmpeg_runner |   | [ 23] handler_name=@Cairl
+2026-06-16 23:10:16.026 | DEBUG | ffmpeg_runner |   | [ 24] U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616231012)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 23:12:06.109 | INFO  | ffmpeg_runner | [231016_02490] 结束: 失败 (返回码 1) | 用时: 110.1s
+2026-06-16 23:12:06.110 | WARN  | ffmpeg_runner | [231016_02490] stderr 输出 (10 行):
+2026-06-16 23:12:06.110 | WARN  | ffmpeg_runner |   | frame=  428 fps=7.7 q=27.8 size=   21248KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:55.71
+2026-06-16 23:12:06.110 | WARN  | ffmpeg_runner |   | frame=  430 fps=7.6 q=25.5 size=   21760KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:56.23
+2026-06-16 23:12:06.110 | WARN  | ffmpeg_runner |   | frame=  433 fps=7.6 q=23.7 size=   22272KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:56.74
+2026-06-16 23:12:06.110 | WARN  | ffmpeg_runner |   | frame=  437 fps=7.6 q=27.7 size=   23040KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:57.26
+2026-06-16 23:12:06.110 | WARN  | ffmpeg_runner |   | frame=  437 fps=7.6 q=27.7 size=   23040KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:57.78
+2026-06-16 23:12:06.110 | WARN  | ffmpeg_runner |   | frame=  441 fps=7.6 q=27.7 size=   23040KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:58.29
+2026-06-16 23:12:06.110 | WARN  | ffmpeg_runner |   | frame=  444 fps=7.5 q=27.7 size=   23296KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:58.81
+2026-06-16 23:12:06.110 | WARN  | ffmpeg_runner |   | frame=  449 fps=7.6 q=27.8 size=   23808KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:59.33
+2026-06-16 23:12:06.110 | WARN  | ffmpeg_runner |   | frame=  449 fps=7.5 q=27.8 size=   23808KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:59.85
+2026-06-16 23:12:06.110 | WARN  | ffmpeg_runner |   | [q] command received. Exiting.
+2026-06-16 23:12:06.110 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [231016_02490] =====
+
+2026-06-16 23:40:30.793 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [234030_79365] =====
+2026-06-16 23:40:30.794 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-16 23:40:30.794 | INFO  | ffmpeg_runner | 输入: U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 23:40:30.794 | INFO  | ffmpeg_runner | 输出: U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616234022)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 23:40:30.794 | INFO  | ffmpeg_runner | 预计时长: 3501.73s
+2026-06-16 23:40:30.794 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v -map 0:a -map 0:s -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616234022)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 23:40:30.794 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-16 23:40:30.794 | DEBUG | ffmpeg_runner |   | [  5] U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 23:40:30.794 | DEBUG | ffmpeg_runner |   | [  6] -map
+2026-06-16 23:40:30.794 | DEBUG | ffmpeg_runner |   | [  7] 0:v
+2026-06-16 23:40:30.794 | DEBUG | ffmpeg_runner |   | [  8] -map
+2026-06-16 23:40:30.794 | DEBUG | ffmpeg_runner |   | [  9] 0:a
+2026-06-16 23:40:30.794 | DEBUG | ffmpeg_runner |   | [ 10] -map
+2026-06-16 23:40:30.794 | DEBUG | ffmpeg_runner |   | [ 11] 0:s
+2026-06-16 23:40:30.794 | DEBUG | ffmpeg_runner |   | [ 12] -c:v
+2026-06-16 23:40:30.794 | DEBUG | ffmpeg_runner |   | [ 13] hevc
+2026-06-16 23:40:30.794 | DEBUG | ffmpeg_runner |   | [ 14] -crf
+2026-06-16 23:40:30.794 | DEBUG | ffmpeg_runner |   | [ 15] 23
+2026-06-16 23:40:30.794 | DEBUG | ffmpeg_runner |   | [ 16] -c:s
+2026-06-16 23:40:30.794 | DEBUG | ffmpeg_runner |   | [ 17] mov_text
+2026-06-16 23:40:30.794 | DEBUG | ffmpeg_runner |   | [ 18] -map_metadata
+2026-06-16 23:40:30.794 | DEBUG | ffmpeg_runner |   | [ 19] 0
+2026-06-16 23:40:30.794 | DEBUG | ffmpeg_runner |   | [ 20] -map_chapters
+2026-06-16 23:40:30.794 | DEBUG | ffmpeg_runner |   | [ 21] 0
+2026-06-16 23:40:30.794 | DEBUG | ffmpeg_runner |   | [ 22] -metadata
+2026-06-16 23:40:30.794 | DEBUG | ffmpeg_runner |   | [ 23] handler_name=@Cairl
+2026-06-16 23:40:30.794 | DEBUG | ffmpeg_runner |   | [ 24] U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616234022)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 23:48:30.027 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 130.8s/3501.7s (3.7%) | 速度: 0.27x | 用时: 479.2s
+2026-06-16 23:48:33.026 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 131.4s/3501.7s (3.8%) | 速度: 0.27x | 用时: 482.2s
+2026-06-16 23:48:36.030 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 132.1s/3501.7s (3.8%) | 速度: 0.27x | 用时: 485.2s
+2026-06-16 23:48:39.041 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 132.8s/3501.7s (3.8%) | 速度: 0.27x | 用时: 488.2s
+2026-06-16 23:48:42.005 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 133.6s/3501.7s (3.8%) | 速度: 0.27x | 用时: 491.2s
+2026-06-16 23:48:42.058 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 133.6s/3501.7s (3.8%) | 速度: 0.27x | 用时: 491.3s
+2026-06-16 23:48:45.014 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 134.3s/3501.7s (3.8%) | 速度: 0.27x | 用时: 494.2s
+2026-06-16 23:48:48.016 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 134.9s/3501.7s (3.9%) | 速度: 0.27x | 用时: 497.2s
+2026-06-16 23:48:51.034 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 135.8s/3501.7s (3.9%) | 速度: 0.27x | 用时: 500.2s
+2026-06-16 23:48:54.008 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 136.6s/3501.7s (3.9%) | 速度: 0.27x | 用时: 503.2s
+2026-06-16 23:48:54.060 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 136.6s/3501.7s (3.9%) | 速度: 0.27x | 用时: 503.3s
+2026-06-16 23:48:57.034 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 137.4s/3501.7s (3.9%) | 速度: 0.27x | 用时: 506.2s
+2026-06-16 23:49:00.034 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 138.3s/3501.7s (3.9%) | 速度: 0.27x | 用时: 509.2s
+2026-06-16 23:49:03.038 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 139.1s/3501.7s (4.0%) | 速度: 0.27x | 用时: 512.2s
+2026-06-16 23:49:06.036 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 140.1s/3501.7s (4.0%) | 速度: 0.27x | 用时: 515.2s
+2026-06-16 23:49:09.007 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 141.1s/3501.7s (4.0%) | 速度: 0.27x | 用时: 518.2s
+2026-06-16 23:49:09.059 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 141.1s/3501.7s (4.0%) | 速度: 0.27x | 用时: 518.3s
+2026-06-16 23:49:12.048 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 141.8s/3501.7s (4.0%) | 速度: 0.27x | 用时: 521.2s
+2026-06-16 23:49:15.016 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 142.6s/3501.7s (4.1%) | 速度: 0.27x | 用时: 524.2s
+2026-06-16 23:49:18.022 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 143.3s/3501.7s (4.1%) | 速度: 0.27x | 用时: 527.2s
+2026-06-16 23:49:21.022 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 143.8s/3501.7s (4.1%) | 速度: 0.27x | 用时: 530.2s
+2026-06-16 23:49:24.028 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 144.5s/3501.7s (4.1%) | 速度: 0.27x | 用时: 533.2s
+2026-06-16 23:49:27.012 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 145.2s/3501.7s (4.1%) | 速度: 0.27x | 用时: 536.2s
+2026-06-16 23:49:30.013 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 145.9s/3501.7s (4.2%) | 速度: 0.27x | 用时: 539.2s
+2026-06-16 23:49:33.015 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 146.6s/3501.7s (4.2%) | 速度: 0.27x | 用时: 542.2s
+2026-06-16 23:49:36.007 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 146.9s/3501.7s (4.2%) | 速度: 0.27x | 用时: 545.2s
+2026-06-16 23:49:36.060 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 146.9s/3501.7s (4.2%) | 速度: 0.27x | 用时: 545.3s
+2026-06-16 23:49:39.053 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 146.9s/3501.7s (4.2%) | 速度: 0.27x | 用时: 548.3s
+2026-06-16 23:49:42.047 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 146.9s/3501.7s (4.2%) | 速度: 0.27x | 用时: 551.2s
+2026-06-16 23:49:45.046 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 146.9s/3501.7s (4.2%) | 速度: 0.27x | 用时: 554.2s
+2026-06-16 23:49:48.010 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 146.9s/3501.7s (4.2%) | 速度: 0.27x | 用时: 557.2s
+2026-06-16 23:49:51.043 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 146.9s/3501.7s (4.2%) | 速度: 0.26x | 用时: 560.2s
+2026-06-16 23:49:54.031 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 146.9s/3501.7s (4.2%) | 速度: 0.26x | 用时: 563.2s
+2026-06-16 23:49:57.015 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 152.6s/3501.7s (4.4%) | 速度: 0.26x | 用时: 566.2s
+2026-06-16 23:50:00.005 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 153.4s/3501.7s (4.4%) | 速度: 0.27x | 用时: 569.2s
+2026-06-16 23:50:00.058 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 153.4s/3501.7s (4.4%) | 速度: 0.27x | 用时: 569.3s
+2026-06-16 23:50:03.002 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 154.2s/3501.7s (4.4%) | 速度: 0.27x | 用时: 572.2s
+2026-06-16 23:50:03.056 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 154.2s/3501.7s (4.4%) | 速度: 0.27x | 用时: 572.3s
+2026-06-16 23:50:06.041 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 155.0s/3501.7s (4.4%) | 速度: 0.27x | 用时: 575.2s
+2026-06-16 23:50:09.035 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 155.7s/3501.7s (4.4%) | 速度: 0.27x | 用时: 578.2s
+2026-06-16 23:50:12.052 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 156.6s/3501.7s (4.5%) | 速度: 0.27x | 用时: 581.3s
+2026-06-16 23:50:15.040 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 157.2s/3501.7s (4.5%) | 速度: 0.27x | 用时: 584.2s
+2026-06-16 23:50:18.039 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 157.9s/3501.7s (4.5%) | 速度: 0.27x | 用时: 587.2s
+2026-06-16 23:50:21.041 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 158.7s/3501.7s (4.5%) | 速度: 0.27x | 用时: 590.2s
+2026-06-16 23:50:24.024 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 159.6s/3501.7s (4.6%) | 速度: 0.27x | 用时: 593.2s
+2026-06-16 23:50:27.023 | DEBUG | ffmpeg_runner | [234030_79365] 进度: 160.2s/3501.7s (4.6%) | 速度: 0.27x | 用时: 596.2s
+2026-06-16 23:50:38.197 | INFO  | ffmpeg_runner | [234030_79365] 结束: 失败 (返回码 1) | 用时: 607.4s
+2026-06-16 23:50:38.197 | WARN  | ffmpeg_runner | [234030_79365] stderr 输出 (10 行):
+2026-06-16 23:50:38.197 | WARN  | ffmpeg_runner |   | frame= 3825 fps=6.5 q=27.3 size=  483840KiB time=00:02:39.45 bitrate=24857.9kbits/s speed=0.269x elapsed=0:09:52.59
+2026-06-16 23:50:38.197 | WARN  | ffmpeg_runner |   | frame= 3829 fps=6.5 q=27.3 size=  483840KiB time=00:02:39.61 bitrate=24831.9kbits/s speed=0.269x elapsed=0:09:53.11
+2026-06-16 23:50:38.197 | WARN  | ffmpeg_runner |   | frame= 3830 fps=6.5 q=24.3 size=  483840KiB time=00:02:39.65 bitrate=24825.4kbits/s speed=0.269x elapsed=0:09:53.63
+2026-06-16 23:50:38.197 | WARN  | ffmpeg_runner |   | frame= 3834 fps=6.5 q=27.2 size=  483840KiB time=00:02:39.82 bitrate=24799.5kbits/s speed=0.269x elapsed=0:09:54.15
+2026-06-16 23:50:38.197 | WARN  | ffmpeg_runner |   | frame= 3836 fps=6.5 q=26.1 size=  483840KiB time=00:02:39.90 bitrate=24786.6kbits/s speed=0.269x elapsed=0:09:54.65
+2026-06-16 23:50:38.197 | WARN  | ffmpeg_runner |   | frame= 3840 fps=6.5 q=24.2 size=  487424KiB time=00:02:40.07 bitrate=24944.2kbits/s speed=0.269x elapsed=0:09:55.16
+2026-06-16 23:50:38.197 | WARN  | ffmpeg_runner |   | frame= 3844 fps=6.5 q=27.3 size=  487424KiB time=00:02:40.24 bitrate=24918.2kbits/s speed=0.269x elapsed=0:09:55.69
+2026-06-16 23:50:38.197 | WARN  | ffmpeg_runner |   | frame= 3846 fps=6.5 q=26.2 size=  488960KiB time=00:02:40.32 bitrate=24983.7kbits/s speed=0.269x elapsed=0:09:56.19
+2026-06-16 23:50:38.197 | WARN  | ffmpeg_runner |   | frame= 3850 fps=6.5 q=23.8 size=  488960KiB time=00:02:40.49 bitrate=24957.8kbits/s speed=0.269x elapsed=0:09:56.71
+2026-06-16 23:50:38.197 | WARN  | ffmpeg_runner |   | [q] command received. Exiting.
+2026-06-16 23:50:38.197 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [234030_79365] =====
+
+2026-06-16 23:50:59.696 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [235059_69664] =====
+2026-06-16 23:50:59.696 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-16 23:50:59.696 | INFO  | ffmpeg_runner | 输入: U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 23:50:59.696 | INFO  | ffmpeg_runner | 输出: U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616235023)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 23:50:59.696 | INFO  | ffmpeg_runner | 预计时长: 3501.73s
+2026-06-16 23:50:59.696 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v -map 0:a -map 0:s:2 -map 0:s:3 -map 0:s:4 -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616235023)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 23:50:59.697 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-16 23:50:59.697 | DEBUG | ffmpeg_runner |   | [  9] 0:a
+2026-06-16 23:50:59.697 | DEBUG | ffmpeg_runner |   | [ 10] -map
+2026-06-16 23:50:59.697 | DEBUG | ffmpeg_runner |   | [ 11] 0:s:2
+2026-06-16 23:50:59.697 | DEBUG | ffmpeg_runner |   | [ 12] -map
+2026-06-16 23:50:59.697 | DEBUG | ffmpeg_runner |   | [ 13] 0:s:3
+2026-06-16 23:50:59.697 | DEBUG | ffmpeg_runner |   | [ 14] -map
+2026-06-16 23:50:59.697 | DEBUG | ffmpeg_runner |   | [ 15] 0:s:4
+2026-06-16 23:50:59.697 | DEBUG | ffmpeg_runner |   | [ 16] -c:v
+2026-06-16 23:50:59.697 | DEBUG | ffmpeg_runner |   | [ 17] hevc
+2026-06-16 23:50:59.697 | DEBUG | ffmpeg_runner |   | [ 18] -crf
+2026-06-16 23:50:59.697 | DEBUG | ffmpeg_runner |   | [ 19] 23
+2026-06-16 23:50:59.697 | DEBUG | ffmpeg_runner |   | [ 20] -c:s
+2026-06-16 23:50:59.697 | DEBUG | ffmpeg_runner |   | [ 21] mov_text
+2026-06-16 23:50:59.697 | DEBUG | ffmpeg_runner |   | [ 22] -map_metadata
+2026-06-16 23:50:59.697 | DEBUG | ffmpeg_runner |   | [ 23] 0
+2026-06-16 23:50:59.697 | DEBUG | ffmpeg_runner |   | [ 24] -map_chapters
+2026-06-16 23:50:59.697 | DEBUG | ffmpeg_runner |   | [ 25] 0
+2026-06-16 23:50:59.697 | DEBUG | ffmpeg_runner |   | [ 26] -metadata
+2026-06-16 23:50:59.697 | DEBUG | ffmpeg_runner |   | [ 27] handler_name=@Cairl
+2026-06-16 23:50:59.697 | DEBUG | ffmpeg_runner |   | [ 28] U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616235023)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 23:54:58.002 | INFO  | ffmpeg_runner | [235059_69664] 结束: 失败 (返回码 1) | 用时: 238.3s
+2026-06-16 23:54:58.002 | WARN  | ffmpeg_runner | [235059_69664] stderr 输出 (10 行):
+2026-06-16 23:54:58.002 | WARN  | ffmpeg_runner |   | frame= 1469 fps=6.6 q=27.0 size=  174848KiB time=N/A bitrate=N/A speed=N/A elapsed=0:03:43.43
+2026-06-16 23:54:58.002 | WARN  | ffmpeg_runner |   | frame= 1472 fps=6.6 q=26.9 size=  175104KiB time=N/A bitrate=N/A speed=N/A elapsed=0:03:43.97
+2026-06-16 23:54:58.002 | WARN  | ffmpeg_runner |   | frame= 1474 fps=6.6 q=25.8 size=  175360KiB time=N/A bitrate=N/A speed=N/A elapsed=0:03:44.50
+2026-06-16 23:54:58.002 | WARN  | ffmpeg_runner |   | frame= 1475 fps=6.6 q=26.6 size=  175360KiB time=N/A bitrate=N/A speed=N/A elapsed=0:03:45.00
+2026-06-16 23:54:58.002 | WARN  | ffmpeg_runner |   | frame= 1477 fps=6.5 q=25.3 size=  175360KiB time=N/A bitrate=N/A speed=N/A elapsed=0:03:45.52
+2026-06-16 23:54:58.002 | WARN  | ffmpeg_runner |   | frame= 1481 fps=6.6 q=28.2 size=  175872KiB time=N/A bitrate=N/A speed=N/A elapsed=0:03:46.04
+2026-06-16 23:54:58.002 | WARN  | ffmpeg_runner |   | frame= 1484 fps=6.6 q=27.1 size=  176128KiB time=N/A bitrate=N/A speed=N/A elapsed=0:03:46.56
+2026-06-16 23:54:58.002 | WARN  | ffmpeg_runner |   | frame= 1485 fps=6.5 q=28.2 size=  176640KiB time=N/A bitrate=N/A speed=N/A elapsed=0:03:47.06
+2026-06-16 23:54:58.002 | WARN  | ffmpeg_runner |   | frame= 1489 fps=6.5 q=28.8 size=  177408KiB time=N/A bitrate=N/A speed=N/A elapsed=0:03:47.58
+2026-06-16 23:54:58.002 | WARN  | ffmpeg_runner |   | [q] command received. Exiting.
+2026-06-16 23:54:58.002 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [235059_69664] =====
+
+2026-06-16 23:56:07.971 | INFO  | ffmpeg_runner | ===== FFmpeg 开始 [235607_97160] =====
+2026-06-16 23:56:07.971 | INFO  | ffmpeg_runner | 任务: S01E01 Pilot
+2026-06-16 23:56:07.971 | INFO  | ffmpeg_runner | 输入: U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv
+2026-06-16 23:56:07.971 | INFO  | ffmpeg_runner | 输出: U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616235559)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 23:56:07.971 | INFO  | ffmpeg_runner | 预计时长: 3501.73s
+2026-06-16 23:56:07.971 | INFO  | ffmpeg_runner | 命令: ffmpeg -y -hide_banner -ignore_unknown -i U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mkv -map 0:v -map 0:a -map 0:s:1 -map 0:s:2 -map 0:s:3 -map 0:s:4 -map 0:s:5 -map 0:s:6 -map 0:s:7 -map 0:s:8 -map 0:s:9 -map 0:s:10 -map 0:s:11 -map 0:s:12 -map 0:s:13 -map 0:s:14 -map 0:s:15 -map 0:s:16 -map 0:s:17 -map 0:s:18 -map 0:s:19 -map 0:s:20 -map 0:s:21 -map 0:s:22 -map 0:s:23 -map 0:s:24 -map 0:s:25 -map 0:s:26 -map 0:s:27 -map 0:s:28 -map 0:s:29 -map 0:s:30 -map 0:s:31 -c:v hevc -crf 23 -c:s mov_text -map_metadata 0 -map_chapters 0 -metadata handler_name=@Cairl U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616235559)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 23:56:07.971 | DEBUG | ffmpeg_runner | 命令详情:
+2026-06-16 23:56:07.971 | DEBUG | ffmpeg_runner |   | [ 65] 0:s:28
+2026-06-16 23:56:07.971 | DEBUG | ffmpeg_runner |   | [ 66] -map
+2026-06-16 23:56:07.971 | DEBUG | ffmpeg_runner |   | [ 67] 0:s:29
+2026-06-16 23:56:07.971 | DEBUG | ffmpeg_runner |   | [ 68] -map
+2026-06-16 23:56:07.971 | DEBUG | ffmpeg_runner |   | [ 69] 0:s:30
+2026-06-16 23:56:07.971 | DEBUG | ffmpeg_runner |   | [ 70] -map
+2026-06-16 23:56:07.971 | DEBUG | ffmpeg_runner |   | [ 71] 0:s:31
+2026-06-16 23:56:07.971 | DEBUG | ffmpeg_runner |   | [ 72] -c:v
+2026-06-16 23:56:07.971 | DEBUG | ffmpeg_runner |   | [ 73] hevc
+2026-06-16 23:56:07.971 | DEBUG | ffmpeg_runner |   | [ 74] -crf
+2026-06-16 23:56:07.971 | DEBUG | ffmpeg_runner |   | [ 75] 23
+2026-06-16 23:56:07.971 | DEBUG | ffmpeg_runner |   | [ 76] -c:s
+2026-06-16 23:56:07.971 | DEBUG | ffmpeg_runner |   | [ 77] mov_text
+2026-06-16 23:56:07.971 | DEBUG | ffmpeg_runner |   | [ 78] -map_metadata
+2026-06-16 23:56:07.971 | DEBUG | ffmpeg_runner |   | [ 79] 0
+2026-06-16 23:56:07.971 | DEBUG | ffmpeg_runner |   | [ 80] -map_chapters
+2026-06-16 23:56:07.971 | DEBUG | ffmpeg_runner |   | [ 81] 0
+2026-06-16 23:56:07.971 | DEBUG | ffmpeg_runner |   | [ 82] -metadata
+2026-06-16 23:56:07.971 | DEBUG | ffmpeg_runner |   | [ 83] handler_name=@Cairl
+2026-06-16 23:56:07.971 | DEBUG | ffmpeg_runner |   | [ 84] U:\绝命毒师 第一季[全7集][简繁英字幕].Breaking.Bad.S01.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV (MovieEditor20260616235559)\Breaking.Bad.S01E01.Pilot.2160p.NF.WEB-DL.DDP.5.1.H.265-BlackTV.mp4
+2026-06-16 23:57:18.280 | INFO  | ffmpeg_runner | [235607_97160] 结束: 失败 (返回码 1) | 用时: 70.3s
+2026-06-16 23:57:18.280 | WARN  | ffmpeg_runner | [235607_97160] stderr 输出 (10 行):
+2026-06-16 23:57:18.280 | WARN  | ffmpeg_runner |   | frame=  428 fps=7.7 q=27.8 size=   23808KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:55.71
+2026-06-16 23:57:18.280 | WARN  | ffmpeg_runner |   | frame=  429 fps=7.6 q=27.8 size=   23808KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:56.23
+2026-06-16 23:57:18.280 | WARN  | ffmpeg_runner |   | frame=  433 fps=7.6 q=23.7 size=   24320KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:56.74
+2026-06-16 23:57:18.280 | WARN  | ffmpeg_runner |   | frame=  434 fps=7.6 q=24.4 size=   24320KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:57.26
+2026-06-16 23:57:18.280 | WARN  | ffmpeg_runner |   | frame=  437 fps=7.6 q=27.7 size=   24320KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:57.78
+2026-06-16 23:57:18.280 | WARN  | ffmpeg_runner |   | frame=  441 fps=7.6 q=27.7 size=   24832KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:58.29
+2026-06-16 23:57:18.280 | WARN  | ffmpeg_runner |   | frame=  441 fps=7.5 q=27.7 size=   24832KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:58.81
+2026-06-16 23:57:18.280 | WARN  | ffmpeg_runner |   | frame=  445 fps=7.5 q=27.8 size=   24832KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:59.32
+2026-06-16 23:57:18.280 | WARN  | ffmpeg_runner |   | frame=  448 fps=7.5 q=27.8 size=   25088KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:59.84
+2026-06-16 23:57:18.280 | WARN  | ffmpeg_runner |   | [q] command received. Exiting.
+2026-06-16 23:57:18.280 | INFO  | ffmpeg_runner | ===== FFmpeg 结束 [235607_97160] =====
+

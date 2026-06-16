@@ -5,14 +5,14 @@ import sys
 from datetime import datetime
 
 from ui.console import (
-    ANSI_ESCAPE, CURSOR_HOME, UI_COLORS, hide_cursor, show_cursor,
+    ANSI_ESCAPE, UI_COLORS,
     terminate_active_children, _shutdown_requested,
 )
 from ui.display import (
     MENU_SEPARATOR, menu_item, truncate_name,
     with_ffmpeg_hint, render_screen_menu, run_menu_loop, Action,
-    reset_menu_cache,
 )
+import ui.live as live
 from core.helpers import (
     format_on_off, extract_differential_name, escape_ffmpeg_filter_path,
     format_hms, parse_time_to_seconds, build_resolution_options,
@@ -63,6 +63,8 @@ def process_files() -> None:
     if not input_paths:
         print('未发现可处理的文件')
         return
+
+    live.start_screen()
 
     current_file_idx = 0
     first_file = ""
@@ -135,12 +137,16 @@ def process_files() -> None:
         # Always map the first video stream from input 0.
         # Without this, FFmpeg drops video entirely once any explicit
         # -map is used (e.g. for audio/subtitle streams).
-        cmd.extend(['-map', '0:v:0'])
+        cmd.extend(['-map', '0:v'])
 
-        for i, s in enumerate(audio_streams):
-            key = str(s['index'])
-            if settings['audio']['internal_streams'].get(key, True):
-                cmd.extend(['-map', f"0:a:{s['rel_index']}"])
+        all_audio = all(settings['audio']['internal_streams'].get(str(s['index']), True) for s in audio_streams)
+        if all_audio and audio_streams:
+            cmd.extend(['-map', '0:a'])
+        else:
+            for s in audio_streams:
+                key = str(s['index'])
+                if settings['audio']['internal_streams'].get(key, True):
+                    cmd.extend(['-map', f"0:a:{s['rel_index']}"])
 
         if settings['subtitle']['burn_in'] and (subtitle_streams or selected_external_sub):
             if settings['subtitle']['mode'] == 'internal' and selected_internal_sub:
@@ -152,8 +158,12 @@ def process_files() -> None:
                 vf_filters.append(f"subtitles={escape_ffmpeg_filter_path(os.path.abspath(sub_path))}")
         elif not settings['subtitle']['disable']:
             if settings['subtitle']['mode'] == 'internal':
-                for pos in selected_internal_sub:
-                    cmd.extend(['-map', f"0:s:{subtitle_streams[pos]['rel_index']}"])
+                all_internal_sub = len(selected_internal_sub) == len(subtitle_streams) and len(subtitle_streams) > 0
+                if all_internal_sub:
+                    cmd.extend(['-map', '0:s'])
+                else:
+                    for pos in selected_internal_sub:
+                        cmd.extend(['-map', f"0:s:{subtitle_streams[pos]['rel_index']}"])
             elif settings['subtitle']['mode'] == 'external' and external_subtitle:
                 cmd.extend(['-i', external_subtitle, '-map', '1:s:0'])
 
@@ -239,56 +249,69 @@ def process_files() -> None:
 
     main_index = 0
     resume_mode = False
+    start_label = '开始列队' if is_series_mode else '开始渲染'
+    needs_rebuild = True  # Build menu on first iteration
+    needs_render = True
     while True:
         if _shutdown_requested.is_set():
             break
-        hide_cursor()
-        refresh_ctx()
 
-        context = []
+        if needs_rebuild:
+            context = []
+            menu = []
+            if is_series_mode:
+                edit_mode_label = '统筹编辑' if series_edit_mode == 'batch' else '逐集编辑'
+                menu.append(menu_item(f'编辑模式: {edit_mode_label}'))
+                if series_edit_mode == 'per_episode':
+                    diff_names = extract_differential_name(input_paths)
+                    menu.append(menu_item(f'当前选择: {diff_names[current_file_idx]}'))
+                menu.append(MENU_SEPARATOR)
 
-        menu = []
-        if is_series_mode:
-            edit_mode_label = '统筹编辑' if series_edit_mode == 'batch' else '逐集编辑'
-            menu.append(menu_item(f'编辑模式: {edit_mode_label}'))
-            if series_edit_mode == 'per_episode':
-                diff_names = extract_differential_name(input_paths)
-                menu.append(menu_item(f'当前选择: {diff_names[current_file_idx]}'))
-            menu.append(MENU_SEPARATOR)
+            menu.extend([
+                menu_item('视频设置'),
+                menu_item('音频设置'),
+                menu_item('字幕设置'),
+                MENU_SEPARATOR,
+                f'{UI_COLORS["green"]}\033[1m{menu_item(start_label)}{UI_COLORS["reset"]}',
+            ])
+            # Show "继续列队" button when there's unfinished progress
+            _resume_label = None
+            if is_series_mode and progress_mgr and progress_mgr.has_progress():
+                remaining = len(progress_mgr.get_remaining())
+                if remaining > 0 and remaining < progress_mgr.get_total():
+                    _resume_label = f'继续列队 (剩余 {remaining} 集)'
+                    menu.append(f'{UI_COLORS["yellow"]}\033[1m{menu_item(_resume_label)}{UI_COLORS["reset"]}')
+            menu.extend([
+                menu_item('预览 FFmpeg 命令'),
+                '',
+            ])
+            needs_rebuild = False
+            needs_render = True
 
-        start_label = '开始列队' if is_series_mode else '开始渲染'
-        menu.extend([
-            menu_item('视频设置'),
-            menu_item('音频设置'),
-            menu_item('字幕设置'),
-            MENU_SEPARATOR,
-            f'{UI_COLORS["green"]}\033[1m{menu_item(start_label)}{UI_COLORS["reset"]}',
-        ])
-        # Show "继续列队" button when there's unfinished progress
-        _resume_label = None
-        if is_series_mode and progress_mgr and progress_mgr.has_progress():
-            remaining = len(progress_mgr.get_remaining())
-            if remaining > 0 and remaining < progress_mgr.get_total():
-                _resume_label = f'继续列队 (剩余 {remaining} 集)'
-                menu.append(f'{UI_COLORS["yellow"]}\033[1m{menu_item(_resume_label)}{UI_COLORS["reset"]}')
-        menu.extend([
-            menu_item('预览 FFmpeg 命令'),
-            '',
-        ])
-        render_screen_menu(mode_title, context, menu, selected_index=main_index)
-        main_index = normalize_selected_index(menu, main_index) or 0
+        if needs_render:
+            refresh_ctx()
+            render_screen_menu(mode_title, context, menu, selected_index=main_index)
+            main_index = normalize_selected_index(menu, main_index) or 0
+            needs_render = False
         k = read_navigation_key()
         if k in ('LEFT', 'RIGHT'):
             selected_line = ANSI_ESCAPE.sub('', menu[main_index]).strip() if main_index < len(menu) else ''
             if is_series_mode and '当前选择' in selected_line:
                 update_current_episode(current_file_idx + (-1 if k == 'LEFT' else 1))
                 reset_video_trim()
+                needs_rebuild = True
             continue
         if k == 'UP':
-            main_index = get_next_selectable(menu, main_index, -1)
+            new_idx = get_next_selectable(menu, main_index, -1)
+            if new_idx != main_index:
+                main_index = new_idx
+                needs_render = True
             continue
         if k == 'DOWN':
-            main_index = get_next_selectable(menu, main_index, 1)
+            new_idx = get_next_selectable(menu, main_index, 1)
+            if new_idx != main_index:
+                main_index = new_idx
+                needs_render = True
             continue
         if k != 'ENTER':
             continue
@@ -331,7 +354,6 @@ def process_files() -> None:
                         _batch_diff = extract_differential_name(input_paths)
                         prefix = _batch_diff[current_file_idx] if current_file_idx < len(_batch_diff) else os.path.splitext(os.path.basename(first_file))[0]
                         run_ffmpeg_with_progress(command, calculate_effective_duration(first_file), title_prefix=prefix, is_last=True)
-                        reset_menu_cache()
                         return 'DONE'
                     elif '返回菜单' in selected_item:
                         return Action.BREAK
@@ -355,7 +377,7 @@ def process_files() -> None:
                     if result is None or result == Action.BREAK:
                         break
                     main_index = 0
-                reset_menu_cache()  # force full redraw after per-episode FFmpeg
+                # rich.Live handles full redraw automatically
             else:
                 break
         elif '继续列队' in selected_plain and _resume_label:
@@ -363,6 +385,7 @@ def process_files() -> None:
             break
         elif '编辑模式' in selected_plain:
             series_edit_mode = 'batch' if series_edit_mode == 'per_episode' else 'per_episode'
+            needs_rebuild = True
         elif any(label in selected_plain for label in _SETTINGS_HANDLERS):
             allow_ep_nav = is_series_mode and series_edit_mode == 'per_episode'
             refresh_ctx()
@@ -370,7 +393,8 @@ def process_files() -> None:
                 if label in selected_plain:
                     handler(ctx, [], allow_episode_nav=allow_ep_nav, return_label='返回菜单')
                     break
-            reset_menu_cache()  # force full redraw after settings menu
+            # rich.Live handles full redraw automatically
+            needs_rebuild = True
         elif '预览 FFmpeg 命令' in selected_plain:
             def build_preview_context():
                 ext_sub = None
@@ -395,14 +419,13 @@ def process_files() -> None:
                 update_current_episode=update_current_episode,
                 current_file_idx_ref=[current_file_idx],
             )
-            reset_menu_cache()
+            needs_rebuild = True
 
     if _shutdown_requested.is_set():
-        show_cursor()
+        live.stop_screen()
         return
-    show_cursor()
 
-    # Determine batch parameters (resume vs fresh start)
+    # Determine batch parameters
     if resume_mode and progress_mgr:
         progress_data = progress_mgr.load()
         batch_timestamp = progress_data["batch_id"]
@@ -428,6 +451,7 @@ def process_files() -> None:
         total_count = len(input_paths)
         remaining_indices = [i for i in range(total_count) if i not in skip_indices]
         has_failures = False
+        was_terminated = False
         for idx_in_remaining, i in enumerate(remaining_indices):
             path = input_paths[i]
 
@@ -459,6 +483,7 @@ def process_files() -> None:
                 if is_series_mode and progress_mgr:
                     progress_mgr.mark_failed(i)
                 print('\n任务已终止')
+                was_terminated = True
                 break
             except (OSError, RuntimeError) as ep_err:
                 # Mark failed but continue to next episode
@@ -472,13 +497,14 @@ def process_files() -> None:
         if is_series_mode and progress_mgr and not has_failures:
             progress_mgr.clear()
 
-        read_navigation_key()
+        if not was_terminated:
+            read_navigation_key()
 
     except KeyboardInterrupt:
-        show_cursor()
         print('\n\n操作已取消（进度已保存，下次可继续）')
         terminate_active_children()
     except (OSError, RuntimeError) as e:
         log_ffmpeg_error('batch', e)
-        show_cursor()
         print(f'\n发生错误: {e}')
+    finally:
+        live.stop_screen()

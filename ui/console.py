@@ -1,4 +1,4 @@
-# 控制台底层：键盘读取、光标控制、ANSI 常量、子进程管理
+# 控制台底层：键盘读取、ANSI 常量、子进程管理
 import io
 import sys
 import re
@@ -15,7 +15,6 @@ if sys.platform == "win32":
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8")
 
 ANSI_ESCAPE = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
-CURSOR_HOME = '\033[H'
 
 ACTIVE_CHILD_PROCESSES = set()
 ACTIVE_CHILD_LOCK = threading.Lock()
@@ -124,9 +123,3 @@ def terminate_active_children() -> None:
                 pass
 
 
-def hide_cursor() -> None:
-    print('\033[?25l', end='', flush=True)
-
-
-def show_cursor() -> None:
-    print('\033[?25h', end='', flush=True)
