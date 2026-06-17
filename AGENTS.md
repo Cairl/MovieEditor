@@ -6,7 +6,7 @@
 
 **入口**: `main.py` → `ui/app.py:process_files()`
 **运行**: `python main.py <file_or_dir> [<file_or_dir>...]`
-**总量**: 14 个模块，2782 行
+**总量**: 14 个模块，3646 行
 
 ---
 
@@ -43,15 +43,15 @@
 | 模块 | 行数 | 职责 |
 |------|------|------|
 | `main.py` | 10 | 入口，光标隐藏/恢复 |
-| `ui/app.py` | 510 | `process_files()` 主流程：菜单循环、命令组装、批量处理 |
+| `ui/app.py` | 508 | `process_files()` 主流程：菜单循环、命令组装、批量处理 |
 | `ui/display.py` | 435 | TUI 渲染：`build_menu_renderable`、`run_menu_loop`、`menu_return_item` |
-| `core/ffmpeg.py` | 762 | FFmpeg 探针、命令预览、`run_ffmpeg_with_progress`、交互按钮暂停/终止/复制命令 |
+| `core/ffmpeg.py` | 1620 | FFmpeg 探针、命令预览、`run_ffmpeg_with_progress`、交互按钮暂停/终止/复制命令/通知 |
 | `ui/console.py` | 125 | 底层：`msvcrt` 键盘读取、光标控制、ANSI 常量、子进程注册/终止 |
 | `ui/subtitle.py` | 156 | 字幕设置菜单：流选择、burn_in 切换、排序 |
 | `core/progress.py` | 151 | `ProgressManager` 进度状态管理 |
 | `core/logger.py` | 144 | FFmpeg 运行日志记录（启动/进度/完成/错误） |
 | `core/helpers.py` | 163 | 工具函数：`format_hms`、`format_on_off`、`escape_ffmpeg_filter_path`、`parse_time_to_seconds` |
-| `ui/video.py` | 88 | 视频设置菜单 |
+| `ui/video.py` | 84 | 视频设置菜单：编码格式(H.265/H.264/AV1)、硬件编码(NVENC)、CRF、裁切、时间 |
 | `ui/audio.py` | 61 | 音频设置菜单 |
 | `ui/live.py` | 52 | `rich.Live` 全局生命周期封装（备用屏幕缓冲 + 增量 diff） |
 | `ui/navigation.py` | 92 | 导航逻辑：`read_navigation_key`、`get_selectable_indices`、`get_next_selectable` |
@@ -60,7 +60,7 @@
 ## 关键技术细节
 
 ### TUI 渲染
-- **rich Live 渲染**: `ui/live.py` 封装 `rich.Live`，`screen=True` 备用屏幕缓冲，`update()` 增量 diff
+- **rich Live 渲染**: `ui/live.py` 封装 `rich.Live`，`screen=True` 备用屏幕缓冲，`update()` 增量 diff，`color_system="truecolor"` 确保 24-bit ANSI 不降级
 - **菜单布局**: `build_menu_renderable` 统一 2 格左边距、`› ` 光标、1 格分隔线边距、`╭───` 标题 3 格
 - **右对齐项**: `_RIGHT_ALIGN` 前缀标记返回菜单等右对齐项，渲染器自动放置 `›` 于标签前方
 - **ffmpeg 进度框**: 独立缩进体系（文字 4 格、进度条 2 格、命令 2 格），高度上限对齐菜单
@@ -73,10 +73,17 @@
 - Shift 状态通过 `GetKeyState(0x10)` 检测
 
 ### Settings 数据结构
-- **当前**: 三层嵌套 dict (`settings['video']['hevc']`)，全文件 115 处访问
+- **当前**: 三层嵌套 dict (`settings['video']['codec']`)，全文件 115 处访问
+- **视频 codec**: `settings['video']['codec']` 取值 `'h265'`/`'h264'`/`'av1'`，默认 `'h265'`
+- **硬件编码**: `settings['video']['hw_encoder']` 取值 `'none'`/`'nvenc'`，仅 NVIDIA，界面显示为"停用/开启"
+- **CRF**: `settings['video']['crf']` 范围 0-51，默认 23，0 表示关闭
 - **已有优化计划**: docs/ 中有详细 dataclass 迁移方案（VideoSettings/AudioSettings/SubtitleSettings/AppSettings）
 
 ### FFmpeg 命令组装
+- **编码器选择**: `settings['video']['codec']`（h265/h264/av1）+ `hw_encoder`（none/nvenc）组合决定 `-c:v` 值
+- **CPU 编码器映射**: h265→hevc, h264→h264, av1→libsvtav1
+- **NVENC 编码器映射**: h265→hevc_nvenc, h264→h264_nvenc, av1→av1_nvenc
+- **CRF**: 仅 CPU 编码生效，`crf > 0` 时添加 `-crf N` 参数
 - `-ignore_unknown` 跳过 data/attachment 流
 - 字幕烧录使用 `subtitles=` filter，路径中的 `\` 和 `:` 需转义
 - 音频流使用相对索引 `0:a:{rel_index}` 映射
@@ -84,8 +91,8 @@
 - `-ss`/`-to` 放在输出文件前作为输出选项
 
 ### FFmpeg 运行时控制
-- **交互按钮**: 底部显示三个按钮（`[暂停任务]/[终止任务]/[复制命令]`），通过 ←/→ 方向键选择，Enter 确认。暂停按钮黄色、终止按钮红色、复制按钮蓝色，选中时灰色底色高亮（`\033[48;2;69;71;90m`）。复制按钮按 Enter 后将当前命令以单行形式复制到剪贴板，按钮临时闪烁"✓已复制"约 1.5 秒
-- **按钮状态机**: `ffmpeg_state['selected_button']`（0=暂停/恢复，1=终止，2=复制），方向键切换选中。终止过后按钮变灰（`muted`）表示已触发
+- **交互按钮**: 底部显示四个按钮（`[暂停任务]  复制命令  关闭通知                    终止任务`），通过 ←/→ 方向键选择，Enter 确认。无颜色样式，选中态用方括号 + 白色加粗（`\033[97;1m`）。终止任务始终在最右侧。复制按钮按 Enter 后将当前命令复制到剪贴板，按钮临时显示"复制成功"约 1.5 秒
+- **按钮状态机**: `ffmpeg_state['selected_button']`（0=暂停/恢复，1=复制，2=通知，3=终止），方向键切换选中
 - **暂停**: FFmpeg 无原生暂停。通过 `SuspendThread` 挂起 ffmpeg.exe 的所有线程，进程存在但 CPU 利用率为零；再通过 `ResumeThread` 恢复
 - **终止**: 向 FFmpeg 的 stdin 写入 `q`（FFmpeg 原生优雅退出信号），完成当前帧写入后退出。挂起状态下先恢复线程再发送。终止后抛出 `FFmpegUserTerminated` 异常，中断整个任务队列
 - **队列中断**: `FFmpegUserTerminated` 在 `process.wait()` 后检测 `ffmpeg_state['terminated']` 触发。`ui/app.py` 的批量循环中捕获该异常并 `break`，确保终止当前任务后队列不再继续
@@ -119,7 +126,7 @@ python main.py "D:\TV\S01" "D:\TV\S02"
 
 ## 已知问题与注意事项
 
-1. **多模块架构**: 13 个文件，2744 行。`ui/app.py:process_files()` 仍有 478 行含 20+ 闭包
+1. **多模块架构**: 14 个文件，3646 行。`ui/app.py:process_files()` 仍有 478 行含 20+ 闭包
 2. **settings 用嵌套 dict**: 类型无检查，key 拼写错误运行时才暴露
 3. **菜单循环重复**: 三个 settings 子菜单 (video/audio/subtitle) 有 60-80 行重复的按键分发骨架
 4. **ffprobe 重复调用**: `update_current_episode()` 每次调用 3-4 次 ffprobe，逐集切换约 0.8-1.5s

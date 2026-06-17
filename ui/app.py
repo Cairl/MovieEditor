@@ -96,7 +96,7 @@ def process_files() -> None:
     series_edit_mode = 'batch'
 
     settings = {
-        'video': {'hevc': True, 'hw_encoder': 'none', 'resolution': None, 'crop_top': 0, 'crop_left': 0, 'ss': None, 'to': None},
+        'video': {'codec': 'h265', 'hw_encoder': 'none', 'resolution': None, 'crop_top': 0, 'crop_left': 0, 'ss': None, 'to': None, 'crf': 23},
         'audio': {'reencode': True, 'codec': 'copy', 'internal_streams': {}},
         'subtitle': {'mode': 'internal', 'files': [], 'burn_in': False, 'disable': False, 'codec': 'copy', 'internal_streams': {}, 'external_streams': {}},
     }
@@ -167,18 +167,16 @@ def process_files() -> None:
             elif settings['subtitle']['mode'] == 'external' and external_subtitle:
                 cmd.extend(['-i', external_subtitle, '-map', '1:s:0'])
 
+        codec = settings['video']['codec']
         hw = settings['video'].get('hw_encoder', 'none')
+        CPU_ENCODERS = {'h265': 'hevc', 'h264': 'h264', 'av1': 'libsvtav1'}
+        NVENC_ENCODERS = {'h265': 'hevc_nvenc', 'h264': 'h264_nvenc', 'av1': 'av1_nvenc'}
         if hw == 'nvenc':
-            cmd.extend(['-c:v', 'hevc_nvenc' if settings['video']['hevc'] else 'h264_nvenc'])
-        elif hw == 'qsv':
-            cmd.extend(['-c:v', 'hevc_qsv' if settings['video']['hevc'] else 'h264_qsv', '-global_quality', '23'])
-        elif hw == 'amf':
-            cmd.extend(['-c:v', 'hevc_amf' if settings['video']['hevc'] else 'h264_amf', '-quality', 'balanced'])
+            cmd.extend(['-c:v', NVENC_ENCODERS.get(codec, 'h264_nvenc')])
         else:
-            if settings['video']['hevc']:
-                cmd.extend(['-c:v', 'hevc', '-crf', '23'])
-            else:
-                cmd.extend(['-c:v', 'h264'])
+            cmd.extend(['-c:v', CPU_ENCODERS.get(codec, 'h264')])
+            if settings['video']['crf'] > 0:
+                cmd.extend(['-crf', str(settings['video']['crf'])])
 
         if not settings['audio']['reencode']:
             cmd.extend(['-c:a', 'copy'])

@@ -12,7 +12,7 @@ from rich.live import Live
 # 与 core/ffmpeg.py 的 _PROGRESS_POLL_SEC (0.05s) 对齐
 _REFRESH_PER_SECOND = 20
 
-console = Console()
+console = Console(color_system="truecolor")
 _live: Optional[Live] = None
 
 

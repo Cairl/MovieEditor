@@ -14,36 +14,26 @@ def handle_video_settings_menu(ctx: dict, context_lines: list, allow_episode_nav
     build_crop_filter_text = ctx['build_crop_filter_text']
     update_current_episode = ctx['update_current_episode']
 
-    HW_ENCODERS = ['none', 'nvenc', 'qsv', 'amf']
-    HW_LABELS = {'none': 'CPU (默认)', 'nvenc': 'NVIDIA NVENC', 'qsv': 'Intel QSV', 'amf': 'AMD AMF'}
-    HW_HINTS = {
-        'none': None,
-        'nvenc': None,
-        'qsv': '-global_quality 23',
-        'amf': '-quality balanced',
-    }
+    HW_ENCODERS = ['none', 'nvenc']
+    HW_LABELS = {'none': '停用', 'nvenc': '开启'}
 
-    def _hevc_hint():
-        """Dynamic H.265 hint — just the codec; HW flags live on the encoder row."""
+    def _codec_hint():
+        codec = settings['video']['codec']
         hw = settings['video'].get('hw_encoder', 'none')
-        hevc = settings['video']['hevc']
+        CPU_ENCODERS = {'h265': 'hevc', 'h264': 'h264', 'av1': 'libsvtav1'}
+        NVENC_ENCODERS = {'h265': 'hevc_nvenc', 'h264': 'h264_nvenc', 'av1': 'av1_nvenc'}
         if hw == 'nvenc':
-            return '-c:v hevc_nvenc' if hevc else '-c:v h264_nvenc'
-        elif hw == 'qsv':
-            return '-c:v hevc_qsv' if hevc else '-c:v h264_qsv'
-        elif hw == 'amf':
-            return '-c:v hevc_amf' if hevc else '-c:v h264_amf'
-        else:
-            return '-c:v hevc -crf 23' if hevc else '-c:v h264'
+            return f'-c:v {NVENC_ENCODERS.get(codec, "h264_nvenc")}'
+        return f'-c:v {CPU_ENCODERS.get(codec, "h264")}'
 
     def build_menu():
         crop_hint = f"-vf {build_crop_filter_text()}"
         hw = settings['video'].get('hw_encoder', 'none')
         hw_label = HW_LABELS.get(hw, hw)
-        hw_hint_text = HW_HINTS.get(hw)
         return [
-            with_ffmpeg_hint(menu_item('H.265 编码', format_on_off(settings['video']['hevc'])), _hevc_hint(), settings['video']['hevc']),
-            with_ffmpeg_hint(menu_item('硬件编码', hw_label), hw_hint_text, hw != 'none'),
+            with_ffmpeg_hint(menu_item('编码格式', {'h265': 'H.265', 'h264': 'H.264', 'av1': 'AV1'}.get(settings['video']['codec'], settings['video']['codec'])), _codec_hint(), True),
+            menu_item('硬件编码', hw_label),
+            with_ffmpeg_hint(menu_item('CRF 值', str(settings['video']['crf']) if settings['video']['crf'] > 0 else '关闭'), f"-crf {settings['video']['crf']}" if settings['video']['crf'] > 0 else None, settings['video']['crf'] > 0),
             MENU_SEPARATOR,
             with_ffmpeg_hint(menu_item('开始时间', settings['video']['ss'] or '未设置'), f"-ss {settings['video']['ss']}" if settings['video']['ss'] else None, bool(settings['video']['ss'])),
             with_ffmpeg_hint(menu_item('结束时间', settings['video']['to'] or '未设置'), f"-to {settings['video']['to']}" if settings['video']['to'] else None, bool(settings['video']['to'])),
@@ -57,25 +47,31 @@ def handle_video_settings_menu(ctx: dict, context_lines: list, allow_episode_nav
 
     def action_handler(key, selected_item, idx_in_sel):
         step = -1 if key in ('LEFT', 'SHIFT_LEFT') else 1
-        if idx_in_sel == 0:
-            settings['video']['hevc'] = not settings['video']['hevc']
+        CODECS = ['h265', 'h264', 'av1']
+        if idx_in_sel == 0 and key in ('LEFT', 'RIGHT'):
+            cur = CODECS.index(settings['video']['codec']) if settings['video']['codec'] in CODECS else 0
+            settings['video']['codec'] = CODECS[(cur + step) % len(CODECS)]
         elif idx_in_sel == 1 and key in ('LEFT', 'RIGHT'):
             hw_list = HW_ENCODERS
             cur_hw = settings['video'].get('hw_encoder', 'none')
             cur_idx = hw_list.index(cur_hw) if cur_hw in hw_list else 0
             new_idx = (cur_idx + step) % len(hw_list)
             settings['video']['hw_encoder'] = hw_list[new_idx]
-        elif idx_in_sel == 2 and key in ('LEFT', 'RIGHT', 'SHIFT_LEFT', 'SHIFT_RIGHT'):
-            delta = 60 if key in ('SHIFT_LEFT', 'SHIFT_RIGHT') else TIME_ADJUST_STEP
-            settings['video']['ss'] = adjust_time_setting(settings['video']['ss'], step * delta)
+        elif idx_in_sel == 2 and key in ('LEFT', 'RIGHT'):
+            crf = settings['video']['crf']
+            crf = max(0, min(51, crf + step))
+            settings['video']['crf'] = crf
         elif idx_in_sel == 3 and key in ('LEFT', 'RIGHT', 'SHIFT_LEFT', 'SHIFT_RIGHT'):
             delta = 60 if key in ('SHIFT_LEFT', 'SHIFT_RIGHT') else TIME_ADJUST_STEP
+            settings['video']['ss'] = adjust_time_setting(settings['video']['ss'], step * delta)
+        elif idx_in_sel == 4 and key in ('LEFT', 'RIGHT', 'SHIFT_LEFT', 'SHIFT_RIGHT'):
+            delta = 60 if key in ('SHIFT_LEFT', 'SHIFT_RIGHT') else TIME_ADJUST_STEP
             settings['video']['to'] = adjust_time_setting(settings['video']['to'], step * delta)
-        elif idx_in_sel == 4 and key in ('LEFT', 'RIGHT'):
-            settings['video']['crop_top'] = max(0, min(max(0, first_height // 4 - 1), settings['video']['crop_top'] + step * CROP_ADJUST_STEP))
         elif idx_in_sel == 5 and key in ('LEFT', 'RIGHT'):
+            settings['video']['crop_top'] = max(0, min(max(0, first_height // 4 - 1), settings['video']['crop_top'] + step * CROP_ADJUST_STEP))
+        elif idx_in_sel == 6 and key in ('LEFT', 'RIGHT'):
             settings['video']['crop_left'] = max(0, min(max(0, first_width // 4 - 1), settings['video']['crop_left'] + step * CROP_ADJUST_STEP))
-        elif idx_in_sel == 6:
+        elif idx_in_sel == 7:
             return Action.BREAK
         return None
 
@@ -84,5 +80,5 @@ def handle_video_settings_menu(ctx: dict, context_lines: list, allow_episode_nav
         allow_episode_nav=allow_episode_nav,
         update_current_episode=update_current_episode,
         current_file_idx_ref=[ctx.get('current_file_idx', 0)],
-        no_nav_indices={0, 1, 2, 3, 4, 5},
+        no_nav_indices={0, 1, 2, 3, 4, 5, 6},
     )
