@@ -52,6 +52,33 @@ def _copy_text_to_clipboard(text: str) -> None:
         pass  # clipboard is best-effort
 
 
+def _make_paths_clickable(text: str) -> str:
+    """将文本中的 Windows 文件路径转换为 OSC 8 终端超链接。"""
+    _path_re = re.compile(
+        r'([A-Za-z]:\\(?:[^\s"])+\.(?:mp4|mkv|avi|mov|flv|wmv|webm|ts|m2ts|'
+        r'srt|ass|ssa|sub|sup|vtt|'
+        r'aac|mp3|flac|wav|opus|ogg|ac3|eac3|dts|'
+        r'jpg|jpeg|png|bmp|gif|webp))',
+        re.IGNORECASE
+    )
+    _esc = chr(27)
+    _bs = chr(92)
+    def _replace(m):
+        raw = m.group(1)
+        uri = raw.replace(_bs, '/')
+        return f'{_esc}]8;;file:///{uri}{_esc}{_bs}{raw}{_esc}]8;;{_esc}{_bs}'
+    return _path_re.sub(_replace, text)
+
+
+def _send_notification(title: str, message: str) -> None:
+    """发送 Windows 桌面通知（best-effort）。"""
+    try:
+        from winotify import Notification
+        Notification(app_id='MovieEditor', title=title, msg=message).show()
+    except Exception:
+        pass
+
+
 # ---- 进度 UI helpers ----
 _SPEED_EMA_ALPHA = 0.1
 _PROGRESS_POLL_SEC = 0.05
@@ -393,7 +420,8 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
     ffmpeg_state = {
         'paused': False,
         'terminated': False,
-        'selected_button': 0,  # 0=pause/resume, 1=terminate, 2=copy
+        'notify': False,
+        'selected_button': 0,  # 0=pause/resume, 1=terminate, 2=copy, 3=notify
         'copy_flash': 0,
         'cmd_scroll': 0,
     }
@@ -481,7 +509,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
                     if arrow == b'K':  # LEFT
                         ffmpeg_state['selected_button'] = max(0, ffmpeg_state['selected_button'] - 1)
                     elif arrow == b'M':  # RIGHT
-                        ffmpeg_state['selected_button'] = min(2, ffmpeg_state['selected_button'] + 1)
+                        ffmpeg_state['selected_button'] = min(3, ffmpeg_state['selected_button'] + 1)
                     elif arrow == b'H':  # UP
                         ffmpeg_state['cmd_scroll'] = max(0, ffmpeg_state['cmd_scroll'] - 1)
                     elif arrow == b'P':  # DOWN
@@ -515,9 +543,11 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
                     cmd_str = ' '.join(parts)
                     _copy_text_to_clipboard(cmd_str)
                     ffmpeg_state['copy_flash'] = time.time()
+                elif btn == 3:  # Toggle notification
+                    ffmpeg_state['notify'] = not ffmpeg_state['notify']
                 continue
 
-    def build_interface_lines(progress_text, title, is_finished, pct=0, ffmpeg_state=None):
+    def build_interface_lines(progress_text, title, is_finished, pct=0, ffmpeg_state=None, output_file=None):
         """Build the interface as a single box for live.update()."""
         term_w, term_h = shutil.get_terminal_size((120, 30))
         width = max(70, min(140, term_w - 2))
@@ -527,6 +557,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
         code_indent = '  '     # 2 spaces: separator & command lines
         muted = UI_COLORS['muted']
         reset = UI_COLORS['reset']
+        dim = muted if is_finished else ''
 
         def _pad(content_vis):
             return ' ' * max(0, inner_w - content_vis)
@@ -555,7 +586,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
         lines.append(_empty())
         # 3. Progress text
         bold = "\033[1m" if is_finished else ""
-        p_disp = f"\033[38;2;205;214;244m{bold}{progress_text}\033[0m"
+        p_disp = f"\033[38;2;205;214;244m{bold}{progress_text}\033[0m" if not is_finished else f"{dim}{progress_text}{reset}"
         lines.append(_text_line(p_disp, get_display_width(progress_text)))
 
         # 4. Progress bar — small box, muted borders, left-aligned at bar_indent
@@ -564,7 +595,10 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
         bar_inner = max(1, bar_inner)
         filled = int(bar_inner * min(bar_pct, 100) / 100)
         empty = bar_inner - filled
-        bar_str = f"\033[38;2;137;180;250m{'█' * filled}\033[38;2;108;112;134m{'░' * empty}\033[0m"
+        if is_finished:
+            bar_str = f"{dim}{'█' * filled}{'░' * empty}{reset}"
+        else:
+            bar_str = f"\033[38;2;137;180;250m{'█' * filled}\033[38;2;108;112;134m{'░' * empty}\033[0m"
         bar_plain = filled + empty
         # Top:  ╭──────────╮
         top_w = bar_plain + 2  # +2 for inner spaces
@@ -579,11 +613,13 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
         if has_buttons:
             is_paused = ffmpeg_state.get('paused', False)
             is_terminated = ffmpeg_state.get('terminated', False)
+            notify_on = ffmpeg_state.get('notify', False)
             sel = ffmpeg_state.get('selected_button', 0)
 
             YELLOW = "\033[38;2;249;226;175m"
             RED = "\033[38;2;243;139;168m"
             CYAN = "\033[38;2;137;180;250m"
+            GREEN = "\033[38;2;166;227;161m"
             SEL_BG = "\033[48;2;69;71;90m"
 
             p_label = '恢复任务' if is_paused else '暂停任务'
@@ -592,16 +628,20 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
             copy_flash = ffmpeg_state.get('copy_flash', 0)
             c_label = '复制成功' if copy_flash and time.time() - copy_flash < 1.5 else '复制命令'
 
+            n_label = '关闭通知' if notify_on else '开启通知'
+
             t_color = muted if is_terminated else RED
-            pad38 = ' ' * max(0, inner_w - 38)
-            pad39 = ' ' * max(0, inner_w - 39)
+            pad50 = ' ' * max(0, inner_w - 50)
+            pad51 = ' ' * max(0, inner_w - 51)
+            pad52 = ' ' * max(0, inner_w - 52)
 
             if sel == 0:
                 lines.append(
                     f"  │   {SEL_BG} {reset}{SEL_BG}{YELLOW}\033[1m[{p_label}]{reset}"
                     f"{SEL_BG} {reset} "
                     f"{t_color}[{t_label}]{reset}"
-                    f"  {CYAN}[{c_label}]{reset}{pad38}│"
+                    f"  {CYAN}[{c_label}]{reset}"
+                    f"  {GREEN}[{n_label}]{reset}{pad50}│"
                 )
             elif sel == 1:
                 lines.append(
@@ -609,7 +649,8 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
                     f"{YELLOW}[{p_label}]{reset} "
                     f"{SEL_BG} {reset}{SEL_BG}{RED}\033[1m[{t_label}]{reset}"
                     f"{SEL_BG} {reset} "
-                    f"{CYAN}[{c_label}]{reset}{pad38}│"
+                    f"{CYAN}[{c_label}]{reset}"
+                    f"  {GREEN}[{n_label}]{reset}{pad50}│"
                 )
             elif sel == 2:
                 lines.append(
@@ -617,14 +658,25 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
                     f"{YELLOW}[{p_label}]{reset}"
                     f"  {t_color}[{t_label}]{reset} "
                     f"{SEL_BG} {reset}{SEL_BG}{CYAN}\033[1m[{c_label}]{reset}"
-                    f"{SEL_BG} {reset}{pad39}│"
+                    f"{SEL_BG} {reset} "
+                    f"{GREEN}[{n_label}]{reset}{pad50}│"
+                )
+            elif sel == 3:
+                lines.append(
+                    f"  │    "
+                    f"{YELLOW}[{p_label}]{reset}"
+                    f"  {t_color}[{t_label}]{reset}"
+                    f"  {CYAN}[{c_label}]{reset} "
+                    f"{SEL_BG} {reset}{SEL_BG}{GREEN}\033[1m[{n_label}]{reset}"
+                    f"{SEL_BG} {reset}{pad51}│"
                 )
             else:
                 lines.append(
                     f"  │    "
                     f"{YELLOW}[{p_label}]{reset}"
                     f"  {t_color}[{t_label}]{reset}"
-                    f"  {CYAN}[{c_label}]{reset}{pad38}│"
+                    f"  {CYAN}[{c_label}]{reset}"
+                    f"  {GREEN}[{n_label}]{reset}{pad50}│"
                 )
             lines.append(_empty())
 
@@ -652,7 +704,10 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
 
         for seg in wrapped[cmd_scroll : cmd_scroll + max_visible]:
             sv = get_display_width(seg)
-            lines.append(f"  │{code_indent}{muted}{seg}{reset}{_pad(len(code_indent) + sv)}│")
+            if is_finished and output_file and output_file in seg:
+                lines.append(f"  │{code_indent}\033[38;2;166;227;161m{seg}{reset}{_pad(len(code_indent) + sv)}│")
+            else:
+                lines.append(f"  │{code_indent}{muted}{seg}{reset}{_pad(len(code_indent) + sv)}│")
 
         if cmd_scroll + max_visible < len(wrapped):
             lines.append(ellipsis_line)
@@ -668,7 +723,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
 
         progress_tag = f' ({episode_progress})' if episode_progress else ''
         display_title = f"正在运行{progress_tag}: {title_prefix}" if title_prefix else f"正在运行{progress_tag}"
-        live.update(build_interface_lines(last_plain_text, display_title, False, 0, ffmpeg_state))
+        live.update(build_interface_lines(last_plain_text, display_title, False, 0, ffmpeg_state, output_file=output_file))
         cur_pct = 0.0
 
         while not state['done']:
@@ -701,7 +756,7 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
 
             last_plain_text = plain_text
 
-            live.update(build_interface_lines(plain_text, display_title, False, cur_pct, ffmpeg_state))
+            live.update(build_interface_lines(plain_text, display_title, False, cur_pct, ffmpeg_state, output_file=output_file))
 
             # 日志：每 3 秒记录一次进度
             if int(now * 1000) % _PROGRESS_LOG_INTERVAL_MS < _PROGRESS_LOG_TOLERANCE_MS and has_started:
@@ -726,6 +781,8 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
         if ffmpeg_state.get('terminated'):
             elapsed_final = time.time() - start_time
             log_ffmpeg_end(run_id, process.returncode, elapsed_final, list(stderr_tail))
+            if ffmpeg_state.get('notify'):
+                _send_notification('MovieEditor', f'任务已终止: {title_prefix}')
             raise FFmpegUserTerminated()
 
         if process.returncode != 0:
@@ -733,6 +790,8 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
             elapsed_final = time.time() - start_time
             stderr_list = list(stderr_tail)
             log_ffmpeg_end(run_id, process.returncode, elapsed_final, stderr_list)
+            if ffmpeg_state.get('notify'):
+                _send_notification('MovieEditor - 执行失败', f'FFmpeg 返回码: {process.returncode}\n{title_prefix}')
             msg = f'FFmpeg 执行失败，返回码: {process.returncode}'
             if stderr_list:
                 msg += '\n' + '\n'.join(f'  | {line}' for line in stderr_list[-5:])
@@ -745,11 +804,14 @@ def run_ffmpeg_with_progress(command: list[str], total_duration: float, title_pr
             final_title = "渲染完成"
         else:
             final_title = f"{title_prefix} - 已完成" if title_prefix else "已完成"
-        live.update(build_interface_lines(last_plain_text, final_title, True, 100, ffmpeg_state))
+        live.update(build_interface_lines(last_plain_text, final_title, True, 100, ffmpeg_state, output_file=output_file))
 
         # 日志：记录成功完成
         elapsed_final = time.time() - start_time
         log_ffmpeg_end(run_id, process.returncode, elapsed_final, list(stderr_tail))
+
+        if ffmpeg_state.get('notify'):
+            _send_notification('MovieEditor - 渲染完成', f'{title_prefix}\n{output_file}')
 
     except KeyboardInterrupt:
         _reset_ffmpeg_pause(process)
